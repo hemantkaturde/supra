@@ -100,8 +100,6 @@
                <input type="hidden" class="form-control" id="part_number" name="part_number">
 
 
-               
-
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Quantity Assign <span class="required">*</span></label>
                   <div class="col-sm-8">
@@ -162,17 +160,22 @@
                   <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                </div>
 
-               
                 <input type="hidden" class="form-control"  id="assigned_id" name="assigned_id">
                 <input type="hidden" class="form-control"  id="partsId_popup" name="partsId_popup">
                 <input type="hidden" class="form-control"  id="partId_popup" name="partId_popup">
                 <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
-                <input type="hidden" class="form-control" id="instrument_name_popup" name="instrument_name_popup">
-                <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
-                <input type="hidden" class="form-control" id="qty_popup" name="qty_popup">
+                <input type="hidden" class="form-control"  id="instrument_name_popup" name="instrument_name_popup">
+                <input type="hidden" class="form-control"  id="measuring_size_popup" name="measuring_size_popup">
+                <input type="hidden" class="form-control"  id="qty_popup" name="qty_popup">
+                <input type="hidden" class="form-control"  id="sampling_trans_id" name="sampling_trans_id">
+                <input type="hidden" class="form-control"  id="sampling_id" name="sampling_id">
 
-                <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
-                <input type="hidden" class="form-control" id="sampling_trans_id" name="sampling_trans_id">
+                <input type="hidden" class="form-control" id="type" name="type">
+                <input type="hidden" class="form-control" id="grade" name="grade">
+                <input type="hidden" class="form-control" id="unit" name="unit">
+                <input type="hidden" class="form-control" id="class_1" name="class_1">
+                <input type="hidden" class="form-control" id="part_number" name="part_number">
+
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Quantity Received <span class="required">*</span></label>
@@ -181,6 +184,29 @@
                      <p class="error qty_removed_error"></p>
                   </div>
                </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Instrument ID - Due Date</label>
+                   <div class="col-sm-8">
+                     <select class="form-control" name="certificate" id="certificate">
+                       <option st-id="" value="">Select Instrument ID</option>              
+                     </select>
+                    <p class="error certificate_error"></p>
+                   </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Status</label>
+                   <div class="col-sm-8">
+                     <select class="form-control" name="status" id="status">
+                        <option value="Open" selected>Open</option>
+                        <option value="Close">Close</option>
+                     </select>
+                    <p class="error status_error"></p>
+                   </div>
+               </div>
+
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label"> Remark </label>
                   <div class="col-sm-8">

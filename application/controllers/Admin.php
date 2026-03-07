@@ -29359,7 +29359,18 @@ public function editstoreformqtyremovedata()
             'ticket_no'       => $ticket_no,
             'instrument_name' => $instrument_name,
             'measuring_size'  => $measuring_size,
-            'qty_available'   => (float) $this->input->post('qty_popup')
+            'qty_available'   => (float) $this->input->post('qty_popup'),
+            'sampling_id'       => trim($this->input->post('sampling_id')),
+            'sampling_trans_id' => trim($this->input->post('sampling_trans_id')),
+
+            'certificate'       => trim($this->input->post('certificate')),
+            'status' => trim($this->input->post('status')),
+            
+            'type' => trim($this->input->post('type')),
+            'grade' => trim($this->input->post('grade')),
+            'unit' => trim($this->input->post('unit')),
+            'class' => trim($this->input->post('class_1')),
+            'part_number' => trim($this->input->post('part_number')),
         ]);
       
         $ok = $this->admin_model->savequantityassignstoreform(null, $data);

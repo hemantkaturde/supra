@@ -24069,7 +24069,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-instrument_name='".$row['instrument_name']."'
                 data-measuring_size='".$row['measuring_size']."'
                 data-qty='".$row['instru_qty']."'
-                data-part_number='".$row['part_number']."' 
+                data-part_number='".$row['part_number']."'
+                data-sampling_id ='".$row['sampling_id']."'
+                data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                data-instrument_id ='".$row['instrument_id']."'
+
+                data-type='".$row['instrument_type']."'
+                data-grade='".$row['grade']."'
+                data-unit='".$row['unit']."'
+                data-class_1='".$row['class']."'
+
                 class='fa fa-minus-circle addrejectionitemdata'>
             </i> &nbsp;";
 
