@@ -23791,127 +23791,73 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     // }
 
 
+
     public function getLiveQtyforInst_check_count($id, $instrument_name, $measuring_size ,$instrument_type,$grade,$unit,$class)
-{
+        {
 
-$this->db->select('qty');
-$this->db->from(TBL_INSTRUMENT_MASTER);
+        /* AVAILABLE QTY */
 
-$this->db->where('instrument_name', $instrument_name);
-$this->db->where('measuring_size', $measuring_size);
+        $this->db->select('IFNULL(qty,0) as qty');
+        $this->db->from(TBL_INSTRUMENT_MASTER);
 
-if($instrument_type === NULL || $instrument_type == ''){
-$this->db->where('type IS NULL', NULL, FALSE);
-}else{
-$this->db->where('type', $instrument_type);
-}
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
 
-if($grade === NULL || $grade == ''){
-$this->db->where('grade IS NULL', NULL, FALSE);
-}else{
-$this->db->where('grade', $grade);
-}
+        $this->db->where("IFNULL(type,'') =", $instrument_type ?? '');
+        $this->db->where("IFNULL(grade,'') =", $grade ?? '');
+        $this->db->where("IFNULL(unit,'') =", $unit ?? '');
+        $this->db->where("IFNULL(class,'') =", $class ?? '');
 
-if($unit === NULL || $unit == ''){
-$this->db->where('unit IS NULL', NULL, FALSE);
-}else{
-$this->db->where('unit', $unit);
-}
+        $query = $this->db->get()->row_array();
 
-if($class === NULL || $class == ''){
-$this->db->where('class IS NULL', NULL, FALSE);
-}else{
-$this->db->where('class', $class);
-}
+        $quantity_available = (float)$query['qty'];
 
-$query = $this->db->get()->row_array();
-
-$quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
-
-if (empty($instrument_name) || empty($measuring_size)) {
-return 0;
-}
+        if (empty($instrument_name) || empty($measuring_size)) {
+        return 0;
+        }
 
 
-/* TOTAL ASSIGNED */
+        /* TOTAL ASSIGNED */
 
-$this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
-$this->db->from('tbl_storeform_qty_assign');
+        $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
+        $this->db->from('tbl_storeform_qty_assign');
 
-$this->db->where('instrument_name', $instrument_name);
-$this->db->where('measuring_size', $measuring_size);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
 
-if($instrument_type === NULL || $instrument_type == ''){
-$this->db->where('type IS NULL', NULL, FALSE);
-}else{
-$this->db->where('type', $instrument_type);
-}
+        $this->db->where("IFNULL(type,'') =", $instrument_type ?? '');
+        $this->db->where("IFNULL(grade,'') =", $grade ?? '');
+        $this->db->where("IFNULL(unit,'') =", $unit ?? '');
+        $this->db->where("IFNULL(class,'') =", $class ?? '');
 
-if($grade === NULL || $grade == ''){
-$this->db->where('grade IS NULL', NULL, FALSE);
-}else{
-$this->db->where('grade', $grade);
-}
-
-if($unit === NULL || $unit == ''){
-$this->db->where('unit IS NULL', NULL, FALSE);
-}else{
-$this->db->where('unit', $unit);
-}
-
-if($class === NULL || $class == ''){
-$this->db->where('class IS NULL', NULL, FALSE);
-}else{
-$this->db->where('class', $class);
-}
-
-$assignedRow = $this->db->get()->row_array();
-$total_assign = (float)$assignedRow['total_assign'];
+        $assignedRow = $this->db->get()->row_array();
+        $total_assign = (float)$assignedRow['total_assign'];
 
 
-/* TOTAL REMOVED */
+        /* TOTAL REMOVED */
 
-$this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
-$this->db->from('tbl_storeform_qty_assign');
+        $this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
+        $this->db->from('tbl_storeform_qty_assign');
 
-$this->db->where('instrument_name', $instrument_name);
-$this->db->where('measuring_size', $measuring_size);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
 
-if($instrument_type === NULL || $instrument_type == ''){
-$this->db->where('type IS NULL', NULL, FALSE);
-}else{
-$this->db->where('type', $instrument_type);
-}
+        $this->db->where("IFNULL(type,'') =", $instrument_type ?? '');
+        $this->db->where("IFNULL(grade,'') =", $grade ?? '');
+        $this->db->where("IFNULL(unit,'') =", $unit ?? '');
+        $this->db->where("IFNULL(class,'') =", $class ?? '');
 
-if($grade === NULL || $grade == ''){
-$this->db->where('grade IS NULL', NULL, FALSE);
-}else{
-$this->db->where('grade', $grade);
-}
-
-if($unit === NULL || $unit == ''){
-$this->db->where('unit IS NULL', NULL, FALSE);
-}else{
-$this->db->where('unit', $unit);
-}
-
-if($class === NULL || $class == ''){
-$this->db->where('class IS NULL', NULL, FALSE);
-}else{
-$this->db->where('class', $class);
-}
-
-$removedRow = $this->db->get()->row_array();
-$total_removed = (float)$removedRow['total_removed'];
+        $removedRow = $this->db->get()->row_array();
+        $total_removed = (float)$removedRow['total_removed'];
 
 
-/* FINAL LIVE QTY */
+        /* FINAL LIVE QTY */
 
-$live_qty = $quantity_available - $total_assign + $total_removed;
+        $live_qty = $quantity_available - $total_assign + $total_removed;
 
-return ($live_qty > 0) ? $live_qty : 0;
+        return ($live_qty > 0) ? $live_qty : 0;
 
-}
+        }
 
 
 
