@@ -23737,58 +23737,181 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-    public function getLiveQtyforInst_check_count($id, $instrument_name, $measuring_size ,$instrument_type,$grade,$unit,$class)
-    {
-        $this->db->select('qty');
-        $this->db->from(TBL_INSTRUMENT_MASTER);
-        $this->db->where('instrument_name', $instrument_name);
-        $this->db->where('measuring_size', $measuring_size);
-        $this->db->where('class', $class);
-        $this->db->where('type', $instrument_type);
-        $this->db->where('unit', $unit);
-        $this->db->where('grade', $grade);
+    // public function getLiveQtyforInst_check_count($id, $instrument_name, $measuring_size ,$instrument_type,$grade,$unit,$class)
+    // {
+    //     $this->db->select('qty');
+    //     $this->db->from(TBL_INSTRUMENT_MASTER);
+    //     $this->db->where('instrument_name', $instrument_name);
+    //     $this->db->where('measuring_size', $measuring_size);
+    //     $this->db->where('class', $class);
+    //     $this->db->where('type', $instrument_type);
+    //     $this->db->where('unit', $unit);
+    //     $this->db->where('grade', $grade);
 
-        $query = $this->db->get()->row_array();
+    //     $query = $this->db->get()->row_array();
 
-        $quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
+    //     $quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
 
-        if (empty($instrument_name) || empty($measuring_size)) {
-            return 0;
-        }
+    //     if (empty($instrument_name) || empty($measuring_size)) {
+    //         return 0;
+    //     }
 
-        $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
-        $this->db->from('tbl_storeform_qty_assign');
-        $this->db->where('instrument_name', $instrument_name);
-        $this->db->where('measuring_size', $measuring_size);
+    //     $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
+    //     $this->db->from('tbl_storeform_qty_assign');
+    //     $this->db->where('instrument_name', $instrument_name);
+    //     $this->db->where('measuring_size', $measuring_size);
 
-        $this->db->where('type', $instrument_type);
-        $this->db->where('grade', $grade);
-        $this->db->where('unit', $unit);
-        $this->db->where('class', $class);
-        //$this->db->where('sampling_trans_id', $id);
+    //     $this->db->where('type', $instrument_type);
+    //     $this->db->where('grade', $grade);
+    //     $this->db->where('unit', $unit);
+    //     $this->db->where('class', $class);
+    //     //$this->db->where('sampling_trans_id', $id);
 
-        $assignedRow = $this->db->get()->row_array();
-        $total_assign = (float)$assignedRow['total_assign'];
+    //     $assignedRow = $this->db->get()->row_array();
+    //     $total_assign = (float)$assignedRow['total_assign'];
 
-        $this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
-        $this->db->from('tbl_storeform_qty_assign');
-        $this->db->where('instrument_name', $instrument_name);
-        $this->db->where('measuring_size', $measuring_size);
+    //     $this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
+    //     $this->db->from('tbl_storeform_qty_assign');
+    //     $this->db->where('instrument_name', $instrument_name);
+    //     $this->db->where('measuring_size', $measuring_size);
 
         
-        $this->db->where('type', $instrument_type);
-        $this->db->where('grade', $grade);
-        $this->db->where('unit', $unit);
-        $this->db->where('class', $class);
-        // $this->db->where('sampling_trans_id', $id);
+    //     $this->db->where('type', $instrument_type);
+    //     $this->db->where('grade', $grade);
+    //     $this->db->where('unit', $unit);
+    //     $this->db->where('class', $class);
+    //     // $this->db->where('sampling_trans_id', $id);
 
-        $removedRow = $this->db->get()->row_array();
-        $total_removed = (float)$removedRow['total_removed'];
+    //     $removedRow = $this->db->get()->row_array();
+    //     $total_removed = (float)$removedRow['total_removed'];
 
-        $live_qty = $quantity_available - $total_assign + $total_removed;
+    //     $live_qty = $quantity_available - $total_assign + $total_removed;
 
-        return ($live_qty > 0) ? $live_qty : 0;
-    }
+    //     return ($live_qty > 0) ? $live_qty : 0;
+    // }
+
+
+    public function getLiveQtyforInst_check_count($id, $instrument_name, $measuring_size ,$instrument_type,$grade,$unit,$class)
+{
+
+$this->db->select('qty');
+$this->db->from(TBL_INSTRUMENT_MASTER);
+
+$this->db->where('instrument_name', $instrument_name);
+$this->db->where('measuring_size', $measuring_size);
+
+if($instrument_type === NULL || $instrument_type == ''){
+$this->db->where('type IS NULL', NULL, FALSE);
+}else{
+$this->db->where('type', $instrument_type);
+}
+
+if($grade === NULL || $grade == ''){
+$this->db->where('grade IS NULL', NULL, FALSE);
+}else{
+$this->db->where('grade', $grade);
+}
+
+if($unit === NULL || $unit == ''){
+$this->db->where('unit IS NULL', NULL, FALSE);
+}else{
+$this->db->where('unit', $unit);
+}
+
+if($class === NULL || $class == ''){
+$this->db->where('class IS NULL', NULL, FALSE);
+}else{
+$this->db->where('class', $class);
+}
+
+$query = $this->db->get()->row_array();
+
+$quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
+
+if (empty($instrument_name) || empty($measuring_size)) {
+return 0;
+}
+
+
+/* TOTAL ASSIGNED */
+
+$this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
+$this->db->from('tbl_storeform_qty_assign');
+
+$this->db->where('instrument_name', $instrument_name);
+$this->db->where('measuring_size', $measuring_size);
+
+if($instrument_type === NULL || $instrument_type == ''){
+$this->db->where('type IS NULL', NULL, FALSE);
+}else{
+$this->db->where('type', $instrument_type);
+}
+
+if($grade === NULL || $grade == ''){
+$this->db->where('grade IS NULL', NULL, FALSE);
+}else{
+$this->db->where('grade', $grade);
+}
+
+if($unit === NULL || $unit == ''){
+$this->db->where('unit IS NULL', NULL, FALSE);
+}else{
+$this->db->where('unit', $unit);
+}
+
+if($class === NULL || $class == ''){
+$this->db->where('class IS NULL', NULL, FALSE);
+}else{
+$this->db->where('class', $class);
+}
+
+$assignedRow = $this->db->get()->row_array();
+$total_assign = (float)$assignedRow['total_assign'];
+
+
+/* TOTAL REMOVED */
+
+$this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
+$this->db->from('tbl_storeform_qty_assign');
+
+$this->db->where('instrument_name', $instrument_name);
+$this->db->where('measuring_size', $measuring_size);
+
+if($instrument_type === NULL || $instrument_type == ''){
+$this->db->where('type IS NULL', NULL, FALSE);
+}else{
+$this->db->where('type', $instrument_type);
+}
+
+if($grade === NULL || $grade == ''){
+$this->db->where('grade IS NULL', NULL, FALSE);
+}else{
+$this->db->where('grade', $grade);
+}
+
+if($unit === NULL || $unit == ''){
+$this->db->where('unit IS NULL', NULL, FALSE);
+}else{
+$this->db->where('unit', $unit);
+}
+
+if($class === NULL || $class == ''){
+$this->db->where('class IS NULL', NULL, FALSE);
+}else{
+$this->db->where('class', $class);
+}
+
+$removedRow = $this->db->get()->row_array();
+$total_removed = (float)$removedRow['total_removed'];
+
+
+/* FINAL LIVE QTY */
+
+$live_qty = $quantity_available - $total_assign + $total_removed;
+
+return ($live_qty > 0) ? $live_qty : 0;
+
+}
 
 
 
@@ -24147,172 +24270,172 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
-{
+    {
 
-$this->db->select('
-'.TBL_SAMPLING_MASTER.'.id AS sampling_id,
-'.TBL_FINISHED_GOODS.'.part_number,
-'.TBL_FINISHED_GOODS.'.fin_id,
+        $this->db->select('
+        '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
+        '.TBL_FINISHED_GOODS.'.part_number,
+        '.TBL_FINISHED_GOODS.'.fin_id,
 
-'.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
-'.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+        '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+        '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
 
-'.TBL_INSTRUMENT_MASTER.'.grade AS instru_grade,
-'.TBL_INSTRUMENT_MASTER.'.unit,
-'.TBL_SAMPLING_MASTER_TRANS.'.class,
-'.TBL_SAMPLING_MASTER_TRANS.'.type AS instrument_type,
-'.TBL_SAMPLING_MASTER_TRANS.'.id AS sampling_trans_id,
+        '.TBL_INSTRUMENT_MASTER.'.grade AS instru_grade,
+        '.TBL_INSTRUMENT_MASTER.'.unit,
+        '.TBL_SAMPLING_MASTER_TRANS.'.class,
+        '.TBL_SAMPLING_MASTER_TRANS.'.type AS instrument_type,
+        '.TBL_SAMPLING_MASTER_TRANS.'.id AS sampling_trans_id,
 
-'.TBL_INSTRUMENT_MASTER.'.qty AS instru_qty,
+        '.TBL_INSTRUMENT_MASTER.'.qty AS instru_qty,
 
-'.TBL_INSTRUMENT_MASTER.'.remark,
-'.TBL_INSTRUMENT_MASTER.'.id AS instrument_id
-');
+        '.TBL_INSTRUMENT_MASTER.'.remark,
+        '.TBL_INSTRUMENT_MASTER.'.id AS instrument_id
+        ');
 
-if (!empty($params['search']['value'])) {
+        if (!empty($params['search']['value'])) {
 
-$search = $params['search']['value'];
+        $search = $params['search']['value'];
 
-$this->db->group_start()
-->like(TBL_SAMPLING_MASTER.'.id', $search)
-->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
-->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
-->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
-->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
-->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
-->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
-->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
-->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
-->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
-->group_end();
+        $this->db->group_start()
+        ->like(TBL_SAMPLING_MASTER.'.id', $search)
+        ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
+        ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
+        ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
+        ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
+        ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
+        ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
+        ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
+        ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
+        ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
+        ->group_end();
 
-}
+        }
 
-$this->db->from(TBL_SAMPLING_MASTER);
+        $this->db->from(TBL_SAMPLING_MASTER);
 
-$this->db->join(
-TBL_FINISHED_GOODS,
-TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
-'left'
-);
+        $this->db->join(
+            TBL_FINISHED_GOODS,
+            TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
+            'left'
+        );
 
-$this->db->join(
-TBL_SAMPLING_MASTER_TRANS,
-TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
-AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
-'left'
-);
+        $this->db->join(
+            TBL_SAMPLING_MASTER_TRANS,
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
+            AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+            'left'
+        );
 
-$this->db->join(
-TBL_INSTRUMENT_MASTER,
-TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
-AND IFNULL('.TBL_INSTRUMENT_MASTER.'.measuring_size,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,"")
-AND IFNULL('.TBL_INSTRUMENT_MASTER.'.type,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.type,"")
-AND IFNULL('.TBL_INSTRUMENT_MASTER.'.class,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.class,"")
-AND IFNULL('.TBL_INSTRUMENT_MASTER.'.grade,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.grade,"")
-AND IFNULL('.TBL_INSTRUMENT_MASTER.'.unit,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.unit,"")',
-'left'
-);
+        $this->db->join(
+            TBL_INSTRUMENT_MASTER,
+            TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+            AND IFNULL('.TBL_INSTRUMENT_MASTER.'.measuring_size,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,"")
+            AND IFNULL('.TBL_INSTRUMENT_MASTER.'.type,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.type,"")
+            AND IFNULL('.TBL_INSTRUMENT_MASTER.'.class,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.class,"")
+            AND IFNULL('.TBL_INSTRUMENT_MASTER.'.grade,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.grade,"")
+            AND IFNULL('.TBL_INSTRUMENT_MASTER.'.unit,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.unit,"")',
+            'left'
+        );
 
-$this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
 
-$this->db->group_by([
-TBL_SAMPLING_MASTER_TRANS.'.id'
-]);
+        $this->db->group_by([
+        TBL_SAMPLING_MASTER_TRANS.'.id'
+        ]);
 
-$this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
-$this->db->limit($params['length'], $params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
 
-$query  = $this->db->get();
-$result = $query->result_array();
+        $query  = $this->db->get();
+        $result = $query->result_array();
 
-$data = [];
-$count = 0;
+        $data = [];
+        $count = 0;
 
-foreach ($result as $row) {
+        foreach ($result as $row) {
 
-$live_quantity = $this->getLiveQtyforInst_check_count(
-$row['sampling_trans_id'],
-$row['instrument_name'],
-$row['measuring_size'],
-$row['instrument_type'],
-$row['instru_grade'],
-$row['unit'],
-$row['class']
-);
+        $live_quantity = $this->getLiveQtyforInst_check_count(
+            $row['sampling_trans_id'],
+            $row['instrument_name'],
+            $row['measuring_size'],
+            $row['instrument_type'],
+            $row['instru_grade'],
+            $row['unit'],
+            $row['class']
+        );
 
-$data[$count]['instrument_name']  = $row['instrument_name'];
-$data[$count]['grade']            = $row['instru_grade'];
-$data[$count]['unit']             = $row['unit'];
-$data[$count]['class']            = $row['class'];
-$data[$count]['measuring_size']   = $row['measuring_size'];
-$data[$count]['type']             = $row['instrument_type'];
-$data[$count]['remark']           = $row['remark'];
-$data[$count]['qty']              = $row['instru_qty'];
-$data[$count]['live_qty']         = $live_quantity;
+        $data[$count]['instrument_name']  = $row['instrument_name'];
+        $data[$count]['grade']            = $row['instru_grade'];
+        $data[$count]['unit']             = $row['unit'];
+        $data[$count]['class']            = $row['class'];
+        $data[$count]['measuring_size']   = $row['measuring_size'];
+        $data[$count]['type']             = $row['instrument_type'];
+        $data[$count]['remark']           = $row['remark'];
+        $data[$count]['qty']              = $row['instru_qty'];
+        $data[$count]['live_qty']         = $live_quantity;
 
-$data[$count]['action']  = "";
-            $data[$count]['action'] .= "
-            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-                data-toggle='modal' 
-                data-target='#addNewModal'
-                data-part_id='".$id."'
-                data-ticket_no='".$ticket_no."'
-                data-instrument_name='".$row['instrument_name']."'
-                data-measuring_size='".$row['measuring_size']."'
-                data-qty='".$row['instru_qty']."' 
-                data-part_number='".$row['part_number']."'
-                data-sampling_id ='".$row['sampling_id']."'
-                data-sampling_trans_id ='".$row['sampling_trans_id']."'
-                data-instrument_id ='".$row['instrument_id']."'
+        $data[$count]['action']  = "";
+                    $data[$count]['action'] .= "
+                    <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                        data-toggle='modal' 
+                        data-target='#addNewModal'
+                        data-part_id='".$id."'
+                        data-ticket_no='".$ticket_no."'
+                        data-instrument_name='".$row['instrument_name']."'
+                        data-measuring_size='".$row['measuring_size']."'
+                        data-qty='".$row['instru_qty']."' 
+                        data-part_number='".$row['part_number']."'
+                        data-sampling_id ='".$row['sampling_id']."'
+                        data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                        data-instrument_id ='".$row['instrument_id']."'
 
-                 data-type='".$row['instrument_type']."'
-                 data-grade='".$row['grade']."'
-                 data-unit='".$row['unit']."'
-                 data-class_1='".$row['class']."'
+                        data-type='".$row['instrument_type']."'
+                        data-grade='".$row['grade']."'
+                        data-unit='".$row['unit']."'
+                        data-class_1='".$row['class']."'
 
-                class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
-            </i> &nbsp;";
+                        class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
+                    </i> &nbsp;";
 
-            $data[$count]['action'] .= "
-            <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
-            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
-            </a>";
-
-
-            $data[$count]['action'] .= "
-            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-                data-toggle='modal' 
-                data-target='#removeNewModal'
-                data-part_id='".$id."'
-                data-ticket_no='".$ticket_no."'
-                data-instrument_name='".$row['instrument_name']."'
-                data-measuring_size='".$row['measuring_size']."'
-                data-qty='".$row['instru_qty']."'
-                data-part_number='".$row['part_number']."'
-                data-sampling_id ='".$row['sampling_id']."'
-                data-sampling_trans_id ='".$row['sampling_trans_id']."'
-                data-instrument_id ='".$row['instrument_id']."'
-
-                data-type='".$row['instrument_type']."'
-                data-grade='".$row['grade']."'
-                data-unit='".$row['unit']."'
-                data-class_1='".$row['class']."'
-
-                class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
-            </i> &nbsp;";
+                    $data[$count]['action'] .= "
+                    <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
+                    <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+                    </a>";
 
 
-            $data[$count]['action'] .= "
-            <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
-            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
-            </a>";
-            $count++;
-}
+                $data[$count]['action'] .= "
+                <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                    data-toggle='modal' 
+                    data-target='#removeNewModal'
+                    data-part_id='".$id."'
+                    data-ticket_no='".$ticket_no."'
+                    data-instrument_name='".$row['instrument_name']."'
+                    data-measuring_size='".$row['measuring_size']."'
+                    data-qty='".$row['instru_qty']."'
+                    data-part_number='".$row['part_number']."'
+                    data-sampling_id ='".$row['sampling_id']."'
+                    data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                    data-instrument_id ='".$row['instrument_id']."'
 
-return $data;
+                    data-type='".$row['instrument_type']."'
+                    data-grade='".$row['grade']."'
+                    data-unit='".$row['unit']."'
+                    data-class_1='".$row['class']."'
 
-}
+                    class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
+                </i> &nbsp;";
+
+
+                $data[$count]['action'] .= "
+                <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+                <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+                </a>";
+                $count++;
+        }
+
+        return $data;
+
+    }
 
     
 
