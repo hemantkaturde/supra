@@ -24079,7 +24079,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-unit='".$row['unit']."'
                 data-class_1='".$row['class']."'
 
-                class='fa fa-minus-circle addrejectionitemdata'>
+                class='fa fa-minus-circle addrejectionitemdata getinstrumentcertificate'>
             </i> &nbsp;";
 
 
