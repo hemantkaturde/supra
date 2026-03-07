@@ -28068,14 +28068,23 @@ public function saveintrument()
 {
     $id = $this->input->post('id');
     $data = [
-        'instrument_name' => $this->input->post('instrument_name'),
-        'grade' => $this->input->post('grade'),
-        'measuring_size' => $this->input->post('measuring_size'),
-        'unit' => $this->input->post('unit'),
-        'class' => $this->input->post('class'),
-        'type' => $this->input->post('type'),
-        'qty' => $this->input->post('qty'),
-        'remark' => $this->input->post('remark')
+        // 'instrument_name' => $this->input->post('instrument_name'),
+        // 'grade' => $this->input->post('grade'),
+        // 'measuring_size' => $this->input->post('measuring_size'),
+        // 'unit' => $this->input->post('unit'),
+        // 'class' => $this->input->post('class'),
+        // 'type' => $this->input->post('type'),
+        // 'qty' => $this->input->post('qty'),
+        // 'remark' => $this->input->post('remark')
+
+        'instrument_name' => $this->input->post('instrument_name') ?: NULL,
+        'grade' => $this->input->post('grade') ?: NULL,
+        'measuring_size' => $this->input->post('measuring_size') ?: NULL,
+        'unit' => $this->input->post('unit') ?: NULL,
+        'class' => $this->input->post('class') ?: NULL,
+        'type' => $this->input->post('type') ?: NULL,
+        'qty' => $this->input->post('qty') ?: NULL,
+        'remark' => $this->input->post('remark') ?: NULL
     ];
 
     if ($id == '') {
@@ -29365,7 +29374,7 @@ public function editstoreformqtyremovedata()
 
             'certificate'       => trim($this->input->post('certificate')),
             'status' => trim($this->input->post('status')),
-            
+
             'type' => trim($this->input->post('type')),
             'grade' => trim($this->input->post('grade')),
             'unit' => trim($this->input->post('unit')),
