@@ -24145,6 +24145,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     // }
 
 
+
     public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
 {
 
@@ -24209,8 +24210,8 @@ AND IFNULL('.TBL_INSTRUMENT_MASTER.'.measuring_size,"") = IFNULL('.TBL_SAMPLING_
 AND IFNULL('.TBL_INSTRUMENT_MASTER.'.type,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.type,"")
 AND IFNULL('.TBL_INSTRUMENT_MASTER.'.class,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.class,"")
 AND IFNULL('.TBL_INSTRUMENT_MASTER.'.grade,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.grade,"")
-AND IFNULL('.TBL_INSTRUMENT_MASTER.'.unit,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.unit,"")','left'
-
+AND IFNULL('.TBL_INSTRUMENT_MASTER.'.unit,"") = IFNULL('.TBL_SAMPLING_MASTER_TRANS.'.unit,"")',
+'left'
 );
 
 $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
@@ -24251,33 +24252,68 @@ $data[$count]['qty']              = $row['instru_qty'];
 $data[$count]['live_qty']         = $live_quantity;
 
 $data[$count]['action']  = "";
+            $data[$count]['action'] .= "
+            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal' 
+                data-target='#addNewModal'
+                data-part_id='".$id."'
+                data-ticket_no='".$ticket_no."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-qty='".$row['instru_qty']."' 
+                data-part_number='".$row['part_number']."'
+                data-sampling_id ='".$row['sampling_id']."'
+                data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                data-instrument_id ='".$row['instrument_id']."'
 
-$data[$count]['action'] .= "
-<i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-data-toggle='modal' 
-data-target='#addNewModal'
-data-part_id='".$id."'
-data-ticket_no='".$ticket_no."'
-data-instrument_name='".$row['instrument_name']."'
-data-measuring_size='".$row['measuring_size']."'
-data-qty='".$row['instru_qty']."'
-data-part_number='".$row['part_number']."'
-data-sampling_id='".$row['sampling_id']."'
-data-sampling_trans_id='".$row['sampling_trans_id']."'
-data-instrument_id='".$row['instrument_id']."'
-data-type='".$row['instrument_type']."'
-data-grade='".$row['instru_grade']."'
-data-unit='".$row['unit']."'
-data-class_1='".$row['class']."'
-class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
-</i>";
+                 data-type='".$row['instrument_type']."'
+                 data-grade='".$row['grade']."'
+                 data-unit='".$row['unit']."'
+                 data-class_1='".$row['class']."'
 
-$count++;
+                class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
+            </i> &nbsp;";
+
+            $data[$count]['action'] .= "
+            <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+            </a>";
+
+
+            $data[$count]['action'] .= "
+            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal' 
+                data-target='#removeNewModal'
+                data-part_id='".$id."'
+                data-ticket_no='".$ticket_no."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-qty='".$row['instru_qty']."'
+                data-part_number='".$row['part_number']."'
+                data-sampling_id ='".$row['sampling_id']."'
+                data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                data-instrument_id ='".$row['instrument_id']."'
+
+                data-type='".$row['instrument_type']."'
+                data-grade='".$row['grade']."'
+                data-unit='".$row['unit']."'
+                data-class_1='".$row['class']."'
+
+                class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
+            </i> &nbsp;";
+
+
+            $data[$count]['action'] .= "
+            <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+            </a>";
+            $count++;
 }
 
 return $data;
 
 }
+
     
 
     public function getSamplingInstrumnetDataBypartIdcount($params, $partId, $ticket_no)
