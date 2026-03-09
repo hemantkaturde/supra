@@ -22791,12 +22791,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         $this->db->select('*');
         $this->db->from('tbl_instrument_master_details');
+        $this->db->join('tbl_instrument_master', 'tbl_instrument_master.id  = tbl_instrument_master_details.instrument_master_id');
 
         // ✅ Search filter (like DataTables)
         if (!empty($params['search']['value'])) {
             $search = $params['search']['value'];
             $this->db->group_start();
             $this->db->like('instrument_id', $search);
+            $this->db->or_like('instrument_name', $search);
+            $this->db->or_like('measuring_size', $search);
             $this->db->or_like('calibration_date', $search);
             $this->db->or_like('due_date', $search);
             $this->db->or_like('certificate_no', $search);
@@ -22812,20 +22815,22 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         $this->db->select('*');
         $this->db->from('tbl_instrument_master_details');
+        $this->db->join('tbl_instrument_master', 'tbl_instrument_master.id  = tbl_instrument_master_details.instrument_master_id');
 
         // ✅ Search filter (like DataTables)
         if (!empty($params['search']['value'])) {
             $search = $params['search']['value'];
             $this->db->group_start();
             $this->db->like('instrument_id', $search);
-            $this->db->or_like('calibration_date', $search);
+            $this->db->or_like('instrument_name', $search);
+            $this->db->or_like('measuring_size', $search);
             $this->db->or_like('due_date', $search);
             $this->db->or_like('certificate_no', $search);
             $this->db->or_like('status', $search);
             $this->db->or_like('remark', $search);
             $this->db->group_end();
         }
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('tbl_instrument_master_details.id', 'DESC');
         $this->db->limit($params['length'], $params['start']);
 
         $query = $this->db->get();
@@ -22835,7 +22840,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $counter = 0;
         if (!empty($result)) {
             foreach ($result as $row) {
-            
+                $data[$counter]['instrument_name'] = $row['instrument_name'];
+                $data[$counter]['measuring_size'] = $row['measuring_size'];
                 $data[$counter]['instrument_id'] = $row['instrument_id'];
                 $data[$counter]['calibration_date'] =  date("d-m-Y", strtotime($row['calibration_date']));
                 $data[$counter]['due_date']  =  date("d-m-Y", strtotime($row['due_date']));

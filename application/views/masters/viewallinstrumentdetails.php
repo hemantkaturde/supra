@@ -27,6 +27,8 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_instrument_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
+                                        <th>Instrument Name</th>
+                                        <th>Measuring Size</th>
                                         <th>Instrument Id</th>
                                         <th>Calibration Date</th>
                                         <th>Due Date</th>
