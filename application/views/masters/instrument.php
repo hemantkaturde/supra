@@ -31,7 +31,7 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_instrument_details">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_instrument">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Instrument Name</th>
