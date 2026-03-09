@@ -667,6 +667,7 @@ $route['clonerecordspackinginstraction/(:any)'] = "admin/clonerecordspackinginst
 
 $route['addinstrumentdetailsdata/(:any)'] = "admin/addinstrumentdetailsdata/$1";
 
+$route['viewallinstrumentdetails'] = "admin/viewallinstrumentdetails";
 
 
 

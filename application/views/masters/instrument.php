@@ -16,6 +16,9 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
+                   <a href="<?php echo base_url(); ?>viewallinstrumentdetails" class="btn btn-warning">
+                        <i class="fa fa-info"></i> View All Instrument Details
+                    </a>
                     <button class="btn btn-primary" onclick="openModal()">
                         <i class="fa fa-plus"></i> Add Instrument
                     </button>
@@ -28,7 +31,7 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_instrument">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_instrument_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Instrument Name</th>

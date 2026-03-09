@@ -30227,3 +30227,66 @@ $('#export_excel').on('click', function() {
 
     </script>
 <?php } ?>
+
+
+<?php if ($pageTitle == 'View All Instrument Item Details') { ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var dt = $('#view_instrument_details').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "15%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "8%", "targets": 6 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Instrumens Details Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+
+					
+						"createdRow": function (row, data, dataIndex) {
+								    var dueDateText = data[2]; // Due Date column (dd-mm-yyyy format)
+
+									var parts = dueDateText.split("-");
+									var dueDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+									var today = new Date();
+
+									today.setHours(0,0,0,0);
+									dueDate.setHours(0,0,0,0);
+
+									// 15 din pehle ki date nikalo
+									var alertDate = new Date(dueDate);
+									alertDate.setDate(alertDate.getDate() - 15);
+
+									// Condition
+									if (today >= alertDate && today <= dueDate) {
+										$(row).addClass("due-warning");   // Yellow highlight
+									}
+
+									// Agar date cross ho gayi
+									if (today > dueDate) {
+										$(row).addClass("due-expired");   // Red highlight
+									}
+						},
+
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchtintrumentdetailsmasterDetailsall",
+							type: "post",
+						},
+					});
+		});
+	</script>
+<?php } ?>

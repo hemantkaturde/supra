@@ -22787,6 +22787,71 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+     public function fetchtintrumentdetailscountdetails($params)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_instrument_master_details');
+
+        // ✅ Search filter (like DataTables)
+        if (!empty($params['search']['value'])) {
+            $search = $params['search']['value'];
+            $this->db->group_start();
+            $this->db->like('instrument_id', $search);
+            $this->db->or_like('calibration_date', $search);
+            $this->db->or_like('due_date', $search);
+            $this->db->or_like('certificate_no', $search);
+            $this->db->or_like('status', $search);
+            $this->db->or_like('remark', $search);
+            $this->db->group_end();
+        }
+        return $this->db->count_all_results();
+    }
+
+
+    public function fetchtintrumentdetailsdatadetails($params)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_instrument_master_details');
+
+        // ✅ Search filter (like DataTables)
+        if (!empty($params['search']['value'])) {
+            $search = $params['search']['value'];
+            $this->db->group_start();
+            $this->db->like('instrument_id', $search);
+            $this->db->or_like('calibration_date', $search);
+            $this->db->or_like('due_date', $search);
+            $this->db->or_like('certificate_no', $search);
+            $this->db->or_like('status', $search);
+            $this->db->or_like('remark', $search);
+            $this->db->group_end();
+        }
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        $data = [];
+        $counter = 0;
+        if (!empty($result)) {
+            foreach ($result as $row) {
+            
+                $data[$counter]['instrument_id'] = $row['instrument_id'];
+                $data[$counter]['calibration_date'] =  date("d-m-Y", strtotime($row['calibration_date']));
+                $data[$counter]['due_date']  =  date("d-m-Y", strtotime($row['due_date']));
+                $data[$counter]['certificate_no'] = $row['certificate_no'];
+                $data[$counter]['status'] = $row['status'];
+                $data[$counter]['remark'] = $row['remark'];
+                $data[$counter]['action'] = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editinstrumentmasterData(".$row['id'].")'></i> &nbsp;&nbsp;";
+                $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#d9534f; cursor: pointer;' class='fa fa-trash-o' aria-hidden='true' onclick='deleteinstrumentmasterData(".$row['id'].")'></i>";
+                $counter++;
+            }
+        }
+
+        return $data;
+    }
+
+
 
     public function getinstrumentdetailsdata($id){
         $this->db->select('*');

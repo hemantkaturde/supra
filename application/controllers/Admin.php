@@ -28046,6 +28046,33 @@ public function fetchtintrumentdetailsmaster($instrument_details_id)
 }
 
 
+public function fetchtintrumentdetailsmasterDetailsall()
+{
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchtintrumentdetailscountdetails($params); 
+    $queryRecords = $this->admin_model->fetchtintrumentdetailsdatadetails($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
 public function deleteinstrumentmasterData($id)
 {
     $this->admin_model->delete_instrument_master_details($id);
@@ -31279,30 +31306,40 @@ public function addnewbalancestock(){
 
     public function getinstrumentcertificates(){
 
-    $instrument_id=$this->input->post('instrument_id');
-    if($instrument_id) {
-        $getVendoritemsonly = $this->admin_model->getinstrumentcertificates($instrument_id);
-        if(count($getVendoritemsonly) >= 1) {
-            $content = $content.'<option value="">Select Instrument ID</option>';
-            foreach($getVendoritemsonly as $value) {
+        $instrument_id=$this->input->post('instrument_id');
+        if($instrument_id) {
+            $getVendoritemsonly = $this->admin_model->getinstrumentcertificates($instrument_id);
+            if(count($getVendoritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Instrument ID</option>';
+                foreach($getVendoritemsonly as $value) {
 
-                    if($this->input->post('instrument_id')==$value["fin_id"]){
-                        $selected = 'selected';
-                     }else{ 
-                        $selected ='';
-                     }
+                        if($this->input->post('instrument_id')==$value["fin_id"]){
+                            $selected = 'selected';
+                        }else{ 
+                            $selected ='';
+                        }
 
-                $content = $content.'<option value="'.$value["certificate_id"].'" data_id="'.$value["instrument_id"].'" '.$selected.'>'.$value["instrument_id"].' - '. date("d-m-Y", strtotime($value["due_date"])).'</option>';
+                    $content = $content.'<option value="'.$value["certificate_id"].'" data_id="'.$value["instrument_id"].'" '.$selected.'>'.$value["instrument_id"].' - '. date("d-m-Y", strtotime($value["due_date"])).'</option>';
+                }
+                echo $content;
+            } else {
+                echo 'failure';
             }
-            echo $content;
         } else {
             echo 'failure';
         }
-    } else {
-        echo 'failure';
+
     }
 
-}
+    public function viewallinstrumentdetails(){
+
+         $process = 'View All Instrument Item Details';
+         $processFunction = 'Admin/viewallinstrumentdetails';
+         $this->logrecord($process,$processFunction);
+         $this->global['pageTitle'] = 'View All Instrument Item Details';
+         $this->loadViews("masters/viewallinstrumentdetails", $this->global, $data, NULL);
+
+    }
 
 
 
