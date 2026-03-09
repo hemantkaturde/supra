@@ -22803,7 +22803,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_like('calibration_date', $search);
             $this->db->or_like('due_date', $search);
             $this->db->or_like('certificate_no', $search);
-            $this->db->or_like('status', $search);
+            $this->db->or_like('tbl_instrument_master_details.status', $search);
             $this->db->or_like('remark', $search);
             $this->db->group_end();
         }
@@ -22826,7 +22826,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_like('measuring_size', $search);
             $this->db->or_like('due_date', $search);
             $this->db->or_like('certificate_no', $search);
-            $this->db->or_like('status', $search);
+            $this->db->or_like('tbl_instrument_master_details.status', $search);
             $this->db->or_like('remark', $search);
             $this->db->group_end();
         }
