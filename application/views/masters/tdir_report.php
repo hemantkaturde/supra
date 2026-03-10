@@ -49,7 +49,7 @@
                                             <th>Part no.</th>
                                             <th>Part name</th>
                                             <th>Buyer name</th>
-                                            <th>Vendor Ordey Qty</th>
+                                            <th>Vendor Order Qty</th>
                                             <th>Remarks</th>
                                             <th>Action</th>
                                           </tr>
