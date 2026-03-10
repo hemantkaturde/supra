@@ -102,14 +102,28 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <label for="vendor_order_qty">Vendor Order Qty</label>
+                                            <input type="text" class="form-control" id="vendor_order_qty" name="vendor_order_qty">
+                                            <p class="error vendor_order_qty_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
                                             <label for="buyer_name">Buyer Name</label>
                                             <input type="text" class="form-control" value="<?php echo $getTdirdata[0]['buyer_name_label']; ?>" id="buyer_name" name="buyer_name">
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
-                                </div>
-                               
-                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="buyer_PO_number">Buyer PO</label>
+                                            <input type="text" class="form-control" id="buyer_PO_number" name="buyer_PO_number" value="<?php echo $getTdirdata[0]['buyer_PO_number']; ?>">
+                                            <p class="error buyer_PO_number_error"></p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_po_date">Buyer PO Date</label>
@@ -117,7 +131,27 @@
                                             <p class="error buyer_po_date_error"></p>
                                         </div>
                                     </div>
-                                    
+
+                                      
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="inspection_report_date">Inspection Report Date</label>
+                                            <input type="text" class="form-control datepicker" id="inspection_report_date" value="<?php echo $getTdirdata[0]['inspection_report_date']; ?>" name="inspection_report_date">
+                                            <p class="error inspection_report_date_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                     <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="checked_by">Checked By</label>
+                                            <input type="text" class="form-control" id="checked_by" name="checked_by" value="<?php echo $getTdirdata[0]['checked_by']; ?>">
+                                            <p class="error checked_by_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="row">
                                     <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_qty">Order Qty</label>
