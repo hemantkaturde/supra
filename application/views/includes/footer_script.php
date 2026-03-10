@@ -27524,6 +27524,9 @@
 											$('#part_name').val('');
 											// $('#order_qty').val('');
 											$('#vendor_order_qty').val('');
+											$('#buyer_order_qty').val('');
+
+											
 											
 										}
 									else
@@ -27531,6 +27534,9 @@
 											$('#part_name').val(get_vendoritem_data.name);
 											// $('#order_qty').val(get_vendoritem_data.order_oty);
 											$('#vendor_order_qty').val(get_vendoritem_data.order_oty);
+											$('#buyer_order_qty').val(get_vendoritem_data.vendor_qty);
+
+											
 										}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
