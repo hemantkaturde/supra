@@ -26736,12 +26736,13 @@ public function addTDIR(){
         $this->form_validation->set_rules('buyer_name','Buyer Name','trim');
         $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim');
         $this->form_validation->set_rules('order_qty','Order Qty','trim');
-
         $this->form_validation->set_rules('material_type','Material Type','trim');
         $this->form_validation->set_rules('additional_process','Additional Process','trim');
         $this->form_validation->set_rules('remarks','Remarks','trim');
         $this->form_validation->set_rules('qty_in_pcs_for_export_purposr','qty_in_pcs_for_export_purposr','trim');
-
+        $this->form_validation->set_rules('checked_by','checked_by','trim');
+        $this->form_validation->set_rules('inspection_report_date','inspection_report_date','trim');
+        $this->form_validation->set_rules('buyer_PO_number','buyer_PO_number','trim');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -26770,6 +26771,9 @@ public function addTDIR(){
                 'qty_per_box' => trim($this->input->post('qty_per_box')),
                 'print_qty_per_bag' => trim($this->input->post('print_qty_per_bag')),
                 'print_qty_per_box' => trim($this->input->post('print_qty_per_box')),
+                'inspection_report_date'       => trim($this->input->post('inspection_report_date')),
+                'checked_by'           => trim($this->input->post('checked_by')),
+                'buyer_PO_number'           => trim($this->input->post('buyer_PO_number')),
             );
 
             if($this->input->post('tdir_id')){

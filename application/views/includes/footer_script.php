@@ -27560,18 +27560,21 @@
 								if(data == "failure")
 								{
 									$('#buyer_name').val('');
+									$('#buyer_PO_number').val('');
 									$('#buyer_po_date').val('');
 								}
 								else
 								{
 									var data_row_material = jQuery.parseJSON( data );
 									$('#buyer_name').val(data_row_material.buyer_name);
+									$('#buyer_PO_number').val(data_row_material.sales_order_number);
 									$('#buyer_po_date').val(data_row_material.buyer_po_date);
 							}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								    $('#buyer_name').val('');
+									$('#buyer_PO_number').val('');
 									$('#buyer_po_date').val('');
 								    //$(".loader_ajax").hide();
 							}
