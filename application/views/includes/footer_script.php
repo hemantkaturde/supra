@@ -28160,6 +28160,7 @@
 						}
 				    });
 		}
+		
 
 	</script> 
 <?php } ?>
@@ -30299,5 +30300,64 @@ $('#export_excel').on('click', function() {
 						},
 					});
 		});
+
+		function editinstrumentmasterData(id) {
+			$.get('<?php echo base_url();?>admin/editinstrumentmasterData/' + id, function (res) {
+				let d = JSON.parse(res);
+
+				$('#instrument_master_details_id').val($.trim(d.id));
+				$('#instrument_id').val($.trim(d.instrument_id));
+				$('#calibration_date').val($.trim(d.calibration_date));
+				$('#due_date').val($.trim(d.due_date));
+				$('#certificate_no').val($.trim(d.certificate_no));
+				$('#status').val($.trim(d.status));
+				$('#remark').val($.trim(d.remark));
+
+				$('.modal-title').text('Edit Instrument Master Details');
+
+				// wait to ensure modal animation completes, then open
+				// setTimeout(() => {
+				$('#instrumentdetailsModal').modal('show');
+				// }, 300);
+			});
+		}
+
+		function deleteinstrumentmasterData(id){
+						var instrument_details_id = $('#instrument_details_id').val();
+
+		            swal({
+						title: "Are you sure?",
+						text: "Delete Instrument Master Details",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) { 
+		                 	        $.get('<?php echo base_url();?>admin/deleteinstrumentmasterData/' + id, function(res){
+										let d = JSON.parse(res);
+									    if(d.status){
+											swal({
+													title: "Deleted!",
+													text: "Instrument Master Details Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url()?>addinstrumentdetailsdata/"+instrument_details_id;
+											});	
+						                }
+					                });
+					      }
+						  else {
+						swal("Cancelled", "Instrument deletion cancelled ", "error");
+						}
+				    });
+		}
+
+
 	</script>
 <?php } ?>

@@ -49,6 +49,87 @@
 </div>
 
 
+
+<!-- Instrument Modal -->
+<div class="modal fade" id="instrumentdetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form id="instrumentForm">
+        <div class="modal-header" style="background-color:#3c8dbc;color:#fff">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Add Instrument Master Details</h4>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="instrument_details_id" id="instrument_details_id" value="<?php echo $getinstrumentdetailsdata[0]['id']; ?>">
+          <input type="hidden" name="instrument_master_details_id" id="instrument_master_details_id">
+
+          <!-- Row 1 -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Instrument Id <span class="text-danger">*</span></label>
+                  <input type="text" name="instrument_id" id="instrument_id" class="form-control" Required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Calibration Date <span class="text-danger">*</span></label>
+                 <input type="text" name="calibration_date" id="calibration_date" class="form-control datepicker" Required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Due Date <span class="text-danger">*</span></label>
+                <input type="text"  name="due_date" id="due_date" class="form-control datepicker_due_date" Required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Certificate No</label>
+                 <input type="text" name="certificate_no" id="certificate_no" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="row">
+             <div class="col-md-6">
+              <div class="form-group">
+                <label>Status</label>
+                <select name="status" id="status" class="form-control serachfilternotrequired">
+                  <option value="">Select Status</option>
+                  <option value="Ok">Ok</option>
+                  <option value="Reject">Reject</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Remark</label>
+                <input type="text" name="remark" id="remark" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
 
