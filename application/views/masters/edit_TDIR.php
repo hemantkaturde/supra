@@ -102,9 +102,9 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="vendor_order_qty">Vendor Order Qty</label>
-                                            <input type="text" class="form-control" id="vendor_order_qty" name="vendor_order_qty">
-                                            <p class="error vendor_order_qty_error"></p>
+                                            <label for="buyer_order_qty">Buyer Order QTY</label>
+                                            <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty">
+                                            <p class="error buyer_order_qty_error"></p>
                                         </div>
                                     </div>
 
