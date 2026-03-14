@@ -22760,8 +22760,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
      
-        // Expired + Next 15 Days
-        $this->db->where("due_date <=", date('Y-m-d', strtotime('+15 days')));
+        $today = date('Y-m-d');
+        $next15days = date('Y-m-d', strtotime('+15 days'));
+
+            // expired + next 15 days
+        $this->db->where('due_date <=', $next15days);
 
 
         $this->db->where('tbl_instrument_master_details.instrument_master_id', $instrument_details_id);
