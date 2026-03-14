@@ -159,7 +159,6 @@ $(function() {
 .due-warning {
         /* background-color: red !important; */  /* Yellow */
         background-color: #e6b800 !important;  /* Yellow */
-
 }
 
 .due-expired {
