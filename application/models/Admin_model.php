@@ -22807,6 +22807,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_like('remark', $search);
             $this->db->group_end();
         }
+
+        $today = date('Y-m-d');
+        $next15days = date('Y-m-d', strtotime('+15 days'));
+
+
+        // expired + next 15 days
+        $this->db->where('due_date <=', $next15days);
         return $this->db->count_all_results();
     }
 
