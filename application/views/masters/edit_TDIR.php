@@ -103,7 +103,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_order_qty">Buyer Order QTY</label>
-                                            <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty">
+                                            <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" value="<?php echo $getTdirdata[0]['buyer_order_qty']; ?>">
                                             <p class="error buyer_order_qty_error"></p>
                                         </div>
                                     </div>
