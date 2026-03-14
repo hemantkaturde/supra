@@ -27232,7 +27232,6 @@
 <?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report' ||  $pageTitle=='Edit TDIR' ||  $pageTitle=='Incoming Lots Data' || $pageTitle=='TDIR Attachment'){ ?>
  <script type="text/javascript">
 
-
 				$(document).ready(function() {
 					var dt = $('#view_tdir_report').DataTable({
 						"columnDefs": [ 
@@ -27407,7 +27406,6 @@
 
 				});
 
-
 				$(document).on('change','#vendor_name',function(e){  
 				       e.preventDefault();
 						var vendor_name = $('#vendor_name').val();
@@ -27533,8 +27531,8 @@
 										{
 											$('#part_name').val(get_vendoritem_data.name);
 											// $('#order_qty').val(get_vendoritem_data.order_oty);
-											$('#vendor_order_qty').val(get_vendoritem_data.order_oty);
-											$('#buyer_order_qty').val(get_vendoritem_data.vendor_qty);
+											$('#vendor_order_qty').val(get_vendoritem_data.vendor_order_qty);
+											$('#buyer_order_qty').val(get_vendoritem_data.buyer_order_qty);
 
 											
 										}
@@ -27881,7 +27879,6 @@
 					$('#qty_per_box').val(qtyPerBox);
 				});
 
-				
 
     </script>
 <?php } ?>

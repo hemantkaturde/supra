@@ -26824,6 +26824,11 @@ public function getvendorpartdetialstdir_report(){
     $vendor_po_number=$this->input->post('vendor_po_number');
     if($part_no) {
         $part_no_data = $this->admin_model->getvendorpartdetialstdir_report($part_no,$vendor_po_number);
+
+        print_r($part_no_data);
+        exit;
+
+
         if(count($part_no_data) >= 1) {
             echo json_encode($part_no_data[0]);
         } else {

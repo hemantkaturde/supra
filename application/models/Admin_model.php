@@ -22281,10 +22281,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getvendorpartdetialstdir_report($part_no,$vendor_po_number){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
-         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_buyer_po_number  and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id ');
         $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
         return $query_result;
     }
