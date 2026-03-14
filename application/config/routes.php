@@ -671,6 +671,11 @@ $route['viewallinstrumentdetails'] = "admin/viewallinstrumentdetails";
 
 
 
+$route['inspectionreportexcel'] = "admin/inspectionreportexcel";
+
+
+
+
 
 
 /* End of file routes.php */

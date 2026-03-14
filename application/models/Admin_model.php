@@ -22425,6 +22425,90 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+
+     public function gettdirexportreportcount($params){
+
+         $this->db->select('*'); 
+           if($params['search']['value'] != "") 
+            {
+                $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".remarks LIKE '%".$params['search']['value']."%')");
+            }
+
+         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
+         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
+         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
+
+         $this->db->order_by(TBL_TDIR.'.id','DESC');
+         $query = $this->db->get(TBL_TDIR);
+         $rowcount = $query->num_rows();
+         return $rowcount;
+
+    }
+
+
+    public function gettdirreportexportdata($params){
+
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label,'.TBL_TDIR.'.buyer_name as buyer_name_label,'.TBL_TDIR.'.id as tdir_id');
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR.".remarks LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
+
+        $this->db->where(TBL_TDIR.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_TDIR.'.id','DESC');
+        $query = $this->db->get(TBL_TDIR);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['report_number'] = $value['report_number'];
+                $data[$counter]['inspection_report_date'] = $value['inspection_report_date'];
+                $data[$counter]['vendor_name'] =  $value['vendor_name_label'];
+                $data[$counter]['vendor_po'] =  $value['po_number'];
+                $data[$counter]['part_number'] =  $value['part_number_label'];
+                $data[$counter]['part_name'] =  $value['name'];
+                $data[$counter]['buyer_name'] =  $value['buyer_name_label'];
+                $data[$counter]['vendor_order_qty'] =  $value['vendor_order_qty'];
+                $data[$counter]['remark'] =  $value['remarks'];
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."incoming_lots/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printinspectionreportlabel/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printinspectionreportlabelperbox/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-archive' aria-hidden='true'></i></a>   &nbsp";
+
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['tdir_id']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
     public function deletetdirreport($id){
 
         $this->db->where('id', $id);

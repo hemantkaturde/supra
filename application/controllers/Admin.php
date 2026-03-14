@@ -26907,6 +26907,32 @@ public function fetchtdirreport(){
 
 }
 
+public function fetchtdirreportexcel(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->gettdirexportreportcount($params); 
+    $queryRecords = $this->admin_model->gettdirreportexportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
 
 public function printinspectionreportlabel($id)
 {
@@ -31348,6 +31374,15 @@ public function addnewbalancestock(){
 
     }
 
+
+    public function  inspectionreportexcel(){
+
+         $process = 'Inspection Report Excel';
+         $processFunction = 'Admin/inspectionreportexcel';
+         $this->logrecord($process,$processFunction);
+         $this->global['pageTitle'] = 'Inspection Report Excel';
+         $this->loadViews("masters/inspectionreportexcel", $this->global, $data, NULL);
+    }
 
 
 

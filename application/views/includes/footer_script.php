@@ -27885,6 +27885,43 @@
 
 
 
+<?php if($pageTitle=='Inspection Report Excel'){ ?>
+ <script type="text/javascript">
+
+				$(document).ready(function() {
+					var dt = $('#export_tdir_report').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "10%", "targets": 6 },
+							{ "width": "10%", "targets": 7 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No TDIR Report Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchtdirreportexcel",
+							type: "post",
+						},
+					});
+				});
+</script>
+<?php } ?>
+
+
 <?php if($pageTitle=='Instrument Master'){ ?>
 	<script type="text/javascript">
 
@@ -28161,6 +28198,10 @@
 
 	</script> 
 <?php } ?>
+
+
+
+
 
 
 
