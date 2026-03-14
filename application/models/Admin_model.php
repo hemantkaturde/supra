@@ -22759,14 +22759,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->group_end();
         }
 
-     
-        $today = date('Y-m-d');
-        $next15days = date('Y-m-d', strtotime('+15 days'));
-
-            // expired + next 15 days
-        $this->db->where('due_date <=', $next15days);
-
-
         $this->db->where('tbl_instrument_master_details.instrument_master_id', $instrument_details_id);
         $this->db->order_by('id', 'DESC');
         $this->db->limit($params['length'], $params['start']);
@@ -22838,6 +22830,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_like('remark', $search);
             $this->db->group_end();
         }
+
+        $today = date('Y-m-d');
+        $next15days = date('Y-m-d', strtotime('+15 days'));
+
+
+        // expired + next 15 days
+        $this->db->where('due_date <=', $next15days);
+
+
         $this->db->order_by('tbl_instrument_master_details.id', 'DESC');
         $this->db->limit($params['length'], $params['start']);
 

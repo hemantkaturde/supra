@@ -30269,7 +30269,8 @@ $('#export_excel').on('click', function() {
 
 					
 						"createdRow": function (row, data, dataIndex) {
-								    var dueDateText = data[2]; // Due Date column (dd-mm-yyyy format)
+
+								    var dueDateText = data[4]; // Due Date column (dd-mm-yyyy format)
 
 									var parts = dueDateText.split("-");
 									var dueDate = new Date(parts[2], parts[1] - 1, parts[0]);
