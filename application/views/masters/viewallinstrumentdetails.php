@@ -155,9 +155,10 @@ $(function() {
 });
 </script>
 <style>
+
 .due-warning {
         /* background-color: red !important; */  /* Yellow */
-        background-color: #fff3cd !important;  /* Yellow */
+        background-color: #e6b800 !important;  /* Yellow */
 
 }
 
