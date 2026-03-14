@@ -26743,6 +26743,7 @@ public function addTDIR(){
         $this->form_validation->set_rules('checked_by','checked_by','trim');
         $this->form_validation->set_rules('inspection_report_date','inspection_report_date','trim');
         $this->form_validation->set_rules('buyer_PO_number','buyer_PO_number','trim');
+        $this->form_validation->set_rules('buyer_order_qty','buyer_order_qty','trim');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -26774,6 +26775,7 @@ public function addTDIR(){
                 'inspection_report_date'       => trim($this->input->post('inspection_report_date')),
                 'checked_by'           => trim($this->input->post('checked_by')),
                 'buyer_PO_number'           => trim($this->input->post('buyer_PO_number')),
+                'buyer_order_qty' => trim($this->input->post('buyer_order_qty')),
             );
 
             if($this->input->post('tdir_id')){
