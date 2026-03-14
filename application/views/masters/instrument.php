@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                   <a href="<?php echo base_url(); ?>viewallinstrumentdetails" class="btn btn-warning">
+                   <a href="<?php echo base_url(); ?>viewallinstrumentdetails" class="btn btn-warning" target="_blank">
                         <i class="fa fa-info"></i> View All Instrument Details
                     </a>
                     <button class="btn btn-primary" onclick="openModal()">
