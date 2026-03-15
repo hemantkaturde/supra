@@ -24,6 +24,40 @@
                 <div class="box">
                     <div class="box box-primary"> 
                         <?php $this->load->helper("form"); ?>
+
+                         <div class="row" style="margin-left:4px;margin-top:10px">
+
+                            
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="from_date">From Date</label>
+                                        <input type="text" class="form-control datepicker" placeholder="Select From Date" id="from_date" name="from_date">
+                                        <p class="error from_date_error"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="to_date">To Date </label>
+                                        <input type="text" class="form-control datepicker" placeholder="Select To Date" id="to_date" name="to_date">
+                                        <p class="error to_date_error"></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div style="margin-top:22px">
+                                            <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
+                                            <input type="button" class="btn btn-primary" value="Export To Excel"
+                                                id="exporttoexcelinspectionreport" name="exporttoexcelinspectionreport" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
