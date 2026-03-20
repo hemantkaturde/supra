@@ -22444,7 +22444,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
          $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
          $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
 
-         
+
             if($from_date!='NA'){
                 $this->db->where(TBL_TDIR.".inspection_report_date >=", $from_date);
             }
@@ -22524,6 +22524,31 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         return $data;
 
+    }
+
+
+    public function exportinspectionreportexcel($from_date,$to_date){
+
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label,'.TBL_TDIR.'.buyer_name as buyer_name_label,'.TBL_TDIR.'.id as tdir_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
+
+        $this->db->where(TBL_TDIR.'.status', 1);
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_TDIR.".inspection_report_date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_TDIR.".inspection_report_date <=", $to_date);
+        }
+
+        $this->db->order_by(TBL_TDIR.'.id','DESC');
+        $query = $this->db->get(TBL_TDIR);
+        $fetch_result = $query->result_array();
+      
+        return $fetch_result;
     }
 
 

@@ -27889,46 +27889,24 @@
  <script type="text/javascript">
 
 
-        $(document).ready(function() {
+			$(document).ready(function() {
 
-				$("#view_vendor_rejection_report").dataTable().fnDestroy();
-				
-				if($('#from_date').val()){
-					var from_date = $('#from_date').val();
-				}else{
-					var from_date ='NA';
-				}
+					$("#view_vendor_rejection_report").dataTable().fnDestroy();
+					
+					if($('#from_date').val()){
+						var from_date = $('#from_date').val();
+					}else{
+						var from_date ='NA';
+					}
 
-				if($('#to_date').val()){
-					var to_date = $('#to_date').val();
-				}else{
-					var to_date ='NA';
-				}
+					if($('#to_date').val()){
+						var to_date = $('#to_date').val();
+					}else{
+						var to_date ='NA';
+					}
 
-				getExporttdirreportreport(from_date,to_date);
+					getExporttdirreportreport(from_date,to_date);
 
-		});
-
-
-			$(document).on('change','#from_date',function(e){  
-				e.preventDefault();
-				$("#export_tdir_report").dataTable().fnDestroy();
-				
-
-				if($('#from_date').val()){
-					var from_date = $('#from_date').val();
-				}else{
-					var from_date ='NA';
-				}
-
-				if($('#to_date').val()){
-					var to_date = $('#to_date').val();
-				}else{
-					var to_date ='NA';
-				}
-
-
-				getExporttdirreportreport(from_date,to_date);
 			});
 
 			$(document).on('change','#from_date',function(e){  
@@ -27948,44 +27926,106 @@
 					var to_date ='NA';
 				}
 
+
 				getExporttdirreportreport(from_date,to_date);
 			});
-	
 
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#export_tdir_report").dataTable().fnDestroy();
+				
 
-        function getExporttdirreportreport(from_date,to_date){
-            var dt = $('#export_tdir_report').DataTable({
-						"columnDefs": [ 
-							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "10%", "targets": 0 },
-							{ "width": "10%", "targets": 1 },
-							{ "width": "10%", "targets": 2 },
-							{ "width": "10%", "targets": 3 },
-							{ "width": "10%", "targets": 4 },
-							{ "width": "10%", "targets": 5 },
-							{ "width": "10%", "targets": 6 },
-							{ "width": "10%", "targets": 7 },
-							
-						],
-						responsive: true,
-						"oLanguage": {
-							"sEmptyTable": "<i>No TDIR Report Found.</i>",
-						}, 
-						"bSort" : false,
-						"bFilter":true,
-						"bLengthChange": true,
-						"iDisplayLength": 10,   
-						"bProcessing": true,
-						"serverSide": true,
-						"ajax":{
-							url :"<?php echo base_url();?>admin/fetchtdirreportexcel/"+from_date+"/"+to_date,
-							type: "post",
-				},
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+				getExporttdirreportreport(from_date,to_date);
 			});
-        }
+
+			function getExporttdirreportreport(from_date,to_date){
+				var dt = $('#export_tdir_report').DataTable({
+							"columnDefs": [ 
+								{ className: "details-control", "targets": [ 0 ] },
+								{ "width": "10%", "targets": 0 },
+								{ "width": "10%", "targets": 1 },
+								{ "width": "10%", "targets": 2 },
+								{ "width": "10%", "targets": 3 },
+								{ "width": "10%", "targets": 4 },
+								{ "width": "10%", "targets": 5 },
+								{ "width": "10%", "targets": 6 },
+								{ "width": "10%", "targets": 7 },
+								
+							],
+							responsive: true,
+							"oLanguage": {
+								"sEmptyTable": "<i>No TDIR Report Found.</i>",
+							}, 
+							"bSort" : false,
+							"bFilter":true,
+							"bLengthChange": true,
+							"iDisplayLength": 10,   
+							"bProcessing": true,
+							"serverSide": true,
+							"ajax":{
+								url :"<?php echo base_url();?>admin/fetchtdirreportexcel/"+from_date+"/"+to_date,
+								type: "post",
+					},
+				});
+			}
 
 
-		
+
+			$(document).on('click','#exporttoexcelinspectionreport',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date,
+					type: "POST",
+					success: function(data, textStatus, jqXHR)
+			         {
+
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							alert('No data fond');
+						}
+						else
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							 window.location.href = "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number;
+						}
+			
+
+					 }
+				});
+
+				return false;
+	        });
+
+
 
 
 
