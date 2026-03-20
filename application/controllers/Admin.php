@@ -31394,9 +31394,6 @@ public function addnewbalancestock(){
             // load excel library
             $empInfo = $this->admin_model->exportinspectionreportexcel($from_date,$to_date);
 
-            print_r($empInfo);
-            exit;
-
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->setActiveSheetIndex(0);
             // set Header
