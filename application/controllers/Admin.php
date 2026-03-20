@@ -31425,7 +31425,7 @@ public function addnewbalancestock(){
                 $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_name_label']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_PO_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, date("d-m-Y", strtotime($element['buyer_po_date'])));
-                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['inspection_report_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, date("d-m-Y", strtotime($element['inspection_report_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['checked_by']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['remarks']);
 
