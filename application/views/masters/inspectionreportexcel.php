@@ -61,7 +61,7 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="export_tdir_report">
+                                    id="view_instrument_details">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Inspection Report no.</th>

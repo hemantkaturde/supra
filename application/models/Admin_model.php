@@ -22872,7 +22872,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function fetchtintrumentdetailscountdetails($params)
+     public function fetchtintrumentdetailscountdetails($params,$from_date,$to_date)
     {
         $this->db->select('*');
         $this->db->from('tbl_instrument_master_details');
@@ -22902,7 +22902,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetchtintrumentdetailsdatadetails($params)
+    public function fetchtintrumentdetailsdatadetails($params,$from_date,$to_date)
     {
         $this->db->select('*,tbl_instrument_master_details.status as details_status');
         $this->db->from('tbl_instrument_master_details');
@@ -22929,6 +22929,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // expired + next 15 days
         $this->db->where('due_date <=', $next15days);
 
+    
 
         $this->db->order_by('tbl_instrument_master_details.id', 'DESC');
         $this->db->limit($params['length'], $params['start']);
