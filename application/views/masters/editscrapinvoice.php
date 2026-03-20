@@ -187,12 +187,12 @@
                                                              <select class="form-control" name="unit" id="unit">
                                                                 <option value="">Select Unit</option>
                                                                 <option value="kgs" selected>Kgs</option>
-                                                                <!-- <option value="Pcs">Pcs</option>
+                                                                <option value="Pcs">Pcs</option>
                                                                 <option value="Nos">Nos</option>
                                                                 <option value="Sheet">Sheet</option>
                                                                 <option value="Set">Set</option>
                                                                 <option value="Mtr">Mtr</option>
-                                                                <option value="Ltr">Ltr</option> -->
+                                                                <option value="Ltr">Ltr</option>
                                                              </select>
                                                             <p class="error unit_error"></p>
                                                         </div>
