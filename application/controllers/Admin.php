@@ -31384,8 +31384,6 @@ public function addnewbalancestock(){
          $this->loadViews("masters/inspectionreportexcel", $this->global, $data, NULL);
     }
 
-
-
     public function exportinspectionreportexcel($from_date,$to_date){
 
 
@@ -31419,14 +31417,14 @@ public function addnewbalancestock(){
                 $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['report_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['vendor_name']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['po_number']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['vendor_po_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, date("d-m-Y", strtotime($element['vendor_po_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['part_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['part_name']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_order_qty']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_order_qty']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_name_label']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_PO_number']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['buyer_po_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, date("d-m-Y", strtotime($element['buyer_po_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['inspection_report_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['checked_by']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['remarks']);
