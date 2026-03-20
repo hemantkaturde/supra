@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <div style="margin-top:22px">
                                             <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
-                                            <input type="button" class="btn btn-primary" value="Export To Excel"
+                                            <input type="button" class="btn btn-primary exporttoexcelinspectionreport" value="Export To Excel"
                                                 id="exporttoexcelinspectionreport" name="exporttoexcelinspectionreport" />
                                         </div>
                                     </div>

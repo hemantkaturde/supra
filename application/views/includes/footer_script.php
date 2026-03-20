@@ -28015,7 +28015,7 @@
 						else
 						{
 							// $(".sales_tracking_report_name_error").html("");
-							 window.location.href = "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number;
+							 window.location.href = "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date;
 						}
 			
 
