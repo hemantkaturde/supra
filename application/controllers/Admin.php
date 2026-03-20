@@ -26907,10 +26907,10 @@ public function fetchtdirreport(){
 
 }
 
-public function fetchtdirreportexcel(){
+public function fetchtdirreportexcel($from_date,$to_date){
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->gettdirexportreportcount($params); 
-    $queryRecords = $this->admin_model->gettdirreportexportdata($params); 
+    $totalRecords = $this->admin_model->gettdirexportreportcount($params,$from_date,$to_date); 
+    $queryRecords = $this->admin_model->gettdirreportexportdata($params,$from_date,$to_date); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -28079,11 +28079,11 @@ public function fetchtintrumentdetailsmaster($instrument_details_id)
 }
 
 
-public function fetchtintrumentdetailsmasterDetailsall($from_date,$to_date)
+public function fetchtintrumentdetailsmasterDetailsall()
 {
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchtintrumentdetailscountdetails($params,$from_date,$to_date); 
-    $queryRecords = $this->admin_model->fetchtintrumentdetailsdatadetails($params,$from_date,$to_date); 
+    $totalRecords = $this->admin_model->fetchtintrumentdetailscountdetails($params); 
+    $queryRecords = $this->admin_model->fetchtintrumentdetailsdatadetails($params); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -31377,10 +31377,10 @@ public function addnewbalancestock(){
 
     public function  inspectionreportexcel(){
 
-         $process = 'Instrument Master Detail Data';
+         $process = 'Inspection Report Excel';
          $processFunction = 'Admin/inspectionreportexcel';
          $this->logrecord($process,$processFunction);
-         $this->global['pageTitle'] = 'Instrument Master Detail Data';
+         $this->global['pageTitle'] = 'Inspection Report Excel';
          $this->loadViews("masters/inspectionreportexcel", $this->global, $data, NULL);
     }
 

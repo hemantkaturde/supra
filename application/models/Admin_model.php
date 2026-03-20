@@ -22426,7 +22426,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-     public function gettdirexportreportcount($params){
+     public function gettdirexportreportcount($params,$from_date,$to_date){
 
          $this->db->select('*'); 
            if($params['search']['value'] != "") 
@@ -22444,6 +22444,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
          $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
          $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
 
+         
+            if($from_date!='NA'){
+                $this->db->where(TBL_TDIR.".inspection_report_date >=", $from_date);
+            }
+        
+            if($to_date!='NA'){
+                $this->db->where(TBL_TDIR.".inspection_report_date <=", $to_date);
+            }
+
          $this->db->order_by(TBL_TDIR.'.id','DESC');
          $query = $this->db->get(TBL_TDIR);
          $rowcount = $query->num_rows();
@@ -22452,7 +22461,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function gettdirreportexportdata($params){
+    public function gettdirreportexportdata($params,$from_date,$to_date){
 
         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label,'.TBL_TDIR.'.buyer_name as buyer_name_label,'.TBL_TDIR.'.id as tdir_id');
        
@@ -22472,6 +22481,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
 
         $this->db->where(TBL_TDIR.'.status', 1);
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_TDIR.".inspection_report_date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_TDIR.".inspection_report_date <=", $to_date);
+        }
+
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_TDIR.'.id','DESC');
         $query = $this->db->get(TBL_TDIR);
@@ -22872,7 +22890,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function fetchtintrumentdetailscountdetails($params,$from_date,$to_date)
+     public function fetchtintrumentdetailscountdetails($params)
     {
         $this->db->select('*');
         $this->db->from('tbl_instrument_master_details');
@@ -22902,7 +22920,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetchtintrumentdetailsdatadetails($params,$from_date,$to_date)
+    public function fetchtintrumentdetailsdatadetails($params)
     {
         $this->db->select('*,tbl_instrument_master_details.status as details_status');
         $this->db->from('tbl_instrument_master_details');
@@ -22929,7 +22947,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // expired + next 15 days
         $this->db->where('due_date <=', $next15days);
 
-    
 
         $this->db->order_by('tbl_instrument_master_details.id', 'DESC');
         $this->db->limit($params['length'], $params['start']);
