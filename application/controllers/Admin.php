@@ -31394,6 +31394,9 @@ public function addnewbalancestock(){
             // load excel library
             $empInfo = $this->admin_model->exportinspectionreportexcel($from_date,$to_date);
 
+            print_r($empInfo);
+            exit;
+
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->setActiveSheetIndex(0);
             // set Header
@@ -31422,8 +31425,9 @@ public function addnewbalancestock(){
                 $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['vendor_po_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['part_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['part_name']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '');
-                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
+                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_name_label']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_PO_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['buyer_po_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['inspection_report_date']);
@@ -31433,16 +31437,16 @@ public function addnewbalancestock(){
                 $rowCount++;
             }
 
-            foreach(range('A','H') as $columnID) {
+            foreach(range('A','N') as $columnID) {
                 $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
 			}
 			/*********************Autoresize column width depending upon contents END***********************/
 			
-            $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true); //Make heading font bold
+            $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->getFont()->setBold(true); //Make heading font bold
 			
 			/*********************Add color to heading START**********************/
             $objPHPExcel->getActiveSheet()
-						->getStyle('A1:H1')
+						->getStyle('A1:N1')
 						->getFill()
 						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
 						->getStartColor()
