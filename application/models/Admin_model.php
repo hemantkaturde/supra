@@ -24896,7 +24896,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             <i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
                 data-toggle='modal'
                 data-target='#addNewModal'
-                data-id='".$row['id']."'
+                data-id='".$row['remove_id']."'
                 data-instrument_name='".$row['instrument_name']."'
                 data-measuring_size='".$row['measuring_size']."'
                 data-ticket_no='".$row['ticket_no']."'
