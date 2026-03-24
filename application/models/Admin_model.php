@@ -24009,6 +24009,31 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getLiveQtyforInst_check_count($id, $instrument_name, $measuring_size ,$instrument_type,$grade,$unit,$class)
         {
 
+
+        print_r($id);
+        echo "<br>";
+        
+        print_r($instrument_name);
+        echo "<br>";
+        
+        print_r($measuring_size);
+        echo "<br>";
+        
+        print_r($instrument_type);
+        echo "<br>";
+        
+        print_r($grade);
+        echo "<br>";
+
+        print_r($unit);
+        echo "<br>";
+
+        print_r($class);
+        echo "<br>";
+
+        exit;
+
+
         /* AVAILABLE QTY */
 
         $this->db->select('IFNULL(qty,0) as qty');
