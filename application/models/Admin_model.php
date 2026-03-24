@@ -24554,7 +24554,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                         data-instrument_id ='".$row['instrument_id']."'
 
                         data-type='".$row['instrument_type']."'
-                        data-grade='".$row['grade']."'
+                        data-grade='".$row['instru_grade']."'
                         data-unit='".$row['unit']."'
                         data-class_1='".$row['class']."'
 
@@ -24582,7 +24582,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     data-instrument_id ='".$row['instrument_id']."'
 
                     data-type='".$row['instrument_type']."'
-                    data-grade='".$row['grade']."'
+                    data-grade='".$row['instru_grade']."'
                     data-unit='".$row['unit']."'
                     data-class_1='".$row['class']."'
 
