@@ -24800,7 +24800,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         foreach ($result as $row) {
 
-            if($row['due_date']!='0000-00-00'){
+            if($row['due_date']){
                $due_date = date("d-m-Y", strtotime($row['due_date']));
             }else{
                 $due_date = '';
