@@ -29970,7 +29970,7 @@ $('#export_excel').on('click', function() {
 				return false;
 			});
 
-			$(document).on('click', '.deleteassignqty', function(e) {
+			$(document).on('click', '.deleterecivednqty', function(e) {
 
 					var elemF = $(this);
 					e.preventDefault();
@@ -30000,7 +30000,7 @@ $('#export_excel').on('click', function() {
 					}, function(isConfirm) {
 						if (isConfirm) {
 							$.ajax({
-								url: "<?php echo base_url(); ?>deleteassignqty",
+								url: "<?php echo base_url(); ?>admin/deleteremovenqty",
 								type: "POST",
 								data: 'id=' + elemF.attr('data-id'),
 								success: function(data, textStatus, jqXHR) {

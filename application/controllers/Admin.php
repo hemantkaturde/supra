@@ -29624,6 +29624,24 @@ public function deleteassignqty(){
 }
 
 
+public function deleteremovenqty(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteremovenqty(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Remove quantity';
+                    $processFunction = 'Admin/deleteremovenqty';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
 public function printincomingitemdetails($id)
 {
     require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed

@@ -24905,7 +24905,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-measuring_size='".$row['measuring_size']."'
                 data-ticket_no='".$row['ticket_no']."'
                 data-qty_live='".$row['qty_live']."'
-                data-part_id='".$part_id."' class='fa fa-trash deleteassignqty'></i>";
+                data-part_id='".$part_id."' class='fa fa-trash deleterecivednqty'></i>";
 
             //  "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
 
@@ -24929,6 +24929,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
     public function deleteassignqty($id){
+        $this->db->where('id', $id);
+        if($this->db->delete(TBL_STOREFORM_QTY_ASSIGN)){
+                return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+
+     public function deleteremovenqty($id){
         $this->db->where('id', $id);
         if($this->db->delete(TBL_STOREFORM_QTY_ASSIGN)){
                 return TRUE;
