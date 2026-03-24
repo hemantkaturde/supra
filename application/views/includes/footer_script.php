@@ -29896,13 +29896,15 @@ $('#export_excel').on('click', function() {
 					data: 'id=' + item_id,
 					success: function(data, textStatus, jqXHR) {
 						var fetchResponse = $.parseJSON(data);
-						$('#addNewModal').modal('show');
+						
 						$('#assigned_id').val(fetchResponse.id);
 						$('#qty_removed').val(fetchResponse.qty_removed);
 						$('#qty_remark').val(fetchResponse.qty_remark);
 						$('#ticket_no').val(fetchResponse.ticket_no);
 						$('#instrument_name').val(fetchResponse.instrument_name);
 						$('#measuring_size').val(fetchResponse.measuring_size);
+
+						$('#addNewModal').modal('show');
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						$(".loader_ajax").hide();
