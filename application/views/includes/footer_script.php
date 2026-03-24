@@ -29904,6 +29904,10 @@ $('#export_excel').on('click', function() {
 						$('#instrument_name').val(fetchResponse.instrument_name);
 						$('#measuring_size').val(fetchResponse.measuring_size);
 
+						setTimeout(function(){
+							$('#certificateremove').val(fetchResponse.certificate).trigger('change');
+						},200);
+
 						$('#addNewModal').modal('show');
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
