@@ -29876,7 +29876,7 @@ $('#export_excel').on('click', function() {
 				});
 			});
 
-			$(document).on('click', '.editrecivedqtyitem', function(e) {
+			$(document).on('click', '.editassignqtyitem', function(e) {
 
 			
 				e.preventDefault();
