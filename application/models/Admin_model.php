@@ -24883,8 +24883,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $count = 0;
 
         foreach ($result as $row) {
+
+
+            if($row['due_date']){
+
+               $due_date =  date("d-m-Y", strtotime($row['due_date']));
+
+            }else{
+               $due_date ='';
+               
+            }
+
             $data[$count]['instrument_name']  = $row['instrument_name'];
-            $data[$count]['certificate_id']   = $row['instrument_id'].' - '. date("d-m-Y", strtotime($row['due_date']));
+            $data[$count]['certificate_id']   = $row['instrument_id'].' - '. $due_date;
             $data[$count]['measuring_size']   = $row['measuring_size'];
             $data[$count]['qty_removed']       = $row['qty_removed'];
             $data[$count]['status']       =     $row['a_status'];
