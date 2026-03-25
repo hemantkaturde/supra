@@ -29905,7 +29905,7 @@ $('#export_excel').on('click', function() {
 						$('#measuring_size').val(fetchResponse.measuring_size);
 
 						setTimeout(function(){
-							$('#certificateremove').val(fetchResponse.certificate).trigger('change');
+							$('#certificate').val(fetchResponse.certificate).trigger('change');
 						},200);
 
 						$('#addNewModal').modal('show');
@@ -29930,8 +29930,8 @@ $('#export_excel').on('click', function() {
 				var qty_removed = $('#qty_removed').val();
 				var qty_remark= $('#qty_rec_remark').val();
 
-				var certificateremove = $('#certificateremove').val();
-				var statuscertificateremove= $('#statuscertificateremove').val();
+				var certificateremove = $('#certificate').val();
+				var statuscertificateremove= $('#status').val();
 
 				
 				$.ajax({
