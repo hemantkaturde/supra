@@ -29418,7 +29418,7 @@ $('#export_excel').on('click', function() {
 			var part_number = $('#part_number').val();
 
 			var certificateremove = $('#certificateremove').val();
-			var status = $('#status').val();
+			var status = $('#statuscertificateremove').val();
 
 
 
