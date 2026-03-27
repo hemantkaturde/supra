@@ -29363,6 +29363,7 @@ public function editstoreformqtyassigndata() {
 
 public function editstoreformqtyremovedata()
 {
+
     $response = [];
     $post = $this->input->post();
 
@@ -29400,7 +29401,11 @@ public function editstoreformqtyremovedata()
 
     if ($assignedID && $qty_removed_input == $old_qty_removed) {
         $ok = $this->admin_model->savequantityassignstoreform($assignedID, [
-            'qty_remark' => $qty_remark_input
+            'qty_remark' => $qty_remark_input,
+            
+        'certificate'       => trim($this->input->post('certificateremove')) !== '' ? trim($this->input->post('certificateremove')) : NULL,
+        'status'            => trim($this->input->post('statuscertificateremove')) !== '' ? trim($this->input->post('statuscertificateremove')) : NULL,
+
         ]);
 
         echo json_encode($ok
@@ -29439,12 +29444,24 @@ public function editstoreformqtyremovedata()
     $data = [
         'qty_assign'  => 0,  // On removal assign must be 0
         'qty_removed' => $qty_removed_input,
-        'qty_remark'  => $qty_remark_input
+        'qty_remark'  => $qty_remark_input,
+
+
+        'certificate'       => trim($this->input->post('certificateremove')) !== '' ? trim($this->input->post('certificateremove')) : NULL,
+        'status'            => trim($this->input->post('statuscertificateremove')) !== '' ? trim($this->input->post('statuscertificateremove')) : NULL,
+
+
+
     ];
+
+
+   
 
     if (!empty($assignedID)) {
         $ok = $this->admin_model->savequantityassignstoreform($assignedID, $data);
     } else {
+
+
         $data = array_merge($data, [
              'ticket_no'        => $ticket_no !== '' ? $ticket_no : NULL,
              'instrument_name'  => $instrument_name !== '' ? $instrument_name : NULL,

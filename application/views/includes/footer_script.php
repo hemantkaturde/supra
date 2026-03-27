@@ -29900,7 +29900,7 @@ $('#export_excel').on('click', function() {
 						
 						$('#assigned_id').val(fetchResponse.id);
 						$('#qty_removed').val(fetchResponse.qty_removed);
-						$('#qty_remark').val(fetchResponse.qty_remark);
+						$('#qty_rec_remark').val(fetchResponse.qty_remark);
 						$('#ticket_no').val(fetchResponse.ticket_no);
 						$('#instrument_name').val(fetchResponse.instrument_name);
 						$('#measuring_size').val(fetchResponse.measuring_size);
@@ -29908,6 +29908,10 @@ $('#export_excel').on('click', function() {
 						setTimeout(function(){
 							$('#certificate').val(fetchResponse.certificate).trigger('change');
 						},200);
+                        $('#status').val(fetchResponse.assign_open_close);
+
+
+						//$('#status').val(fetchResponse.status);
 
 						$('#addNewModal').modal('show');
 					},
