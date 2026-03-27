@@ -29659,6 +29659,7 @@ $('#export_excel').on('click', function() {
 				var status = $('#status').val();
 
 				
+				
 				$.ajax({
 					url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 					type: "POST",
