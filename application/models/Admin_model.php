@@ -24528,6 +24528,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $row['class']
         // );
 
+        
         $live_quantity = $row['instru_qty'];
 
         $data[$count]['instrument_name']  = $row['instrument_name'];
