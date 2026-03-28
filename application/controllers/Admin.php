@@ -29272,27 +29272,27 @@ public function editstoreformqtyassigndata() {
 				$measuring_size_popup = trim($this->input->post('measuring_size_popup'));
                 
 
-                $new_qty_assign = (int) $this->input->post('qty_assign');
+                // $new_qty_assign = (int) $this->input->post('qty_assign');
 
-                $old = $this->admin_model->getassignbyId($assignedID);
-                $old_qty_assign = isset($old['qty_assign']) ? (int)$old['qty_assign'] : 0;
+                // $old = $this->admin_model->getassignbyId($assignedID);
+                // $old_qty_assign = isset($old['qty_assign']) ? (int)$old['qty_assign'] : 0;
 
-                $remaining_Qty = $this->admin_model->getLiveQtyforInst(
-                    $partsId,
-                    $instrument_name_popup,
-                    $measuring_size_popup
-                );
+                // $remaining_Qty = $this->admin_model->getLiveQtyforInst(
+                //     $partsId,
+                //     $instrument_name_popup,
+                //     $measuring_size_popup
+                // );
 
-                $remaining_Qty_adjusted = $remaining_Qty + $old_qty_assign;
+                // $remaining_Qty_adjusted = $remaining_Qty + $old_qty_assign;
 
-                if ($new_qty_assign > $remaining_Qty_adjusted) {
-                    $response['status'] = 'failure';
-                    $response['error'] = [
-                        'qty_assign' => "Quantity not available."
-                    ];
-                    echo json_encode($response);
-                    exit;
-                }
+                // if ($new_qty_assign > $remaining_Qty_adjusted) {
+                //     $response['status'] = 'failure';
+                //     $response['error'] = [
+                //         'qty_assign' => "Quantity not available."
+                //     ];
+                //     echo json_encode($response);
+                //     exit;
+                // }
 
 
                
