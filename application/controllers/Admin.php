@@ -28146,6 +28146,7 @@ public function saveintrument()
         'class' => $this->input->post('class') ?: NULL,
         'type' => $this->input->post('type') ?: NULL,
         'qty' => $this->input->post('qty') ?: NULL,
+        'actual_qty' => $this->input->post('actual_qty') ?: NULL,
         'remark' => $this->input->post('remark') ?: NULL
     ];
 

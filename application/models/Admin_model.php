@@ -22775,8 +22775,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['class']           = $row['class'];
                 $data[$counter]['type']            = $row['type'];
                 $data[$counter]['qty']             = $row['qty'];
+                $data[$counter]['actual_qty']             = $row['actual_qty'];
                 $data[$counter]['certificate_expiry_count']   = $this->certificate_expiry_count($row['id']);
-                 $data[$counter]['due_datea']   = $this->certificate_expiry_due_dates($row['id']);
+                $data[$counter]['due_datea']   = $this->certificate_expiry_due_dates($row['id']);
                 $data[$counter]['remark']          = $row['remark'];
                 $data[$counter]['action']  = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editData(".$row['id'].")'></i> &nbsp;&nbsp;";
                 // $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true' onclick='deleteData(".$row['id'].")'></i> &nbsp;&nbsp;";

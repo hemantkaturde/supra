@@ -40,7 +40,8 @@
                                         <th>Unit</th>
                                         <th>Class</th>
                                         <th>Type</th>
-                                        <th>Qty</th>
+                                        <th>Live Qty</th>
+                                        <th>Actual Qty</th>
                                         <th>Certificate Expiry Count</th>
                                         <th>Due Date</th>
                                         <th>Remark</th>
@@ -233,7 +234,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Qty</label>
+                <label>Live Qty</label>
                 <input type="number" name="qty" id="qty" class="form-control">
               </div>
             </div>
@@ -242,6 +243,17 @@
               <div class="form-group">
                 <label>Remark</label>
                 <input type="text" name="remark" id="remark" class="form-control">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Row 4 -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Actual Qty</label>
+                <input type="number" name="actual_qty" id="actual_qty" class="form-control">
               </div>
             </div>
           </div>
