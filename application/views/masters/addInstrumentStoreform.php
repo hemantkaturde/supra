@@ -50,7 +50,7 @@
                                         <th>Measuring Size</th>
                                         <th>Type</th>
                                         <th>Remark</th>
-                                        <th>Quantity</th>
+                                        <!-- <th>Quantity</th> -->
                                         <th>Live Quanity</th>
                                         <th>Action</th>
                                     </tr>

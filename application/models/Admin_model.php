@@ -24539,7 +24539,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $data[$count]['measuring_size']   = $row['measuring_size'];
         $data[$count]['type']             = $row['instrument_type'];
         $data[$count]['remark']           = $row['remark'];
-        $data[$count]['qty']              = $row['instru_qty'];
+        // $data[$count]['qty']              = $row['instru_qty'];
         $data[$count]['live_qty']         = $live_quantity;
 
         $data[$count]['action']  = "";
