@@ -24518,15 +24518,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         foreach ($result as $row) {
 
-        $live_quantity = $this->getLiveQtyforInst_check_count(
-            $row['sampling_trans_id'],
-            $row['instrument_name'],
-            $row['measuring_size'],
-            $row['instrument_type'],
-            $row['instru_grade'],
-            $row['unit'],
-            $row['class']
-        );
+        // $live_quantity = $this->getLiveQtyforInst_check_count(
+        //     $row['sampling_trans_id'],
+        //     $row['instrument_name'],
+        //     $row['measuring_size'],
+        //     $row['instrument_type'],
+        //     $row['instru_grade'],
+        //     $row['unit'],
+        //     $row['class']
+        // );
+
+        $live_quantity = $row['instru_qty'];
 
         $data[$count]['instrument_name']  = $row['instrument_name'];
         $data[$count]['grade']            = $row['instru_grade'];
