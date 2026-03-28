@@ -13,6 +13,13 @@
                     <li class="active"> Open Tickets List</a></li>
                 </ul>
             </div>
+
+            <div class="col-xs-6 text-right">
+                <div class="form-group">
+                    <a class="btn btn-primary" href="<?php echo base_url() ?>storeform">
+                       <i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
         </div>
 
         <div class="row">
