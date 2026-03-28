@@ -25493,7 +25493,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 qty_assign LIKE '%{$search}%' OR
                 qty_remark LIKE '%{$search}%'
                 status LIKE '%{$search}%'
-                instrument_id LIKE '%{$search}%'
             )");
         }
         $this->db->order_by('tbl_storeform_qty_assign.id', 'DESC');
