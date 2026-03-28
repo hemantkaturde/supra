@@ -28138,6 +28138,7 @@
 				$('#class').val($.trim(d.class));
 				$('#type').val($.trim(d.type));
 				$('#qty').val($.trim(d.qty));
+				$('#actual_qty').val($.trim(d.actual_qty));
 				$('#remark').val($.trim(d.remark));
 
 				$('.modal-title').text('Edit Instrument');
