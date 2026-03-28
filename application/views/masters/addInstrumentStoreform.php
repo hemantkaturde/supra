@@ -84,8 +84,6 @@
                   <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                </div>
 
-               <input type="hidden" class="form-control"  id="assigned_id_add" name="assigned_id_add">
-
                
                <input type="hidden" class="form-control"  id="partId_popup" name="partId_popup">
                <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
@@ -100,6 +98,9 @@
                <input type="hidden" class="form-control" id="unit" name="unit">
                <input type="hidden" class="form-control" id="class_1" name="class_1">
                <input type="hidden" class="form-control" id="part_number" name="part_number">
+
+               <input type="hidden" class="form-control" id="instrument_id_add" name="instrument_id_add">
+               <input type="hidden" class="form-control" id="live_qty_add" name="live_qty_add">
 
 
                <div class="form-group row">

@@ -24552,6 +24552,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                         data-sampling_id ='".$row['sampling_id']."'
                         data-sampling_trans_id ='".$row['sampling_trans_id']."'
                         data-instrument_id ='".$row['instrument_id']."'
+                        data-live_qty ='".$live_quantity."'
 
                         data-type='".$row['instrument_type']."'
                         data-grade='".$row['instru_grade']."'
@@ -24753,6 +24754,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
     }
+
+
+    public function updateliveqty_to_main_instrument_table($id,$data){
+    
+            $this->db->where('id', $id);
+            if($this->db->update('tbl_instrument_master', $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
 
     public function getTicketLiveQty($ticket_no, $instrument_name, $measuring_size)
     {
@@ -25028,6 +25043,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getassignbyId($assignedID){
         return $this->db->get_where('tbl_storeform_qty_assign', ['id' => $assignedID])->row_array();
+    }
+
+
+
+    public function getinstrument_qty($instrument_id_add){
+        return $this->db->get_where('tbl_instrument_master', ['id' => $instrument_id_add])->row_array();
     }
 
 

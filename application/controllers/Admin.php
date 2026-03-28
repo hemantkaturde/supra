@@ -29270,7 +29270,20 @@ public function editstoreformqtyassigndata() {
                 $partsId = trim($this->input->post('partsId')); 
                 $instrument_name_popup = trim($this->input->post('instrument_name_popup'));
 				$measuring_size_popup = trim($this->input->post('measuring_size_popup'));
-                
+
+
+                $new_qty_assign = (int) $this->input->post('qty_assign');
+                $live_qty_add = (int) $this->input->post('live_qty_add');
+
+                if ($live_qty_add == 0) {
+                    $response['status'] = 'failure';
+                    $response['error'] = [
+                        'qty_assign' => "Quantity not available."
+                    ];
+                    echo json_encode($response);
+                    exit;
+                }
+
 
                 // $new_qty_assign = (int) $this->input->post('qty_assign');
 
@@ -29342,16 +29355,32 @@ public function editstoreformqtyassigndata() {
                         'class'             => trim($this->input->post('class_1')) !== '' ? trim($this->input->post('class_1')) : NULL,
                         'part_number'       => trim($this->input->post('part_number')) !== '' ? trim($this->input->post('part_number')) : NULL
 
-
-
                     );
                 }
 
                 $result = $this->admin_model->savequantityassignstoreform($assignedID, $data);
 
                 if ($result) {
-                    $response['status'] = 'success';
-                    $response['message'] = 'Quantity assigned successfully.';
+
+                   // after Assigned Qty mange Live qty in  Instrument master 
+                    $instrument_id_add = trim($this->input->post('instrument_id_add'));
+                    $instrument_qty_db = $this->admin_model->getinstrument_qty($instrument_id_add);
+                    $instrument_qty_live = isset($instrument_qty_db['qty']) ? (int)$instrument_qty_db['qty'] : 0;
+
+        
+                    $db_live_ty = $instrument_qty_live - (int) $this->input->post('qty_assign');
+                    $data_live_qty_intru_update = array('qty'=>$db_live_ty);
+
+                    $result_db_liveqty = $this->admin_model->updateliveqty_to_main_instrument_table($instrument_id_add, $data_live_qty_intru_update);
+ 
+                    if($result_db_liveqty){
+                       $response['status'] = 'success';
+                       $response['message'] = 'Quantity assigned successfully.';
+                    }else{
+                       $response['status'] = 'failure';
+                       $response['message'] = 'DB error! Something went wrong.';
+                    }
+                 
                 } else {
                     $response['status'] = 'failure';
                     $response['message'] = 'DB error! Something went wrong.';

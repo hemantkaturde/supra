@@ -29306,6 +29306,9 @@ $('#export_excel').on('click', function() {
 			$("#unit").val($(this).data("unit"));
 			$("#class_1").val($(this).data("class_1"));
 			$("#part_number").val($(this).data("part_id"));
+
+			$("#instrument_id_add").val($(this).data("instrument_id"));
+			$("#live_qty_add").val($(this).data("live_qty"));
 		});
 
 
@@ -29354,11 +29357,15 @@ $('#export_excel').on('click', function() {
 			var class_1 = $('#class_1').val();
 			var part_number = $('#part_number').val();
 
+			var instrument_id_add   = $('#instrument_id_add').val();
+			var live_qty_add   = $('#live_qty_add').val();
+
+
 			
 			$.ajax({
 				url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 				type: "POST",
-				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed,'sampling_id':sampling_id,'sampling_trans_id':sampling_trans_id,'certificate':certificate,'type':type,'grade':grade,'unit':unit,'class_1':class_1,'part_number':part_number,'status':status},
+				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed,'sampling_id':sampling_id,'sampling_trans_id':sampling_trans_id,'certificate':certificate,'type':type,'grade':grade,'unit':unit,'class_1':class_1,'part_number':part_number,'status':status,'instrument_id_add':instrument_id_add,'live_qty_add':live_qty_add},
 				dataType: "json",
                 cache:false,
 				success: function(fetchResponse, textStatus, jqXHR)
