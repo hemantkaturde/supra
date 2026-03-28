@@ -29362,7 +29362,7 @@ public function editstoreformqtyassigndata() {
 
                 if ($result) {
 
-                   // after Assigned Qty mange Live qty in  Instrument master 
+                    // after Assigned Qty mange Live qty in  Instrument master 
                     $instrument_id_add = trim($this->input->post('instrument_id_add'));
                     $instrument_qty_db = $this->admin_model->getinstrument_qty($instrument_id_add);
                     $instrument_qty_live = isset($instrument_qty_db['qty']) ? (int)$instrument_qty_db['qty'] : 0;
@@ -29488,6 +29488,21 @@ public function editstoreformqtyremovedata()
 
     if (!empty($assignedID)) {
         $ok = $this->admin_model->savequantityassignstoreform($assignedID, $data);
+
+
+                   // after Assigned Qty mange Live qty in  Instrument master 
+                    $instrument_id_removed = trim($this->input->post('instrument_id_removed'));
+                    $instrument_qty_db = $this->admin_model->getinstrument_qty($instrument_id_removed);
+                    $instrument_qty_live = isset($instrument_qty_db['qty']) ? (int)$instrument_qty_db['qty'] : 0;
+
+        
+                    $db_live_ty = $instrument_qty_live + (int) $this->input->post('qty_removed');
+                    $data_live_qty_intru_update = array('qty'=>$db_live_ty);
+
+                    $result_db_liveqty = $this->admin_model->updateliveqty_to_main_instrument_table($instrument_id_removed, $data_live_qty_intru_update);
+ 
+
+
     } else {
 
 
@@ -29512,7 +29527,21 @@ public function editstoreformqtyremovedata()
 
         ]);
       
-        $ok = $this->admin_model->savequantityassignstoreform(null, $data);
+                   $ok = $this->admin_model->savequantityassignstoreform(null, $data);
+
+        
+                   // after Assigned Qty mange Live qty in  Instrument master 
+                    $instrument_id_removed = trim($this->input->post('instrument_id_removed'));
+                    $instrument_qty_db = $this->admin_model->getinstrument_qty($instrument_id_removed);
+                    $instrument_qty_live = isset($instrument_qty_db['qty']) ? (int)$instrument_qty_db['qty'] : 0;
+
+        
+                    $db_live_ty = $instrument_qty_live + (int) $this->input->post('qty_removed');
+                    $data_live_qty_intru_update = array('qty'=>$db_live_ty);
+
+                    $result_db_liveqty = $this->admin_model->updateliveqty_to_main_instrument_table($instrument_id_removed, $data_live_qty_intru_update);
+ 
+
     }
 
     echo json_encode($ok

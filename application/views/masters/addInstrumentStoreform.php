@@ -186,6 +186,7 @@
                 <input type="hidden" class="form-control" id="unit" name="unit">
                 <input type="hidden" class="form-control" id="class_1" name="class_1">
                 <input type="hidden" class="form-control" id="part_number" name="part_number">
+               <input type="hidden" class="form-control" id="instrument_id_removed" name="instrument_id_removed">
 
 
                <div class="form-group row">
