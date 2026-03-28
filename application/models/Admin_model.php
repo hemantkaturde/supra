@@ -25499,8 +25499,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             $this->db->group_start()
                 ->like('tbl_storeform_qty_assign.id', $search)
-                ->or_like('ticket_no', $search)
-                ->or_like('ticket_date', $search)
+                ->or_like('tbl_storeform_tickets.ticket_no', $search)
+                ->or_like('tbl_storeform_tickets.ticket_date', $search)
                 ->or_like('instrument_name', $search)
                 ->or_like('measuring_size', $search)
                 ->or_like('qty_assign', $search)
