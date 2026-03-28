@@ -31552,5 +31552,39 @@ public function addnewbalancestock(){
     }
 
 
+    public function viewopentickets(){
+
+         $process = 'View All Open Tickets';
+         $processFunction = 'Admin/viewopentickets';
+         $this->logrecord($process,$processFunction);
+         $this->global['pageTitle'] = 'View All Open Tickets';
+         $this->loadViews("masters/viewopentickets", $this->global, $data, NULL);
+    }
+
+
+    public function fetchviewAllpendingticket(){
+        $params = $_REQUEST;
+        $queryRecords = $this->admin_model->fetchviewAllpendingticketData($params);
+        
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval(count($data) ),  
+            "recordsFiltered" => intval(count($data)),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+}
+
+
 
 }

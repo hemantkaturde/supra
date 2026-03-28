@@ -30596,3 +30596,72 @@ $('#export_excel').on('click', function() {
 
 	</script>
 <?php } ?>
+
+
+<?php if ($pageTitle == 'View All Open Tickets') { ?>
+<script type="text/javascript">
+
+				var dt = $('#view_all_open_tickets').DataTable({
+					"columnDefs": [{
+							className: "details-control",
+							"targets": [0]
+						},
+						{
+							"width": "15%",
+							"targets": 0
+						},
+						{
+							"width": "10%",
+							"targets": 1
+						},
+						{
+							"width": "10%",
+							"targets": 2
+						},
+						{
+							"width": "10%",
+							"targets": 3
+						},
+						{
+							"width": "10%",
+							"targets": 4
+						},
+						{
+							"width": "10%",
+							"targets": 5
+						},
+						{
+							"width": "10%",
+							"targets": 6
+						},
+						{
+							"width": "10%",
+							"targets": 7
+						}
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Assign Quantity Found.</i>"
+					},
+					bSort: false,
+					bFilter: true,
+					bLengthChange: true,
+					iDisplayLength: 10,
+					processing: true,
+					serverSide: true,
+					ajax: {
+						url: "<?php echo base_url(); ?>admin/fetchviewAllpendingticket",
+						type: "POST",
+						data: function (d) {
+							d.ticket_no       = $("#ticket_no").val();
+							d.instrument_name = $("#instrument_name").val();
+							d.measuring_size  = $("#measuring_size").val();
+							d.part_id = $("#part_id").val();
+							d.sampling_id = $("#sampling_id").val();
+							d.sampling_trans_id = $("#sampling_trans_id").val();
+						}
+					}
+				});
+
+</script>
+<?php } ?>

@@ -25472,6 +25472,66 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function fetchviewAllpendingticketData($params)
+    {
+        $this->db->select('*,tbl_storeform_qty_assign.id as tbl_storeform_qty_assign_id,tbl_instrument_master_details.id as main_instrument_details_id,tbl_storeform_qty_assign.status as a_status,tbl_storeform_tickets.ticket_no');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->join('tbl_storeform_tickets','tbl_storeform_tickets.ticket_id = tbl_storeform_qty_assign.ticket_no');
+        $this->db->join('tbl_instrument_master_details','tbl_instrument_master_details.id = tbl_storeform_qty_assign.certificate','left');
+
+        $this->db->where('tbl_storeform_qty_assign.status', 'Open');
+       
+        if ($params['search']['value'] != "") 
+        {
+            $search = $params['search']['value'];
+            $this->db->where("(
+                id LIKE '%{$search}%' OR
+                ticket_no LIKE '%{$search}%' OR
+                ticket_date LIKE '%{$search}%' OR
+                instrument_name LIKE '%{$search}%' OR
+                measuring_size LIKE '%{$search}%' OR
+                qty_assign LIKE '%{$search}%' OR
+                qty_remark LIKE '%{$search}%'
+                status LIKE '%{$search}%'
+                instrument_id LIKE '%{$search}%'
+            )");
+        }
+        $this->db->order_by('tbl_storeform_qty_assign.id', 'DESC');
+        $result = $this->db->get()->result_array(); 
+        $data = [];
+        $count = 0;
+
+        foreach ($result as $row) {
+
+            if($row['due_date']){
+               $due_date = date("d-m-Y", strtotime($row['due_date']));
+            }else{
+                $due_date = '';
+            }
+
+             if($row['ticket_date']){
+               $ticket_date = date("d-m-Y", strtotime($row['ticket_date']));
+            }else{
+                $ticket_date = '';
+            }
+
+            $data[$count]['ticket_no']  = $row['ticket_no'];
+             $data[$count]['ticket_date']  = $ticket_date;
+            $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['certificate_id']   = $row['instrument_id'].' - '. $due_date;
+            $data[$count]['measuring_size']   = $row['measuring_size'];
+            $data[$count]['qty_assign']       = $row['qty_assign'];
+            $data[$count]['status']       =     $row['a_status'];
+            $data[$count]['qty_remark']       = $row['qty_remark'];
+
+    
+            $count++;
+        }
+
+        return $data;
+    }
+
+
 }
 
 ?>

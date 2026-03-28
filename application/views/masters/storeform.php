@@ -24,7 +24,10 @@
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                 <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='QC'){ ?>
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addStoreForm">
+                 <a class="btn btn-primary" href="<?php echo base_url(); ?>viewopentickets">
+                        <i class="fa fa-eye"></i> View Open Tickets</a>    
+                
+                 <a class="btn btn-primary" href="<?php echo base_url(); ?>addStoreForm">
                         <i class="fa fa-plus"></i> Add Store Form</a>
                 <?php } ?>
                 </div>
