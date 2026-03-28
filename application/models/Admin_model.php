@@ -25484,16 +25484,31 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         if ($params['search']['value'] != "") 
         {
             $search = $params['search']['value'];
-            $this->db->where("(
-                id LIKE '%{$search}%' OR
-                ticket_no LIKE '%{$search}%' OR
-                ticket_date LIKE '%{$search}%' OR
-                instrument_name LIKE '%{$search}%' OR
-                measuring_size LIKE '%{$search}%' OR
-                qty_assign LIKE '%{$search}%' OR
-                qty_remark LIKE '%{$search}%'
-                status LIKE '%{$search}%'
-            )");
+            // $this->db->where("(
+            //     id LIKE '%{$search}%' OR
+            //     ticket_no LIKE '%{$search}%' OR
+            //     ticket_date LIKE '%{$search}%' OR
+            //     instrument_name LIKE '%{$search}%' OR
+            //     measuring_size LIKE '%{$search}%' OR
+            //     qty_assign LIKE '%{$search}%' OR
+            //     qty_remark LIKE '%{$search}%'
+            //     status LIKE '%{$search}%'
+            //     instrument_id LIKE '%{$search}%'
+            // )");
+
+
+            $this->db->group_start()
+                ->like('tbl_storeform_qty_assign.id', $search)
+                ->or_like('ticket_no', $search)
+                ->or_like('ticket_date', $search)
+                ->or_like('instrument_name', $search)
+                ->or_like('measuring_size', $search)
+                ->or_like('qty_assign', $search)
+                ->or_like('qty_remark', $search)
+                ->or_like('tbl_storeform_qty_assign.status', $search)
+                ->or_like('instrument_id', $search)
+            ->group_end();
+
         }
         $this->db->order_by('tbl_storeform_qty_assign.id', 'DESC');
         $result = $this->db->get()->result_array(); 
@@ -25515,7 +25530,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
 
             $data[$count]['ticket_no']  = $row['ticket_no'];
-             $data[$count]['ticket_date']  = $ticket_date;
+            $data[$count]['ticket_date']  = $ticket_date;
             $data[$count]['instrument_name']  = $row['instrument_name'];
             $data[$count]['certificate_id']   = $row['instrument_id'].' - '. $due_date;
             $data[$count]['measuring_size']   = $row['measuring_size'];
