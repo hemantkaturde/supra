@@ -35,203 +35,251 @@
                                 <div class="col-md-4">
                                     <?php
 
-                                            $current_month = date("n"); // Get the current month without leading zeros
+                                        //     $current_month = date("n"); // Get the current month without leading zeros
 
-                                            if ($current_month >= 4) {
-                                                    // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                                    $financial_year_indian = date("y") . "" . (date("y") + 1);
-                                            } else {
-                                                    // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                                    $financial_year_indian = (date("y") - 1) . "" . date("y");
-                                            }
+                                        //     if ($current_month >= 4) {
+                                        //             // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                        //             $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                        //     } else {
+                                        //             // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                        //             $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                        //     }
                                       
-                                        // New Logic Commnet here 18-04-2024
-                                        if($getPreviousVendorPoconfirmationNumber['po_number']){
+                                        // // New Logic Commnet here 18-04-2024
+                                        // if($getPreviousVendorPoconfirmationNumber['po_number']){
                                             
-                                            $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -4);
-                                            $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -4);
+                                        //     $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -4);
+                                        //     $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -4);
                                          
                                             
-                                            $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
-                                            $first_part_of_string = substr($getfinancial_year,0,4);
+                                        //     $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
+                                        //     $first_part_of_string = substr($getfinancial_year,0,4);
  
-                                            if($first_part_of_string == $financial_year_indian){
+                                        //     if($first_part_of_string == $financial_year_indian){
 
-                                                if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
+                                        //         if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
 
                                                 
-                                                    if($getPreviousVendorPoconfirmationNumber_number){
+                                        //             if($getPreviousVendorPoconfirmationNumber_number){
                                                     
 
 
-                                                        $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
+                                        //                 $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
             
-                                                        // Function to check if a given year is the current Indian financial year
-                                                        $year = substr($getfinancial_year,0,2);
+                                        //                 // Function to check if a given year is the current Indian financial year
+                                        //                 $year = substr($getfinancial_year,0,2);
 
-                                                        // Current date
-                                                        $currentDate = new DateTime();
+                                        //                 // Current date
+                                        //                 $currentDate = new DateTime();
                                                         
-                                                        // Financial year in India starts from April 1st
-                                                        $financialYearStart = new DateTime("$year-04-01");
+                                        //                 // Financial year in India starts from April 1st
+                                        //                 $financialYearStart = new DateTime("$year-04-01");
                                                         
-                                                        // Financial year in India ends on March 31st of the following year
-                                                        $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                        //                 // Financial year in India ends on March 31st of the following year
+                                        //                 $financialYearEnd = new DateTime(($year + 1) . "-03-31");
                                                         
-                                                        // Check if the current date falls within the financial year
-                                                        if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                        //                 // Check if the current date falls within the financial year
+                                        //                 if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
 
                                                       
                                                         
-                                                            $string = $getPreviousVendorPoconfirmationNumber_number;
-                                                            $n = 4; // Number of characters to extract from the end
-                                                            $lastNCharacters = substr($string, -$n);
-                                                            $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                            $po_number = $inrno;
+                                        //                     $string = $getPreviousVendorPoconfirmationNumber_number;
+                                        //                     $n = 4; // Number of characters to extract from the end
+                                        //                     $lastNCharacters = substr($string, -$n);
+                                        //                     $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //                     $po_number = $inrno;
 
-                                                        } else {
+                                        //                 } else {
 
                                                         
 
-                                                            //$string = $getPreviousSupplierPoconfirmationNumber_number;
-                                                            // Changed 
+                                        //                     //$string = $getPreviousSupplierPoconfirmationNumber_number;
+                                        //                     // Changed 
 
-                                                            $string = $getPreviousVendorPoconfirmationNumber_number;
+                                        //                     $string = $getPreviousVendorPoconfirmationNumber_number;
 
-                                                            $n = 4; // Number of characters to extract from the end
-                                                            $lastNCharacters = substr($string, -$n);
-                                                            $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                            $po_number = $inrno;
+                                        //                     $n = 4; // Number of characters to extract from the end
+                                        //                     $lastNCharacters = substr($string, -$n);
+                                        //                     $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //                     $po_number = $inrno;
 
-                                                            //$po_number = 'SQPO24250001';
-                                                        }  
-                                                    /* New Logic End Here */
+                                        //                     //$po_number = 'SQPO24250001';
+                                        //                 }  
+                                        //             /* New Logic End Here */
 
-                                                    }else{
-                                                        $po_number = 'SQFU'.$financial_year_indian.'0001';
-                                                    }   
+                                        //             }else{
+                                        //                 $po_number = 'SQFU'.$financial_year_indian.'0001';
+                                        //             }   
 
-                                                }else{
+                                        //         }else{
 
                                                
-                                                    if($getPreviousSupplierPoconfirmationNumber_number){
+                                        //             if($getPreviousSupplierPoconfirmationNumber_number){
                                                     
                                                         
-                                                        /* New Logic Statrt Here */ 
-                                                        /* get finaicial Year from the Serial Number*/
-                                                        $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
+                                        //                 /* New Logic Statrt Here */ 
+                                        //                 /* get finaicial Year from the Serial Number*/
+                                        //                 $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
             
-                                                        // Function to check if a given year is the current Indian financial year
-                                                        $year = substr($getfinancial_year,0,2);
+                                        //                 // Function to check if a given year is the current Indian financial year
+                                        //                 $year = substr($getfinancial_year,0,2);
 
-                                                        // Current date
-                                                        $currentDate = new DateTime();
+                                        //                 // Current date
+                                        //                 $currentDate = new DateTime();
                                                         
-                                                        // Financial year in India starts from April 1st
-                                                        $financialYearStart = new DateTime("$year-04-01");
+                                        //                 // Financial year in India starts from April 1st
+                                        //                 $financialYearStart = new DateTime("$year-04-01");
                                                         
-                                                        // Financial year in India ends on March 31st of the following year
-                                                        $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                        //                 // Financial year in India ends on March 31st of the following year
+                                        //                 $financialYearEnd = new DateTime(($year + 1) . "-03-31");
                                                         
-                                                        // Check if the current date falls within the financial year
-                                                        if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                        //                 // Check if the current date falls within the financial year
+                                        //                 if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                             
-                                                                $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
-                                                                $n = 4; // Number of characters to extract from the end
-                                                                $lastNCharacters = substr($string, -$n);
-                                                                $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                                $po_number = $inrno;
+                                        //                         $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                        //                         $n = 4; // Number of characters to extract from the end
+                                        //                         $lastNCharacters = substr($string, -$n);
+                                        //                         $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //                         $po_number = $inrno;
 
-                                                        } else {
-                                                                $string = $getPreviousVendorPoconfirmationNumber_number;
-                                                                $n = 4; // Number of characters to extract from the end
-                                                                $lastNCharacters = substr($string, -$n);
-                                                                $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                                $po_number = $inrno;
+                                        //                 } else {
+                                        //                         $string = $getPreviousVendorPoconfirmationNumber_number;
+                                        //                         $n = 4; // Number of characters to extract from the end
+                                        //                         $lastNCharacters = substr($string, -$n);
+                                        //                         $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //                         $po_number = $inrno;
 
-                                                        }  
-                                                        /* New Logic End Here */
-                                                    }else{
-                                                        $po_number = 'SQFU'.$financial_year_indian.'0001';
-                                                    }  
+                                        //                 }  
+                                        //                 /* New Logic End Here */
+                                        //             }else{
+                                        //                 $po_number = 'SQFU'.$financial_year_indian.'0001';
+                                        //             }  
                                                      
-                                                }
+                                        //         }
 
-                                            }else{
+                                        //     }else{
                                                 
-                                                $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
+                                        //         $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
 
-                                                $first_part_of_string = substr($getfinancial_year,0,4);
+                                        //         $first_part_of_string = substr($getfinancial_year,0,4);
 
-                                                if($first_part_of_string == $financial_year_indian){
+                                        //         if($first_part_of_string == $financial_year_indian){
 
-                                                    $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
-                                                }else{
+                                        //             $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = substr($string, -$n);
+                                        //             $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
+                                        //         }else{
 
-                                                    $string = 0;
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
+                                        //             $string = 0;
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = substr($string, -$n);
+                                        //             $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
 
-                                                }
+                                        //         }
 
 
-                                            }
+                                        //     }
 
-                                        }else{
+                                        // }else{
 
-                                            if($getPreviousSupplierPoconfirmationNumber['po_number']){
-                                                // $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
-                                                // $i = end($arr);
-                                                // $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                // $po_number = $inrno;
+                                        //     if($getPreviousSupplierPoconfirmationNumber['po_number']){
+                                        //         // $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
+                                        //         // $i = end($arr);
+                                        //         // $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //         // $po_number = $inrno;
 
                                               
-                                                /* New Logic Statrt Here */ 
-                                                      /* get finaicial Year from the Serial Number*/
-                                                      $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
+                                        //         /* New Logic Statrt Here */ 
+                                        //               /* get finaicial Year from the Serial Number*/
+                                        //               $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
         
-                                                      // Function to check if a given year is the current Indian financial year
-                                                      $year = substr($getfinancial_year,0,2);
+                                        //               // Function to check if a given year is the current Indian financial year
+                                        //               $year = substr($getfinancial_year,0,2);
 
-                                                      // Current date
-                                                      $currentDate = new DateTime();
+                                        //               // Current date
+                                        //               $currentDate = new DateTime();
                                                       
-                                                      // Financial year in India starts from April 1st
-                                                      $financialYearStart = new DateTime("$year-04-01");
+                                        //               // Financial year in India starts from April 1st
+                                        //               $financialYearStart = new DateTime("$year-04-01");
                                                       
-                                                      // Financial year in India ends on March 31st of the following year
-                                                      $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                        //               // Financial year in India ends on March 31st of the following year
+                                        //               $financialYearEnd = new DateTime(($year + 1) . "-03-31");
                                                       
-                                                      // Check if the current date falls within the financial year
-                                                      if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                        //               // Check if the current date falls within the financial year
+                                        //               if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                          
-                                                          $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
-                                                          $n = 4; // Number of characters to extract from the end
-                                                          $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                          $po_number = $inrno;
+                                        //                   $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                        //                   $n = 4; // Number of characters to extract from the end
+                                        //                   $lastNCharacters = substr($string, -$n);
+                                        //                   $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //                   $po_number = $inrno;
 
-                                                      } else {
-                                                          $string = $getPreviousVendorPoconfirmationNumber_number;
-                                                          $n = 4; // Number of characters to extract from the end
-                                                          $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                          $po_number = $inrno;
+                                        //               } else {
+                                        //                   $string = $getPreviousVendorPoconfirmationNumber_number;
+                                        //                   $n = 4; // Number of characters to extract from the end
+                                        //                   $lastNCharacters = substr($string, -$n);
+                                        //                   $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //                   $po_number = $inrno;
 
-                                                      }  
-                                                    /* New Logic End Here */
+                                        //               }  
+                                        //             /* New Logic End Here */
 
-                                            }else{
-                                                $po_number = 'SQFU'.$financial_year_indian.'0001';
-                                            }
+                                        //     }else{
+                                        //         $po_number = 'SQFU'.$financial_year_indian.'0001';
+                                        //     }
                                             
-                                        } 
+                                        // } 
+
+                                        $current_month = date("n");
+
+                                        // Financial Year (Indian)
+                                        if ($current_month >= 4) {
+                                            $financial_year = date("y") . (date("y") + 1);
+                                        } else {
+                                            $financial_year = (date("y") - 1) . date("y");
+                                        }
+
+                                        // Get last Vendor Confirmation PO
+                                        $vendorPO = $getPreviousVendorPoconfirmationNumber['po_number'] ?? '';
+
+                                        // Get last Supplier Confirmation PO
+                                        $supplierPO = $getPreviousSupplierPoconfirmationNumber['po_number'] ?? '';
+
+                                        // Extract last numbers
+                                        $vendor_last   = 0;
+                                        $supplier_last = 0;
+
+                                        if (!empty($vendorPO)) {
+                                            $vendor_last = (int) substr($vendorPO, -4);
+                                        }
+
+                                        if (!empty($supplierPO)) {
+                                            $supplier_last = (int) substr($supplierPO, -4);
+                                        }
+
+                                        // ✅ Take latest number
+                                        $last_number = max($vendor_last, $supplier_last);
+
+                                        // Get last PO for FY check
+                                        $last_po = !empty($vendorPO) ? $vendorPO : $supplierPO;
+
+                                        // ✅ Financial Year Reset
+                                        if (!empty($last_po)) {
+                                            $last_year = substr($last_po, 4, 4);
+
+                                            if ($last_year != $financial_year) {
+                                                $last_number = 0;
+                                            }
+                                        }
+
+                                        // Generate next number
+                                        $new_number = $last_number + 1;
+
+                                        // Final Confirmation PO
+                                        $po_number = "SQFU" . $financial_year . str_pad($new_number, 4, '0', STR_PAD_LEFT);
 
 
                                     ?>
