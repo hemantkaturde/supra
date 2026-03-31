@@ -59,8 +59,10 @@
 
                                                 if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
 
+                                                
                                                     if($getPreviousVendorPoconfirmationNumber_number){
                                                     
+
 
                                                         $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
             
@@ -78,6 +80,8 @@
                                                         
                                                         // Check if the current date falls within the financial year
                                                         if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+
+                                                      
                                                         
                                                             $string = $getPreviousVendorPoconfirmationNumber_number;
                                                             $n = 4; // Number of characters to extract from the end
@@ -87,7 +91,13 @@
 
                                                         } else {
 
-                                                            $string = $getPreviousSupplierPoconfirmationNumber_number;
+                                                        
+
+                                                            //$string = $getPreviousSupplierPoconfirmationNumber_number;
+                                                            // Changed 
+
+                                                            $string = $getPreviousVendorPoconfirmationNumber_number;
+
                                                             $n = 4; // Number of characters to extract from the end
                                                             $lastNCharacters = substr($string, -$n);
                                                             $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
@@ -103,6 +113,7 @@
 
                                                 }else{
 
+                                               
                                                     if($getPreviousSupplierPoconfirmationNumber_number){
                                                     
                                                         
@@ -142,7 +153,8 @@
                                                         /* New Logic End Here */
                                                     }else{
                                                         $po_number = 'SQFU'.$financial_year_indian.'0001';
-                                                    }   
+                                                    }  
+                                                     
                                                 }
 
                                             }else{
