@@ -49,8 +49,7 @@
 
                                         
                                             if($getPrevioussupplierPONumber_number > $getPreviousPONumber_number){
-
-                                            
+    
                                                         if($getPrevioussupplierPONumber_number){
                                                             
                                                             /* New Logic start here */
@@ -146,6 +145,7 @@
 
                                                         } else {
 
+                                                     
                                                         
                                                             $getfinancial_year = substr($getPrevioussupplierPONumber['po_number'], -8);
 
@@ -153,11 +153,18 @@
 
                                                             if($first_part_of_string == $financial_year_indian){
 
-                                                                $string = $getPrevioussupplierPONumber['po_number'];
+                                                          
+
+                                                               // $string = $getPrevioussupplierPONumber['po_number'];
+                                                                $string = $getPreviousPONumber['po_number'];
+
+                                                                // Changed 31-03-2026
+
                                                                 $n = 4; // Number of characters to extract from the end
                                                                 $lastNCharacters = substr($string, -$n);
                                                                 $inrno= "SQPO".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                                 $po_number = $inrno;
+
 
                                                             }else{
                                                                 $string = 0;
@@ -176,7 +183,8 @@
                                             }
                                            }else{
 
-                                                   
+
+                                         
                                             $getfinancial_year = substr($getPreviousPONumber['po_number'], -8);
 
                                             $first_part_of_string = substr($getfinancial_year,0,4);
