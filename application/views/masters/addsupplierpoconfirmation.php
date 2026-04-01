@@ -233,52 +233,97 @@
                                             
                                         // } 
 
+                                        // $current_month = date("n");
+
+                                        // // Financial Year (Indian)
+                                        // if ($current_month >= 4) {
+                                        //     $financial_year = date("y") . (date("y") + 1);
+                                        // } else {
+                                        //     $financial_year = (date("y") - 1) . date("y");
+                                        // }
+
+                                        // // Get last Vendor Confirmation PO
+                                        // $vendorPO = $getPreviousVendorPoconfirmationNumber['po_number'] ?? '';
+
+                                        // // Get last Supplier Confirmation PO
+                                        // $supplierPO = $getPreviousSupplierPoconfirmationNumber['po_number'] ?? '';
+
+                                        // // Extract last numbers
+                                        // $vendor_last   = 0;
+                                        // $supplier_last = 0;
+
+                                        // if (!empty($vendorPO)) {
+                                        //     $vendor_last = (int) substr($vendorPO, -4);
+                                        // }
+
+                                        // if (!empty($supplierPO)) {
+                                        //     $supplier_last = (int) substr($supplierPO, -4);
+                                        // }
+
+                                        // // ✅ Take latest number
+                                        // $last_number = max($vendor_last, $supplier_last);
+
+                                        // // Get last PO for FY check
+                                        // $last_po = !empty($vendorPO) ? $vendorPO : $supplierPO;
+
+                                        // // ✅ Financial Year Reset
+                                        // if (!empty($last_po)) {
+                                        //     $last_year = substr($last_po, 4, 4);
+
+                                        //     if ($last_year != $financial_year) {
+                                        //         $last_number = 0;
+                                        //     }
+                                        // }
+
+                                        // // Generate next number
+                                        // $new_number = $last_number + 1;
+
+                                        // // Final Confirmation PO
+                                        // $po_number = "SQFU" . $financial_year . str_pad($new_number, 4, '0', STR_PAD_LEFT);
+
+
                                         $current_month = date("n");
 
-                                        // Financial Year (Indian)
+                                        // Financial Year
                                         if ($current_month >= 4) {
                                             $financial_year = date("y") . (date("y") + 1);
                                         } else {
                                             $financial_year = (date("y") - 1) . date("y");
                                         }
 
-                                        // Get last Vendor Confirmation PO
-                                        $vendorPO = $getPreviousVendorPoconfirmationNumber['po_number'] ?? '';
+                                        // Clean values
+                                        $vendorPO   = trim($getPreviousVendorPoconfirmationNumber['po_number'] ?? '');
+                                        $supplierPO = trim($getPreviousSupplierPoconfirmationNumber['po_number'] ?? '');
 
-                                        // Get last Supplier Confirmation PO
-                                        $supplierPO = $getPreviousSupplierPoconfirmationNumber['po_number'] ?? '';
-
-                                        // Extract last numbers
+                                        // Initialize
                                         $vendor_last   = 0;
                                         $supplier_last = 0;
 
+                                        // ✅ Vendor (ONLY current FY)
                                         if (!empty($vendorPO)) {
-                                            $vendor_last = (int) substr($vendorPO, -4);
-                                        }
+                                            $vendor_year = substr($vendorPO, 4, 4);
 
-                                        if (!empty($supplierPO)) {
-                                            $supplier_last = (int) substr($supplierPO, -4);
-                                        }
-
-                                        // ✅ Take latest number
-                                        $last_number = max($vendor_last, $supplier_last);
-
-                                        // Get last PO for FY check
-                                        $last_po = !empty($vendorPO) ? $vendorPO : $supplierPO;
-
-                                        // ✅ Financial Year Reset
-                                        if (!empty($last_po)) {
-                                            $last_year = substr($last_po, 4, 4);
-
-                                            if ($last_year != $financial_year) {
-                                                $last_number = 0;
+                                            if ($vendor_year == $financial_year) {
+                                                $vendor_last = (int) substr($vendorPO, -4);
                                             }
                                         }
 
-                                        // Generate next number
+                                        // ✅ Supplier (ONLY current FY)
+                                        if (!empty($supplierPO)) {
+                                            $supplier_year = substr($supplierPO, 4, 4);
+
+                                            if ($supplier_year == $financial_year) {
+                                                $supplier_last = (int) substr($supplierPO, -4);
+                                            }
+                                        }
+
+                                        // ✅ Take max of CURRENT FY only
+                                        $last_number = max($vendor_last, $supplier_last);
+
+                                        // Generate next
                                         $new_number = $last_number + 1;
 
-                                        // Final Confirmation PO
+                                        // Final Confirmation Number
                                         $po_number = "SQFU" . $financial_year . str_pad($new_number, 4, '0', STR_PAD_LEFT);
 
 

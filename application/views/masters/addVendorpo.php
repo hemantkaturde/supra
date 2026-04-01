@@ -319,7 +319,7 @@
                                         // $po_number = "SQPO" . $financial_year_indian . str_pad($new_number, 4, '0', STR_PAD_LEFT);
 
 
-                                      $current_month = date("n");
+                                        $current_month = date("n");
 
                                         if ($current_month >= 4) {
                                             $financial_year = date("y") . (date("y") + 1);
