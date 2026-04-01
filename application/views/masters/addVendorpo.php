@@ -281,42 +281,85 @@
                                         // }
 
 
-                                        $current_month = date("n");
+                                        // $current_month = date("n");
+
+                                        // if ($current_month >= 4) {
+                                        //     $financial_year_indian = date("y") . (date("y") + 1);
+                                        // } else {
+                                        //     $financial_year_indian = (date("y") - 1) . date("y");
+                                        // }
+
+                                        // // Get last numbers
+                                        // $supplier_last = 0;
+                                        // $vendor_last   = 0;
+
+                                        // if (!empty($getPrevioussupplierPONumber['po_number'])) {
+                                        //     $supplier_last = (int) substr($getPrevioussupplierPONumber['po_number'], -4);
+                                        // }
+
+                                        // if (!empty($getPreviousPONumber['po_number'])) {
+                                        //     $vendor_last = (int) substr($getPreviousPONumber['po_number'], -4);
+                                        // }
+
+                                        // // ✅ IMPORTANT: get max (latest series)
+                                        // $last_number = max($supplier_last, $vendor_last);
+
+                                        // // Check financial year reset
+                                        // $last_po = $getPrevioussupplierPONumber['po_number'] ?? $getPreviousPONumber['po_number'] ?? '';
+
+                                        // $last_year = substr($last_po, 4, 4);
+
+                                        // if ($last_year != $financial_year_indian) {
+                                        //     $last_number = 0; // reset on new financial year
+                                        // }
+
+                                        // // Generate next PO
+                                        // $new_number = $last_number + 1;
+
+                                        // $po_number = "SQPO" . $financial_year_indian . str_pad($new_number, 4, '0', STR_PAD_LEFT);
+
+
+                                      $current_month = date("n");
 
                                         if ($current_month >= 4) {
-                                            $financial_year_indian = date("y") . (date("y") + 1);
+                                            $financial_year = date("y") . (date("y") + 1);
                                         } else {
-                                            $financial_year_indian = (date("y") - 1) . date("y");
+                                            $financial_year = (date("y") - 1) . date("y");
                                         }
 
-                                        // Get last numbers
+                                        // Clean values
+                                        $supplierPO = trim($getPrevioussupplierPONumber['po_number'] ?? '');
+                                        $vendorPO   = trim($getPreviousPONumber['po_number'] ?? '');
+
+                                        // Initialize
                                         $supplier_last = 0;
                                         $vendor_last   = 0;
 
-                                        if (!empty($getPrevioussupplierPONumber['po_number'])) {
-                                            $supplier_last = (int) substr($getPrevioussupplierPONumber['po_number'], -4);
+                                        // ✅ Supplier (ONLY current FY)
+                                        if (!empty($supplierPO)) {
+                                            $supplier_year = substr($supplierPO, 4, 4);
+
+                                            if ($supplier_year == $financial_year) {
+                                                $supplier_last = (int) substr($supplierPO, -4);
+                                            }
                                         }
 
-                                        if (!empty($getPreviousPONumber['po_number'])) {
-                                            $vendor_last = (int) substr($getPreviousPONumber['po_number'], -4);
+                                        // ✅ Vendor (ONLY current FY)
+                                        if (!empty($vendorPO)) {
+                                            $vendor_year = substr($vendorPO, 4, 4);
+
+                                            if ($vendor_year == $financial_year) {
+                                                $vendor_last = (int) substr($vendorPO, -4);
+                                            }
                                         }
 
-                                        // ✅ IMPORTANT: get max (latest series)
+                                        // ✅ Take max of CURRENT FY only
                                         $last_number = max($supplier_last, $vendor_last);
 
-                                        // Check financial year reset
-                                        $last_po = $getPrevioussupplierPONumber['po_number'] ?? $getPreviousPONumber['po_number'] ?? '';
-
-                                        $last_year = substr($last_po, 4, 4);
-
-                                        if ($last_year != $financial_year_indian) {
-                                            $last_number = 0; // reset on new financial year
-                                        }
-
-                                        // Generate next PO
+                                        // Generate next
                                         $new_number = $last_number + 1;
 
-                                        $po_number = "SQPO" . $financial_year_indian . str_pad($new_number, 4, '0', STR_PAD_LEFT);
+                                        $po_number = "SQPO" . $financial_year . str_pad($new_number, 4, '0', STR_PAD_LEFT);
 
 
                                     ?>
