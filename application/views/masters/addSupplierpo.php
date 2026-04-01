@@ -342,7 +342,6 @@
                                         //     $po_number = 'SQPO23240001';
                                         // }
 
-
                                         $current_month = date("n");
 
                                         // Financial Year (Indian)
@@ -358,34 +357,29 @@
                                         // Get last Vendor PO
                                         $vendorPO = $getPreviousvendorPONumber['po_number'] ?? '';
 
-                                        // Extract last numbers
-                                        $supplier_last = 0;
-                                        $vendor_last   = 0;
+                                        // Extract last numbers safely
+                                        $supplier_last = (!empty($supplierPO)) ? (int) substr($supplierPO, -4) : 0;
+                                        $vendor_last   = (!empty($vendorPO)) ? (int) substr($vendorPO, -4) : 0;
 
-                                        if (!empty($supplierPO)) {
-                                            $supplier_last = (int) substr($supplierPO, -4);
+                                        // ✅ IMPORTANT: pick latest PO (number + string both)
+                                        if ($supplier_last >= $vendor_last) {
+                                            $last_number = $supplier_last;
+                                            $last_po     = $supplierPO;
+                                        } else {
+                                            $last_number = $vendor_last;
+                                            $last_po     = $vendorPO;
                                         }
 
-                                        if (!empty($vendorPO)) {
-                                            $vendor_last = (int) substr($vendorPO, -4);
-                                        }
-
-                                        // ✅ Take latest number from both
-                                        $last_number = max($supplier_last, $vendor_last);
-
-                                        // Get last PO (for financial year check)
-                                        $last_po = !empty($supplierPO) ? $supplierPO : $vendorPO;
-
-                                        // ✅ Financial Year Reset Check
+                                        // ✅ Financial Year Reset Check (on correct PO)
                                         if (!empty($last_po)) {
                                             $last_year = substr($last_po, 4, 4);
 
                                             if ($last_year != $financial_year) {
-                                                $last_number = 0; // Reset series
+                                                $last_number = 0; // reset
                                             }
                                         }
 
-                                        // Generate next PO
+                                        // Generate next number
                                         $new_number = $last_number + 1;
 
                                         // Final PO Number
