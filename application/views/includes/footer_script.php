@@ -29667,12 +29667,15 @@ $('#export_excel').on('click', function() {
 				var certificate = $('#certificate').val();
 				var status = $('#status').val();
 
-				
-				
+				var edit_form = $('#edit_form').val();
+
+				//alert(edit_form);
+
+			
 				$.ajax({
 					url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 					type: "POST",
-					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate,'status':status},
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate,'status':status,'edit_form':edit_form},
 					dataType: "json",
 					cache:false,
 					success: function(fetchResponse, textStatus, jqXHR)

@@ -29276,14 +29276,21 @@ public function editstoreformqtyassigndata() {
                 $new_qty_assign = (int) $this->input->post('qty_assign');
                 $live_qty_add = (int) $this->input->post('live_qty_add');
 
-                if ($live_qty_add == 0) {
-                    $response['status'] = 'failure';
-                    $response['error'] = [
-                        'qty_assign' => "Quantity not available."
-                    ];
-                    echo json_encode($response);
-                    exit;
+                if($assignedID){
+
+                }else{
+
+                    if ($live_qty_add == 0) {
+                        $response['status'] = 'failure';
+                        $response['error'] = [
+                            'qty_assign' => "Quantity not available."
+                        ];
+                        echo json_encode($response);
+                        exit;
+                    }
+
                 }
+               
 
 
                 // $new_qty_assign = (int) $this->input->post('qty_assign');
@@ -29309,11 +29316,12 @@ public function editstoreformqtyassigndata() {
                 // }
 
 
+
                
                 // If update
                 if (!empty($assignedID)) {
                     $data = array(
-                        'qty_assign'  => trim($this->input->post('qty_assign')),
+                        // 'qty_assign'  => trim($this->input->post('qty_assign')),
                         'qty_remark'  => trim($this->input->post('qty_remark')),
                         'certificate' => trim($this->input->post('certificate')),
                         'status' => trim($this->input->post('status')),
@@ -29358,6 +29366,9 @@ public function editstoreformqtyassigndata() {
 
                     );
                 }
+
+
+
 
                 $result = $this->admin_model->savequantityassignstoreform($assignedID, $data);
 

@@ -88,6 +88,9 @@
                 <input type="hidden" class="form-control" id="sampling_id" name="sampling_id">
                 <input type="hidden" class="form-control" id="sampling_trans_id" name="sampling_trans_id">
 
+                <input type="hidden" class="form-control" id="edit_form" name="edit_form" value="edit_form">
+
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Quantity Assign <span class="required">*</span></label>
                   <div class="col-sm-8">
