@@ -29561,6 +29561,8 @@ public function viewassigninstqtytforticket() {
     $sampling_id  = $this->input->get('sampling_id');
     $sampling_trans_id  = $this->input->get('sampling_trans_id');
 
+    $data_live_qty  = $this->input->get('data_live_qty');
+
     $process = 'Assigned Quantity Details';
     $processFunction = 'Admin/assigned_instrument_listing';
     $this->logrecord($process,$processFunction);
@@ -29575,6 +29577,8 @@ public function viewassigninstqtytforticket() {
 
     $data['sampling_id'] = $sampling_id;
     $data['sampling_trans_id'] = $sampling_trans_id;
+
+    $data['data_live_qty'] = $data_live_qty;
 
     // $this->global['pageTitle'] = 'Assigned Quantity Details';
     $this->loadViews("masters/assign_qty_list_view", $this->global, $data, NULL);

@@ -24567,7 +24567,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     </i> &nbsp;";
 
                     $data[$count]['action'] .= "
-                    <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
+                    <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."&data_live_qty=".$live_quantity."' style='cursor: pointer;' target='_blank'>
                     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
                     </a>";
 
@@ -24590,6 +24590,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     data-grade='".$row['instru_grade']."'
                     data-unit='".$row['unit']."'
                     data-class_1='".$row['class']."'
+
+                    data-live_qty ='".$live_quantity."'
 
                     class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
                 </i> &nbsp;";

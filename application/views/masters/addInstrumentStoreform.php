@@ -125,8 +125,8 @@
                   <label class="col-sm-4 col-form-label">Status</label>
                    <div class="col-sm-8">
                      <select class="form-control" name="status" id="status">
-                        <option value="Open">Open</option>
-                        <option value="Close" selected>Close</option>
+                        <option value="Open" selected>Open</option>
+                        <option value="Close">Close</option>
                      </select>
                     <p class="error status_error"></p>
                    </div>

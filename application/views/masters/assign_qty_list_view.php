@@ -20,6 +20,7 @@
                     <input type="hidden" id="measuring_size" value="<?= $measuring_size ?>">
                     <input type="hidden" id="part_id" value="<?= $part_id ?>">
                     <input type="hidden" id="part_number" value="<?= $part_number ?>">
+                    <input type="hidden" id="live_qty_add" value="<?= $data_live_qty ?>">
 
                     <input type="hidden" id="sampling_id" value="<?= $sampling_id ?>">
                     <input type="hidden" id="sampling_trans_id" value="<?= $sampling_trans_id ?>">
