@@ -29188,7 +29188,7 @@ $('#export_excel').on('click', function() {
 
 		});
 
-		$(document).on('click', '.deletetdirreport', function(e) {
+		$(document).on('click', '.deletestoreform', function(e) {
 			var elemF = $(this);
 			e.preventDefault();
 

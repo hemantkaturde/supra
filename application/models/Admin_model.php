@@ -23849,7 +23849,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_storeform_ticket_attachement/".$row['ticket_id_label']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
             // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printinspectionreportlabel/".$row['ticket_id_label']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
 
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletestoreform' aria-hidden='true'></i>"; 
 
             $counter++;
         }
@@ -23882,6 +23882,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->where('ticket_id', $id);
         if($this->db->delete(TBL_STOREFORM_TICKETS)){
+                return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+
+    public function delete_assign_tickit_also($ticket_no){
+
+        $this->db->where('ticket_no', $ticket_no);
+        if($this->db->delete('tbl_storeform_qty_assign')){
                 return TRUE;
         }else{
             return FALSE;

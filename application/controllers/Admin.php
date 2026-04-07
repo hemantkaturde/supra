@@ -29192,8 +29192,16 @@ public function deletetstoreform(){
 
     $post_submit = $this->input->post();
     if($post_submit){
+
+      $get_tikct_number_from = $this->admin_model->getTicketData(trim($this->input->post('id')));
+    //   $get_tikct_number_from[0]['ticket_no'];
         $result = $this->admin_model->deletetstoreform(trim($this->input->post('id')));
         if ($result) {
+
+
+           $delete_assign_tickit_also =   $this->admin_model->delete_assign_tickit_also(trim($get_tikct_number_from[0]['ticket_no']));
+
+
                     $process = 'Delete Storeform';
                     $processFunction = 'Admin/deletetstoreform';
                     $this->logrecord($process,$processFunction);
