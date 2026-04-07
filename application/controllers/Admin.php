@@ -29445,7 +29445,7 @@ public function editstoreformqtyremovedata()
             'qty_remark' => $qty_remark_input,
             
         'certificate'       => trim($this->input->post('certificateremove')) !== '' ? trim($this->input->post('certificateremove')) : NULL,
-        'status'            => trim($this->input->post('statuscertificateremove')) !== '' ? trim($this->input->post('statuscertificateremove')) : NULL,
+        'status'            => trim($this->input->post('status')) !== '' ? trim($this->input->post('status')) : NULL,
 
         ]);
 
@@ -29489,7 +29489,7 @@ public function editstoreformqtyremovedata()
 
 
         'certificate'       => trim($this->input->post('certificateremove')) !== '' ? trim($this->input->post('certificateremove')) : NULL,
-        'status'            => trim($this->input->post('statuscertificateremove')) !== '' ? trim($this->input->post('statuscertificateremove')) : NULL,
+        'status'            => trim($this->input->post('status')) !== '' ? trim($this->input->post('status')) : NULL,
 
 
 
@@ -29529,7 +29529,7 @@ public function editstoreformqtyremovedata()
              'sampling_trans_id' => trim($this->input->post('sampling_trans_id')) !== '' ? trim($this->input->post('sampling_trans_id')) : NULL,
 
              'certificate'       => trim($this->input->post('certificateremove')) !== '' ? trim($this->input->post('certificateremove')) : NULL,
-             'status'            => trim($this->input->post('statuscertificateremove')) !== '' ? trim($this->input->post('statuscertificateremove')) : NULL,
+             'status'            => trim($this->input->post('status')) !== '' ? trim($this->input->post('status')) : NULL,
 
              'type'              => trim($this->input->post('type')) !== '' ? trim($this->input->post('type')) : NULL,
              'grade'             => trim($this->input->post('grade')) !== '' ? trim($this->input->post('grade')) : NULL,
