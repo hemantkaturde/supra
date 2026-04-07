@@ -25478,7 +25478,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         $this->db->select('*,tbl_storeform_qty_assign.id as tbl_storeform_qty_assign_id,tbl_instrument_master_details.id as main_instrument_details_id,tbl_storeform_qty_assign.status as a_status,tbl_storeform_tickets.ticket_no');
         $this->db->from('tbl_storeform_qty_assign');
-        $this->db->join('tbl_storeform_tickets','tbl_storeform_tickets.ticket_id = tbl_storeform_qty_assign.ticket_no');
+        $this->db->join('tbl_storeform_tickets','tbl_storeform_tickets.ticket_no = tbl_storeform_qty_assign.ticket_no');
         $this->db->join('tbl_instrument_master_details','tbl_instrument_master_details.id = tbl_storeform_qty_assign.certificate','left');
 
         $this->db->where('tbl_storeform_qty_assign.status', 'Open');
@@ -25514,6 +25514,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
         $this->db->order_by('tbl_storeform_qty_assign.id', 'DESC');
         $result = $this->db->get()->result_array(); 
+
+
         $data = [];
         $count = 0;
 
