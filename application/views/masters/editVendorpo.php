@@ -246,9 +246,8 @@
                                                             <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendor_po_item'];?>' class='fa fa-pencil-square-o editVendorpoitem'  aria-hidden='true'></i>
                                                             <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendor_po_item'];?>' class='fa fa-trash-o deleteVendorpoitemedit' aria-hidden='true'></i>
 
-                                                            <?php if($value['pre_supplier_po_number']==""){ ?>
+                                                            
                                                               <a href="<?php echo ADMIN_PATH . 'vendor_po_item_attachment/'.$value['vendor_po_item']; ?>" target="_blank" style="cursor: pointer;"><i  class="fa fa-paperclip" style="font-size: x-large; cursor: pointer;" aria-hidden="true"></i></a>                                                        
-                                                             <?php } ?>
 
                                                         </td>
                                                     </tr>
