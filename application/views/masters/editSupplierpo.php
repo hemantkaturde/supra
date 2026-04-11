@@ -235,8 +235,9 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['suppliritemid'];?>' class='fa fa-pencil-square-o editSupplierpoitem'  aria-hidden='true'></i>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['suppliritemid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['suppliritemid'];?>' class='fa fa-pencil-square-o editSupplierpoitem'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['suppliritemid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                            <a href="<?php echo ADMIN_PATH . 'supplier_po_item_attachment/'.$value['suppliritemid']; ?>" target="_blank" style="cursor: pointer;"><i  class="fa fa-paperclip" style="font-size: x-large; cursor: pointer;" aria-hidden="true"></i></a>                                                        
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

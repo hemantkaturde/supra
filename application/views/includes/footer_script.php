@@ -2207,7 +2207,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Supplier PO' || $pageTitle=='Add Supplier PO' || $pageTitle=="Edit Supplier PO"){ ?>
+<?php if($pageTitle=='Supplier PO' || $pageTitle=='Add Supplier PO' || $pageTitle=="Edit Supplier PO" || $pageTitle=="Supplier PO Item Attachment"){ ?>
 	<script type="text/javascript">
      
 	    $(document).ready(function() {
@@ -2840,6 +2840,119 @@
 			$("#part_number_old").show();
 			$("#part_number_new").hide();
 		});
+
+
+		$(document).ready(function() {
+					var supplieritemid_main = $('#supplieritemid_main').val();
+					var dt = $('#view_supplier_po_item_attachedment').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "35%", "targets": 0 },
+							{ "width": "5%", "targets": 1 },		
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Supplier PO Item Attachment Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchsupplierpoitemattachedment/"+supplieritemid_main,
+							type: "post",
+						},
+					});
+		});
+
+
+		$(document).on('click','#uploadBtn',function(e){
+				    e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($('#fileUploadForm')[0]);
+					var supplieritemid_main = $('#supplieritemid_main').val();
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addSupplierPOattachment",
+						type: 'POST',
+						data: formData,
+						contentType: false,
+						processData: false,
+						dataType: 'json',
+						success: function (response) {
+							$('#uploadResponse').removeClass('alert-success alert-danger').show();
+							if (response.status === 'success') {
+								// $('#uploadResponse').addClass('alert-success').html('File uploaded successfully: ' + response.file_name);
+								// $('#fileUploadForm')[0].reset();
+
+								swal({
+									title: "Success",
+									text: "TDIR Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										$("#modal-md").hide();
+										window.location.href = "<?php echo base_url().'supplier_po_item_attachment/'?>"+supplieritemid_main;
+								});		
+
+								$(".loader_ajax").hide();
+
+							} else {
+								$('#uploadResponse').addClass('alert-danger').html(response.message);
+							}
+						}
+					});
+		});
+
+		$(document).on('click','.deletesupplieritemattachment',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+	                var supplieritemid_main = $('#supplieritemid_main').val();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Supplier PO Item Attachment Attachment",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deletesupplieritemattachment",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Supplier PO Item Attachment Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>supplier_po_item_attachment/"+supplieritemid_main;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Supplier PO Item Attachment deletion cancelled ", "error");
+						}
+					});
+	    });
 
     </script>
 <?php } ?>

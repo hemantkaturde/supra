@@ -31609,5 +31609,110 @@ public function addnewbalancestock(){
 }
 
 
+public function supplier_po_item_attachment($suppliritemid){
+
+    $process = 'Supplier PO Item Attachment';
+    $processFunction = 'Admin/supplier_po_item_attachment';
+    $data['suppliritemid']= $suppliritemid;
+    $this->global['pageTitle'] = 'Supplier PO Item Attachment';  
+    $data['getsupplierpoitemattachmentdetails']= $this->admin_model->getsupplierpoitemattachmentdetails($suppliritemid);
+
+    $this->loadViews("masters/supplier_po_item_attacment", $this->global, $data, NULL); 
+
+}
+
+
+public function fetchsupplierpoitemattachedment($suppliritemid){
+
+
+
+  $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchsupplierpoitemattachedmentcount($params,$suppliritemid); 
+    $queryRecords = $this->admin_model->fetchsupplierpoitemattachedmentdate($params,$suppliritemid); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+
+}
+
+
+public function addSupplierPOattachment(){
+      $post_submit = $this->input->post();
+       if($post_submit){
+          $save_TDIR_Attachment_response = array();
+            if (!empty($_FILES['file']['name'])) {
+                if (!empty($_FILES['file']['name'])) {
+                    $config['upload_path']   = './uploads/';
+                    $config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
+                    $config['max_size']      = 5000;
+
+                    $this->load->library('upload', $config);
+
+                    if (!$this->upload->do_upload('file')) {
+                        $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags($this->upload->display_errors()));
+                    } else {
+                            $uploadData = $this->upload->data();
+                            $file_name = $uploadData['file_name'];
+                            $supplieritemid = $this->input->post('supplieritemid');
+
+                            // Save into table
+                            $save_data_to_table = $this->db->insert('tbl_supplier_item_attachment', [
+                                'attachment' => $file_name,
+                                'supplier_item_id' => $supplieritemid
+                            ]);
+
+                            if($save_data_to_table){
+                                $save_TDIR_Attachment_response['status'] = 'success';
+                                $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
+                            }else{
+                                $save_TDIR_Attachment_response['status'] = 'success';
+                                $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
+                            }
+
+                         echo json_encode($save_TDIR_Attachment_response);
+                    }
+                }
+            }
+        }
+}
+
+
+
+public function deletesupplieritemattachment(){
+
+ $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletesupplieritemattachment(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete TDIR Attachment';
+                    $processFunction = 'Admin/deletetdirattachment';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+
+
 
 }

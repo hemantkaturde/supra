@@ -220,6 +220,7 @@
                           || $pageUrl=="addnewpackingchallan"
                           || $pageUrl== "editpackingchallan"
                           || $pageUrl=="angadia_report"
+                          || $pageUrl=="supplier_po_item_attachment"
                           ){echo 'active';}?>">
                         <a href="#">
                           <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
@@ -230,7 +231,7 @@
 
                         <ul class="treeview-menu" >
                           <li class="line_height <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo" || $pageUrl=="editBuyerpo" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpo"><i class="fa fa-cubes"></i> Buyer PO</a></li>
-                          <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" || $pageUrl=="editSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
+                          <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="supplier_po_item_attachment"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
                           <li class="line_height <?php if($pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  || $pageUrl=="addnewVendorpo" || $pageUrl=="editVendorpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpo"><i class="fa fa-cubes"></i> Vendor PO</a></li> 
                           <li class="line_height <?php if($pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl =="viewSupplierpoconfirmation" || $pageUrl =="editSupplierpoconfirmation" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpoconfirmation"><i class="fa fa-cubes"></i> Supplier PO Confirmation</a></li>
                           <li class="line_height <?php if($pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="editvendorpoconfirmation" || $pageUrl=="viewvendorpoconfirmation"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpoconfirmation"><i class="fa fa-cubes"></i> Vendor PO Confirmation</a></li>

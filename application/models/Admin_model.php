@@ -25561,6 +25561,90 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getsupplierpoitemattachmentdetails($suppliritemid){
+
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.id',$suppliritemid);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
+
+     public function fetchsupplierpoitemattachedmentcount($params,$suppliritemid){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_SUPPLIER_ITEM_ATTACHMENT.'.supplier_item_id', $suppliritemid);
+        $this->db->where(TBL_SUPPLIER_ITEM_ATTACHMENT.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_ITEM_ATTACHMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchsupplierpoitemattachedmentdate($params,$suppliritemid){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_SUPPLIER_ITEM_ATTACHMENT.'.supplier_item_id', $suppliritemid);
+        $this->db->where(TBL_SUPPLIER_ITEM_ATTACHMENT.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SUPPLIER_ITEM_ATTACHMENT.'.id','DESC');
+        $query = $this->db->get(TBL_SUPPLIER_ITEM_ATTACHMENT);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['attachment'] =  $value['attachment'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletesupplieritemattachment' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+      public function deletesupplieritemattachment($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SUPPLIER_ITEM_ATTACHMENT)){
+               return TRUE;
+            //   $this->db->where('packing_challan_id', $id);
+            //   //$this->db->delete(TBL_SUPPLIER);
+            //   if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+            //         return TRUE;
+            //   }
+        }else{
+           return FALSE;
+        }
+    }
+
+
+
 }
 
 ?>
