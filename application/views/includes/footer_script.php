@@ -2888,7 +2888,7 @@
 
 								swal({
 									title: "Success",
-									text: "TDIR Successfully Added!",
+									text: "Supplier PO Item Attachment Successfully Added!",
 									icon: "success",
 									button: "Ok",
 									},function(){ 
