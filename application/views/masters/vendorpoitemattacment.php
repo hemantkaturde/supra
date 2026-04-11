@@ -31,7 +31,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                     <a href="<?php echo base_url().'/editSupplierpo/'.$getvendorpoitemattachmentdetails[0]['vendor_po_id'];?>" class="btn btn-primary">
+                     <a href="<?php echo base_url().'editVendorpo/'.$getvendorpoitemattachmentdetails[0]['vendor_po_id'];?>" class="btn btn-primary">
                           <i class="fa fa-arrow-left"></i> Back
                         </a>
                 <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='QC'){ ?>
