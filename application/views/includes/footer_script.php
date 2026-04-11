@@ -3030,7 +3030,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Vendor PO Master' || $pageTitle=='Add Vendor PO' || $pageTitle=='Edit Vendor PO' ){ ?>
+<?php if($pageTitle=='Vendor PO Master' || $pageTitle=='Add Vendor PO' || $pageTitle=='Edit Vendor PO' || $pageTitle=='Vendor PO Item Attachment' ){ ?>
 	<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -4184,6 +4184,119 @@
 			$("#part_number_old").show();
 			$("#part_number_new").hide();
 		});
+
+
+		$(document).ready(function() {
+					var vendoritemid_main = $('#vendoritemid_main').val();
+					var dt = $('#view_vendor_po_item_attachedment').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "35%", "targets": 0 },
+							{ "width": "5%", "targets": 1 },		
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Vendor PO Item Attachment Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchvendorpoitemattachedment/"+vendoritemid_main,
+							type: "post",
+						},
+					});
+		});
+
+
+		$(document).on('click','#uploadBtn',function(e){
+				    e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($('#fileUploadForm')[0]);
+					var vendoritemid_main = $('#vendoritemid_main').val();
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addvendorPOattachment",
+						type: 'POST',
+						data: formData,
+						contentType: false,
+						processData: false,
+						dataType: 'json',
+						success: function (response) {
+							$('#uploadResponse').removeClass('alert-success alert-danger').show();
+							if (response.status === 'success') {
+								// $('#uploadResponse').addClass('alert-success').html('File uploaded successfully: ' + response.file_name);
+								// $('#fileUploadForm')[0].reset();
+
+								swal({
+									title: "Success",
+									text: "Vendor PO Item Attachment Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										$("#modal-md").hide();
+										window.location.href = "<?php echo base_url().'vendor_po_item_attachment/'?>"+vendoritemid_main;
+								});		
+
+								$(".loader_ajax").hide();
+
+							} else {
+								$('#uploadResponse').addClass('alert-danger').html(response.message);
+							}
+						}
+					});
+		});
+
+		$(document).on('click','.deletevendoritemattachment',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+	                var vendoritemid_main = $('#vendoritemid_main').val();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Supplier PO Item Attachment Attachment",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deletevendoritemattachment",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Vendor PO Item Attachment Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>vendor_po_item_attachment/"+vendoritemid_main;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Vendor PO Item Attachment deletion cancelled ", "error");
+						}
+					});
+	    });
 
 	
     </script>

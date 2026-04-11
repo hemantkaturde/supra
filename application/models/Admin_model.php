@@ -25572,8 +25572,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
         $data = $query->result_array();
         return $data;
-
-
     }
 
 
@@ -25632,6 +25630,89 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_SUPPLIER_ITEM_ATTACHMENT)){
+               return TRUE;
+            //   $this->db->where('packing_challan_id', $id);
+            //   //$this->db->delete(TBL_SUPPLIER);
+            //   if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+            //         return TRUE;
+            //   }
+        }else{
+           return FALSE;
+        }
+    }
+
+
+    
+    public function getvendorpoitemattachmentdetails($vendor_po_item_id){
+
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_FINISHED_GOODS.'.part_number as part_number_label');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$vendor_po_item_id);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
+
+    public function fetchvendorpoitemattachedmentcount($params,$vendoritemid_main){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_VENDOR_ITEM_ATTACHMENT.'.vendor_item_id', $vendoritemid_main);
+        $this->db->where(TBL_VENDOR_ITEM_ATTACHMENT.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_ITEM_ATTACHMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchvendorpoitemattachedmentdate($params,$vendoritemid_main){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_ITEM_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_VENDOR_ITEM_ATTACHMENT.'.vendor_item_id', $vendoritemid_main);
+        $this->db->where(TBL_VENDOR_ITEM_ATTACHMENT.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_VENDOR_ITEM_ATTACHMENT.'.id','DESC');
+        $query = $this->db->get(TBL_VENDOR_ITEM_ATTACHMENT);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['attachment'] =  $value['attachment'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletevendoritemattachment' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+    public function deletevendoritemattachment($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_VENDOR_ITEM_ATTACHMENT)){
                return TRUE;
             //   $this->db->where('packing_challan_id', $id);
             //   //$this->db->delete(TBL_SUPPLIER);

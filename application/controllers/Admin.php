@@ -31616,7 +31616,6 @@ public function supplier_po_item_attachment($suppliritemid){
     $data['suppliritemid']= $suppliritemid;
     $this->global['pageTitle'] = 'Supplier PO Item Attachment';  
     $data['getsupplierpoitemattachmentdetails']= $this->admin_model->getsupplierpoitemattachmentdetails($suppliritemid);
-
     $this->loadViews("masters/supplier_po_item_attacment", $this->global, $data, NULL); 
 
 }
@@ -31700,8 +31699,8 @@ public function deletesupplieritemattachment(){
     if($post_submit){
         $result = $this->admin_model->deletesupplieritemattachment(trim($this->input->post('id')));
         if ($result) {
-                    $process = 'Delete TDIR Attachment';
-                    $processFunction = 'Admin/deletetdirattachment';
+                    $process = 'Delete Supplier PO Item Attachment';
+                    $processFunction = 'Admin/deletesupplieritemattachment';
                     $this->logrecord($process,$processFunction);
                 echo(json_encode(array('status'=>'success')));
             }
@@ -31712,6 +31711,105 @@ public function deletesupplieritemattachment(){
 
 }
 
+
+public function vendor_po_item_attachment($vendor_po_item_id){
+
+    $process = 'Vendor PO Item Attachment';
+    $processFunction = 'Admin/vendor_po_item_attachment';
+    $data['vendor_po_item_id']= $vendor_po_item_id;
+    $this->global['pageTitle'] = 'Vendor PO Item Attachment';  
+    $data['getvendorpoitemattachmentdetails']= $this->admin_model->getvendorpoitemattachmentdetails($vendor_po_item_id);
+    $this->loadViews("masters/vendorpoitemattacment", $this->global, $data, NULL); 
+
+}
+
+
+
+public function fetchvendorpoitemattachedment($vendoritemid_main){
+
+
+
+  $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchvendorpoitemattachedmentcount($params,$vendoritemid_main); 
+    $queryRecords = $this->admin_model->fetchvendorpoitemattachedmentdate($params,$vendoritemid_main); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+}
+
+public function addvendorPOattachment(){
+      $post_submit = $this->input->post();
+       if($post_submit){
+          $save_TDIR_Attachment_response = array();
+            if (!empty($_FILES['file']['name'])) {
+                if (!empty($_FILES['file']['name'])) {
+                    $config['upload_path']   = './uploads/';
+                    $config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
+                    $config['max_size']      = 5000;
+
+                    $this->load->library('upload', $config);
+
+                    if (!$this->upload->do_upload('file')) {
+                        $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags($this->upload->display_errors()));
+                    } else {
+                            $uploadData = $this->upload->data();
+                            $file_name = $uploadData['file_name'];
+                            $vendorpoitemid = $this->input->post('vendorpoitemid');
+
+                            // Save into table
+                            $save_data_to_table = $this->db->insert('tbl_vendor_item_attachment', [
+                                'attachment' => $file_name,
+                                'vendor_item_id' => $vendorpoitemid
+                            ]);
+
+                            if($save_data_to_table){
+                                $save_TDIR_Attachment_response['status'] = 'success';
+                                $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
+                            }else{
+                                $save_TDIR_Attachment_response['status'] = 'success';
+                                $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
+                            }
+
+                         echo json_encode($save_TDIR_Attachment_response);
+                    }
+                }
+            }
+        }
+}
+
+
+public function deletevendoritemattachment(){
+
+ $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletevendoritemattachment(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Vendor PO Item Attachment';
+                    $processFunction = 'Admin/deletetdirattachment';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
 
 
 

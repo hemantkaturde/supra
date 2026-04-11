@@ -670,6 +670,7 @@ $route['inspectionreportexcel'] = "admin/inspectionreportexcel";
 
 $route['viewopentickets'] = "admin/viewopentickets";
 $route['supplier_po_item_attachment/(:any)'] = "admin/supplier_po_item_attachment/$1";
+$route['vendor_po_item_attachment/(:any)'] = "admin/vendor_po_item_attachment/$1";
 
 
 

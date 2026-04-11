@@ -206,6 +206,7 @@ define('TBL_BALANCE_STOCK_DETAILS','tbl_balance_stock_details');
 
 define('TBL_INSTRUMENT_MASTER_DETAILS','tbl_instrument_master_details');
 define('TBL_SUPPLIER_ITEM_ATTACHMENT','tbl_supplier_item_attachment');
+define('TBL_VENDOR_ITEM_ATTACHMENT','tbl_vendor_item_attachment');
 
 
 
