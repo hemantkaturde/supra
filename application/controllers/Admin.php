@@ -31811,6 +31811,15 @@ public function deletevendoritemattachment(){
 
 }
 
+public function rmtestcertificate(){
+
+    $process = 'RM Test Certificate';
+    $processFunction = 'Admin/rmtestcertificate';
+    $this->global['pageTitle'] = 'RM Test Certificate';  
+    $this->loadViews("masters/rmtestcertificate", $this->global, $data, NULL); 
+
+}
+
 
 
 }

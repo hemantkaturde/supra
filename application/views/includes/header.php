@@ -175,7 +175,6 @@
                           <li class="line_height <?php if($pageUrl=="packingmaster" || $pageUrl=="addnewpackingmaster"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packingmaster"><i class="fa fa-cubes"></i> Packing Master</a></li>
                           <li class="line_height <?php if($pageUrl=="instrument" || $pageUrl=="addinstrumentdetailsdata"){echo 'active';}?>"><a href="<?php echo base_url(); ?>instrument"><i class="fa fa-cubes"></i> Instrument Master</a></li>
 
-                       
                         </ul>
                       </li>
 
@@ -357,6 +356,13 @@
                           <i class="fa fa-file-excel-o"></i> <span class="menu_label">CBAM</span>
                         </a>
                       </li> 
+
+                      <li class="treeview <?php if($pageUrl=="rmtestcertificate"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>rmtestcertificate">
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">RM Test Certificate</span>
+                        </a>
+                      </li> 
+
 
                       <li class="treeview <?php if($pageUrl=="vendor_rejection_form"){echo 'active';}?>" >
                         <a href="<?php echo base_url(); ?>vendor_rejection_form">
