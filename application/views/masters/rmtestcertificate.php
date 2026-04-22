@@ -31,7 +31,7 @@
                 </div>
 
 
-                 <!-- <div id="vendor_name_div" style="display:none">
+                <div id="vendor_name_div" style="display:none">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="vendor_name ">Vendor Name</label>
@@ -61,7 +61,7 @@
                             <p class="error supplier_name_error"></p>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
 
                 <div class="col-md-2">

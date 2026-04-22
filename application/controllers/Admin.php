@@ -31821,6 +31821,8 @@ public function rmtestcertificate(){
     $process = 'RM Test Certificate';
     $processFunction = 'Admin/rmtestcertificate';
     $this->global['pageTitle'] = 'RM Test Certificate';  
+    $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
     $this->loadViews("masters/rmtestcertificate", $this->global, $data, NULL); 
 
 }

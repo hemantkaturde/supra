@@ -11089,7 +11089,7 @@
 
 		$(document).ready(function() {
 
-			var vendor_supplier_name = $('#vendor_supplier_name').val();
+			    var vendor_supplier_name = $('#vendor_supplier_name').val();
 
 			    if(vendor_supplier_name=='vendor'){
 				    $('#vendor_name_div_for_hide_show').css('display','block');
@@ -11155,7 +11155,7 @@
 							}
 						});
 						return false;
-			        }
+			    }
 
 			
 		});
@@ -30900,40 +30900,79 @@ $('#export_excel').on('click', function() {
 <?php if ($pageTitle == 'RM Test Certificate') { ?>
 	<script type="text/javascript">
 	    $(document).ready(function() {
-           getRmcertificateList();
-	    });
+    
+
+				var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+						if(vendor_supplier_name=='Vendor'){
+							$('#vendor_name_div').css('display','block');
+							$('#supplier_name_div').css('display','none');
+						}
+
+						if(vendor_supplier_name=='Supplier'){
+							$('#vendor_name_div').css('display','block');
+							$('#supplier_name_div').css('display','none');
+						}
 
 
-		function getRmcertificateList(){
-			var dt = $('#view_rm_certificate_report').DataTable({
-					"columnDefs": [ 
-						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "15%", "targets": 1 },
-						{ "width": "15%", "targets": 2 },
-						{ "width": "10%", "targets": 3 },
-						{ "width": "15%", "targets": 4 },
-						{ "width": "10%", "targets": 5 },
-						{ "width": "10%", "targets": 6 },
-						{ "width": "10%", "targets": 7 },
-						
-					],
-					responsive: true,
-					"oLanguage": {
-						"sEmptyTable": "<i>No RM Certificate Found.</i>",
-					}, 
-					"bSort" : false,
-					"bFilter":true,
-					"bLengthChange": true,
-					"iDisplayLength": 10,   
-					"bProcessing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchrmcertificatelist",
-						type: "post",
-					},
+						getRmcertificateList();
 				});
-		}	
+
+
+				$(document).on('change','#vendor_supplier_name',function(e){  
+						e.preventDefault();
+					
+						var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+						if(vendor_supplier_name=='Vendor'){
+							$('#vendor_name_div').css('display','block');
+							$('#supplier_name_div').css('display','none');
+						}
+
+
+						if(vendor_supplier_name=='Supplier'){
+							$('#vendor_name_div').css('display','none');
+							$('#supplier_name_div').css('display','block');
+						}		
+				});
+
+
+				function getRmcertificateList(){
+					var dt = $('#view_rm_certificate_report').DataTable({
+							"columnDefs": [ 
+								{ className: "details-control", "targets": [ 0 ] },
+								{ "width": "10%", "targets": 0 },
+								{ "width": "15%", "targets": 1 },
+								{ "width": "15%", "targets": 2 },
+								{ "width": "10%", "targets": 3 },
+								{ "width": "15%", "targets": 4 },
+								{ "width": "10%", "targets": 5 },
+								{ "width": "10%", "targets": 6 },
+								{ "width": "10%", "targets": 7 },
+								
+							],
+							responsive: true,
+							"oLanguage": {
+								"sEmptyTable": "<i>No RM Certificate Found.</i>",
+							}, 
+							"bSort" : false,
+							"bFilter":true,
+							"bLengthChange": true,
+							"iDisplayLength": 10,   
+							"bProcessing": true,
+							"serverSide": true,
+							"ajax":{
+								url :"<?php echo base_url();?>admin/fetchrmcertificatelist",
+								type: "post",
+							},
+						});
+				}	
+
+
+
+
+
+
 
 	</script>
 <?php } ?>
