@@ -31734,7 +31734,7 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
 
 
 
-  $params = $_REQUEST;
+    $params = $_REQUEST;
     $totalRecords = $this->admin_model->fetchvendorpoitemattachedmentcount($params,$vendoritemid_main); 
     $queryRecords = $this->admin_model->fetchvendorpoitemattachedmentdate($params,$vendoritemid_main); 
 
@@ -31822,6 +31822,32 @@ public function rmtestcertificate(){
     $processFunction = 'Admin/rmtestcertificate';
     $this->global['pageTitle'] = 'RM Test Certificate';  
     $this->loadViews("masters/rmtestcertificate", $this->global, $data, NULL); 
+
+}
+
+public function fetchrmcertificatelist(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params); 
+    $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
 
 }
 

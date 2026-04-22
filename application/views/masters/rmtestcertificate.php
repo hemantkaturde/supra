@@ -69,9 +69,8 @@
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option st-id="" value="NA">Select Status</option>
-                            <option value="NA">ALL </option>
-                            <option value="paid">Paid </option>
-                            <option value="unpaid">Unpaid</option>
+                            <option value="Open">Open</option>
+                            <option value="Close">Close</option>
                         </select>
                         <p class="error status_error"></p>
                     </div>
@@ -96,6 +95,8 @@
                                         <th>Supplier name</th>
                                         <th>Supplier PO</th>
                                         <th>Status</th>
+                                        <th>Updated Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

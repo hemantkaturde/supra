@@ -25727,6 +25727,83 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function fetchrmcertificatelistcount($params){
+
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchrmcertificatelistdata($params){
+
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+
+                $check_document_is_uploded_or_not = $this->checkdocumentisuploadedornot($value['suppliritemid']);
+                 if($check_document_is_uploded_or_not){
+                   $document_status = 'Uploaded';
+                   $check_document_date_time = $check_document_is_uploded_or_not[0]['createdDtm'];
+
+                 }else{
+                    $document_status = '';
+                    $check_document_date_time ='';
+                 }
+                  
+
+
+                $data[$counter]['part_number'] =  $value['part_number'];
+                $data[$counter]['description'] =  $value['description'];
+                $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
+                $data[$counter]['order_oty'] =  $value['order_oty'];
+                $data[$counter]['vendor_name'] =  '';
+                $data[$counter]['vendor_po'] =  '';
+                $data[$counter]['sup_nme'] =  $value['sup_nme'];
+                $data[$counter]['po_number'] =  $value['po_number'];
+                $data[$counter]['status'] =  $document_status;
+                $data[$counter]['updated_date'] =  $check_document_date_time;
+                $data[$counter]['action'] = '';
+                // $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-pencil-square-o updatestatusofrmcertificate' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+
+    public function checkdocumentisuploadedornot($supplieritemid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SUPPLIER_ITEM_ATTACHMENT.'.supplier_item_id', $supplieritemid);
+        $this->db->where(TBL_SUPPLIER_ITEM_ATTACHMENT.'.status', 1);
+        $this->db->order_by(TBL_SUPPLIER_ITEM_ATTACHMENT.'.id','DESC');
+        $this->db->limit(1);
+
+        $query = $this->db->get(TBL_SUPPLIER_ITEM_ATTACHMENT);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+      
+    }
+
 
 }
 

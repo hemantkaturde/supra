@@ -30895,3 +30895,46 @@ $('#export_excel').on('click', function() {
 
 </script>
 <?php } ?>
+
+
+<?php if ($pageTitle == 'RM Test Certificate') { ?>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+           getRmcertificateList();
+	    });
+
+
+		function getRmcertificateList(){
+			var dt = $('#view_rm_certificate_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "8%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10", "targets": 8 },
+						{ "width": "10%", "targets": 9 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No RM Certificate Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchrmcertificatelist",
+						type: "post",
+					},
+				});
+		}	
+
+	</script>
+<?php } ?>
