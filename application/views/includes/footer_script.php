@@ -30900,9 +30900,10 @@ $('#export_excel').on('click', function() {
 <?php if ($pageTitle == 'RM Test Certificate') { ?>
 	<script type="text/javascript">
 	    $(document).ready(function() {
-    
+    			$("#view_rm_certificate_report").dataTable().fnDestroy();
 
-				var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+				        var vendor_supplier_name = $('#vendor_supplier_name').val();
 
 						if(vendor_supplier_name=='Vendor'){
 							$('#vendor_name_div').css('display','block');
@@ -30938,6 +30939,8 @@ $('#export_excel').on('click', function() {
 
 
 				function getRmcertificateList(){
+					$("#view_rm_certificate_report").dataTable().fnDestroy();
+
 					var dt = $('#view_rm_certificate_report').DataTable({
 							"columnDefs": [ 
 								{ className: "details-control", "targets": [ 0 ] },
@@ -30967,11 +30970,6 @@ $('#export_excel').on('click', function() {
 							},
 						});
 				}	
-
-
-
-
-
 
 
 	</script>
