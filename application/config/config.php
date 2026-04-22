@@ -47,9 +47,9 @@ if($_SERVER['HTTP_HOST']=='localhost'){
         $config['base_url'] = $base;
 
         define('TH_DB_HOST','localhost');
-        define('TH_DB_USER','supraexp_supra');
-        define('TH_DB_PASSWORD','supra@123');
-        define('TH_DB_DBNAME','supraexp_supraexports');
+        define('TH_DB_USER','supraerp_supra_co');
+        define('TH_DB_PASSWORD','supra_co');
+        define('TH_DB_DBNAME','supraerp_supra_co');
 
     }else{
 
