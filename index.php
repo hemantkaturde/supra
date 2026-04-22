@@ -1,4 +1,6 @@
 <?php
+
+ini_set('memory_limit', '102400000000000000000M');
 /**
  * CodeIgniter
  *
