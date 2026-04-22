@@ -547,9 +547,9 @@
                                                                     <option value="Pcs">Pcs</option>
                                                                     <option value="Nos">Nos</option>
                                                                     <option value="Sheet">Sheet</option>
-                                                                   <option value="Set">Set</option>
-<option value="Mtr">Mtr</option>
-<option value="Ltr">Ltr</option>
+                                                                    <option value="Set">Set</option>
+                                                                    <option value="Mtr">Mtr</option>
+                                                                    <option value="Ltr">Ltr</option>
                                                                 </select>
                                                                 <p class="error units_error"></p>
                                                             </div>
@@ -686,6 +686,18 @@
                                                                 <input type="text" class="form-control" id="qc_person_name"
                                                                     name="qc_person_name">
                                                                 <p class="error qc_person_name_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                         <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Status</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="incoming_item_status" id="incoming_item_status">
+                                                                    <option value="">Select Status</option>
+                                                                    <option value="Open">Open</option>
+                                                                    <option value="Close">Close</option>
+                                                                </select>
+                                                                <p class="error incoming_item_status_error"></p>
                                                             </div>
                                                         </div>
 

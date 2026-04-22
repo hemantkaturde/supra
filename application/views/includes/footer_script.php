@@ -9154,7 +9154,7 @@
 			   var qc_person_name =   $('#qc_person_name').val();
 			   var lr_no =   $('#lr_no').val();
 
-
+               var incoming_item_status =   $('#incoming_item_status').val();
 
 			   var remarks =   $('#remarks').val();
 
@@ -9174,7 +9174,7 @@
 				url : "<?php echo base_url();?>saveincomingitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid,lot_no:lot_no,incoiming_details_item_id:incoiming_details_item_id,assign_team:assign_team,working_hrs_status:working_hrs_status,material_match_to_drawing:material_match_to_drawing,difference_of_gr_weight:difference_of_gr_weight,material_grade:material_grade,next_process:next_process,qc_person_name:qc_person_name,lr_no:lr_no,pre_additional_process:pre_additional_process,additional_process:additional_process},
+				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid,lot_no:lot_no,incoiming_details_item_id:incoiming_details_item_id,assign_team:assign_team,working_hrs_status:working_hrs_status,material_match_to_drawing:material_match_to_drawing,difference_of_gr_weight:difference_of_gr_weight,material_grade:material_grade,next_process:next_process,qc_person_name:qc_person_name,lr_no:lr_no,pre_additional_process:pre_additional_process,additional_process:additional_process,incoming_item_status:incoming_item_status},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -9564,6 +9564,7 @@
 						
 
 						$('#units').val(fetchResponse.units);
+						$('#incoming_item_status').val(fetchResponse.incoming_item_status);
 						$('#boxex_goni_bundle').val(fetchResponse.boxex_goni_bundle);
 						$('#lot_no').val(fetchResponse.lot_no);
 						$('#remarks').val(fetchResponse.remarks);

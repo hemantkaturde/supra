@@ -558,6 +558,19 @@
                                                             </div>
                                                         </div>
 
+                                                         <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Status</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="incoming_item_status" id="incoming_item_status">
+                                                                    <option value="">Select Status</option>
+                                                                    <option value="Open">Open</option>
+                                                                    <option value="Close">Close</option>
+                                                                </select>
+                                                                <p class="error incoming_item_status_error"></p>
+                                                            </div>
+                                                        </div>
+
+
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Remarks</label>
                                                         <div class="col-sm-9">
