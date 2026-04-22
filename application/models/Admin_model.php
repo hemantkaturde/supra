@@ -25771,8 +25771,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['description'] =  $value['description'];
                 $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
                 $data[$counter]['order_oty'] =  $value['order_oty'];
-                $data[$counter]['vendor_name'] =  '';
-                $data[$counter]['vendor_po'] =  '';
+                // $data[$counter]['vendor_name'] =  '';
+                // $data[$counter]['vendor_po'] =  '';
                 $data[$counter]['sup_nme'] =  $value['sup_nme'];
                 $data[$counter]['po_number'] =  $value['po_number'];
                 $data[$counter]['status'] =  $document_status;
