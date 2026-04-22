@@ -221,6 +221,19 @@
                                         </div>
                                     </div>
 
+
+                                     <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Status</label>
+                                        <div class="col-sm-3">
+                                                <select class="form-control " name="inspection_report_status" id="inspection_report_status">
+                                                    <option value="">Select Status</option>
+                                                    <option value="Open" <?php if($getTdirdata[0]['inspection_report_status']== 'Open'){ echo 'selected'; } ?>>Open</option>
+                                                    <option value="Close" <?php if($getTdirdata[0]['inspection_report_status']== 'Close'){ echo 'selected'; } ?>>Close</option>
+                                                </select>
+                                            <p class="error inspection_report_status_error"></p>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>

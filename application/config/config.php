@@ -39,14 +39,30 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     define('TH_DB_DBNAME','supra_1');
 
 }else{
-    $base  = "https://".$_SERVER['HTTP_HOST'];
-    $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-    $config['base_url'] = $base;
 
-    define('TH_DB_HOST','localhost');
-    define('TH_DB_USER','supraexp_supra');
-    define('TH_DB_PASSWORD','supra@123');
-    define('TH_DB_DBNAME','supraexp_supraexports');
+    if($_SERVER['HTTP_HOST']=="supraerp.co"){
+
+        $base  = "https://".$_SERVER['HTTP_HOST'];
+        $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+        $config['base_url'] = $base;
+
+        define('TH_DB_HOST','localhost');
+        define('TH_DB_USER','supraexp_supra');
+        define('TH_DB_PASSWORD','supra@123');
+        define('TH_DB_DBNAME','supraexp_supraexports');
+
+    }else{
+
+        $base  = "https://".$_SERVER['HTTP_HOST'];
+        $base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+        $config['base_url'] = $base;
+
+        define('TH_DB_HOST','localhost');
+        define('TH_DB_USER','supraexp_supra');
+        define('TH_DB_PASSWORD','supra@123');
+        define('TH_DB_DBNAME','supraexp_supraexports');
+
+    }
 }
 
 define("ADMIN_PATH",$config['base_url']);
