@@ -22441,6 +22441,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".inspection_report_status LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_TDIR.".remarks LIKE '%".$params['search']['value']."%')");
             }
 
@@ -22477,6 +22478,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR.".inspection_report_status LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_TDIR.".remarks LIKE '%".$params['search']['value']."%')");
         }
 
@@ -22512,6 +22514,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['part_name'] =  $value['name'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name_label'];
                 $data[$counter]['vendor_order_qty'] =  $value['vendor_order_qty'];
+                $data[$counter]['inspection_report_status'] =  $value['inspection_report_status'];
                 $data[$counter]['remark'] =  $value['remarks'];
 
                 $data[$counter]['action'] = '';
