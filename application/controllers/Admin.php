@@ -26912,10 +26912,10 @@ public function fetchtdirreport(){
 
 }
 
-public function fetchtdirreportexcel($from_date,$to_date){
+public function fetchtdirreportexcel($from_date,$to_date,$inpection_report_status){
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->gettdirexportreportcount($params,$from_date,$to_date); 
-    $queryRecords = $this->admin_model->gettdirreportexportdata($params,$from_date,$to_date); 
+    $totalRecords = $this->admin_model->gettdirexportreportcount($params,$from_date,$to_date,$inpection_report_status); 
+    $queryRecords = $this->admin_model->gettdirreportexportdata($params,$from_date,$to_date,$inpection_report_status); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -31561,7 +31561,7 @@ public function addnewbalancestock(){
 			}
 			/*********************Autoresize column width depending upon contents END***********************/
 			
-            $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->getFont()->setBold(true); //Make heading font bold
+            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->getFont()->setBold(true); //Make heading font bold
 			
 			/*********************Add color to heading START**********************/
             $objPHPExcel->getActiveSheet()

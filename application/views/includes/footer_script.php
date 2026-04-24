@@ -28119,7 +28119,7 @@
 
 			$(document).ready(function() {
 
-					$("#view_vendor_rejection_report").dataTable().fnDestroy();
+					$("#export_tdir_report").dataTable().fnDestroy();
 					
 					if($('#from_date').val()){
 						var from_date = $('#from_date').val();
@@ -28133,7 +28133,11 @@
 						var to_date ='NA';
 					}
 
-					getExporttdirreportreport(from_date,to_date);
+
+				    var inpection_report_status = $('#inpection_report_status').val();
+
+
+					getExporttdirreportreport(from_date,to_date,inpection_report_status);
 
 			});
 
@@ -28154,8 +28158,11 @@
 					var to_date ='NA';
 				}
 
+				var inpection_report_status = $('#inpection_report_status').val();
 
-				getExporttdirreportreport(from_date,to_date);
+				getExporttdirreportreport(from_date,to_date,inpection_report_status);
+
+				//getExporttdirreportreport(from_date,to_date);
 			});
 
 			$(document).on('change','#from_date',function(e){  
@@ -28175,10 +28182,36 @@
 					var to_date ='NA';
 				}
 
-				getExporttdirreportreport(from_date,to_date);
+				var inpection_report_status = $('#inpection_report_status').val();
+
+				getExporttdirreportreport(from_date,to_date,inpection_report_status);
+
+				//getExporttdirreportreport(from_date,to_date);
 			});
 
-			function getExporttdirreportreport(from_date,to_date){
+			$(document).on('change','#inpection_report_status',function(e){  
+					$("#export_tdir_report").dataTable().fnDestroy();
+					e.preventDefault();
+					
+					
+					if($('#from_date').val()){
+						var from_date = $('#from_date').val();
+					}else{
+						var from_date ='NA';
+					}
+
+					if($('#to_date').val()){
+						var to_date = $('#to_date').val();
+					}else{
+						var to_date ='NA';
+					}
+
+					var inpection_report_status = $('#inpection_report_status').val();
+
+					getExporttdirreportreport(from_date,to_date,inpection_report_status);
+			});
+
+			function getExporttdirreportreport(from_date,to_date,inpection_report_status){
 				var dt = $('#export_tdir_report').DataTable({
 							"columnDefs": [ 
 								{ className: "details-control", "targets": [ 0 ] },
@@ -28205,12 +28238,11 @@
 							"bProcessing": true,
 							"serverSide": true,
 							"ajax":{
-								url :"<?php echo base_url();?>admin/fetchtdirreportexcel/"+from_date+"/"+to_date,
+								url :"<?php echo base_url();?>admin/fetchtdirreportexcel/"+from_date+"/"+to_date+"/"+inpection_report_status,
 								type: "post",
 					},
 				});
 			}
-
 
 
 			$(document).on('click','#exporttoexcelinspectionreport',function(e){
@@ -28254,9 +28286,6 @@
 
 				return false;
 	        });
-
-
-
 
 
 		// $(document).ready(function() {
