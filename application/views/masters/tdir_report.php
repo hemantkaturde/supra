@@ -50,6 +50,7 @@
                                             <th>Part name</th>
                                             <th>Buyer name</th>
                                             <th>Vendor Order Qty</th>
+                                            <th>Status</th>
                                             <th>Remarks</th>
                                             <th>Action</th>
                                           </tr>
