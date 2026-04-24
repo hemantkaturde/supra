@@ -28262,8 +28262,11 @@
 					var to_date ='NA';
 				}
 
+				var inpection_report_status = $('#inpection_report_status').val();
+
+
 				$.ajax({
-					url : "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date,
+					url : "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date+"/"+inpection_report_status,
 					type: "POST",
 					success: function(data, textStatus, jqXHR)
 			         {

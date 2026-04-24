@@ -31506,13 +31506,13 @@ public function addnewbalancestock(){
          $this->loadViews("masters/inspectionreportexcel", $this->global, $data, NULL);
     }
 
-    public function exportinspectionreportexcel($from_date,$to_date){
+    public function exportinspectionreportexcel($from_date,$to_date,$inpection_report_status){
 
 
             // create file name
             $fileName = 'Inspection Excel Export Report -'.date('d-m-Y').'.xlsx';  
             // load excel library
-            $empInfo = $this->admin_model->exportinspectionreportexcel($from_date,$to_date);
+            $empInfo = $this->admin_model->exportinspectionreportexcel($from_date,$to_date,$inpection_report_status);
 
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->setActiveSheetIndex(0);

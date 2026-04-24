@@ -22548,7 +22548,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function exportinspectionreportexcel($from_date,$to_date){
+    public function exportinspectionreportexcel($from_date,$to_date,$inpection_report_status){
 
         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label,'.TBL_TDIR.'.buyer_name as buyer_name_label,'.TBL_TDIR.'.id as tdir_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
@@ -22563,6 +22563,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     
         if($to_date!='NA'){
             $this->db->where(TBL_TDIR.".inspection_report_date <=", $to_date);
+        }
+
+         if($inpection_report_status!='NA'){
+                $this->db->where(TBL_TDIR.".inspection_report_status", $inpection_report_status);
         }
 
         $this->db->order_by(TBL_TDIR.'.id','DESC');
