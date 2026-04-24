@@ -31531,7 +31531,8 @@ public function addnewbalancestock(){
             $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Buyer PO Date');  
             $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Inspection Report Date'); 
             $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Checked By'); 
-            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Remarks');
+            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Status');
+            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Remarks');
 
             // set Row
             $rowCount = 2;
@@ -31549,12 +31550,13 @@ public function addnewbalancestock(){
                 $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, date("d-m-Y", strtotime($element['buyer_po_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, date("d-m-Y", strtotime($element['inspection_report_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['checked_by']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['remarks']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['inspection_report_status']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['remarks']);
 
                 $rowCount++;
             }
 
-            foreach(range('A','N') as $columnID) {
+            foreach(range('A','O') as $columnID) {
                 $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
 			}
 			/*********************Autoresize column width depending upon contents END***********************/
@@ -31563,7 +31565,7 @@ public function addnewbalancestock(){
 			
 			/*********************Add color to heading START**********************/
             $objPHPExcel->getActiveSheet()
-						->getStyle('A1:N1')
+						->getStyle('A1:O1')
 						->getFill()
 						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
 						->getStartColor()
