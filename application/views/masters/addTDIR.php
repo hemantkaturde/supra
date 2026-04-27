@@ -331,7 +331,7 @@
                                             <div class="col-sm-3">
                                                 <select class="form-control " name="inspection_report_status" id="inspection_report_status">
                                                     <option value="">Select Status</option>
-                                                    <option value="Open">Open</option>
+                                                    <option value="Open" selected>Open</option>
                                                     <option value="Close">Close</option>
                                                 </select>
                                                 <p class="error inspection_report_status_error"></p>
