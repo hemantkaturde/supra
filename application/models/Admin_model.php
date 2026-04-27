@@ -25750,65 +25750,256 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetchrmcertificatelistcount($params){
+    // public function fetchrmcertificatelistcount($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
-        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
-        $rowcount = $query->num_rows();
-        return $rowcount;
-    }
+    //     $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
+    //     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+    //     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+    //     $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+    //     $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+    //     $rowcount = $query->num_rows();
+    //     return $rowcount;
+    // }
 
-    public function fetchrmcertificatelistdata($params){
+    // public function fetchrmcertificatelistdata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
-        $this->db->limit($params['length'],$params['start']);
-        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
-        $fetch_result = $query->result_array();
-        $data = array();
-        $counter = 0;
-        if(count($fetch_result) > 0)
-        {
-            foreach ($fetch_result as $key => $value)
-            {
+    //     $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid,'.TBL_SUPPLIER.'.supplier_name as sup_nme,'.TBL_RAWMATERIAL.'.part_number as part_number_label');
+    //     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+    //     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+    //     $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+    //     $this->db->limit($params['length'],$params['start']);
+    //     $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+    //     $fetch_result = $query->result_array();
+    //     $data = array();
+    //     $counter = 0;
+    //     if(count($fetch_result) > 0)
+    //     {
+    //         foreach ($fetch_result as $key => $value)
+    //         {
 
 
-                $check_document_is_uploded_or_not = $this->checkdocumentisuploadedornot($value['suppliritemid']);
-                 if($check_document_is_uploded_or_not){
-                   $document_status = 'Uploaded';
-                   $check_document_date_time = $check_document_is_uploded_or_not[0]['createdDtm'];
-
-                 }else{
-                    $document_status = '';
-                    $check_document_date_time ='';
-                 }
+    //             $check_document_is_uploded_or_not = $this->checkdocumentisuploadedornot($value['suppliritemid']);
+    //              if($check_document_is_uploded_or_not){
+    //                $document_status = 'Uploaded';
+    //                $check_document_date_time = $check_document_is_uploded_or_not[0]['createdDtm'];
+    //              }else{
+    //                 $document_status = '';
+    //                 $check_document_date_time ='';
+    //              }
                   
 
 
-                $data[$counter]['part_number'] =  $value['part_number'];
-                $data[$counter]['description'] =  $value['description'];
-                $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
-                $data[$counter]['order_oty'] =  $value['order_oty'];
-                // $data[$counter]['vendor_name'] =  '';
-                // $data[$counter]['vendor_po'] =  '';
-                $data[$counter]['sup_nme'] =  $value['sup_nme'];
-                $data[$counter]['po_number'] =  $value['po_number'];
-                $data[$counter]['status'] =  $document_status;
-                $data[$counter]['updated_date'] =  $check_document_date_time;
-                $data[$counter]['action'] = '';
-                // $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-pencil-square-o updatestatusofrmcertificate' aria-hidden='true'></i>"; 
-                $counter++; 
-            }
+    //             $data[$counter]['part_number'] =  $value['part_number'];
+    //             $data[$counter]['description'] =  $value['description'];
+    //             $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
+    //             $data[$counter]['order_oty'] =  $value['order_oty'];
+    //             $data[$counter]['vendor_name'] =  '';
+    //             $data[$counter]['vendor_po'] =  '';
+    //             $data[$counter]['sup_nme'] =  $value['sup_nme'];
+    //             $data[$counter]['po_number'] =  $value['po_number'];
+    //             $data[$counter]['status'] =  $document_status;
+    //             $data[$counter]['updated_date'] =  $check_document_date_time;
+    //             $data[$counter]['action'] = '';
+    //             // $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+    //             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-pencil-square-o updatestatusofrmcertificate' aria-hidden='true'></i>"; 
+    //             $counter++; 
+    //         }
+    //     }
+
+    //    // return $data;
+
+
+    //     $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendoritemid,'.TBL_VENDOR.'.vendor_name as ven_name');
+    //     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    //     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+    //     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+    //     $this->db->limit($params['length'],$params['start']);
+    //     $query_vendor_result = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    //     $fetch_result_vendor_result = $query_vendor_result->result_array();
+
+    //     $data_vendor = array();
+    //     $counter_vendor = 0;
+    //     if(count($fetch_result_vendor_result) > 0)
+    //     {
+    //         foreach ($fetch_result_vendor_result as $key => $value_vendor)
+    //         {
+
+
+    //             $check_document_is_uploded_or_not_venodr = $this->checkdocumentisuploadedornot_vendor($value['vendoritemid']);
+    //              if($check_document_is_uploded_or_not_venodr){
+    //                $document_status_vendor = 'Uploaded';
+    //                $check_document_date_time_vendor = $check_document_is_uploded_or_not_venodr[0]['createdDtm'];
+    //              }else{
+    //                 $document_status_vendor = '';
+    //                 $check_document_date_time_vendor ='';
+    //              }
+                  
+
+    //             $data_vendor[$counter_vendor]['part_number'] =  $value_vendor['part_number'];
+    //             $data_vendor[$counter_vendor]['description'] =  $value_vendor['description'];
+    //             $data_vendor[$counter_vendor]['type_of_raw_material'] =  '';
+    //             $data_vendor[$counter_vendor]['order_oty'] =  $value_vendor['order_oty'];
+    //             $data_vendor[$counter_vendor]['vendor_name'] =  $value_vendor['ven_name'];
+    //             $data_vendor[$counter_vendor]['vendor_po'] =  $value_vendor['po_number'];
+    //             $data_vendor[$counter_vendor]['sup_nme'] =  '';
+    //             $data_vendor[$counter_vendor]['po_number'] =  '';
+    //             $data_vendor[$counter_vendor]['status'] =  $document_status_vendor;
+    //             $data_vendor[$counter_vendor]['updated_date'] =  $check_document_date_time_vendor;
+    //             $data_vendor[$counter_vendor]['action'] = '';
+    //             // $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+    //             $data_vendor[$counter_vendor]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value_vendor['vendoritemid']."' class='fa fa-pencil-square-o updatestatusofrmcertificate' aria-hidden='true'></i>"; 
+                
+    //             $counter_vendor++; 
+    //         }
+    //     }
+
+
+
+    //     $result = array_merge($data, $data_vendor);
+    //     return $result;
+
+
+    // }
+
+
+
+    public function fetchrmcertificatelistcount($params)
+    {
+        // -------- SUPPLIER COUNT --------
+        $this->db->from(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', 'left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id', 'left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name', 'left');
+
+        $supplier_count = $this->db->count_all_results();
+
+        // Handle null / false
+        $supplier_count = (!empty($supplier_count) && is_numeric($supplier_count)) ? (int)$supplier_count : 0;
+
+        // -------- VENDOR COUNT --------
+        $this->db->from(TBL_VENDOR_PO_MASTER_ITEM);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', 'left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', 'left');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name', 'left');
+
+        $vendor_count = $this->db->count_all_results();
+
+        // Handle null / false
+        $vendor_count = (!empty($vendor_count) && is_numeric($vendor_count)) ? (int)$vendor_count : 0;
+
+        // -------- TOTAL --------
+        return $supplier_count + $vendor_count;
+    }
+
+
+    public function fetchrmcertificatelistdata($params)
+    {
+        // ---------------- SUPPLIER DATA ----------------
+        $this->db->select([
+            TBL_SUPPLIER_PO_MASTER_ITEM.'.id as item_id',
+            TBL_RAWMATERIAL.'.part_number',
+            TBL_SUPPLIER_PO_MASTER_ITEM.'.description',
+            TBL_RAWMATERIAL.'.type_of_raw_material',
+            TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty',
+            TBL_SUPPLIER.'.supplier_name as sup_name',
+            TBL_SUPPLIER_PO_MASTER.'.po_number'
+        ]);
+
+        $this->db->from(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', 'left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id', 'left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name', 'left');
+
+        $supplier_result = $this->db->get()->result_array() ?? [];
+
+        $data = [];
+
+        foreach ($supplier_result as $row) {
+
+            $doc = $this->checkdocumentisuploadedornot($row['item_id'] ?? 0);
+
+            $data[] = [
+                'part_number' => $row['part_number'] ?? '',
+                'description' => $row['description'] ?? '',
+                'type_of_raw_material' => $row['type_of_raw_material'] ?? '',
+                'order_qty' => $row['order_oty'] ?? 0,
+                'vendor_name' => '',
+                'vendor_po' => '',
+                'sup_nme' => $row['sup_name'] ?? '',
+                'po_number' => $row['po_number'] ?? '',
+                'status' => (!empty($doc)) ? 'Uploaded' : '',
+                'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
+                'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i>"
+            ];
         }
 
-        return $data;
+        // ---------------- VENDOR DATA ----------------
+        $this->db->select([
+            TBL_VENDOR_PO_MASTER_ITEM.'.id as item_id',
+            TBL_FINISHED_GOODS.'.part_number',
+            TBL_VENDOR_PO_MASTER_ITEM.'.description',
+            TBL_VENDOR_PO_MASTER_ITEM.'.order_oty',
+            TBL_VENDOR.'.vendor_name',
+            TBL_VENDOR_PO_MASTER.'.po_number'
+        ]);
 
+        $this->db->from(TBL_VENDOR_PO_MASTER_ITEM);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', 'left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', 'left');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name', 'left');
+
+        $vendor_result = $this->db->get()->result_array() ?? [];
+
+        $data_vendor = [];
+
+        foreach ($vendor_result as $row) {
+
+            $doc = $this->checkdocumentisuploadedornot_vendor($row['item_id'] ?? 0);
+
+            $data_vendor[] = [
+                'part_number' => $row['part_number'] ?? '',
+                'description' => $row['description'] ?? '',
+                'type_of_raw_material' => '',
+                'order_qty' => $row['order_oty'] ?? 0,
+                'vendor_name' => $row['vendor_name'] ?? '',
+                'vendor_po' => $row['po_number'] ?? '',
+                'sup_nme' => '',
+                'po_number' => '',
+                'status' => (!empty($doc)) ? 'Uploaded' : '',
+                'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
+                'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i>"
+            ];
+        }
+
+        // ---------------- MERGE ----------------
+        // $result = array_merge($data, $data_vendor);
+
+        // // ---------------- PAGINATION ----------------
+        // $start  = isset($params['start']) ? (int)$params['start'] : 0;
+        // $length = isset($params['length']) ? (int)$params['length'] : count($result);
+
+        // $result = array_slice($result, $start, $length);
+
+        // return $result ?? [];
+
+        // ---------------- MERGE ----------------
+        $result = array_merge($data, $data_vendor);
+
+        // ---------------- SORT BY UPDATED DATE (DESC) ----------------
+        usort($result, function ($a, $b) {
+            $dateA = !empty($a['updated_date']) ? strtotime($a['updated_date']) : 0;
+            $dateB = !empty($b['updated_date']) ? strtotime($b['updated_date']) : 0;
+
+            return $dateB - $dateA; // DESC (latest first)
+        });
+
+        // ---------------- PAGINATION ----------------
+        $start  = isset($params['start']) ? (int)$params['start'] : 0;
+        $length = isset($params['length']) ? (int)$params['length'] : count($result);
+
+        $result = array_slice($result, $start, $length);
+
+        return $result;
     }
 
 
@@ -25822,6 +26013,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->limit(1);
 
         $query = $this->db->get(TBL_SUPPLIER_ITEM_ATTACHMENT);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+      
+    }
+
+
+    public function checkdocumentisuploadedornot_vendor($vendoritemid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_ITEM_ATTACHMENT.'.vendor_item_id', $vendoritemid);
+        $this->db->where(TBL_VENDOR_ITEM_ATTACHMENT.'.status', 1);
+        $this->db->order_by(TBL_VENDOR_ITEM_ATTACHMENT.'.id','DESC');
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_VENDOR_ITEM_ATTACHMENT);
         $fetch_result = $query->result_array();
         return $fetch_result;
       
