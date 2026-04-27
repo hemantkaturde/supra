@@ -28288,7 +28288,7 @@
 						else
 						{
 							// $(".sales_tracking_report_name_error").html("");
-							 window.location.href = "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date;
+							 window.location.href = "<?php echo ADMIN_PATH;?>admin/exportinspectionreportexcel/"+from_date+"/"+to_date+"/"+inpection_report_status;
 						}
 			
 
