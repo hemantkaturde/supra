@@ -28262,7 +28262,15 @@
 					var to_date ='NA';
 				}
 
-				var inpection_report_status = $('#inpection_report_status').val();
+				if($('#inpection_report_status').val()){
+					var inpection_report_status = $('#inpection_report_status').val();
+				}else{
+					var inpection_report_status ='NA';
+				}
+
+				//var inpection_report_status = $('#inpection_report_status').val();
+
+
 
 
 				$.ajax({
