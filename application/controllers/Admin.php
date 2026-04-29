@@ -31856,5 +31856,32 @@ public function fetchrmcertificatelist($vendor_supplier_name,$vendor_name,$suppl
 }
 
 
+public function getVendorPoconforRMcetificate(){
+        $vendor_name=$this->input->post('vendor_name');
+        if($vendor_name) {
+			$getVendordetails = $this->admin_model->getVendorPoconforRMcetificate($vendor_name);
+			if(count($getVendordetails) >= 1) {
+                $content = $content.'<option value="">Select Vendor PO Number</option>';
+				foreach($getVendordetails as $value) {
+
+                     if($this->input->post('vendor_po_id')==$value["id"]){
+                        $selected = 'selected';
+                     }else{ 
+                        $selected ='';
+                     }
+
+                     $content = $content.'<option value="'.$value["id"].'" '.$selected.'>'.$value["po_number"].'</option>';
+					
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+
 
 }

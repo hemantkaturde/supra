@@ -26252,6 +26252,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    
+    public function getVendorPoconforRMcetificate($vendor_name){
+        $this->db->select('*');
+        //$this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
 }
 
 ?>

@@ -35,7 +35,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="vendor_name ">Vendor Name</label>
-                            <select class="form-control" name="vendor_name" id="vendor_name">
+                            <select class="form-control getvendorpobasedonvendorname" name="vendor_name" id="vendor_name">
                                 <option st-id="" value="NA">Select Vendor Name</option>
                                 <?php foreach ($vendorList as $key => $value) {?>
                                 <option value="<?php echo $value['ven_id']; ?>">
@@ -46,6 +46,29 @@
                         </div>
                     </div>
                  </div>
+
+                <div id="vendor_po_number_div" style="display:none">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="vendor_po">Vendor PO</label>
+                            <select class="form-control" name="vendor_po_number" id="vendor_po_number">
+                            </select> 
+                            <p class="error vendor_po_number_error"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="supplier_po_number_div" style="display:none">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="vendor_po">Vendor PO</label>
+                            <select class="form-control" name="supplier_po_number" id="supplier_po_number">
+                            </select> 
+                            <p class="error supplier_po_number_error"></p>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div id="supplier_name_div" style="display:none">
                     <div class="col-md-3">
