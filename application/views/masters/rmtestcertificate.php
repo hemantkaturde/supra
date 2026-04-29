@@ -92,8 +92,8 @@
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option st-id="" value="NA">Select Status</option>
-                            <option value="Open">Open</option>
-                            <option value="Close">Close</option>
+                            <option value="Uploaded">Uploaded</option>
+                            <option value="Reviewed">Reviewed</option>
                         </select>
                         <p class="error status_error"></p>
                     </div>
