@@ -26265,6 +26265,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+     public function getsupplierpobysupplieridforRMcetificate($supplier_name){
+
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER.'.id as supplier_id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_po_number');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.supplier_name', $supplier_name);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+
+        $query_result = $this->db->get(TBL_SUPPLIER_PO_MASTER)->result_array();
+		
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+		
+        return $query_result;
+
+    }
+
+
+
 }
 
 ?>

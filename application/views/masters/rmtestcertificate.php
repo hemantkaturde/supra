@@ -58,23 +58,12 @@
                     </div>
                 </div>
 
-                <div id="supplier_po_number_div" style="display:none">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="vendor_po">Vendor PO</label>
-                            <select class="form-control" name="supplier_po_number" id="supplier_po_number">
-                            </select> 
-                            <p class="error supplier_po_number_error"></p>
-                        </div>
-                    </div>
-                </div>
-
-
+               
                 <div id="supplier_name_div" style="display:none">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="supplier_name">Supplier Name</label>
-                            <select class="form-control" name="supplier_name" id="supplier_name">
+                            <select class="form-control getsupplierpobysupplieridforRMcetificate" name="supplier_name" id="supplier_name">
                                 <option st-id="" value="NA">Select Supplier Name</option>
                                 <?php foreach ($supplierList as $key => $value) {?>
                                 <option value="<?php echo $value['sup_id']; ?>">
@@ -82,6 +71,17 @@
                                 <?php } ?>
                             </select>
                             <p class="error supplier_name_error"></p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div id="supplier_po_number_div" style="display:none">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="supplier_po">Supplier PO</label>
+                            <select class="form-control" name="supplier_po_number" id="supplier_po_number">
+                            </select> 
+                            <p class="error supplier_po_number_error"></p>
                         </div>
                     </div>
                 </div>

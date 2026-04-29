@@ -30974,11 +30974,13 @@ $('#export_excel').on('click', function() {
 
 
 						if(vendor_supplier_name=='Vendor'){
+							$("#view_rm_certificate_report").dataTable().fnDestroy();
 							$('#vendor_name_div').css('display','block');
 							$('#supplier_name_div').css('display','none');
 						}
 
 						if(vendor_supplier_name=='Supplier'){
+							$("#view_rm_certificate_report").dataTable().fnDestroy();
 							$('#vendor_name_div').css('display','none');
 							$('#supplier_name_div').css('display','block');
 						}		
@@ -31043,10 +31045,7 @@ $('#export_excel').on('click', function() {
 				$(document).on('change','.getvendorpobasedonvendorname',function(e){  
 						e.preventDefault();
 					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
-
-						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
-						var supplier_name = $('#supplier_name').val();
 	
 
 						$.ajax({
@@ -31062,7 +31061,6 @@ $('#export_excel').on('click', function() {
 								}
 								else
 								{
-									// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
 									$('#vendor_po_number').html(data);
 									$('#vendor_part_number').html('<option value="">Select Part Number</option>');
 								}
@@ -31079,10 +31077,14 @@ $('#export_excel').on('click', function() {
 						//getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
 				});
 
-
 				$(document).on('change','#supplier_name',function(e){  
 						e.preventDefault();
 					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
+
+
+					    $('#vendor_po_number_div').css('display','none');
+						$('#supplier_po_number_div').css('display','block');
+
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
@@ -31098,6 +31100,39 @@ $('#export_excel').on('click', function() {
 							$('#supplier_name_div').css('display','block');
 						}		
 						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+				});
+
+				$(document).on('change','.getsupplierpobysupplieridforRMcetificate',function(e){  
+						e.preventDefault();
+					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
+
+						var supplier_name = $('#supplier_name').val();
+	
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getsupplierpobysupplieridforRMcetificate",
+							type: "POST",
+							data : {'supplier_name' : supplier_name},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+								}
+								else
+								{
+									$('#supplier_po_number').html(data);
+
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#supplier_po_number').html();
+								//$(".loader_ajax").hide();
+							}
+					    });
+					return false;
+					//getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
 				});
 
 				function getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name){

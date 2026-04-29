@@ -31883,5 +31883,29 @@ public function getVendorPoconforRMcetificate(){
     }
 
 
+     public function getsupplierpobysupplieridforRMcetificate(){
+
+        $supplier_name=$this->input->post('supplier_name');
+
+        if($supplier_name) {
+			$getSupplierdetails = $this->admin_model->getsupplierpobysupplieridforRMcetificate($supplier_name);
+			if(count($getSupplierdetails) >= 1) {
+                $content = $content.'<option value="">Select Supplier PO Number</option>';
+				foreach($getSupplierdetails as $value) {
+                    if($value['po_status']=='Open'){
+                        $content = $content.'<option value="'.$value["supplier_id"].'">'.$value["po_number"].'</option>';
+                    }
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
 
 }
