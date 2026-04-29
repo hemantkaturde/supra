@@ -35,7 +35,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="vendor_name ">Vendor Name</label>
-                            <select class="form-control" name="vendor_name" id="vendor_name_id">
+                            <select class="form-control" name="vendor_name" id="vendor_name">
                                 <option st-id="" value="NA">Select Vendor Name</option>
                                 <?php foreach ($vendorList as $key => $value) {?>
                                 <option value="<?php echo $value['ven_id']; ?>">
@@ -47,11 +47,11 @@
                     </div>
                  </div>
 
-                 <div id="supplier_name_div" style="display:none">
+                <div id="supplier_name_div" style="display:none">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="supplier_name">Supplier Name</label>
-                            <select class="form-control" name="supplier_name" id="supplier_name_id">
+                            <select class="form-control" name="supplier_name" id="supplier_name">
                                 <option st-id="" value="NA">Select Supplier Name</option>
                                 <?php foreach ($supplierList as $key => $value) {?>
                                 <option value="<?php echo $value['sup_id']; ?>">

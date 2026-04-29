@@ -30942,11 +30942,13 @@ $('#export_excel').on('click', function() {
 
 <?php if ($pageTitle == 'RM Test Certificate') { ?>
 	<script type="text/javascript">
-	    $(document).ready(function() {
-    			$("#view_rm_certificate_report").dataTable().fnDestroy();
+	            $(document).ready(function() {
+    			        $("#view_rm_certificate_report").dataTable().fnDestroy();
 
-
+                        $("#view_rm_certificate_report").dataTable().fnDestroy();
 				        var vendor_supplier_name = $('#vendor_supplier_name').val();
+						var vendor_name = $('#vendor_name').val();
+						var supplier_name = $('#supplier_name').val();
 
 						if(vendor_supplier_name=='Vendor'){
 							$('#vendor_name_div').css('display','block');
@@ -30957,31 +30959,75 @@ $('#export_excel').on('click', function() {
 							$('#vendor_name_div').css('display','block');
 							$('#supplier_name_div').css('display','none');
 						}
-
-
-						getRmcertificateList();
+						
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
 				});
-
 
 				$(document).on('change','#vendor_supplier_name',function(e){  
 						e.preventDefault();
-					
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
+
+						
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
+						var vendor_name = $('#vendor_name').val();
+						var supplier_name = $('#supplier_name').val();
+
 
 						if(vendor_supplier_name=='Vendor'){
 							$('#vendor_name_div').css('display','block');
 							$('#supplier_name_div').css('display','none');
 						}
-
 
 						if(vendor_supplier_name=='Supplier'){
 							$('#vendor_name_div').css('display','none');
 							$('#supplier_name_div').css('display','block');
 						}		
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
 				});
 
 
-				function getRmcertificateList(){
+				$(document).on('change','#vendor_name',function(e){  
+						e.preventDefault();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
+						var vendor_supplier_name = $('#vendor_supplier_name').val();
+						var vendor_name = $('#vendor_name').val();
+						var supplier_name = $('#supplier_name').val();
+
+
+						if(vendor_supplier_name=='Vendor'){
+							$('#vendor_name_div').css('display','block');
+							$('#supplier_name_div').css('display','none');
+						}
+
+						if(vendor_supplier_name=='Supplier'){
+							$('#vendor_name_div').css('display','none');
+							$('#supplier_name_div').css('display','block');
+						}		
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+				});
+
+
+				$(document).on('change','#supplier_name',function(e){  
+						e.preventDefault();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
+						var vendor_supplier_name = $('#vendor_supplier_name').val();
+						var vendor_name = $('#vendor_name').val();
+						var supplier_name = $('#supplier_name').val();
+
+
+						if(vendor_supplier_name=='Vendor'){
+							$('#vendor_name_div').css('display','block');
+							$('#supplier_name_div').css('display','none');
+						}
+
+						if(vendor_supplier_name=='Supplier'){
+							$('#vendor_name_div').css('display','none');
+							$('#supplier_name_div').css('display','block');
+						}		
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+				});
+
+				function getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name){
 					$("#view_rm_certificate_report").dataTable().fnDestroy();
 
 					var dt = $('#view_rm_certificate_report').DataTable({
@@ -31012,12 +31058,11 @@ $('#export_excel').on('click', function() {
 							"bProcessing": true,
 							"serverSide": true,
 							"ajax":{
-								url :"<?php echo base_url();?>admin/fetchrmcertificatelist",
+								url :"<?php echo base_url();?>admin/fetchrmcertificatelist/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name,
 								type: "post",
 							},
 						});
 				}	
-
 
 	</script>
 <?php } ?>

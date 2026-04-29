@@ -31829,11 +31829,11 @@ public function rmtestcertificate(){
 
 }
 
-public function fetchrmcertificatelist(){
+public function fetchrmcertificatelist($vendor_supplier_name,$vendor_name,$supplier_name){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params); 
-    $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params); 
+    $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name); 
+    $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
