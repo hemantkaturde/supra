@@ -26002,7 +26002,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     //     return $result;
     // }
 
-   public function fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name)
+    public function fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name)
     {
         $supplier_count = 0;
         $vendor_count   = 0;
@@ -26017,7 +26017,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $run_vendor   = true;
         }
         else{
-            // fallback to dropdown
+            // dropdown logic
             if($vendor_supplier_name == 'Supplier'){
                 $run_supplier = true;
                 $run_vendor   = false;
@@ -26027,7 +26027,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $run_vendor   = true;
             }
             else{
-                // Both / NA / empty
                 $run_supplier = true;
                 $run_vendor   = true;
             }
@@ -26041,11 +26040,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id', 'left');
             $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name', 'left');
 
-            // 🔥 FILTER
+            // 🔥 FIXED FILTER (ID BASED - SAME AS DATA FUNCTION)
             if(!empty($supplier_name) && $supplier_name != 'NA'){
-                $this->db->where(TBL_SUPPLIER.'.supplier_name', $supplier_name);
-                // OR ID:
-                // $this->db->where(TBL_SUPPLIER.'.sup_id', $supplier_name);
+                $this->db->where(TBL_SUPPLIER.'.sup_id', $supplier_name);
             }
 
             $supplier_count = (int)$this->db->count_all_results();
@@ -26059,11 +26056,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', 'left');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name', 'left');
 
-            // 🔥 FILTER
+            // 🔥 FIXED FILTER (ID BASED - SAME AS DATA FUNCTION)
             if(!empty($vendor_name) && $vendor_name != 'NA'){
-                $this->db->where(TBL_VENDOR.'.vendor_name', $vendor_name);
-                // OR ID:
-                // $this->db->where(TBL_VENDOR.'.ven_id', $vendor_name);
+                $this->db->where(TBL_VENDOR.'.ven_id', $vendor_name);
             }
 
             $vendor_count = (int)$this->db->count_all_results();
@@ -26080,7 +26075,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         return $supplier_count + $vendor_count;
     }
-
 
    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name)
     {
@@ -26153,7 +26147,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'po_number' => $row['po_number'] ?? '',
                     'status' => (!empty($doc)) ? 'Uploaded' : '',
                     'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
-                    'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i>"
+                    'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate_supplier'></i><a href='".base_url()."/supplier_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
                 ];
             }
         }
@@ -26197,7 +26191,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'po_number' => '',
                     'status' => (!empty($doc)) ? 'Uploaded' : '',
                     'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
-                    'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i>"
+                    'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate_vendor'></i><a href='".base_url()."/vendor_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
                 ];
             }
         }

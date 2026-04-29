@@ -30943,7 +30943,7 @@ $('#export_excel').on('click', function() {
 <?php if ($pageTitle == 'RM Test Certificate') { ?>
 	<script type="text/javascript">
 	            $(document).ready(function() {
-    			        $("#view_rm_certificate_report").dataTable().fnDestroy();
+    			        //$("#view_rm_certificate_report").dataTable().fnDestroy();
 
                         $("#view_rm_certificate_report").dataTable().fnDestroy();
 				        var vendor_supplier_name = $('#vendor_supplier_name').val();
@@ -30965,9 +30965,9 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#vendor_supplier_name',function(e){  
 						e.preventDefault();
-					    $("#view_rm_certificate_report").dataTable().fnDestroy();
+					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
 
-						
+
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
@@ -30988,7 +30988,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#vendor_name',function(e){  
 						e.preventDefault();
-					    $("#view_rm_certificate_report").dataTable().fnDestroy();
+					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
@@ -31009,7 +31009,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#supplier_name',function(e){  
 						e.preventDefault();
-					    $("#view_rm_certificate_report").dataTable().fnDestroy();
+					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
@@ -31034,16 +31034,15 @@ $('#export_excel').on('click', function() {
 							"columnDefs": [ 
 								{ className: "details-control", "targets": [ 0 ] },
 								{ "width": "10%", "targets": 0 },
-								{ "width": "15%", "targets": 1 },
-								{ "width": "15%", "targets": 2 },
-								{ "width": "10%", "targets": 3 },
-								{ "width": "15%", "targets": 4 },
+								{ "width": "10%", "targets": 1 },
+								{ "width": "10%", "targets": 2 },
+								{ "width": "8%", "targets": 3 },
+								{ "width": "10%", "targets": 4 },
 								{ "width": "10%", "targets": 5 },
 								{ "width": "10%", "targets": 6 },
 								{ "width": "10%", "targets": 7 },
 								{ "width": "10%", "targets": 8 },
-								{ "width": "10%", "targets": 9 },
-								{ "width": "10%", "targets": 10 },
+								{ "width": "15%", "targets": 9 },
 								
 								
 							],
