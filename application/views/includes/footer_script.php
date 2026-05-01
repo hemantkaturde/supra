@@ -31173,3 +31173,144 @@ $('#export_excel').on('click', function() {
 
 	</script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Incoming Item Status Report'){?>
+	<script type="text/javascript">
+
+			$(document).ready(function() {
+				$("#view_incomingitemstatus_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var status = $('#status').val();
+				getincomingitemstatusreport(from_date,to_date,status);
+			});
+
+			$(document).on('change','#status',function(e){  
+				e.preventDefault();
+				$("#view_incomingitemstatus_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var status = $('#status').val();
+				getincomingitemstatusreport(from_date,to_date,status);
+			});
+
+
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_incomingitemstatus_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var status = $('#status').val();
+				getincomingitemstatusreport(from_date,to_date,status);
+			});
+
+
+			$(document).on('change','#to_date',function(e){  
+				e.preventDefault();
+				$("#view_incomingitemstatus_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var status = $('#status').val();
+				getincomingitemstatusreport(from_date,to_date,status);
+			});
+
+
+			function getincomingitemstatusreport(from_date,to_date,status){
+
+				if(from_date){
+					from_date = from_date;
+				}else{
+					from_date ='NA';
+				}
+
+				if(to_date){
+					to_date = to_date;
+				}else{
+					to_date ='NA';
+				}
+
+				var dt = $('#view_incomingitemstatus_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "10%", "targets": 2 },	
+						{ "width": "10%", "targets": 3 },	
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },	
+						{ "width": "10%", "targets": 6 },	
+						{ "width": "10%", "targets": 7 },			
+						{ "width": "10%", "targets": 8 },			
+						{ "width": "10%", "targets": 9 },						
+						{ "width": "10%", "targets": 10 },
+						{ "width": "10%", "targets": 11 },
+					
+					],
+					responsive: false,
+					"oLanguage": {
+						"sEmptyTable": "<i>Incoming Item Status Data Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchincomingitemstatuseport/"+from_date+"/"+to_date+"/"+status,
+						type: "post",
+					},
+				});
+            }
+
+
+		// 	$(document).on('click','#export_to_excel_cbam_report',function(e){
+		// 		e.preventDefault();
+		// 		$(".loader_ajax").show();
+
+		// 		var vendor_name  = $("#vendor_name").val();
+	
+		// 		if($("#from_date").val()){
+		// 			var from_date  = $("#from_date").val();
+		// 		}else{
+		// 			var from_date  = 'NA';
+		// 		}
+
+		// 		if($("#to_date").val()){
+		// 			var to_date  = $("#to_date").val();
+		// 		}else{
+		// 			var to_date  = 'NA';
+		// 		}
+
+
+		// 		$.ajax({
+		// 			url : "<?php echo ADMIN_PATH;?>admin/export_to_excel_cbam_report/"+vendor_name+"/"+from_date+"/"+to_date,
+		// 			type: "POST",
+		// 			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+		// 			success: function(data, textStatus, jqXHR)
+		// 			{
+		// 				$(".loader_ajax").hide();
+		// 				if(data == "failure")
+		// 				{
+		// 					// $(".sales_tracking_report_name_error").html("");
+		// 					alert('No data fond');
+		// 				}
+		// 				else
+		// 				{
+		// 					// $(".sales_tracking_report_name_error").html("");
+		// 					window.location.href = "<?php echo ADMIN_PATH;?>admin/export_to_excel_cbam_report/"+vendor_name+"/"+from_date+"/"+to_date;
+		// 				}
+		// 			},
+		// 			error: function (jqXHR, textStatus, errorThrown)
+		// 			{
+		// 				alert('No data fond');
+		// 				$(".loader_ajax").hide();
+		// 			}
+		// 		});
+		// 	return false;
+		// });
+
+    </script>
+<?php } ?>

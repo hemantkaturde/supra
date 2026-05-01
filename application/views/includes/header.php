@@ -363,6 +363,12 @@
                         </a>
                       </li> 
 
+                      <li class="treeview <?php if($pageUrl=="incomingitemstatusreport"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>incomingitemstatusreport">
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">Incoming Item Status Report</span>
+                        </a>
+                      </li> 
+
 
                       <li class="treeview <?php if($pageUrl=="vendor_rejection_form"){echo 'active';}?>" >
                         <a href="<?php echo base_url(); ?>vendor_rejection_form">

@@ -26076,7 +26076,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $supplier_count + $vendor_count;
     }
 
-   public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name)
+    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name)
     {
         $data = [];
         $data_vendor = [];
@@ -26221,7 +26221,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return array_slice($result, $start, $length);
     }
 
-
+    
 
     public function checkdocumentisuploadedornot($supplieritemid){
 
@@ -26279,6 +26279,118 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 		}
 		
         return $query_result;
+
+    }
+
+
+
+    public function getincomingitemstatusreportcount($params,$from_date,$to_date,$status){
+    
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as ven_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+       
+        if($status != 'NA'){
+          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status',$status);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
+        }
+
+        
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".qc_person_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".incoming_item_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".p_o_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function getincomingitemstatusreportdata($params,$from_date,$to_date,$status){
+
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as ven_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+       
+        if($status != 'NA'){
+          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status',$status);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
+        }
+
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".qc_person_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".incoming_item_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".p_o_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['ven_name'] = $value['ven_name'];
+                $data[$counter]['ven_po'] = $value['po_number'];
+                $data[$counter]['qc_person_name'] = $value['qc_person_name'];
+                $data[$counter]['lot_no'] = $value['lot_no'];
+                $data[$counter]['p_o_qty'] = $value['p_o_qty'];
+                $data[$counter]['invoice_qty'] = $value['invoice_qty'];
+                $data[$counter]['invoice_no'] = $value['invoice_no'];
+                $data[$counter]['invoice_date'] = $value['invoice_date'];
+                $data[$counter]['received_date'] = $value['received_date'];
+                $data[$counter]['incoming_item_status'] = $value['incoming_item_status'];               
+                $counter++; 
+            }
+        }
+
+        return $data;
 
     }
 

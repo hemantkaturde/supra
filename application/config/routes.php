@@ -674,6 +674,7 @@ $route['vendor_po_item_attachment/(:any)'] = "admin/vendor_po_item_attachment/$1
 
 
 $route['rmtestcertificate'] = "admin/rmtestcertificate";
+$route['incomingitemstatusreport'] = "admin/incomingitemstatusreport";
 
 
 

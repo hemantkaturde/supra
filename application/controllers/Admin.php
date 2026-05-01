@@ -31759,104 +31759,101 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
     echo json_encode($json_data);
 }
 
-public function addvendorPOattachment(){
-      $post_submit = $this->input->post();
-       if($post_submit){
-          $save_TDIR_Attachment_response = array();
-            if (!empty($_FILES['file']['name'])) {
+    public function addvendorPOattachment(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_TDIR_Attachment_response = array();
                 if (!empty($_FILES['file']['name'])) {
-                    $config['upload_path']   = './uploads/';
-                    $config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
-                    $config['max_size']      = 5000;
+                    if (!empty($_FILES['file']['name'])) {
+                        $config['upload_path']   = './uploads/';
+                        $config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
+                        $config['max_size']      = 5000;
 
-                    $this->load->library('upload', $config);
+                        $this->load->library('upload', $config);
 
-                    if (!$this->upload->do_upload('file')) {
-                        $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags($this->upload->display_errors()));
-                    } else {
-                            $uploadData = $this->upload->data();
-                            $file_name = $uploadData['file_name'];
-                            $vendorpoitemid = $this->input->post('vendorpoitemid');
+                        if (!$this->upload->do_upload('file')) {
+                            $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags($this->upload->display_errors()));
+                        } else {
+                                $uploadData = $this->upload->data();
+                                $file_name = $uploadData['file_name'];
+                                $vendorpoitemid = $this->input->post('vendorpoitemid');
 
-                            // Save into table
-                            $save_data_to_table = $this->db->insert('tbl_vendor_item_attachment', [
-                                'attachment' => $file_name,
-                                'vendor_item_id' => $vendorpoitemid
-                            ]);
+                                // Save into table
+                                $save_data_to_table = $this->db->insert('tbl_vendor_item_attachment', [
+                                    'attachment' => $file_name,
+                                    'vendor_item_id' => $vendorpoitemid
+                                ]);
 
-                            if($save_data_to_table){
-                                $save_TDIR_Attachment_response['status'] = 'success';
-                                $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
-                            }else{
-                                $save_TDIR_Attachment_response['status'] = 'success';
-                                $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
-                            }
+                                if($save_data_to_table){
+                                    $save_TDIR_Attachment_response['status'] = 'success';
+                                    $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
+                                }else{
+                                    $save_TDIR_Attachment_response['status'] = 'success';
+                                    $save_TDIR_Attachment_response['error'] = array('report_number'=>strip_tags(form_error('report_number')));
+                                }
 
-                         echo json_encode($save_TDIR_Attachment_response);
+                            echo json_encode($save_TDIR_Attachment_response);
+                        }
                     }
                 }
             }
-        }
-}
-
-
-public function deletevendoritemattachment(){
-
- $post_submit = $this->input->post();
-    if($post_submit){
-        $result = $this->admin_model->deletevendoritemattachment(trim($this->input->post('id')));
-        if ($result) {
-                    $process = 'Delete Vendor PO Item Attachment';
-                    $processFunction = 'Admin/deletetdirattachment';
-                    $this->logrecord($process,$processFunction);
-                echo(json_encode(array('status'=>'success')));
-            }
-        else { echo(json_encode(array('status'=>'failed'))); }
-    }else{
-        echo(json_encode(array('status'=>'failed'))); 
     }
 
-}
+    public function deletevendoritemattachment(){
 
-public function rmtestcertificate(){
+    $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletevendoritemattachment(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Vendor PO Item Attachment';
+                        $processFunction = 'Admin/deletetdirattachment';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
 
-    $process = 'RM Test Certificate';
-    $processFunction = 'Admin/rmtestcertificate';
-    $this->global['pageTitle'] = 'RM Test Certificate';  
-    $data['supplierList']= $this->admin_model->fetchALLsupplierList();
-    $data['vendorList']= $this->admin_model->fetchALLvendorList();
-    $this->loadViews("masters/rmtestcertificate", $this->global, $data, NULL); 
+    }
 
-}
+    public function rmtestcertificate(){
+        $process = 'RM Test Certificate';
+        $processFunction = 'Admin/rmtestcertificate';
+        $this->global['pageTitle'] = 'RM Test Certificate';  
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/rmtestcertificate", $this->global, $data, NULL); 
+    }
 
-public function fetchrmcertificatelist($vendor_supplier_name,$vendor_name,$supplier_name){
+    public function fetchrmcertificatelist($vendor_supplier_name,$vendor_name,$supplier_name){
 
-    $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name); 
-    $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name); 
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name); 
+        $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name); 
 
-    $data = array();
-    foreach ($queryRecords as $key => $value)
-    {
-        $i = 0;
-        foreach($value as $v)
+        $data = array();
+        foreach ($queryRecords as $key => $value)
         {
-            $data[$key][$i] = $v;
-            $i++;
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
         }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
     }
-    $json_data = array(
-        "draw"            => intval( $params['draw'] ),   
-        "recordsTotal"    => intval( $totalRecords ),  
-        "recordsFiltered" => intval($totalRecords),
-        "data"            => $data   // total data array
-        );
-    echo json_encode($json_data);
-
-}
 
 
-public function getVendorPoconforRMcetificate(){
+    public function getVendorPoconforRMcetificate(){
         $vendor_name=$this->input->post('vendor_name');
         if($vendor_name) {
 			$getVendordetails = $this->admin_model->getVendorPoconforRMcetificate($vendor_name);
@@ -31883,7 +31880,7 @@ public function getVendorPoconforRMcetificate(){
     }
 
 
-     public function getsupplierpobysupplieridforRMcetificate(){
+    public function getsupplierpobysupplieridforRMcetificate(){
 
         $supplier_name=$this->input->post('supplier_name');
 
@@ -31903,6 +31900,41 @@ public function getVendorPoconforRMcetificate(){
 		} else {
 			echo 'failure';
 		}
+
+    }
+
+
+    public function incomingitemstatusreport(){
+        $process = 'Incoming Item Status Report';
+        $processFunction = 'Admin/incomingitemstatusreport';
+        $this->global['pageTitle'] = 'Incoming Item Status Report';
+        $this->loadViews("masters/incomingitemstatusreport", $this->global, $data, NULL); 
+    }
+
+
+    public function fetchincomingitemstatuseport($from_date,$to_date,$status){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getincomingitemstatusreportcount($params,$from_date,$to_date,$status); 
+        $queryRecords = $this->admin_model->getincomingitemstatusreportdata($params,$from_date,$to_date,$status); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
 
     }
 
