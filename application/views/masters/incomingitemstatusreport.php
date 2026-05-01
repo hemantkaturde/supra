@@ -73,7 +73,7 @@
                                             <th>Vendor PO NO.</th>
                                             <th>QC Person</th>
                                             <th>Lot Number</th>
-                                            <th>P.O Qty (in Kgs)</th>
+                                            <th>P.O Qty (in pcs)</th>
                                             <th>Invoice Qty (in Pcs)</th>
                                             <th>Invoice No.</th>
                                             <th>Invoice Date</th>

@@ -26291,19 +26291,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
        
-        if($status != 'NA'){
-          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status',$status);
-        }
-
-        if($from_date!='NA'){
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
-        }
-
-        if($to_date!='NA'){
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
-        }
-
-        
+       
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".qc_person_name LIKE '%".$params['search']['value']."%'");
@@ -26316,6 +26304,18 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
+
+        if($status != 'NA'){
+          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status',$status);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
         }
 
         $this->db->limit($params['length'],$params['start']);
@@ -26334,18 +26334,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
-       
-        if($status != 'NA'){
-          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status',$status);
-        }
-
-        if($from_date!='NA'){
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
-        }
-
-        if($to_date!='NA'){
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
-        }
+  
 
 
         if($params['search']['value'] != "") 
@@ -26360,6 +26349,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
+
+             
+        if($status != 'NA'){
+          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status',$status);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
         }
 
         $this->db->limit($params['length'],$params['start']);
@@ -26383,8 +26385,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 $data[$counter]['invoice_qty'] = $value['invoice_qty'];
                 $data[$counter]['invoice_no'] = $value['invoice_no'];
-                $data[$counter]['invoice_date'] = $value['invoice_date'];
-                $data[$counter]['received_date'] = $value['received_date'];
+                $data[$counter]['invoice_date'] = date("d-m-Y", strtotime($value['invoice_date']));
+                $data[$counter]['received_date'] = date("d-m-Y", strtotime($value['received_date']));
                 $data[$counter]['incoming_item_status'] = $value['incoming_item_status'];               
                 $counter++; 
             }
