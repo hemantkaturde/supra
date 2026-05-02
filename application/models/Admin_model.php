@@ -16001,6 +16001,17 @@ public function getpreviousaddednotesfordisplay($bill_of_material_id,$flag){
 }
 
 
+public function getpreviousdataforRMcertificatestatusupdate_supplier($item_id){
+
+        $this->db->select('id as item_id,reviewdate,rm_certificate_status,notes');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.id', $item_id);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+}
+
+
+
 public function savebillofmaterialnotes($id,$flag,$data){
 
     if($flag=='bom'){
@@ -25149,6 +25160,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
           
     }
 
+
+    public function savermcertificatestatuspopup_supplier($id,$data){
+        
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }      
+    }
+
     
     public function fetchbalancestockcount($params){
 
@@ -26147,7 +26169,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'po_number' => $row['po_number'] ?? '',
                     'status' => (!empty($doc)) ? 'Uploaded' : '',
                     'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
-                    'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' class='fa fa-pencil-square-o updatestatusofrmcertificate_supplier'></i><a href='".base_url()."/supplier_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
+                    'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' data-identity='Supplier' class='fa fa-pencil-square-o updatestatusofrmcertificate_supplier'></i><a href='".base_url()."/supplier_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
                 ];
             }
         }

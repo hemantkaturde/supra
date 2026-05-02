@@ -135,5 +135,80 @@
         </div>
     </section>
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 
+
+<!-- Modal -->
+<div class="modal fade" id="rmcertirmcertificatemodelficate" tabindex="-1" role="dialog" data-dismiss="modal" data-backdrop="static" data-keyboard="false"  aria-labelledby="rmcertirmcertificatemodelficateLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addnotesLabel">RM Certificate Status</h5>
+                <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form role="form" id="rmcertirmcertificatemodelficate_form" action="<?php echo base_url() ?>rmcertirmcertificatemodelficate_form" method="post" role="form">
+
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="item_id" name="item_id">
+                    <input type="hidden" class="form-control" id="flag" name="flag">
+
+                <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="reviewdate">Review Date <span class="required">*</span></label>
+                            <input class="form-control datepicker" id="reviewdate" name="reviewdate"></input>
+                            <p class="error reviewdate_error"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="rm_certificate_status">Status <span class="required">*</span></label>
+                            <div>
+                                <select class="form-control serachfilternotrequired searchfilter" name="rm_certificate_status" id="rm_certificate_status">
+                                    <option value="NA">Select Status</option>
+                                    <option value="Uploaded">Uploaded</option>
+                                    <option value="Reviewed">Reviewed</option>
+                                </select>
+                            <p class="error rm_certificate_status_error"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="notes">Notes </label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                            <p class="error notes_error"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
+                    <button type="button" id="savermcertificatestatuspopup_supplier" class="btn btn-primary">Save Status</button>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script>
+$(function() {
+    $(".datepicker").datepicker({
+        // minDate: 0,
+        todayHighlight: true,
+         dateFormat: 'yy-mm-dd',
+        startDate: new Date()
+    });
+});
+</script>
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>

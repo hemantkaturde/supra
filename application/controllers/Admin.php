@@ -31939,5 +31939,66 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
     }
 
 
+    public function getpreviousdataforRMcertificatestatusupdate_supplier(){
+        $item_id=$this->input->post('id');
+        $flag=$this->input->post('flag');
+        if($item_id) {
+            $item_data_supplier = $this->admin_model->getpreviousdataforRMcertificatestatusupdate_supplier($item_id);
+            if(count($item_data_supplier) >= 1) {
+                echo json_encode($item_data_supplier[0]);
+            } else {
+                echo 'failure';
+            }
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+    public function savermcertificatestatuspopup_supplier(){
+
+        $post_submit = $this->input->post();
+
+
+        if($post_submit){
+            $save_rmcertificate_response = array();
+
+            if($post_submit){
+                $save_rmcertificate_response = array();
+
+                $this->form_validation->set_rules('reviewdate','Review Date','trim|required');
+                $this->form_validation->set_rules('rm_certificate_status','RM Certificate Status','trim|required');
+                $this->form_validation->set_rules('notes','Notes','trim|required');
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $save_rmcertificate_response['status'] = 'failure';
+                    $save_rmcertificate_response['error'] = array('reviewdate'=>strip_tags(form_error('reviewdate')), 'rm_certificate_status'=>strip_tags(form_error('rm_certificate_status')), 'notes'=>strip_tags(form_error('notes')));
+                }else{
+
+
+                    $data = array(
+                        'reviewdate'        => trim($this->input->post('reviewdate')),
+                        'rm_certificate_status'          => trim($this->input->post('rm_certificate_status')),
+                        'notes'          => trim($this->input->post('notes'))
+                    );
+      
+                $savermcertificatestatuspopup_supplier= $this->admin_model->savermcertificatestatuspopup_supplier(trim($this->input->post('item_id')),$data);
+
+                if($savermcertificatestatuspopup_supplier){
+                        $save_rmcertificate_response['status'] = 'success';
+                        $save_rmcertificate_response['error'] = array('reviewdate'=>strip_tags(form_error('reviewdate')), 'rm_certificate_status'=>strip_tags(form_error('rm_certificate_status')), 'notes'=>strip_tags(form_error('notes')));
+                }else{
+                        $save_rmcertificate_response['status'] = 'failure';
+                        $save_rmcertificate_response['error'] = array('reviewdate'=>strip_tags(form_error('reviewdate')), 'rm_certificate_status'=>strip_tags(form_error('rm_certificate_status')), 'notes'=>strip_tags(form_error('notes')));
+                }
+                }
+
+                echo json_encode($save_rmcertificate_response);
+            }
+        }
+    }
+
+
 
 }
