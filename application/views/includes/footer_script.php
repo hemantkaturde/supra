@@ -31173,7 +31173,7 @@ $('#export_excel').on('click', function() {
 				}	
 
 
-				$(document).on('click','.updatestatusofrmcertificate_supplier',function(e){  
+				$(document).on('click','.updatestatusofrmcertificate',function(e){  
 						e.preventDefault();
 					    // $('#rmcertirmcertificatemodelficate').modal('show');
 						var elemF = $(this);
@@ -31220,18 +31220,58 @@ $('#export_excel').on('click', function() {
 												$('#rmcertirmcertificatemodelficate').modal('hide');
 										}
 							});
-
 						}
 
 
-						// if(elemF.attr('data-identity')=='Vendor'){
+						if(elemF.attr('data-identity')=='Vendor'){
 
-						// }
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>admin/getpreviousdataforRMcertificatestatusupdate_vendor",
+								type: "POST",
+								data : {'id' : elemF.attr('data-id'),'flag' : elemF.attr('data-identity')},
+									success: function(data, textStatus, jqXHR)
+									{
+										$(".loader_ajax").hide();
+										if(data == "failure")
+											{
+												$('#item_id').val('');
+												$('#flag').val('');
+												$('#reviewdate').val('');
+												$('#rm_certificate_status').val('');
+												$('#notes').val('');
+
+												$('#rmcertirmcertificatemodelficate').modal('hide');
+											}
+											else
+											{
+												var ram_certificate_data = jQuery.parseJSON( data );
+												$('#item_id').val(elemF.attr('data-id'));
+												$('#flag').val(elemF.attr('data-identity'));
+												$('#reviewdate').val(ram_certificate_data.reviewdate);
+												$('#rm_certificate_status').val(ram_certificate_data.rm_certificate_status);
+												$('#notes').val(ram_certificate_data.notes);
+												
+												$('#rmcertirmcertificatemodelficate').modal('show');
+											}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+											    $('#item_id').val('');
+												$('#flag').val('');
+												$('#reviewdate').val('');
+												$('#rm_certificate_status').val('');
+												$('#notes').val('');
+												
+												$('#rmcertirmcertificatemodelficate').modal('hide');
+										}
+							});
+
+						}
     
 				});
 
 
-				$(document).on('click', '#savermcertificatestatuspopup_supplier', function(e) {
+				$(document).on('click', '#savermcertificatestatuspopup', function(e) {
 						e.preventDefault();
 						//$(".loader_ajax").show();
 						//var formData = new FormData($("#rmcertirmcertificatemodelficate")[0]);
@@ -31240,7 +31280,7 @@ $('#export_excel').on('click', function() {
 				     	var formData = new FormData($("#rmcertirmcertificatemodelficate_form")[0]);
 
 						$.ajax({
-							url: "<?php echo base_url(); ?>admin/savermcertificatestatuspopup_supplier",
+							url: "<?php echo base_url(); ?>admin/savermcertificatestatuspopup",
 							type: "POST",
 							data: formData,
 							cache: false,
@@ -31257,7 +31297,7 @@ $('#export_excel').on('click', function() {
 								} else if (fetchResponse.status == 'success') {
 									swal({
 										title: "Success",
-										text: "Ticket Successfully Added!",
+										text: "RM Status Successfully Added!",
 										icon: "success",
 										button: "Ok",
 									}, function() {
@@ -31273,8 +31313,6 @@ $('#export_excel').on('click', function() {
 						});
 						return false;
 				});
-
-
 
 	</script>
 <?php } ?>

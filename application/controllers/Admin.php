@@ -31955,7 +31955,23 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
     }
 
 
-    public function savermcertificatestatuspopup_supplier(){
+    public function getpreviousdataforRMcertificatestatusupdate_vendor(){
+        $item_id=$this->input->post('id');
+        $flag=$this->input->post('flag');
+        if($item_id) {
+            $item_data_supplier = $this->admin_model->getpreviousdataforRMcertificatestatusupdate_vendor($item_id);
+            if(count($item_data_supplier) >= 1) {
+                echo json_encode($item_data_supplier[0]);
+            } else {
+                echo 'failure';
+            }
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+    public function savermcertificatestatuspopup(){
 
         $post_submit = $this->input->post();
 
@@ -31980,12 +31996,12 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
                     $data = array(
                         'reviewdate'        => trim($this->input->post('reviewdate')),
                         'rm_certificate_status'          => trim($this->input->post('rm_certificate_status')),
-                        'notes'          => trim($this->input->post('notes'))
+                        'notes'          => trim($this->input->post('notes')),
                     );
       
-                $savermcertificatestatuspopup_supplier= $this->admin_model->savermcertificatestatuspopup_supplier(trim($this->input->post('item_id')),$data);
+                $savermcertificatestatuspopup= $this->admin_model->savermcertificatestatuspopup(trim($this->input->post('flag')),trim($this->input->post('item_id')),$data);
 
-                if($savermcertificatestatuspopup_supplier){
+                if($savermcertificatestatuspopup){
                         $save_rmcertificate_response['status'] = 'success';
                         $save_rmcertificate_response['error'] = array('reviewdate'=>strip_tags(form_error('reviewdate')), 'rm_certificate_status'=>strip_tags(form_error('rm_certificate_status')), 'notes'=>strip_tags(form_error('notes')));
                 }else{

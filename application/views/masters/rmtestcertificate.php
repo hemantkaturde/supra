@@ -185,7 +185,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
-                    <button type="button" id="savermcertificatestatuspopup_supplier" class="btn btn-primary">Save Status</button>
+                    <button type="button" id="savermcertificatestatuspopup" class="btn btn-primary">Save Status</button>
                 </div>
            </form>
         </div>
