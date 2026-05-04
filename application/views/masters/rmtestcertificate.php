@@ -118,7 +118,7 @@
                                         <th>Supplier name</th>
                                         <th>Supplier PO</th>
                                         <th>Status</th>
-                                        <th>Updated Date</th>
+                                        <th>Uploaded Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

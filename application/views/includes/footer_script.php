@@ -30949,7 +30949,11 @@ $('#export_excel').on('click', function() {
 				        var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
-						
+
+						var vendor_po_number = $('#vendor_po_number').val();
+						var supplier_po_number = $('#supplier_po_number').val();
+					    var status = $('#status').val();
+
 
 						if(vendor_supplier_name=='Vendor'){
 							$('#vendor_name_div').css('display','block');
@@ -30961,7 +30965,7 @@ $('#export_excel').on('click', function() {
 							$('#supplier_name_div').css('display','none');
 						}
 						
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
 				$(document).on('change','#vendor_supplier_name',function(e){  
@@ -30972,6 +30976,10 @@ $('#export_excel').on('click', function() {
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
+
+						var vendor_po_number = $('#vendor_po_number').val();
+						var supplier_po_number = $('#supplier_po_number').val();
+						
 
 
 						if(vendor_supplier_name=='Vendor'){
@@ -30985,7 +30993,7 @@ $('#export_excel').on('click', function() {
 							$('#vendor_name_div').css('display','none');
 							$('#supplier_name_div').css('display','block');
 						}		
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number);
 				});
 
 				$(document).on('change','#vendor_name',function(e){  
@@ -31000,7 +31008,11 @@ $('#export_excel').on('click', function() {
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
 
-						
+						var vendor_po_number = $('#vendor_po_number').val();
+						var supplier_po_number = $('#supplier_po_number').val();
+						var status = $('#status').val();
+
+
 
 						if(vendor_supplier_name=='Vendor'){
 							$('#vendor_name_div').css('display','block');
@@ -31040,7 +31052,7 @@ $('#export_excel').on('click', function() {
 						});
 						//return false;
 
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
 				$(document).on('change','.getvendorpobasedonvendorname',function(e){  
@@ -31090,6 +31102,10 @@ $('#export_excel').on('click', function() {
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
 
+						var vendor_po_number = $('#vendor_po_number').val();
+						var supplier_po_number = $('#supplier_po_number').val();
+						var status = $('#status').val();
+
 
 						if(vendor_supplier_name=='Vendor'){
 							$('#vendor_name_div').css('display','block');
@@ -31100,7 +31116,7 @@ $('#export_excel').on('click', function() {
 							$('#vendor_name_div').css('display','none');
 							$('#supplier_name_div').css('display','block');
 						}		
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
 				$(document).on('change','.getsupplierpobysupplieridforRMcetificate',function(e){  
@@ -31136,7 +31152,7 @@ $('#export_excel').on('click', function() {
 					//getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
 				});
 
-				function getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name){
+				function getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status){
 					$("#view_rm_certificate_report").dataTable().fnDestroy();
 
 					var dt = $('#view_rm_certificate_report').DataTable({
@@ -31166,7 +31182,7 @@ $('#export_excel').on('click', function() {
 							"bProcessing": true,
 							"serverSide": true,
 							"ajax":{
-								url :"<?php echo base_url();?>admin/fetchrmcertificatelist/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name,
+								url :"<?php echo base_url();?>admin/fetchrmcertificatelist/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name+"/"+vendor_po_number+"/"+supplier_po_number+"/"+status,
 								type: "post",
 							},
 						});
@@ -31269,7 +31285,6 @@ $('#export_excel').on('click', function() {
 						}
     
 				});
-
 
 				$(document).on('click', '#savermcertificatestatuspopup', function(e) {
 						e.preventDefault();

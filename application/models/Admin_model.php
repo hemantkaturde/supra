@@ -26047,7 +26047,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     //     return $result;
     // }
 
-    public function fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name)
+    public function fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status)
     {
         $supplier_count = 0;
         $vendor_count   = 0;
@@ -26121,7 +26121,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $supplier_count + $vendor_count;
     }
 
-    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name)
+    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status)
     {
         $data = [];
         $data_vendor = [];
@@ -26162,7 +26162,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 TBL_RAWMATERIAL.'.type_of_raw_material',
                 TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty',
                 TBL_SUPPLIER.'.supplier_name as sup_name',
-                TBL_SUPPLIER_PO_MASTER.'.po_number'
+                TBL_SUPPLIER_PO_MASTER.'.po_number',
+                TBL_SUPPLIER_PO_MASTER_ITEM.'.rm_certificate_status',
+
             ]);
 
             $this->db->from(TBL_SUPPLIER_PO_MASTER_ITEM);
@@ -26179,7 +26181,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             foreach ($supplier_result as $row) {
 
-                $doc = $this->checkdocumentisuploadedornot($row['item_id'] ?? 0);
+                if($row['rm_certificate_status']=='Reviewed'){
+                 $doc ='<b style="color:green">Reviewed</b>';
+                }else{
+                 $doc = $this->checkdocumentisuploadedornot($row['item_id'] ?? 0);  
+                }
+
+               
 
                 $data[] = [
                     'part_number' => $row['part_number'] ?? '',
@@ -26190,7 +26198,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'vendor_po' => '',
                     'sup_nme' => $row['sup_name'] ?? '',
                     'po_number' => $row['po_number'] ?? '',
-                    'status' => (!empty($doc)) ? 'Uploaded' : '',
+                    'status' => $doc,
                     'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
                     'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' data-identity='Supplier' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i><a href='".base_url()."/supplier_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
                 ];
@@ -26206,7 +26214,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 TBL_VENDOR_PO_MASTER_ITEM.'.description',
                 TBL_VENDOR_PO_MASTER_ITEM.'.order_oty',
                 TBL_VENDOR.'.vendor_name',
-                TBL_VENDOR_PO_MASTER.'.po_number'
+                TBL_VENDOR_PO_MASTER.'.po_number',
+                TBL_VENDOR_PO_MASTER_ITEM.'.rm_certificate_status',
             ]);
 
             $this->db->from(TBL_VENDOR_PO_MASTER_ITEM);
