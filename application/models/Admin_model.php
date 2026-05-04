@@ -26232,7 +26232,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             foreach ($vendor_result as $row) {
 
-                $doc = $this->checkdocumentisuploadedornot_vendor($row['item_id'] ?? 0);
+                // $doc = $this->checkdocumentisuploadedornot_vendor($row['item_id'] ?? 0);
+
+                if($row['rm_certificate_status']=='Reviewed'){
+                 $doc ='<b style="color:green">Reviewed</b>';
+                }else{
+                 $doc = $this->checkdocumentisuploadedornot_vendor($row['item_id'] ?? 0);  
+                }
 
                 $data_vendor[] = [
                     'part_number' => $row['part_number'] ?? '',
@@ -26243,7 +26249,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'vendor_po' => $row['po_number'] ?? '',
                     'sup_nme' => '',
                     'po_number' => '',
-                    'status' => (!empty($doc)) ? 'Uploaded' : '',
+                    'status' => $doc,
                     'updated_date' => (!empty($doc) && isset($doc[0]['createdDtm'])) ? $doc[0]['createdDtm'] : '',
                     'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."'  data-identity='Vendor' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i><a href='".base_url()."/vendor_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
                 ];
