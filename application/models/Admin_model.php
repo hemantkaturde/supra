@@ -26365,6 +26365,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             'left'
         );
 
+
+          if($params['search']['value'] != "") 
+            {
+                    $this->db->where("(".TBL_SUPPLIER_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%')");
+            }
+      
         // ================= FILTER =================
 
         // Supplier Filter
@@ -26463,6 +26477,18 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             TBL_VENDOR . '.ven_id = ' . TBL_VENDOR_PO_MASTER . '.vendor_name',
             'left'
         );
+
+            if($params['search']['value'] != "") 
+            {
+                    $this->db->where("(".TBL_VENDOR_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%')");
+            }
 
         // ================= FILTER =================
 
@@ -26600,6 +26626,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id', 'left');
             $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name', 'left');
 
+           
+            if($params['search']['value'] != "") 
+            {
+                    $this->db->where("(".TBL_SUPPLIER_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%')");
+            }
+           
             // ================= FILTER =================
 
             // Supplier Filter
@@ -26696,6 +26736,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', 'left');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name', 'left');
 
+            if($params['search']['value'] != "") 
+            {
+                    $this->db->where("(".TBL_VENDOR_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+                    $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_certificate_status LIKE '%".$params['search']['value']."%')");
+            }
+           
+           
             // ================= FILTER =================
 
             // Vendor Filter
