@@ -316,7 +316,7 @@
                                     <div class="form-group">
                                        <label for="amount_paid">Bill Checked by Stock</label>
                                        <select class="form-control bill_checked_by_stock" name="bill_checked_by_stock" id="bill_checked_by_stock">
-                                          <option st-id="" value="">Select Payment Status</option>
+                                          <option st-id="" value="">Select Bill Checked by Stock</option>
                                           <option value="Sharda">Sharda</option>
                                           <option value="Sushma">Sushma</option>
                                           <option value="Jaya">Jaya</option>
