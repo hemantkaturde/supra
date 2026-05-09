@@ -31027,8 +31027,22 @@ $('#export_excel').on('click', function() {
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
 
-						var vendor_po_number = $('#vendor_po_number').val();
-						var supplier_po_number = $('#supplier_po_number').val();
+						//var vendor_po_number = $('#vendor_po_number').val();
+
+						if($('#vendor_po_number').val()){
+                           var vendor_po_number = $('#vendor_po_number').val();
+						}else{
+                           var vendor_po_number = null;
+						}
+						
+
+						if($('#supplier_po_number').val()){
+                           var supplier_po_number = $('#supplier_po_number').val();
+						}else{
+                           var supplier_po_number = null;
+						}
+
+
 						var status = $('#status').val();
 
 
@@ -31121,9 +31135,23 @@ $('#export_excel').on('click', function() {
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
 
-						var vendor_po_number = $('#vendor_po_number').val();
-						var supplier_po_number = $('#supplier_po_number').val();
+						//var vendor_po_number = $('#vendor_po_number').val();
+						//var supplier_po_number = $('#supplier_po_number').val();
 						var status = $('#status').val();
+
+						if($('#vendor_po_number').val()){
+                           var vendor_po_number = $('#vendor_po_number').val();
+						}else{
+                           var vendor_po_number = null;
+						}
+						
+
+						if($('#supplier_po_number').val()){
+                           var supplier_po_number = $('#supplier_po_number').val();
+						}else{
+                           var supplier_po_number = null;
+						}
+
 
 
 						if(vendor_supplier_name=='Vendor'){
