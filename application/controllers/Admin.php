@@ -9069,6 +9069,11 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('debit_note_no','Debit Note No','trim');
                 $this->form_validation->set_rules('payment_status','Payment Status','trim|required');
 
+                $this->form_validation->set_rules('bill_checked_by_purchase','Bill Checked By Purchase','trim');
+                $this->form_validation->set_rules('bill_checked_by_purchase_date','Bill Checked By Purchase Date','trim');
+                $this->form_validation->set_rules('bill_checked_by_stock','Bill Checked By Stock','trim');
+                $this->form_validation->set_rules('bill_checked_by_stock_date','Bill Checked By Stock Date','trim');
+
                 if($this->form_validation->run() == FALSE)
                 {
                     $paymentdetails_response['status'] = 'failure';
@@ -9108,7 +9113,11 @@ class Admin extends BaseController
                             'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
                             'debit_note_no' =>  trim($this->input->post('debit_note_no')),
                             'payment_status' =>  trim($this->input->post('payment_status')),
-                            'remark' =>  trim($this->input->post('remark'))
+                            'remark' =>  trim($this->input->post('remark')),
+                            'bill_checked_by_purchase' =>  trim($this->input->post('bill_checked_by_purchase')),
+                            'bill_checked_by_purchase_date' =>  trim($this->input->post('bill_checked_by_purchase_date')),
+                            'bill_checked_by_stock' =>  trim($this->input->post('bill_checked_by_stock')),
+                            'bill_checked_by_stock_date' =>  trim($this->input->post('bill_checked_by_stock_date')),
                         );
 
                     
@@ -9203,8 +9212,12 @@ class Admin extends BaseController
                                 'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
                                 'debit_note_no' =>  trim($this->input->post('debit_note_no')),
                                 'payment_status' =>  trim($this->input->post('payment_status')),
-                                'remark' =>  trim($this->input->post('remark'))
-                            );
+                                'remark' =>  trim($this->input->post('remark')),
+                                'bill_checked_by_purchase' =>  trim($this->input->post('bill_checked_by_purchase')),
+                                'bill_checked_by_purchase_date' =>  trim($this->input->post('bill_checked_by_purchase_date')),
+                                'bill_checked_by_stock' =>  trim($this->input->post('bill_checked_by_stock')),
+                                'bill_checked_by_stock_date' =>  trim($this->input->post('bill_checked_by_stock_date')),
+                                );
 
                         
                             $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails($payment_details_id_edit,$data);

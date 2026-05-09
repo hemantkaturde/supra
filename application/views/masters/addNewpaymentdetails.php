@@ -289,6 +289,55 @@
                                        <p class="error payment_status_error"></p>
                                     </div>
                                  </div>
+                              <?php if($this->session->userdata('roleText')=='Purchase'){ ?>
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="amount_paid">Bill Checked by Purchase</label>
+                                       <select class="form-control bill_checked_by_purchase" name="bill_checked_by_purchase" id="bill_checked_by_purchase">
+                                          <option st-id="" value="">Select Bill Checked by Purchase</option>
+                                          <option value="Supriya">Supriya</option>
+                                          <option value="Sheetal">Sheetal</option>
+                                          <option value="Shubhra">Shubhra</option>
+                                          <option value="Shruti">Shruti</option>
+                                       </select>
+                                       <p class="error bill_checked_by_purchase_error"></p>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="bill_checked_by_purchase_date">Bill Checked by Purchase Date</label>
+                                       <input type="text" class="form-control datepicker" id="bill_checked_by_purchase_date" name="bill_checked_by_purchase_date">
+                                       <p class="error bill_checked_by_purchase_date_error"></p>
+                                    </div>
+                                 </div>
+                              <?php } ?>
+
+                              <?php if($this->session->userdata('roleText')=='Stock'){ ?>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="amount_paid">Bill Checked by Stock</label>
+                                       <select class="form-control bill_checked_by_stock" name="bill_checked_by_stock" id="bill_checked_by_stock">
+                                          <option st-id="" value="">Select Payment Status</option>
+                                          <option value="Sharda">Sharda</option>
+                                          <option value="Sushma">Sushma</option>
+                                          <option value="Jaya">Jaya</option>
+                                       </select>
+                                       <p class="error bill_checked_by_stock_error"></p>
+                                    </div>
+                                 </div>
+
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="bill_checked_by_stock_date">Bill Checked by Stock Date</label>
+                                       <input type="text" class="form-control datepicker" id="bill_checked_by_stock_date" name="bill_checked_by_stock_date">
+                                       <p class="error bill_checked_by_stock_date_error"></p>
+                                    </div>
+                                 </div>
+
+                              <?php } ?>
 
                               
                                  <div class="col-md-12">
