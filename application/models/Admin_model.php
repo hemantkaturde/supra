@@ -26612,6 +26612,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->like(TBL_SUPPLIER_PO_MASTER.'.id', trim($supplier_po_number));
             }
 
+            $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id', 'DESC');
+
+
             $supplier_result = $this->db->get()->result_array() ?? [];
 
 
@@ -26705,6 +26708,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             if($vendor_po_number!== 'null'){
                 $this->db->like(TBL_VENDOR_PO_MASTER.'.id', trim($vendor_po_number));
             }
+
+            $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id', 'DESC');
 
             $vendor_result = $this->db->get()->result_array() ?? [];
 

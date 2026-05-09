@@ -30979,6 +30979,17 @@ $('#export_excel').on('click', function() {
 
 						var vendor_po_number = $('#vendor_po_number').val();
 						var supplier_po_number = $('#supplier_po_number').val();
+
+
+							// if(vendor_supplier_name=='Vendor'){
+						// 	$('#vendor_name_div').css('display','block');
+						// 	$('#supplier_name_div').css('display','none');
+						// }
+
+						// if(vendor_supplier_name=='Supplier'){
+						// 	$('#vendor_name_div').css('display','none');
+						// 	$('#supplier_name_div').css('display','block');
+						// }
 						
 
 
@@ -30986,12 +30997,20 @@ $('#export_excel').on('click', function() {
 							$("#view_rm_certificate_report").dataTable().fnDestroy();
 							$('#vendor_name_div').css('display','block');
 							$('#supplier_name_div').css('display','none');
+							$('#vendor_po_number_div').css('display','block');
+							$('#supplier_po_number_div').css('display','none');
+
+				
 						}
 
 						if(vendor_supplier_name=='Supplier'){
 							$("#view_rm_certificate_report").dataTable().fnDestroy();
 							$('#vendor_name_div').css('display','none');
 							$('#supplier_name_div').css('display','block');
+							$('#vendor_po_number_div').css('display','none');
+							$('#supplier_po_number_div').css('display','block');
+
+
 						}		
 						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number);
 				});
@@ -31335,8 +31354,8 @@ $('#export_excel').on('click', function() {
 					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
-					    $('#vendor_po_number_div').css('display','none');
-						$('#supplier_po_number_div').css('display','block');
+					    // $('#vendor_po_number_div').css('display','none');
+						// $('#supplier_po_number_div').css('display','block');
 
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
@@ -31347,15 +31366,15 @@ $('#export_excel').on('click', function() {
 						var status = $('#status').val();
 
 
-						if(vendor_supplier_name=='Vendor'){
-							$('#vendor_name_div').css('display','block');
-							$('#supplier_name_div').css('display','none');
-						}
+						// if(vendor_supplier_name=='Vendor'){
+						// 	$('#vendor_name_div').css('display','block');
+						// 	$('#supplier_name_div').css('display','none');
+						// }
 
-						if(vendor_supplier_name=='Supplier'){
-							$('#vendor_name_div').css('display','none');
-							$('#supplier_name_div').css('display','block');
-						}		
+						// if(vendor_supplier_name=='Supplier'){
+						// 	$('#vendor_name_div').css('display','none');
+						// 	$('#supplier_name_div').css('display','block');
+						// }		
 						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
@@ -31364,8 +31383,8 @@ $('#export_excel').on('click', function() {
 					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
-					    $('#vendor_po_number_div').css('display','none');
-						$('#supplier_po_number_div').css('display','block');
+					    // $('#vendor_po_number_div').css('display','none');
+						// $('#supplier_po_number_div').css('display','block');
 
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
@@ -31376,15 +31395,15 @@ $('#export_excel').on('click', function() {
 						var status = $('#status').val();
 
 
-						if(vendor_supplier_name=='Vendor'){
-							$('#vendor_name_div').css('display','block');
-							$('#supplier_name_div').css('display','none');
-						}
+						// if(vendor_supplier_name=='Vendor'){
+						// 	$('#vendor_name_div').css('display','block');
+						// 	$('#supplier_name_div').css('display','none');
+						// }
 
-						if(vendor_supplier_name=='Supplier'){
-							$('#vendor_name_div').css('display','none');
-							$('#supplier_name_div').css('display','block');
-						}		
+						// if(vendor_supplier_name=='Supplier'){
+						// 	$('#vendor_name_div').css('display','none');
+						// 	$('#supplier_name_div').css('display','block');
+						// }		
 						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
@@ -31393,8 +31412,8 @@ $('#export_excel').on('click', function() {
 					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
-					    $('#vendor_po_number_div').css('display','none');
-						$('#supplier_po_number_div').css('display','block');
+					    // $('#vendor_po_number_div').css('display','none');
+						// $('#supplier_po_number_div').css('display','block');
 
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
 						var vendor_name = $('#vendor_name').val();
@@ -31405,15 +31424,15 @@ $('#export_excel').on('click', function() {
 						var status = $('#status').val();
 
 
-						if(vendor_supplier_name=='Vendor'){
-							$('#vendor_name_div').css('display','block');
-							$('#supplier_name_div').css('display','none');
-						}
+						// if(vendor_supplier_name=='Vendor'){
+						// 	$('#vendor_name_div').css('display','block');
+						// 	$('#supplier_name_div').css('display','none');
+						// }
 
-						if(vendor_supplier_name=='Supplier'){
-							$('#vendor_name_div').css('display','none');
-							$('#supplier_name_div').css('display','block');
-						}		
+						// if(vendor_supplier_name=='Supplier'){
+						// 	$('#vendor_name_div').css('display','none');
+						// 	$('#supplier_name_div').css('display','block');
+						// }		
 						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
