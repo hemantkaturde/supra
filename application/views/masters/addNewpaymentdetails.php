@@ -289,7 +289,6 @@
                                        <p class="error payment_status_error"></p>
                                     </div>
                                  </div>
-                              <?php if($this->session->userdata('roleText')=='Purchase'){ ?>
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="amount_paid">Bill Checked by Purchase</label>
@@ -311,9 +310,7 @@
                                        <p class="error bill_checked_by_purchase_date_error"></p>
                                     </div>
                                  </div>
-                              <?php } ?>
-
-                              <?php if($this->session->userdata('roleText')=='Stock'){ ?>
+                             
 
                                  <div class="col-md-12">
                                     <div class="form-group">
@@ -337,7 +334,7 @@
                                     </div>
                                  </div>
 
-                              <?php } ?>
+                           
 
                               
                                  <div class="col-md-12">
