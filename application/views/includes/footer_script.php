@@ -31447,8 +31447,8 @@ $('#export_excel').on('click', function() {
 						var vendor_name = $('#vendor_name').val();
 						var supplier_name = $('#supplier_name').val();
 
-						var vendor_po_number = $('#vendor_po_number').val();
-						var supplier_po_number = $('#supplier_po_number').val();
+						//var vendor_po_number = $('#vendor_po_number').val();
+						//var supplier_po_number = $('#supplier_po_number').val();
 						var status = $('#status').val();
 
 
@@ -31461,6 +31461,25 @@ $('#export_excel').on('click', function() {
 						// 	$('#vendor_name_div').css('display','none');
 						// 	$('#supplier_name_div').css('display','block');
 						// }		
+
+
+						
+						if($('#vendor_po_number').val()){
+                           var vendor_po_number = $('#vendor_po_number').val();
+						}else{
+                           var vendor_po_number = null;
+						}
+						
+
+						if($('#supplier_po_number').val()){
+                           var supplier_po_number = $('#supplier_po_number').val();
+						}else{
+                           var supplier_po_number = null;
+						}
+
+
+
+				
 						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status);
 				});
 
