@@ -30970,7 +30970,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#vendor_supplier_name',function(e){  
 						e.preventDefault();
-					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
 						var vendor_supplier_name = $('#vendor_supplier_name').val();
@@ -30979,9 +30979,10 @@ $('#export_excel').on('click', function() {
 
 						var vendor_po_number = $('#vendor_po_number').val();
 						var supplier_po_number = $('#supplier_po_number').val();
+						var status = $('#status').val();
 
 
-							// if(vendor_supplier_name=='Vendor'){
+						// if(vendor_supplier_name=='Vendor'){
 						// 	$('#vendor_name_div').css('display','block');
 						// 	$('#supplier_name_div').css('display','none');
 						// }
@@ -31017,7 +31018,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#vendor_name',function(e){  
 						e.preventDefault();
-					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 						$('#vendor_po_number_div').css('display','block');
 						$('#supplier_po_number_div').css('display','none');
@@ -31090,7 +31091,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','.getvendorpobasedonvendorname',function(e){  
 						e.preventDefault();
-					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
 						var vendor_name = $('#vendor_name').val();
 	
 
@@ -31125,7 +31126,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#supplier_name',function(e){  
 						e.preventDefault();
-					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
 					    $('#vendor_po_number_div').css('display','none');
@@ -31168,7 +31169,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','.getsupplierpobysupplieridforRMcetificate',function(e){  
 						e.preventDefault();
-					    //$("#view_rm_certificate_report").dataTable().fnDestroy();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 						var supplier_name = $('#supplier_name').val();
 	
@@ -31379,7 +31380,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#supplier_po_number',function(e){  
 						e.preventDefault();
-					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
+					   $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
 					    // $('#vendor_po_number_div').css('display','none');
@@ -31408,7 +31409,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#vendor_po_number',function(e){  
 						e.preventDefault();
-					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
+					    $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
 					    // $('#vendor_po_number_div').css('display','none');
@@ -31437,7 +31438,7 @@ $('#export_excel').on('click', function() {
 
 				$(document).on('change','#status',function(e){  
 						e.preventDefault();
-					   // $("#view_rm_certificate_report").dataTable().fnDestroy();
+					   $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 
 					    // $('#vendor_po_number_div').css('display','none');
