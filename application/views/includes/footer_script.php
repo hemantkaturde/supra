@@ -6439,6 +6439,30 @@
                     url :"<?php echo base_url();?>fetchBillofmaterial",
                     type: "post",
 	            },
+
+
+			    // 👇 Add this
+				"rowCallback": function(row, data, index) {
+
+				   
+						var bomDate = new Date(data[1]);
+						var today = new Date();
+
+						var diffTime = today - bomDate;
+						var diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+
+						// 40+ days and status Open
+						if(diffDays >= 40 && data[4] == 'OPEN') {
+
+							$(row).css({
+								'background-color': '#ffcccc',
+								'color': '#a10000',
+								'font-weight': 'bold'
+							});
+
+						}		
+				}
 	        });
 
 	    });

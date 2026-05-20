@@ -3336,7 +3336,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_po_number'] = $value['po_number'];
                 //$data[$counter]['vendor_number'] = $value['vendor_number'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
-                $data[$counter]['bom_status'] = $value['bom_status'];
+                $data[$counter]['bom_status_open_close'] = $value['bom_status'];
                 $data[$counter]['action'] = '';
 
                 if($this->session->userdata('roleText')=='Superadmin'){
