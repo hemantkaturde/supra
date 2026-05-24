@@ -22276,9 +22276,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
                 $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['reason_with_qty'];
 
-                $data[$counter]['original_supplier_name'] = $get_rejected_qty_from_rejection_reson_table[0]['original_supplier_name'];
-                $data[$counter]['original_supplier_po'] = $get_rejected_qty_from_rejection_reson_table[0]['original_supplier_po'];
-                $data[$counter]['type_of_raw_material'] = $get_rejected_qty_from_rejection_reson_table[0]['type_of_raw_material'];
+                $data[$counter]['original_supplier_name'] = $value['original_supplier_name'];
+                $data[$counter]['original_supplier_po'] = $value['original_supplier_po'];
+                $data[$counter]['type_of_raw_material'] = $value['type_of_raw_material'];
                 
                  $data[$counter]['rejection_percentage'] = ($data[$counter]['received_qty'] > 0)  ? round(($data[$counter]['rejected_qty'] / $data[$counter]['received_qty']) * 100, 2).'%'  : '0%';
 
