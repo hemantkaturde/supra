@@ -28664,12 +28664,6 @@
 
 
 
-
-
-
-
-
-
 <?php if($pageTitle=='Angadia Report'){ ?>
 	<script type="text/javascript">
 
@@ -31676,4 +31670,58 @@ $('#export_excel').on('click', function() {
 		// });
 
     </script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Delievery Days Calculation Report'){?>
+<script type="text/javascript">
+
+
+			$(document).ready(function() {
+				getdeliverydayscalculationreport();
+			});
+
+
+            function getdeliverydayscalculationreport(){
+
+				// if(from_date){
+				// 	from_date = from_date;
+				// }else{
+				// 	from_date ='NA';
+				// }
+
+				// if(to_date){
+				// 	to_date = to_date;
+				// }else{
+				// 	to_date ='NA';
+				// }
+
+				var dt = $('#view_delivery_days_calculation_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },	
+						{ "width": "20%", "targets": 2 },	
+						{ "width": "20%", "targets": 3 }
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Delivery Days Data Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchdeliverydayscalculation",
+						type: "post",
+					},
+				});
+            }
+
+
+</script>
 <?php } ?>

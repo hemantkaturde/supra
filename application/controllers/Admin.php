@@ -32037,5 +32037,42 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
     }
 
 
+    public function deliverydayscalculationreport(){
+
+        $process = 'Delievery Days Calculation Report';
+        $processFunction = 'Admin/deliverydayscalculationreport';
+        $this->global['pageTitle'] = 'Delievery Days Calculation Report';  
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/deliverydayscalculationreport", $this->global, $data, NULL); 
+    }
+
+    public function fetchdeliverydayscalculation(){
+
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchdeliverydayscalculationcount($params); 
+        $queryRecords = $this->admin_model->fetchdeliverydayscalculationdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
 
 }
