@@ -17008,11 +17008,26 @@ public function downlaodjobworkchllan($id){
                 <td style="border: 1px solid black;padding-left: 10px;">'.round($sgst_tax_value).'</td>
             </tr>';
      }else{
-        $tax_value = '
+
+        if($gst_rate=='Zero_Tax'){
+
+         $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) 0% Zero Tax </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">0</td>
+            </tr>';
+
+        }else{
+
+         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.round($igst_tax_value).'</td>
             </tr>';
+
+
+        }
+
      }
 
   
