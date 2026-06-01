@@ -6233,23 +6233,42 @@
 
 			}else{
 
-                 var total_value = $("#total").val();
+			   if(gst_rate_value=='Zero_Tax'){
 
-				 var gst_value = parseFloat(total_value) * 18 / 100;
+			        var total_value = $("#total").val();
 
-				 $(".igst_div").attr("style", "display:none");
-				 $(".cgst_sgst_div").attr("style", "display:block");
+					var gst_value = parseFloat(total_value) * 0 / 100;
 
-				 var cgst_rate  =Math.round(gst_value)/2;
+					$(".igst_div").attr("style", "display:none");
+					$(".cgst_sgst_div").attr("style", "display:none");
+					
+					$("#igst_rate").val(0);
 
-				 var SGST_rate  =Math.round(gst_value)/2;
+					$("#gst").val(0);
 
-				 $("#CGST_rate").val( Math.round(cgst_rate));
-				 $("#SGST_rate").val( Math.round(SGST_rate));
+					$("#grand_total").val(Math.round(total_value)); 
+			      
 
-				 $("#gst").val( Math.round(gst_value));
+			   }else{
 
-				 $("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+                    var total_value = $("#total").val();
+
+				    var gst_value = parseFloat(total_value) * 18 / 100;
+
+					$(".igst_div").attr("style", "display:none");
+					$(".cgst_sgst_div").attr("style", "display:block");
+
+					var cgst_rate  =Math.round(gst_value)/2;
+
+					var SGST_rate  =Math.round(gst_value)/2;
+
+					$("#CGST_rate").val( Math.round(cgst_rate));
+					$("#SGST_rate").val( Math.round(SGST_rate));
+
+					$("#gst").val( Math.round(gst_value));
+
+					$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+                }
 
 			}
 
