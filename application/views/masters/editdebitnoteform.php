@@ -521,6 +521,7 @@
                                                         <div class="col-sm-8">
                                                                 <select class="form-control" name="gst_rate" id="gst_rate">
                                                                     <option value="">Select GST Rate</option>
+                                                                    <option value="Zero_Tax">Zero Tax ( 0% )</option>
                                                                     <option value="CGST_SGST">CGST + SGST ( 9% + 9% )</option>
                                                                     <option value="CGST_SGST_6">CGST + SGST ( 6% + 6% )</option>
                                                                     <option value="IGST">IGST ( 18% )</option>
