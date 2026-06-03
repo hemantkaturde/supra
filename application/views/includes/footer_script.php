@@ -13644,6 +13644,19 @@
 				$("#total_normal_gst_value_plus_total").val(total_value_plus_gst_normal);
 
 				/*=======================================normal invoice=========================================================*/
+			}else if(gst_rate_value=='Zero_Tax'){
+
+             	$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:none");
+
+				$(".igst_ok_qty_div").attr("style", "display:none");
+				$(".igst_ok_div_12_div").attr("style", "display:none");
+				$(".cgst_sgst_ok_9_div").attr("style", "display:none");
+				$(".cgst_sgst_ok_6_div").attr("style", "display:none");
+
+			
 			}
          });
 
