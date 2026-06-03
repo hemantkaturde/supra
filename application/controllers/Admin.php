@@ -32092,7 +32092,7 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
     public function exporttoexceldeleverydaysreport($vendor_name,$from_date,$to_date) {
 
         // create file name
-        $fileName = 'CBAM Report -'.date('d-m-Y').'.xlsx';  
+        $fileName = 'Delievery Days Report -'.date('d-m-Y').'.xlsx';  
         // load excel library
         $empInfo = $this->admin_model->exporttoexceldeleverydaysreport($vendor_name,$from_date,$to_date);
 
