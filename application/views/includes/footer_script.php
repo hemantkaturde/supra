@@ -31697,23 +31697,61 @@ $('#export_excel').on('click', function() {
 
 
 			$(document).ready(function() {
-				getdeliverydayscalculationreport();
+	            $("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var vendor_name = $('#vendor_name').val();
+				getdeliverydayscalculationreport(from_date,to_date,vendor_name);
 			});
 
 
-            function getdeliverydayscalculationreport(){
 
-				// if(from_date){
-				// 	from_date = from_date;
-				// }else{
-				// 	from_date ='NA';
-				// }
+			
+			$(document).on('change','#vendor_name',function(e){  
+				e.preventDefault();
+				$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var vendor_name = $('#vendor_name').val();
+				getdeliverydayscalculationreport(from_date,to_date,vendor_name);
+			});
 
-				// if(to_date){
-				// 	to_date = to_date;
-				// }else{
-				// 	to_date ='NA';
-				// }
+
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var vendor_name = $('#vendor_name').val();
+				getdeliverydayscalculationreport(from_date,to_date,vendor_name);
+			});
+
+
+			$(document).on('change','#to_date',function(e){  
+				e.preventDefault();
+				$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var vendor_name = $('#vendor_name').val();
+				getdeliverydayscalculationreport(from_date,to_date,vendor_name);
+			});
+
+
+            function getdeliverydayscalculationreport(from_date,to_date,vendor_name){
+
+
+				if(from_date){
+					from_date = from_date;
+				}else{
+					from_date ='NA';
+				}
+
+				if(to_date){
+					to_date = to_date;
+				}else{
+					to_date ='NA';
+				}
+
 
 				var dt = $('#view_delivery_days_calculation_report').DataTable({
 					"columnDefs": [ 
@@ -31735,7 +31773,7 @@ $('#export_excel').on('click', function() {
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchdeliverydayscalculation",
+						url :"<?php echo base_url();?>admin/fetchdeliverydayscalculation/"+from_date+"/"+to_date+"/"+vendor_name,
 						type: "post",
 					},
 				});

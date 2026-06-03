@@ -32061,12 +32061,12 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
         $this->loadViews("masters/deliverydayscalculationreport", $this->global, $data, NULL); 
     }
 
-    public function fetchdeliverydayscalculation(){
+    public function fetchdeliverydayscalculation($from_date,$to_date,$vendor_name){
 
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->fetchdeliverydayscalculationcount($params); 
-        $queryRecords = $this->admin_model->fetchdeliverydayscalculationdata($params); 
+        $totalRecords = $this->admin_model->fetchdeliverydayscalculationcount($params,$from_date,$to_date,$vendor_name); 
+        $queryRecords = $this->admin_model->fetchdeliverydayscalculationdata($params,$from_date,$to_date,$vendor_name); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

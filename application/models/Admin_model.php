@@ -27052,14 +27052,31 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetchdeliverydayscalculationcount($params){
+    public function fetchdeliverydayscalculationcount($params,$from_date,$to_date,$vendor_name){
 
         $this->db->select(TBL_VENDOR.'.vendor_name as og_vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_VENDOR_PO_MASTER.'.delivery_date as vendor_po_delivery_date,'.TBL_INCOMING_DETAILS_ITEM.'.received_date as incoming_item_recived_date');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".attachment LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".attachment LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_VENDOR_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%')");
         }
+
+
+        if($vendor_name != 'NA'){
+          $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
+        }
+        
+
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
 
@@ -27068,18 +27085,36 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $rowcount;
     }
 
-    public function fetchdeliverydayscalculationdata($params){
+    public function fetchdeliverydayscalculationdata($params,$from_date,$to_date,$vendor_name){
 
         $this->db->select(TBL_VENDOR.'.vendor_name as og_vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_VENDOR_PO_MASTER.'.delivery_date as vendor_po_delivery_date,'.TBL_INCOMING_DETAILS_ITEM.'.received_date as incoming_item_recived_date');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".attachment LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".attachment LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_VENDOR_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%')");
         }
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
 
+
+        if($vendor_name != 'NA'){
+          $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
+        }
+
+
         $this->db->limit($params['length'],$params['start']);
+        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.id'); 
+
         $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $fetch_result = $query->result_array();
