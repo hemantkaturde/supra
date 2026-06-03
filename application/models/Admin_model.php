@@ -27075,7 +27075,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         if($to_date!='NA'){
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
         }
-        
+
 
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
@@ -27126,11 +27126,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['og_vendor_name'] =  $value['og_vendor_name'];
                 $data[$counter]['vendor_po_number'] =  $value['vendor_po_number'];
-                $data[$counter]['vendor_po_devlivey_date'] = $value['vendor_po_delivery_date'];
-                $data[$counter]['incoming_item_part_recoved_date'] = $value['incoming_item_recived_date'];
 
-                $data[$counter]['vendor_po_devlivey_date'] = $value['vendor_po_delivery_date'];
-                $data[$counter]['incoming_item_part_recoved_date'] = $value['incoming_item_recived_date'];
+
+                if($value['vendor_po_delivery_date']){
+                    $vendor_po_delivery_date =date('d-m-Y',strtotime($value['vendor_po_delivery_date']));
+                }else{
+                    $vendor_po_delivery_date='';
+                }
+
+
+                if($value['incoming_item_recived_date']){
+                    $incoming_item_recived_date =date('d-m-Y',strtotime($value['incoming_item_recived_date']));
+                }else{
+                    $incoming_item_recived_date='';
+                }
+
+
+                $data[$counter]['vendor_po_devlivey_date'] = $vendor_po_delivery_date;
+                $data[$counter]['incoming_item_part_recoved_date'] = $incoming_item_recived_date;
+
+                // $data[$counter]['vendor_po_devlivey_date'] = $value['vendor_po_delivery_date'];
+                // $data[$counter]['incoming_item_part_recoved_date'] = $value['incoming_item_recived_date'];
 
                 $delivery_date = new DateTime($value['vendor_po_delivery_date']);
                 $received_date = new DateTime($value['incoming_item_recived_date']);
@@ -27160,6 +27176,101 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+
+    
+     public function exporttoexceldeleverydaysreport($vendor_name,$from_date,$to_date){
+
+        $this->db->select(TBL_VENDOR.'.vendor_name as og_vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_VENDOR_PO_MASTER.'.delivery_date as vendor_po_delivery_date,'.TBL_INCOMING_DETAILS_ITEM.'.received_date as incoming_item_recived_date');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+
+
+        if($vendor_name != 'NA'){
+          $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
+        }
+
+
+        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.id'); 
+
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['og_vendor_name'] =  $value['og_vendor_name'];
+                $data[$counter]['vendor_po_number'] =  $value['vendor_po_number'];
+
+
+                if($value['vendor_po_delivery_date']){
+                    $vendor_po_delivery_date =date('d-m-Y',strtotime($value['vendor_po_delivery_date']));
+                }else{
+                    $vendor_po_delivery_date='';
+                }
+
+
+                if($value['incoming_item_recived_date']){
+                    $incoming_item_recived_date =date('d-m-Y',strtotime($value['incoming_item_recived_date']));
+                }else{
+                    $incoming_item_recived_date='';
+                }
+
+
+                $data[$counter]['vendor_po_devlivey_date'] = $vendor_po_delivery_date;
+                $data[$counter]['incoming_item_part_recoved_date'] = $incoming_item_recived_date;
+
+                //$data[$counter]['vendor_po_devlivey_date'] = $value['vendor_po_delivery_date'];
+                //$data[$counter]['incoming_item_part_recoved_date'] = $value['incoming_item_recived_date'];
+
+                $delivery_date = new DateTime($value['vendor_po_delivery_date']);
+                $received_date = new DateTime($value['incoming_item_recived_date']);
+
+                $interval = $delivery_date->diff($received_date);
+
+                $days = $interval->days;
+
+                // Delivery Date - Recd Date
+                if ($received_date > $delivery_date) {
+
+                    // Delay = negative
+                    $data[$counter]['days_calculation'] = '-' . $days;
+                    $data[$counter]['status'] = 'Delay';
+
+                } else {
+
+                    // Early = positive
+                    $data[$counter]['days_calculation'] = '+' . $days;
+                    $data[$counter]['status'] = 'Early';
+                }
+
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+
 
 
 

@@ -25625,8 +25625,8 @@
 						$(".loader_ajax").hide();
 					}
 				});
-			return false;
-		});
+			 return false;
+		    });
 
 
 
@@ -31779,6 +31779,53 @@ $('#export_excel').on('click', function() {
 				});
             }
 
+
+
+            $(document).on('click','#export_to_excel_delivery_days_report',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var vendor_name  = $("#vendor_name").val();
+	
+				if($("#from_date").val()){
+					var from_date  = $("#from_date").val();
+				}else{
+					var from_date  = 'NA';
+				}
+
+				if($("#to_date").val()){
+					var to_date  = $("#to_date").val();
+				}else{
+					var to_date  = 'NA';
+				}
+
+
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/exporttoexceldeleverydaysreport/"+vendor_name+"/"+from_date+"/"+to_date,
+					type: "POST",
+					// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							alert('No data fond');
+						}
+						else
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							window.location.href = "<?php echo ADMIN_PATH;?>admin/exporttoexceldeleverydaysreport/"+vendor_name+"/"+from_date+"/"+to_date;
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						alert('No data fond');
+						$(".loader_ajax").hide();
+					}
+				});
+			 return false;
+		    });
 
 </script>
 <?php } ?>

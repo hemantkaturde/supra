@@ -57,7 +57,7 @@
                                         <div style="margin-top:22px">
                                             <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
                                             <input type="button" class="btn btn-primary" value="Export To Excel"
-                                                id="" name="export_to_excel_cbam_report" />
+                                                id="export_to_excel_delivery_days_report" name="export_to_excel_delivery_days_report" />
                                         </div>
                                     </div>
                                 </div>
