@@ -28451,7 +28451,8 @@ public function addreworkrecord(){
                     'inspection_report_no'   => strip_tags(form_error('inspection_report_no')),
                     'after_rework_checked_by'   => strip_tags(form_error('after_rework_checked_by')),
                     'rework_done_by'   => strip_tags(form_error('rework_done_by')),
-                    'checking_date'   => strip_tags(form_error('checking_date'))
+                    'checking_date'   => strip_tags(form_error('checking_date')),
+                    'authorized_by'  => strip_tags(form_error('authorized_by')),
                 );
 
             } 
@@ -28481,7 +28482,8 @@ public function addreworkrecord(){
                     'inspection_report_no'  => trim($this->input->post('inspection_report_no')),
                     'after_rework_checked_by'   => trim($this->input->post('after_rework_checked_by')),
                     'rework_done_by'   => trim($this->input->post('rework_done_by')),
-                    'checking_date'   => trim($this->input->post('checking_date'))
+                    'checking_date'   => trim($this->input->post('checking_date')),
+                    'authorized_by'   => trim($this->input->post('authorized_by'))
                 );
 
                 $saveRework = $this->admin_model->saveReworkRecord($rework_id, $data);
@@ -28501,7 +28503,8 @@ public function addreworkrecord(){
                         'inspection_report_no'   => strip_tags(form_error('inspection_report_no')),
                         'after_rework_checked_by'   => strip_tags(form_error('after_rework_checked_by')),
                         'rework_done_by'   => strip_tags(form_error('rework_done_by')),
-                        'checking_date'   => strip_tags(form_error('checking_date'))
+                        'checking_date'   => strip_tags(form_error('checking_date')),
+                        'authorized_by'  => strip_tags(form_error('authorized_by')),
                     );
                 }
             }
