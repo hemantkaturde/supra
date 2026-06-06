@@ -31570,8 +31570,9 @@ public function addnewbalancestock(){
             $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Buyer PO Date');  
             $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Inspection Report Date'); 
             $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Checked By'); 
-            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Status');
-            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Remarks');
+            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'No of Dimensions'); 
+            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Status');
+            $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Remarks');
 
             // set Row
             $rowCount = 2;
@@ -31589,22 +31590,23 @@ public function addnewbalancestock(){
                 $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, date("d-m-Y", strtotime($element['buyer_po_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, date("d-m-Y", strtotime($element['inspection_report_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['checked_by']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['inspection_report_status']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['remarks']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['no_of_dimensions']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['inspection_report_status']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['remarks']);
 
                 $rowCount++;
             }
 
-            foreach(range('A','O') as $columnID) {
+            foreach(range('A','P') as $columnID) {
                 $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
 			}
 			/*********************Autoresize column width depending upon contents END***********************/
 			
-            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->getFont()->setBold(true); //Make heading font bold
+            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->getFont()->setBold(true); //Make heading font bold
 			
 			/*********************Add color to heading START**********************/
             $objPHPExcel->getActiveSheet()
-						->getStyle('A1:O1')
+						->getStyle('A1:P1')
 						->getFill()
 						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
 						->getStartColor()
