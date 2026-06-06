@@ -17825,6 +17825,24 @@ public function downlaoddebitnotevendor($id){
 
         // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
 
+        if($gst_rate=='Zero_Tax'){
+
+                /*06-06-2026 As Per new Logic*/
+                $subtotalpluspandrcharges_TaX = $sub_total_amount;
+                // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
+                // $loop_tax_rate = $igst_tax_rate;
+
+                $tax_value = '
+                    <tr style="border: 1px solid black;">
+                        <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Zero Tax 0%</td>    
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                    </tr>';
+
+                $total_debit_amount = $sub_total_amount;
+
+        }else{
+
+    
         /*03-10-2024 As Per new Logic*/
         $subtotalpluspandrcharges_TaX = $sub_total_amount * $igst_tax_rate / 100;
         $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
@@ -17837,6 +17855,8 @@ public function downlaoddebitnotevendor($id){
             </tr>';
 
         $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
+
+        }
      }
     
 
