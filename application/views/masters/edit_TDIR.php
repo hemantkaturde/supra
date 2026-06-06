@@ -135,7 +135,7 @@
                                       
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="inspection_report_date">Inspection Report Date</label>
+                                            <label for="inspection_report_date">Inspection Report Date <span class="required">*</span></label>
                                             <input type="text" class="form-control datepicker" id="inspection_report_date" value="<?php echo $getTdirdata[0]['inspection_report_date']; ?>" name="inspection_report_date">
                                             <p class="error inspection_report_date_error"></p>
                                         </div>
@@ -144,7 +144,7 @@
 
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="checked_by">Checked By</label>
+                                            <label for="checked_by">Checked By <span class="required">*</span></label>
                                             <input type="text" class="form-control" id="checked_by" name="checked_by" value="<?php echo $getTdirdata[0]['checked_by']; ?>">
                                             <p class="error checked_by_error"></p>
                                         </div>
@@ -152,6 +152,14 @@
                                 </div>
                                
                                 <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="no_of_dimensions">No of Dimensions <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="no_of_dimensions" name="no_of_dimensions">
+                                            <p class="error no_of_dimensions_error"></p>
+                                        </div>
+                                    </div>
                                     <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_qty">Order Qty</label>

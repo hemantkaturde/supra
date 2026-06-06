@@ -26779,16 +26779,18 @@ public function addTDIR(){
         $this->form_validation->set_rules('additional_process','Additional Process','trim');
         $this->form_validation->set_rules('remarks','Remarks','trim');
         $this->form_validation->set_rules('qty_in_pcs_for_export_purposr','qty_in_pcs_for_export_purposr','trim');
-        $this->form_validation->set_rules('checked_by','checked_by','trim');
-        $this->form_validation->set_rules('inspection_report_date','inspection_report_date','trim');
+        $this->form_validation->set_rules('checked_by','checked_by','trim|required');
+        $this->form_validation->set_rules('inspection_report_date','inspection_report_date','trim|required');
         $this->form_validation->set_rules('buyer_PO_number','buyer_PO_number','trim');
         $this->form_validation->set_rules('buyer_order_qty','buyer_order_qty','trim');
         $this->form_validation->set_rules('inspection_report_status','Inspection Report Status','trim');
+        $this->form_validation->set_rules('no_of_dimensions','no_of_dimensions','trim|required');
+
 
         if($this->form_validation->run() == FALSE)
         {
             $save_TDIR_response['status'] = 'failure';
-            $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')),'inspection_report_status'=>strip_tags(form_error('inspection_report_status')));
+            $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')),'inspection_report_status'=>strip_tags(form_error('inspection_report_status')),'inspection_report_date'=>strip_tags(form_error('inspection_report_date')),'checked_by'=>strip_tags(form_error('checked_by')),'no_of_dimensions'=>strip_tags(form_error('no_of_dimensions')));
         }else{
 
 
@@ -26817,6 +26819,7 @@ public function addTDIR(){
                 'buyer_PO_number'           => trim($this->input->post('buyer_PO_number')),
                 'buyer_order_qty' => trim($this->input->post('buyer_order_qty')),
                 'inspection_report_status' => trim($this->input->post('inspection_report_status')),
+                'no_of_dimensions' => trim($this->input->post('no_of_dimensions')),
             );
 
             if($this->input->post('tdir_id')){
@@ -26851,11 +26854,8 @@ public function addTDIR(){
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New TDIR';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
-
             $data['getPreviousReportnumber']= $this->admin_model->getPreviousReportnumber();
-
             $this->loadViews("masters/addTDIR", $this->global, $data, NULL);
-
     }
 
 }
