@@ -153,7 +153,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="no_of_dimensions">No of Dimensions <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="no_of_dimensions" name="no_of_dimensions" value="<?php echo $getTdirdata[0]['no_of_dimensions']; ?>>
+                                            <input type="text" class="form-control" id="no_of_dimensions" name="no_of_dimensions" value="<?php echo $getTdirdata[0]['no_of_dimensions']; ?>">
                                             <p class="error no_of_dimensions_error"></p>
                                         </div>
                                     </div>
