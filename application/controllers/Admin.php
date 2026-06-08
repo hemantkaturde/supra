@@ -30031,7 +30031,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                         <td>'.($row['qty_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_rej_qty_in_pcs'] ?? '').'</td>
-                        <td>'.($row['rework_checked_by'] ?? '').'</td>
+                        <td>'.($row['rework_done_by'] ?? '').'</td>
                     </tr>
                 ';
                 $i++;
