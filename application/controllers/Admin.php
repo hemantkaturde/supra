@@ -16961,27 +16961,50 @@ public function downlaodjobworkchllan($id){
                 $grand_total +=$value['grand_total'];
                 $gst_rate = $value['gst_rate'];
 
+                // if($value['gst_rate']=='CGST_SGST'){
+                //     $cgst_tax_rate = 9;
+                //     $sgst_tax_rate = 9;
+
+                //     $cgst_tax_value = $value['gst']/2;
+                //     $sgst_tax_value = $value['gst']/2;
+
+                // }else if($value['gst_rate']=='CGST_SGST_6'){
+                //     $cgst_tax_rate = 6;
+                //     $sgst_tax_rate = 6;
+
+                //     $cgst_tax_value = $value['gst']/2;
+                //     $sgst_tax_value = $value['gst']/2;
+
+                // }else if($value['gst_rate']=='IGST'){
+                //     $igst_tax_rate = 18;
+                //     $igst_tax_value = $value['gst'];
+                // }else if($value['gst_rate']=='IGST_12'){
+                //     $igst_tax_rate = 12;
+                //     $igst_tax_value = $value['gst'];
+
+                // }
+
                 if($value['gst_rate']=='CGST_SGST'){
                     $cgst_tax_rate = 9;
                     $sgst_tax_rate = 9;
 
-                    $cgst_tax_value = $value['gst']/2;
-                    $sgst_tax_value = $value['gst']/2;
+                    $cgst_tax_value += ($value['gst'] / 2);
+                    $sgst_tax_value += ($value['gst'] / 2);
 
                 }else if($value['gst_rate']=='CGST_SGST_6'){
                     $cgst_tax_rate = 6;
                     $sgst_tax_rate = 6;
 
-                    $cgst_tax_value = $value['gst']/2;
-                    $sgst_tax_value = $value['gst']/2;
+                    $cgst_tax_value += ($value['gst'] / 2);
+                    $sgst_tax_value += ($value['gst'] / 2);
 
                 }else if($value['gst_rate']=='IGST'){
                     $igst_tax_rate = 18;
-                    $igst_tax_value = $value['gst'];
+                    $igst_tax_value += $value['gst'];
+
                 }else if($value['gst_rate']=='IGST_12'){
                     $igst_tax_rate = 12;
-                    $igst_tax_value = $value['gst'];
-
+                    $igst_tax_value += $value['gst'];
                 }
 
             $i++;
