@@ -30224,6 +30224,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     $vendor_po_number = $get_rework_rejection_data[0]['actual_vendor_po'];
     $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
     $rework_done_by = $get_rework_rejection_data[0]['rework_done_by'];
+    $authorized_by = $get_rework_rejection_data[0]['authorized_by'];
 
 
     // ---------------- QR CODE GENERATE -----------------
@@ -30283,7 +30284,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             </tr>
             <tr>
                 <td class="label">Lot Qty Input</td><td>'.$lot_qty.'</td>
-                <td class="label">Rework Done By</td><td>'.$rework_done_by.'</td>
+                <td class="label">Authorized By</td><td>'.$authorized_by.'</td>
 
             </tr>
             </table>
@@ -30293,11 +30294,12 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             <table width="100%" style="font-size:15px;!important">
             <tr>
                 <th width="6%">NO.</th>
-                <th width="30%">Rejection Reason</th>
+                <th width="20%">Rejection Reason</th>
                 <th width="30%">Rejected Reason Notes</th>
                 <th width="10%">Qty Input</th>
                 <th width="20%">After Rework OK Qty</th>
                 <th width="20%">After Rework Rejection Qty</th>
+                <th width="20%">Rework Done By</th>
             </tr>';
 
 
@@ -30316,6 +30318,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
                         <td>'.($row['qty_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_rej_qty_in_pcs'] ?? '').'</td>
+                        <td>'.($row['rework_done_by'] ?? '').'</td>
                     </tr>
                 ';
                 $i++;
@@ -30326,6 +30329,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
                 $html .= '
                     <tr>
                         <td>'.$i.'</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
