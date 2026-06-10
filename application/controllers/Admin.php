@@ -31811,45 +31811,42 @@ public function deletesupplieritemattachment(){
 }
 
 
-public function vendor_po_item_attachment($vendor_po_item_id){
-
-    $process = 'Vendor PO Item Attachment';
-    $processFunction = 'Admin/vendor_po_item_attachment';
-    $data['vendor_po_item_id']= $vendor_po_item_id;
-    $this->global['pageTitle'] = 'Vendor PO Item Attachment';  
-    $data['getvendorpoitemattachmentdetails']= $this->admin_model->getvendorpoitemattachmentdetails($vendor_po_item_id);
-    $this->loadViews("masters/vendorpoitemattacment", $this->global, $data, NULL); 
-
-}
-
-
-
-public function fetchvendorpoitemattachedment($vendoritemid_main){
-
-
-
-    $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchvendorpoitemattachedmentcount($params,$vendoritemid_main); 
-    $queryRecords = $this->admin_model->fetchvendorpoitemattachedmentdate($params,$vendoritemid_main); 
-
-    $data = array();
-    foreach ($queryRecords as $key => $value)
-    {
-        $i = 0;
-        foreach($value as $v)
-        {
-            $data[$key][$i] = $v;
-            $i++;
-        }
+    public function vendor_po_item_attachment($vendor_po_item_id){
+        $process = 'Vendor PO Item Attachment';
+        $processFunction = 'Admin/vendor_po_item_attachment';
+        $data['vendor_po_item_id']= $vendor_po_item_id;
+        $this->global['pageTitle'] = 'Vendor PO Item Attachment';  
+        $data['getvendorpoitemattachmentdetails']= $this->admin_model->getvendorpoitemattachmentdetails($vendor_po_item_id);
+        $this->loadViews("masters/vendorpoitemattacment", $this->global, $data, NULL); 
     }
-    $json_data = array(
-        "draw"            => intval( $params['draw'] ),   
-        "recordsTotal"    => intval( $totalRecords ),  
-        "recordsFiltered" => intval($totalRecords),
-        "data"            => $data   // total data array
-        );
-    echo json_encode($json_data);
-}
+
+
+    public function fetchvendorpoitemattachedment($vendoritemid_main){
+
+
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchvendorpoitemattachedmentcount($params,$vendoritemid_main); 
+        $queryRecords = $this->admin_model->fetchvendorpoitemattachedmentdate($params,$vendoritemid_main); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
 
     public function addvendorPOattachment(){
         $post_submit = $this->input->post();
@@ -32215,7 +32212,76 @@ public function fetchvendorpoitemattachedment($vendoritemid_main){
     }
 
 
+    public function forgingscarpworkingreport(){
 
+        $process = 'Forging Scarp Working';
+        $processFunction = 'Admin/forgingscarpworkingreport';
+        $this->global['pageTitle'] = 'Forging Scarp Working';  
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/forgingscarpworkingreport", $this->global, $data, NULL); 
+
+    }
+
+
+    public function addnewforgingscarpworking(){
+
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            // $packing_instrction_response = array();
+            // $this->form_validation->set_rules('packing_id_number','PO Number','trim|required');
+            // $this->form_validation->set_rules('buyer_name','Date','trim|required');
+            // $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim|required');
+            // $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            // $this->form_validation->set_rules('export_id','Export Id','trim|required');
+            // $this->form_validation->set_rules('remark','Remark','trim');
+
+            // if($this->form_validation->run() == FALSE)
+            // {
+            //     $packing_instrction_response['status'] = 'failure';
+            //     $packing_instrction_response['error'] = array('export_id'=>strip_tags(form_error('export_id')), 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+           
+            // }else{
+
+            //     $data = array(
+            //         'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
+            //         'export_id'   => trim($this->input->post('export_id')),
+            //         'buyer_name'     => trim($this->input->post('buyer_name')),
+            //         'buyer_po_number'  => trim($this->input->post('buyer_po_number')),
+            //         'buyer_po_date'=> trim($this->input->post('buyer_po_date')),
+            //         'remark'=> trim($this->input->post('remark')),
+            //     );
+
+            //     $checkIpackinginstraction = $this->admin_model->checkIpackinginstraction(trim($this->input->post('packing_id_number')));
+            //     if($checkIpackinginstraction > 0){
+            //             $packing_instrction_response['status'] = 'failure';
+            //             $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+            //         }else{
+            //         $savePackinginstarction = $this->admin_model->savePackinginstarction('',$data);
+            //         if($savePackinginstarction){
+            //                  $packing_instrction_response['status'] = 'success';
+            //                  $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                            
+            //         }
+
+            //     }
+
+            // }
+
+            // echo json_encode($packing_instrction_response);
+
+        }else{
+
+            $process = 'Add New Forging Scarp Working';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Forging Scarp Working';
+            $this->loadViews("masters/addnewforgingscarpworking", $this->global, $data, NULL);
+        }
+
+
+    }
 
 
 
