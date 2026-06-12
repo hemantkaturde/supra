@@ -32223,63 +32223,146 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function fetchforgingscrapreport(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchforgingscrapreportcount($params); 
+        $queryRecords = $this->admin_model->fetchforgingscrapreportdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+
     public function addnewforgingscarpworking(){
 
 
         $post_submit = $this->input->post();
         if($post_submit){
 
-            // $packing_instrction_response = array();
-            // $this->form_validation->set_rules('packing_id_number','PO Number','trim|required');
-            // $this->form_validation->set_rules('buyer_name','Date','trim|required');
-            // $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim|required');
-            // $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
-            // $this->form_validation->set_rules('export_id','Export Id','trim|required');
-            // $this->form_validation->set_rules('remark','Remark','trim');
+            $forginscrapwork_response = array();
 
-            // if($this->form_validation->run() == FALSE)
-            // {
-            //     $packing_instrction_response['status'] = 'failure';
-            //     $packing_instrction_response['error'] = array('export_id'=>strip_tags(form_error('export_id')), 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+            $this->form_validation->set_rules('vendor_id','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_id','Vendor PO','trim|required');
+            $this->form_validation->set_rules('supplier_id','Supplier Name','trim|required');
+            $this->form_validation->set_rules('supplier_po_id','Supplier PO ID','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $forginscrapwork_response['status'] = 'failure';
+                $forginscrapwork_response['error'] = array('vendor_id'=>strip_tags(form_error('vendor_id')), 'vendor_po_id'=>strip_tags(form_error('vendor_po_id')),'supplier_id'=>strip_tags(form_error('supplier_id')),'supplier_po_id'=>strip_tags(form_error('supplier_po_id')),'remark'=>strip_tags(form_error('remark')));
            
-            // }else{
+            }else{
 
-            //     $data = array(
-            //         'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
-            //         'export_id'   => trim($this->input->post('export_id')),
-            //         'buyer_name'     => trim($this->input->post('buyer_name')),
-            //         'buyer_po_number'  => trim($this->input->post('buyer_po_number')),
-            //         'buyer_po_date'=> trim($this->input->post('buyer_po_date')),
-            //         'remark'=> trim($this->input->post('remark')),
-            //     );
+                $data = array(
+                    'vendor_id'   => trim($this->input->post('vendor_id')),
+                    'vendor_po_id'   => trim($this->input->post('vendor_po_id')),
+                    'supplier_id'     => trim($this->input->post('supplier_id')),
+                    'supplier_po_id'  => trim($this->input->post('supplier_po_id')),
+                    'remark'=> trim($this->input->post('remark')),
+                );
 
-            //     $checkIpackinginstraction = $this->admin_model->checkIpackinginstraction(trim($this->input->post('packing_id_number')));
-            //     if($checkIpackinginstraction > 0){
-            //             $packing_instrction_response['status'] = 'failure';
-            //             $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
-            //         }else{
-            //         $savePackinginstarction = $this->admin_model->savePackinginstarction('',$data);
-            //         if($savePackinginstarction){
-            //                  $packing_instrction_response['status'] = 'success';
-            //                  $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                $addnewforgingscarpworking = $this->admin_model->addnewforgingscarpworking('',$data);
+                if($addnewforgingscarpworking){
+                    $forginscrapwork_response['status'] = 'success';
+                    $forginscrapwork_response['error'] = array('vendor_id'=>strip_tags(form_error('vendor_id')), 'vendor_po_id'=>strip_tags(form_error('vendor_po_id')),'supplier_id'=>strip_tags(form_error('supplier_id')),'supplier_po_id'=>strip_tags(form_error('supplier_po_id')),'remark'=>strip_tags(form_error('remark')));
                             
-            //         }
+                }
+            }
 
-            //     }
-
-            // }
-
-            // echo json_encode($packing_instrction_response);
+           echo json_encode($forginscrapwork_response);
 
         }else{
 
             $process = 'Add New Forging Scarp Working';
             $processFunction = 'Admin/addjobwork';
             $this->logrecord($process,$processFunction);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->global['pageTitle'] = 'Add New Forging Scarp Working';
             $this->loadViews("masters/addnewforgingscarpworking", $this->global, $data, NULL);
         }
 
+
+    }
+
+
+    public function getVendorPOonlyBOMforforgingreportlist(){
+        $vendor_id=$this->input->post('vendor_id');
+        if($vendor_id) {
+			$getVendordetails = $this->admin_model->getVendorPOonlyBOMforforgingreportlist($vendor_id);
+			if(count($getVendordetails) >= 1) {
+                $content = $content.'<option value="">Select Vendor PO Number</option>';
+				foreach($getVendordetails as $value) {
+
+                    //  if($this->input->post('vendor_po_id')==$value["id"]){
+                    //     $selected = 'selected';
+                    //  }else{ 
+                    //     $selected ='';
+                    //  }
+
+                     $content = $content.'<option value="'.$value["id"].'" '.$selected.'>'.$value["bom_number"].'</option>';
+					
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+    public function getSupplierdetailsforForginworks(){
+
+        if($this->input->post('vendor_po_number')) {
+            $getBuyeridbypoid = $this->admin_model->getSupplierdetailsforForginworks($this->input->post('vendor_po_number'));
+            if($getBuyeridbypoid){
+                $content = $getBuyeridbypoid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+
+    }
+
+    public function deleteforginscrapworking(){
+
+      $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteforginscrapworking(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Forgin Scrap Working';
+                        $processFunction = 'Admin/deleteforginscrapworking';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
 
     }
 

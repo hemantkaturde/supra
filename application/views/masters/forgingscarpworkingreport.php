@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Packing Instructions
+            <i class="fa fa-users"></i> Forging Scarp Working
             <small>Add,Edit,Delete</small>
         </h1>
     </section>

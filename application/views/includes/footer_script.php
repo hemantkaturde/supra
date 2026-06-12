@@ -31842,3 +31842,209 @@ $('#export_excel').on('click', function() {
 
 </script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working'){?>
+	<script type="text/javascript">
+		        $(document).ready(function() {
+					var dt = $('#view_forging_scarp_working').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Forging Scarp Working Record Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchforgingscrapreport",
+							type: "post",
+						},
+					});
+				});
+
+
+			    $(document).on('change','#vendor_id',function(e){  
+					e.preventDefault();
+					var vendor_id = $('#vendor_id').val();
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getVendorPOonlyBOMforforgingreportlist",
+						type: "POST",
+						data : {'vendor_id' : vendor_id},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#vendor_po_id').html('<option value="">Select Vendor PO Number</option>');
+							}
+							else
+							{
+								$('#vendor_po_id').html(data);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#vendor_po_id').html();
+						}
+					});
+					return false;
+		        });
+
+
+				$(document).on('change','#vendor_po_id',function(e){  
+			        e.preventDefault();
+			
+						//$(".loader_ajax").show();
+						var vendor_po_number = $('#vendor_po_id').val();
+	
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getSupplierdetailsforForginworks",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#supplier_name').val('');
+									$('#supplier_po').val('');
+									$('#supplier_id').val('');
+									$('#supplier_po_id').val('');
+								}
+								else
+								{
+									var data_row = jQuery.parseJSON( data );
+
+									$('#supplier_name').val(data_row.supplier);
+									$('#supplier_po').val(data_row.supplierpo);	
+									$('#supplier_id').val(data_row.supplier_id);
+									$('#supplier_po_id').val(data_row.supplier_po_id);
+								
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								   
+									$('#supplier_name').val('');
+									$('#supplier_po').val('');
+									$('#supplier_id').val('');
+									$('#supplier_po_id').val('');				
+							}
+						});
+						return false;
+
+		        });
+
+
+				$(document).on('click','#addnewforgingscarpworking',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addnewforgingscarpworkingform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addnewforgingscarpworking",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Forging Scarp Work Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'forgingscarpworkingreport'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+				});
+
+
+				$(document).on('click','.deleteforginscrapworking',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Forging Scarp Working",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deleteforginscrapworking",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Forging Scarp Working Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>forgingscarpworkingreport";
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Forging Scarp Working deletion cancelled ", "error");
+						}
+					});
+	            });
+
+
+
+    </script>
+<?php } ?>

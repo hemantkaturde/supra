@@ -221,6 +221,7 @@
                           || $pageUrl=="angadia_report"
                           || $pageUrl=="supplier_po_item_attachment"
                           || $pageUrl=="forgingscarpworkingreport"
+                          || $pageUrl=="addnewforgingscarpworking"
                           ){echo 'active';}?>">
                         <a href="#">
                           <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
@@ -254,7 +255,7 @@
                           <li class="line_height <?php if($pageUrl=="packing_challan" || $pageUrl=="addnewpackingchallan" || $pageUrl== "editpackingchallan"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packing_challan"><i class="fa fa-cubes"></i> Packing Challan</a></li>
                           <li class="line_height <?php if($pageUrl=="angadia_report"){echo 'active';}?>"><a href="<?php echo base_url(); ?>angadia_report"><i class="fa fa-cubes"></i> Sai Krupa Express Report</a></li>
                           <li class="line_height <?php if($pageUrl=="deliverydayscalculationreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>deliverydayscalculationreport"><i class="fa fa-cubes"></i> Delievery Days Calculation Report</a></li>
-                          <li class="line_height <?php if($pageUrl=="forgingscarpworkingreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>forgingscarpworkingreport"><i class="fa fa-cubes"></i> Forging Scarp Working</a></li>
+                          <li class="line_height <?php if($pageUrl=="forgingscarpworkingreport" || $pageUrl=="addnewforgingscarpworking"){echo 'active';}?>"><a href="<?php echo base_url(); ?>forgingscarpworkingreport"><i class="fa fa-cubes"></i> Forging Scarp Working</a></li>
 
                         </ul>
                       </li>
