@@ -31845,7 +31845,7 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working' ||  $pageTitle=='Edit Forging Scarp Working'){?>
+<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working' ||  $pageTitle=='Edit Forging Scarp Working' ||  $pageTitle=='Forging Scrap Report Item Dtails'){?>
 	<script type="text/javascript">
 		        $(document).ready(function() {
 					var dt = $('#view_forging_scarp_working').DataTable({
@@ -32043,6 +32043,43 @@ $('#export_excel').on('click', function() {
 						}
 					});
 	            });
+
+
+
+				 $(document).ready(function() {
+
+					var forgin_id = $('#forgin_id').val();
+					var vendor_po_id_master = $('#vendor_po_id_master').val();
+
+
+					var dt = $('#forging_scarp_working_item_details').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "20%", "targets": 0 },
+							{ "width": "20%", "targets": 1 },
+							{ "width": "20%", "targets": 2 },
+							{ "width": "20%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							//{ "width": "5%", "targets": 5 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Forging Scarp Working Item Details Record Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchforgingscarpworkingitemdetails/"+forgin_id+"/"+vendor_po_id_master,
+							type: "post",
+						},
+					});
+				});
+
 
     </script>
 <?php } ?>

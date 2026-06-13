@@ -32324,7 +32324,7 @@ public function deletesupplieritemattachment(){
                     //     $selected ='';
                     //  }
 
-                     $content = $content.'<option value="'.$value["id"].'" '.$selected.'>'.$value["bom_number"].'</option>';
+                     $content = $content.'<option value="'.$value["vendor_po_master_id"].'" '.$selected.'>'.$value["po_number"].'</option>';
 					
 				}
 				echo $content;
@@ -32377,12 +32377,49 @@ public function deletesupplieritemattachment(){
         $processFunction = 'Admin/editforgingscrapreport';
         $this->global['pageTitle'] = 'Edit Forging Scarp Working';  
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
-
         $data['getforgindataforedit']= $this->admin_model->getforgindataforedit($forgin_id);
-
         $this->loadViews("masters/editforgingscrapreport", $this->global, $data, NULL); 
     }
 
+    public function forgingscrapreportitemdetails($forgin_id,$vendor_po_id_master){
+    
+            $process = 'Forging Scrap Report Item Dtails';
+            $processFunction = 'Admin/forgingscrapreportitemdetails';
+            $this->logrecord($process,$processFunction);
+            $data['forgin_id'] = $forgin_id;
+            $data['vendor_po_id_master'] = $vendor_po_id_master;
+            $data['getPreviousforgindata']= $this->admin_model->getforgindataforedit($forgin_id);
+            $this->global['pageTitle'] = 'Forging Scrap Report Item Dtails';
+            $this->loadViews("masters/forgingscrapreportitemdetails", $this->global, $data, NULL);
+
+    }
+
+
+    public function fetchforgingscarpworkingitemdetails($forgin_id,$vendor_po_id_master){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchforgingscarpworkingitemdetailscount($params,$forgin_id,$vendor_po_id_master); 
+        $queryRecords = $this->admin_model->fetchforgingscarpworkingitemdetailsdata($params,$forgin_id,$vendor_po_id_master); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
 
 
 }

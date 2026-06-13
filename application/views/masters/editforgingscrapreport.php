@@ -48,7 +48,7 @@
                                             <div class="form-group">
                                                     <label for="vendor_po_id">Select Vendor PO Number <span class="required">*</span></label>
                                                     <select class="form-control" name="vendor_po_id" id="vendor_po_id">
-                                                        <option st-id="" value="<?=$getforgindataforedit[0]['bom_id'];?>"><?=$getforgindataforedit[0]['vendor_po_number_master'];?></option>
+                                                        <option st-id="" value="<?=$getforgindataforedit[0]['vendor_po_id'];?>"><?=$getforgindataforedit[0]['vendor_po_number_master'];?></option>
                                                         <option st-id="" value="">Select Vendor PO</option>
                                                     </select> 
                                                 <p class="error vendor_po_id_error"></p>

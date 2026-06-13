@@ -682,6 +682,7 @@ $route['addnewforgingscarpworking'] = "admin/addnewforgingscarpworking";
 $route['getVendorPOonlyBOMforforgingreportlist'] = "admin/getVendorPOonlyBOMforforgingreportlist";
 
 $route['editforgingscrapreport/(:any)'] = "admin/editforgingscrapreport/$1";
+$route['forgingscrapreportitemdetails/(:any)/(:any)'] = "admin/forgingscrapreportitemdetails/$1/$2";
 
 
 
