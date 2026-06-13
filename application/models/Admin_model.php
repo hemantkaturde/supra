@@ -27325,7 +27325,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['supplier_po_master'] =  $value['supplier_po_master'];
                 $data[$counter]['forgin_scrap_remark'] =  $value['forgin_scrap_remark'];
                 $data[$counter]['action'] = '';
-                //$data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['forgin_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['forgin_id']."' class='fa fa-trash-o deleteforginscrapworking' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -27399,6 +27399,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
     }
 
+
+     public function getforgindataforedit($forgin_id){
+
+        $this->db->select(TBL_FORGING_SCARP_WORKING.'.remark as forgin_scrap_remark,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_BILL_OF_MATERIAL.'.bom_number as vendor_po_number_master,'.TBL_SUPPLIER.'.supplier_name as supplier_master_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_FORGING_SCARP_WORKING.'.id as forgin_id,'.TBL_VENDOR.'.ven_id as vendor_master_id,'.TBL_SUPPLIER.'.sup_id as supplier_master_id,'.TBL_SUPPLIER_PO_MASTER.'.id as supplier_po_id_master,'.TBL_BILL_OF_MATERIAL.'.id as bom_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_FORGING_SCARP_WORKING.'.supplier_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.supplier_po_id');
+        $this->db->where(TBL_FORGING_SCARP_WORKING.'.id', $forgin_id);
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
 
 
 }

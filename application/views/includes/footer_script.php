@@ -31845,7 +31845,7 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working'){?>
+<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working' ||  $pageTitle=='Edit Forging Scarp Working'){?>
 	<script type="text/javascript">
 		        $(document).ready(function() {
 					var dt = $('#view_forging_scarp_working').DataTable({
@@ -31856,7 +31856,7 @@ $('#export_excel').on('click', function() {
 							{ "width": "10%", "targets": 2 },
 							{ "width": "10%", "targets": 3 },
 							{ "width": "10%", "targets": 4 },
-							{ "width": "10%", "targets": 5 },
+							{ "width": "5%", "targets": 5 },
 							
 						],
 						responsive: true,
@@ -32043,8 +32043,6 @@ $('#export_excel').on('click', function() {
 						}
 					});
 	            });
-
-
 
     </script>
 <?php } ?>

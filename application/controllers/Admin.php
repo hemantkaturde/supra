@@ -32280,7 +32280,13 @@ public function deletesupplieritemattachment(){
                     'remark'=> trim($this->input->post('remark')),
                 );
 
-                $addnewforgingscarpworking = $this->admin_model->addnewforgingscarpworking('',$data);
+                if(trim($this->input->post('forgin_id'))){
+                   $forgin_id = trim($this->input->post('forgin_id'));
+                }else{
+                   $forgin_id ='';
+                }
+
+                $addnewforgingscarpworking = $this->admin_model->addnewforgingscarpworking($forgin_id,$data);
                 if($addnewforgingscarpworking){
                     $forginscrapwork_response['status'] = 'success';
                     $forginscrapwork_response['error'] = array('vendor_id'=>strip_tags(form_error('vendor_id')), 'vendor_po_id'=>strip_tags(form_error('vendor_po_id')),'supplier_id'=>strip_tags(form_error('supplier_id')),'supplier_po_id'=>strip_tags(form_error('supplier_po_id')),'remark'=>strip_tags(form_error('remark')));
@@ -32364,6 +32370,17 @@ public function deletesupplieritemattachment(){
             echo(json_encode(array('status'=>'failed'))); 
         }
 
+    }
+
+    public function editforgingscrapreport($forgin_id){
+        $process = 'Edit Forging Scarp Working';
+        $processFunction = 'Admin/editforgingscrapreport';
+        $this->global['pageTitle'] = 'Edit Forging Scarp Working';  
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
+        $data['getforgindataforedit']= $this->admin_model->getforgindataforedit($forgin_id);
+
+        $this->loadViews("masters/editforgingscrapreport", $this->global, $data, NULL); 
     }
 
 
