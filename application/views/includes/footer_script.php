@@ -32116,7 +32116,6 @@ $('#export_excel').on('click', function() {
 
 				});
 
-
 				$('#sent_rm_in_kgs_section_1').on('keyup change', function () {
 					let rm_actual_qty_popup = parseInt($('#rm_actual_qty_popup').val()) || 0;
 					let sent_rm_in_kgs_section_1  = parseInt($('#sent_rm_in_kgs_section_1').val()) || 0;
@@ -32124,27 +32123,67 @@ $('#export_excel').on('click', function() {
 					$('#diff_in_kgs_section_1').val(final_amt);
 				});
 
-
 				$('#sent_rm_in_kgs_section_2').on('keyup change', function () {
-
 					let sent_rm_in_kgs_section_1  = parseInt($('#sent_rm_in_kgs_section_1').val()) || 0;
 					let sent_rm_in_kgs_section_2 = parseInt($('#sent_rm_in_kgs_section_2').val()) || 0;
 					let final_amt = sent_rm_in_kgs_section_1 - sent_rm_in_kgs_section_2;	
 					$('#diff_in_kgs_section_2').val(final_amt);
 				});
 
-
-
-				
 				$('#sent_rm_in_kgs_section_2').on('keyup change', function () {
-
 					let diff_in_kgs_section_2  = parseInt($('#diff_in_kgs_section_2').val()) || 0;
 					let diff_in_kgs_section_1 = parseInt($('#diff_in_kgs_section_1').val()) || 0;
 					let final_amt = diff_in_kgs_section_1 - diff_in_kgs_section_2;	
 					$('#total_scrap_section_2').val(final_amt);
 				});
 
+				$(document).on('click','#saveforginscrapreportdetailsdata',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
 
+					var forgin_id_popup = $('#forgin_id_popup').val();
+					var vendor_id_popup = $('#vendor_id_popup').val();
+
+
+					var formData = new FormData($("#saveforginscrapreportdetailsform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>admin/saveforginscrapreportdetailsdata",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Forging Scarp Work Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'forgingscrapreportitemdetails/'?>"+forgin_id_popup+"/"+vendor_id_popup;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+				});
 
 
     </script>

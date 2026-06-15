@@ -32424,4 +32424,69 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function saveforginscrapreportdetailsdata(){
+
+    $post_submit = $this->input->post();
+        if($post_submit){
+
+            $forginscrapwork_item_report_response = array();
+
+            $this->form_validation->set_rules('item_id_popup','Item Id Popup','trim|required');
+            $this->form_validation->set_rules('forgin_id_popup','Forgin Id Popup','trim|required');
+            $this->form_validation->set_rules('vendor_id_popup','Vendor Id Popup','trim|required');
+            $this->form_validation->set_rules('rm_actual_qty_popup','RM Actual Qty Popup','trim|required');
+            $this->form_validation->set_rules('expected_qty_popup','Expected Qty Popup','trim|required');
+            $this->form_validation->set_rules('sent_rm_in_kgs_section_1','sent_rm_in_kgs_section_1','trim');
+            $this->form_validation->set_rules('exp_qty_in_pcs_section_1','exp_qty_in_pcs_section_1','trim');
+            $this->form_validation->set_rules('diff_in_kgs_section_1','diff_in_kgs_section_1','trim');
+            $this->form_validation->set_rules('vendor_id','vendor_id','trim');
+            $this->form_validation->set_rules('sent_rm_in_kgs_section_2','sent_rm_in_kgs_section_2','trim');
+            $this->form_validation->set_rules('exp_qty_in_pcs_section_2','exp_qty_in_pcs_section_2','trim');
+            $this->form_validation->set_rules('diff_in_kgs_section_2','diff_in_kgs_section_2','trim');
+            $this->form_validation->set_rules('total_scrap_section_2','total_scrap_section_2','trim');
+            $this->form_validation->set_rules('remark_section_2','remark_section_2','trim');
+
+    
+            if($this->form_validation->run() == FALSE)
+            {
+                $forginscrapwork_item_report_response['status'] = 'failure';
+                $forginscrapwork_item_report_response['error'] = array('vendor_id'=>strip_tags(form_error('vendor_id')), 'vendor_po_id'=>strip_tags(form_error('vendor_po_id')),'supplier_id'=>strip_tags(form_error('supplier_id')),'supplier_po_id'=>strip_tags(form_error('supplier_po_id')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                $data = array(
+                    'vendor_id'   => trim($this->input->post('vendor_id')),
+                    'vendor_po_id'   => trim($this->input->post('vendor_po_id')),
+                    'supplier_id'     => trim($this->input->post('supplier_id')),
+                    'supplier_po_id'  => trim($this->input->post('supplier_po_id')),
+                    'remark'=> trim($this->input->post('remark')),
+                );
+
+                if(trim($this->input->post('forgin_id'))){
+                   $forgin_id = trim($this->input->post('forgin_id'));
+                }else{
+                   $forgin_id ='';
+                }
+
+                $addnewforgingscarpworking = $this->admin_model->addnewforgingscarpworking($forgin_id,$data);
+                if($addnewforgingscarpworking){
+                    $forginscrapwork_item_report_response['status'] = 'success';
+                    $forginscrapwork_item_report_response['error'] = array('vendor_id'=>strip_tags(form_error('vendor_id')), 'vendor_po_id'=>strip_tags(form_error('vendor_po_id')),'supplier_id'=>strip_tags(form_error('supplier_id')),'supplier_po_id'=>strip_tags(form_error('supplier_po_id')),'remark'=>strip_tags(form_error('remark')));
+                            
+                }
+            }
+
+           echo json_encode($forginscrapwork_item_report_response);
+    
+        }
+    }
+
+
+    public function viewforgingscrapreportitemdetails(){
+
+
+
+
+    }
+
 }

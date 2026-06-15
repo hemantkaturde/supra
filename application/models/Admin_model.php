@@ -27492,13 +27492,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $actions .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addnewforginscrappopupdetails' data-id-item-id='".$value['vendor_po_master_item_id']."' data-id-forgin-id='".$forgin_id."' data-id-vendor-po-id-master='".$vendor_po_id_master."' data-rm_actual_qty_popup='".$value['rm_actual_aty']."' data-expected_qty_popup='".$value['expected_qty']."' class='fa fa-plus-square-o addnewforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
 
                 
-                // $actions .= "<a href='".ADMIN_PATH."viewreworkrecordreasondata/".$value['incoming_details_item_id']."' style='cursor:pointer;' target='_blank'>
-                //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
-                //             </a> &nbsp;";
-
-                  $actions .= "<a href='' style='cursor:pointer;' target='_blank'>
+                $actions .= "<a href='".ADMIN_PATH."viewforgingscrapreportitemdetails/".$value['vendor_po_master_item_id']."/".$forgin_id."/".$vendor_po_id_master."' style='cursor:pointer;' target='_blank'>
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
                             </a> &nbsp;";
+
+                //   $actions .= "<a href='' style='cursor:pointer;' target='_blank'>
+                //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
+                //             </a> &nbsp;";
 
                  $data[$counter]['action'] = $actions;
 
