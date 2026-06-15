@@ -31858,7 +31858,7 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working' ||  $pageTitle=='Edit Forging Scarp Working' ||  $pageTitle=='Forging Scrap Report Item Dtails'){?>
+<?php if($pageTitle=='Forging Scarp Working' || $pageTitle=='Add New Forging Scarp Working' ||  $pageTitle=='Edit Forging Scarp Working' ||  $pageTitle=='Forging Scrap Report Item Dtails' || $pageTitle=='view Forging Scrap Report Item Dtails'){?>
 	<script type="text/javascript">
 		        $(document).ready(function() {
 					var dt = $('#view_forging_scarp_working').DataTable({
@@ -32183,6 +32183,47 @@ $('#export_excel').on('click', function() {
 						}
 					});
 					return false;
+				});
+
+
+				$(document).ready(function() {
+
+					var forgin_id = $('#forgin_id').val();
+					var vendor_po_id_master = $('#vendor_po_id_master').val();
+					var item_id = $('#item_id').val();
+
+
+					var dt = $('#view_forging_scarp_working_item_details').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "10%", "targets": 6 },
+							{ "width": "10%", "targets": 7 },
+							{ "width": "10%", "targets": 8 },
+							{ "width": "10%", "targets": 9 },
+							{ "width": "5%", "targets": 10 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Forging Scarp Working Item Report Details Record Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchviewforgingscarpworkingitemdetails/"+forgin_id+"/"+vendor_po_id_master+"/"+item_id,
+							type: "post",
+						},
+					});
 				});
 
 

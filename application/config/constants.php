@@ -215,7 +215,7 @@ define('TBL_STOREFORM_TICKETS','tbl_storeform_tickets');
 define('TBL_INSTRUMENT_MASTER','tbl_instrument_master');
 define('TBL_STOREFORM_QTY_ASSIGN','tbl_storeform_qty_assign');
 define('TBL_FORGING_SCARP_WORKING','tbl_forging_scarp_working');
-
+define('TBL_FORGING_SCARP_WORKING_REPORT_DATA','tbl_forging_scarp_working_report_data');
 
 
 define('SMTP_HOST','mail.supraexports.in');
