@@ -134,8 +134,13 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Vendor Name</label>
                   <div class="col-sm-8">
-                     <input type="text" class="form-control"  id="vendor_name"  name="vendor_name"></input>
-                     <p class="error vendor_name_error"></p>
+                        <select class="form-control " name="vendor_id" id="vendor_id">
+                           <option st-id="" value="">Select Vendor Name</option>
+                              <?php foreach ($vendorList as $key => $value) {?>
+                              <option value="<?php echo $value['ven_id'];?>"><?php echo $value['vendor_name']; ?></option>
+                              <?php } ?>
+                        </select>
+                     <p class="error vendor_id_error"></p>
                   </div>
                </div>
                <div class="form-group row">

@@ -32388,6 +32388,8 @@ public function deletesupplieritemattachment(){
             $this->logrecord($process,$processFunction);
             $data['forgin_id'] = $forgin_id;
             $data['vendor_po_id_master'] = $vendor_po_id_master;
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
             $data['getPreviousforgindata']= $this->admin_model->getforgindataforedit($forgin_id);
             $this->global['pageTitle'] = 'Forging Scrap Report Item Dtails';
             $this->loadViews("masters/forgingscrapreportitemdetails", $this->global, $data, NULL);
