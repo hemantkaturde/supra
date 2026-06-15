@@ -134,8 +134,8 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Vendor Name</label>
                   <div class="col-sm-8">
-                     <input type="text" class="form-control"  id="after_rework_rej_qty_in_pcs"  name="after_rework_rej_qty_in_pcs"></input>
-                     <p class="error after_rework_rej_qty_in_pcs_error"></p>
+                     <input type="text" class="form-control"  id="vendor_name"  name="vendor_name"></input>
+                     <p class="error vendor_name_error"></p>
                   </div>
                </div>
                <div class="form-group row">

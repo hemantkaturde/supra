@@ -395,6 +395,19 @@
 				url : "<?php echo base_url();?>updateRawmaterial/"+rawmaetrial_id,
 				type: "POST",
 				data : formData,
+				Search...
+				MAIN NAVIGATION
+				 Dashboard
+				 Leads
+				 Reports
+				 Masters
+				 Users / Roles
+				 Marketing Report
+				 HR
+				 Employee ID Card
+				 Settings
+				 Employee Master
+				
 				cache: false,
 		        contentType: false,
 		        processData: false,
@@ -31876,7 +31889,6 @@ $('#export_excel').on('click', function() {
 					});
 				});
 
-
 			    $(document).on('change','#vendor_id',function(e){  
 					e.preventDefault();
 					var vendor_id = $('#vendor_id').val();
@@ -32045,8 +32057,7 @@ $('#export_excel').on('click', function() {
 	            });
 
 
-
-				 $(document).ready(function() {
+				$(document).ready(function() {
 
 					var forgin_id = $('#forgin_id').val();
 					var vendor_po_id_master = $('#vendor_po_id_master').val();
@@ -32078,6 +32089,31 @@ $('#export_excel').on('click', function() {
 							type: "post",
 						},
 					});
+				});
+
+
+				$(document).on("click", ".addnewforginscrappopupdetails", function (e) {
+					e.preventDefault();
+					var elemF = $(this);
+					    $(".loader_ajax").show();
+
+						var item_id = elemF.attr('data-id-item-id');
+						var forgin_id = elemF.attr('data-id-forgin-id');
+						var vendor_po_id_master = elemF.attr('data-id-vendor-po-id-master');
+
+						var rm_actual_qty_popup = elemF.attr('data-rm_actual_qty_popup');
+						var expected_qty_popup = elemF.attr('data-expected_qty_popup');
+						
+						
+						$('#item_id_popup').val(item_id);
+						$('#forgin_id_popup').val(forgin_id);
+						$('#vendor_id_popup').val(vendor_po_id_master);
+
+						$('#rm_actual_qty_popup').val(rm_actual_qty_popup);
+						$('#expected_qty_popup').val(vendor_po_id_master);
+
+						$(".loader_ajax").hide();
+
 				});
 
 
