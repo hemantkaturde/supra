@@ -32192,7 +32192,6 @@ $('#export_excel').on('click', function() {
 					var vendor_po_id_master = $('#vendor_po_id_master').val();
 					var item_id = $('#item_id').val();
 
-
 					var dt = $('#view_forging_scarp_working_item_details').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },

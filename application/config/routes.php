@@ -684,7 +684,7 @@ $route['getVendorPOonlyBOMforforgingreportlist'] = "admin/getVendorPOonlyBOMforf
 $route['editforgingscrapreport/(:any)'] = "admin/editforgingscrapreport/$1";
 $route['forgingscrapreportitemdetails/(:any)/(:any)'] = "admin/forgingscrapreportitemdetails/$1/$2";
 
-$route['viewforgingscrapreportitemdetails/(:any)/(:any)/(:any)'] = "admin/viewforgingscrapreportitemdetails/$1/$2//$3";
+$route['viewforgingscrapreportitemdetails/(:any)/(:any)/(:any)'] = "admin/viewforgingscrapreportitemdetails/$1/$2/$3";
 
 
 

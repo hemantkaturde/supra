@@ -27418,7 +27418,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-
     public function fetchforgingscarpworkingitemdetailscount($params,$forgin_id,$vendor_po_id_master){
 
         $this->db->select('*');
@@ -27511,7 +27510,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
- 
 
     public function saveforginscrapreportdetailsdata($id,$data){
            
@@ -27531,6 +27529,112 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         }
           
+    }
+
+
+    public function fetchviewforgingscarpworkingitemdetailscount($params,$forgin_id,$vendor_po_id_master,$item_id){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.vendor_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_FORGING_SCARP_WORKING_REPORT_DATA.".rm_actual_qty_popup LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".expected_qty_popup LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".sent_rm_in_kgs_section_1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".exp_qty_in_pcs_section_1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".diff_in_kgs_section_1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".sent_rm_in_kgs_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".exp_qty_in_pcs_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".total_scrap_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".remark_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".diff_in_kgs_section_2 LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.vendor_id_popup', $vendor_po_id_master);
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup', $forgin_id);
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.item_id_popup', $item_id);
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING_REPORT_DATA);
+
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchviewforgingscarpworkingitemdetailsdata($params,$forgin_id,$vendor_po_id_master,$item_id){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.vendor_id');
+        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
+        // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_FORGING_SCARP_WORKING_REPORT_DATA.".rm_actual_qty_popup LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".expected_qty_popup LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".sent_rm_in_kgs_section_1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".exp_qty_in_pcs_section_1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".diff_in_kgs_section_1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".sent_rm_in_kgs_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".exp_qty_in_pcs_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".total_scrap_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".remark_section_2 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".diff_in_kgs_section_2 LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.vendor_id_popup', $vendor_po_id_master);
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup', $forgin_id);
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.item_id_popup', $item_id);
+
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.id','DESC');
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING_REPORT_DATA);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['rm_actual_qty_popup'] =  $value['rm_actual_qty_popup'];
+                $data[$counter]['expected_qty_popup'] =  $value['expected_qty_popup'];
+                $data[$counter]['sent_rm_in_kgs_section_1'] =  $value['sent_rm_in_kgs_section_1'];
+                $data[$counter]['exp_qty_in_pcs_section_1'] =  $value['exp_qty_in_pcs_section_1'];
+                $data[$counter]['diff_in_kgs_section_1'] =  $value['diff_in_kgs_section_1'];
+                $data[$counter]['vendor_name'] =  $value['vendor_name'];
+                $data[$counter]['sent_rm_in_kgs_section_2'] =  $value['sent_rm_in_kgs_section_2'];
+                $data[$counter]['exp_qty_in_pcs_section_2'] =  $value['exp_qty_in_pcs_section_2'];
+                $data[$counter]['diff_in_kgs_section_2'] =  $value['diff_in_kgs_section_2'];
+                $data[$counter]['total_scrap_section_2'] =  $value['total_scrap_section_2'];
+                $data[$counter]['remark_section_2'] =  $value['remark_section_2'];
+
+        
+                // $actions .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addnewforginscrappopupdetails' data-id-item-id='".$value['vendor_po_master_item_id']."' data-id-forgin-id='".$forgin_id."' data-id-vendor-po-id-master='".$vendor_po_id_master."' data-rm_actual_qty_popup='".$value['rm_actual_aty']."' data-expected_qty_popup='".$value['expected_qty_bill_of']."' class='fa fa-plus-square-o addnewforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
+                // $actions .= "<a href='".ADMIN_PATH."viewforgingscrapreportitemdetails/".$value['vendor_po_master_item_id']."/".$forgin_id."/".$vendor_po_id_master."' style='cursor:pointer;' target='_blank'>
+                //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
+                //             </a> &nbsp;";
+
+                //   $actions .= "<a href='' style='cursor:pointer;' target='_blank'>
+                //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
+                //             </a> &nbsp;";
+
+                 $data[$counter]['action'] = $actions;
+
+
+                $counter++; 
+            }
+        }
+
+        return $data;
+
     }
 
 
