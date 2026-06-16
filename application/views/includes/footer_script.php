@@ -395,19 +395,6 @@
 				url : "<?php echo base_url();?>updateRawmaterial/"+rawmaetrial_id,
 				type: "POST",
 				data : formData,
-				Search...
-				MAIN NAVIGATION
-				 Dashboard
-				 Leads
-				 Reports
-				 Masters
-				 Users / Roles
-				 Marketing Report
-				 HR
-				 Employee ID Card
-				 Settings
-				 Employee Master
-				
 				cache: false,
 		        contentType: false,
 		        processData: false,

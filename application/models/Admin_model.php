@@ -176,6 +176,8 @@ class Admin_model extends CI_Model
         $this->db->order_by(TBL_RAWMATERIAL.'.raw_id','DESC');
         $query = $this->db->get(TBL_RAWMATERIAL);
         $fetch_result = $query->result_array();
+
+
         $data = array();
         $counter = 0;
         if(count($fetch_result) > 0)
