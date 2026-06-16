@@ -27448,7 +27448,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchforgingscarpworkingitemdetailsdata($params,$forgin_id,$vendor_po_id_master){
 
-        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_master_item_id');
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty_bill_of,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_master_item_id');
         // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -27486,10 +27486,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['name'] =  $value['name'];
                 $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
                 $data[$counter]['rm_actual_aty'] =  $value['rm_actual_aty'];
-                $data[$counter]['expected_qty'] =  $value['expected_qty'];
+                $data[$counter]['expected_qty'] =  $value['expected_qty_bill_of'];
                
 
-                $actions .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addnewforginscrappopupdetails' data-id-item-id='".$value['vendor_po_master_item_id']."' data-id-forgin-id='".$forgin_id."' data-id-vendor-po-id-master='".$vendor_po_id_master."' data-rm_actual_qty_popup='".$value['rm_actual_aty']."' data-expected_qty_popup='".$value['expected_qty']."' class='fa fa-plus-square-o addnewforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
+                $actions .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addnewforginscrappopupdetails' data-id-item-id='".$value['vendor_po_master_item_id']."' data-id-forgin-id='".$forgin_id."' data-id-vendor-po-id-master='".$vendor_po_id_master."' data-rm_actual_qty_popup='".$value['rm_actual_aty']."' data-expected_qty_popup='".$value['expected_qty_bill_of']."' class='fa fa-plus-square-o addnewforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
 
                 
                 $actions .= "<a href='".ADMIN_PATH."viewforgingscrapreportitemdetails/".$value['vendor_po_master_item_id']."/".$forgin_id."/".$vendor_po_id_master."' style='cursor:pointer;' target='_blank'>
