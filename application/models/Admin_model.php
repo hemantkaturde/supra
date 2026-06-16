@@ -27473,6 +27473,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id_master);
 
+        $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
