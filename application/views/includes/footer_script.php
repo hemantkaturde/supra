@@ -32214,5 +32214,59 @@ $('#export_excel').on('click', function() {
 				});
 
 
+				$(document).on('click','.deleteforginscrapworkingitemsub',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+
+		            var item_id_popup = $('#item_id_popup').val();
+					var forgin_id_popup = $('#forgin_id_popup').val();
+					var vendor_id_popup = $('#vendor_id_popup').val();
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Forging Scarp Working Item Details",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deleteforginscrapworkingitemsub",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Forging Scarp Working Item Details Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>viewforgingscrapreportitemdetails/"+item_id_popup+"/"+forgin_id_popup+"/"+vendor_id_popup;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Forging Scarp Working deletion cancelled ", "error");
+						}
+					});
+	            });
+
     </script>
 <?php } ?>

@@ -27559,7 +27559,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchviewforgingscarpworkingitemdetailsdata($params,$forgin_id,$vendor_po_id_master,$item_id){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.id as forgin_scrap_item_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.vendor_id');
         // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
         // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -27622,7 +27622,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
                 //             </a> &nbsp;";
 
-                 $data[$counter]['action'] = $actions;
+                 $data[$counter]['action']='';
+
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['forgin_scrap_item_id']."' class='fa fa-trash-o deleteforginscrapworkingitemsub' aria-hidden='true'></i>"; 
+
+
+                 //$data[$counter]['action'] = $actions;
 
 
                 $counter++; 
@@ -27632,6 +27637,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+
+
+    public function deleteforginscrapworkingitemsub($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_FORGING_SCARP_WORKING_REPORT_DATA)){
+              return TRUE;
+            //   $this->db->where('forgin_id_popup', $id);
+            //   //$this->db->delete(TBL_SUPPLIER);
+            //   if($this->db->delete(TBL_FORGING_SCARP_WORKING_REPORT_DATA)){
+            //         return TRUE;
+            //   }
+        }else{
+           return FALSE;
+        }
+    }
+
+
 
 
 

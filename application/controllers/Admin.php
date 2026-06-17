@@ -32557,4 +32557,23 @@ public function deletesupplieritemattachment(){
 
     }
 
+
+    public function deleteforginscrapworkingitemsub(){
+
+      $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteforginscrapworkingitemsub(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Forgin Scrap Working';
+                        $processFunction = 'Admin/deleteforginscrapworkingitemsub';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
 }
