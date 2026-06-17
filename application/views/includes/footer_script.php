@@ -32103,6 +32103,7 @@ $('#export_excel').on('click', function() {
 
 				});
 
+
 				$('#sent_rm_in_kgs_section_1').on('keyup change', function () {
 					let rm_actual_qty_popup = parseFloat($('#rm_actual_qty_popup').val()) || 0;
 					let sent_rm_in_kgs_section_1 = parseFloat($('#sent_rm_in_kgs_section_1').val()) || 0;
@@ -32111,8 +32112,8 @@ $('#export_excel').on('click', function() {
 				});
 
 				$('#sent_rm_in_kgs_section_2').on('keyup change', function () {
-					let sent_rm_in_kgs_section_1  = parseInt($('#sent_rm_in_kgs_section_1').val()) || 0;
-					let sent_rm_in_kgs_section_2 = parseInt($('#sent_rm_in_kgs_section_2').val()) || 0;
+					let sent_rm_in_kgs_section_1  = parseFloat($('#sent_rm_in_kgs_section_1').val()) || 0;
+					let sent_rm_in_kgs_section_2 = parseFloat($('#sent_rm_in_kgs_section_2').val()) || 0;
 					let final_amt = sent_rm_in_kgs_section_1 - sent_rm_in_kgs_section_2;	
 					$('#diff_in_kgs_section_2').val(final_amt.toFixed(2));
 				});

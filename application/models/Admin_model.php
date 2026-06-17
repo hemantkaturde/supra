@@ -27392,12 +27392,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_FORGING_SCARP_WORKING)){
-               return TRUE;
-            //   $this->db->where('packing_challan_id', $id);
-            //   //$this->db->delete(TBL_SUPPLIER);
-            //   if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
-            //         return TRUE;
-            //   }
+              // return TRUE;
+              $this->db->where('forgin_id_popup', $id);
+              //$this->db->delete(TBL_SUPPLIER);
+              if($this->db->delete(TBL_FORGING_SCARP_WORKING_REPORT_DATA)){
+                    return TRUE;
+              }
         }else{
            return FALSE;
         }
