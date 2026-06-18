@@ -32525,6 +32525,8 @@ public function deletesupplieritemattachment(){
             $data['forgin_id'] = $forgin_id;
             $data['vendor_po_id_master'] = $vendor_po_id_master;
             $data['getPreviousforgindata']= $this->admin_model->getforgindataforedit($forgin_id);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
             $this->global['pageTitle'] = 'view Forging Scrap Report Item Dtails';
             $this->loadViews("masters/viewforgingscrapreportitemdetails", $this->global, $data, NULL);
     }
@@ -32573,6 +32575,23 @@ public function deletesupplieritemattachment(){
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
+
+    }
+
+
+    public function getdataeditforginscrappopupdetails(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $geteditforginscrap = $this->admin_model->getdataeditforginscrappopupdetails(trim($this->input->post('item_id')));
+        if($geteditforginscrap){
+            $content = $geteditforginscrap[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
 
     }
 

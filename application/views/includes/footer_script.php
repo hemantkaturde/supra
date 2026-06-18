@@ -32268,5 +32268,57 @@ $('#export_excel').on('click', function() {
 					});
 	            });
 
+
+				$(document).on("click", ".editforginscrappopupdetails", function (e) {
+					e.preventDefault();
+					var elemF = $(this);
+					    $(".loader_ajax").show();
+
+						var item_id = elemF.attr('data-id-item-id');
+
+
+						
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getdataeditforginscrappopupdetails",
+							type: "POST",
+							data : {'item_id' : item_id},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#supplier_name').val('');
+									$('#supplier_po').val('');
+									$('#supplier_id').val('');
+									$('#supplier_po_id').val('');
+								}
+								else
+								{
+									var data_row = jQuery.parseJSON( data );
+
+									$('#supplier_name').val(data_row.supplier);
+									$('#supplier_po').val(data_row.supplierpo);	
+									$('#supplier_id').val(data_row.supplier_id);
+									$('#supplier_po_id').val(data_row.supplier_po_id);
+								
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								   
+									$('#supplier_name').val('');
+									$('#supplier_po').val('');
+									$('#supplier_id').val('');
+									$('#supplier_po_id').val('');				
+							}
+						});
+						return false;
+
+					$(".loader_ajax").hide();
+
+				});
+
+
+
     </script>
 <?php } ?>
