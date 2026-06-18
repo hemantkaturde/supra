@@ -27605,8 +27605,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['expected_qty_popup'] =  $value['expected_qty_popup'];
                 $data[$counter]['sent_rm_in_kgs_section_1'] =  $value['sent_rm_in_kgs_section_1'];
                 $data[$counter]['exp_qty_in_pcs_section_1'] =  $value['exp_qty_in_pcs_section_1'];
-                $data[$counter]['diff_in_kgs_section_1'] =  $value['diff_in_kgs_section_1'];
                 $data[$counter]['vendor_name'] =  $value['vendor_name'];
+                $data[$counter]['diff_in_kgs_section_1'] =  $value['diff_in_kgs_section_1'];
                 $data[$counter]['sent_rm_in_kgs_section_2'] =  $value['sent_rm_in_kgs_section_2'];
                 $data[$counter]['exp_qty_in_pcs_section_2'] =  $value['exp_qty_in_pcs_section_2'];
                 $data[$counter]['diff_in_kgs_section_2'] =  $value['diff_in_kgs_section_2'];

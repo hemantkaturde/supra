@@ -46,7 +46,6 @@
                                         <th>Sent RM (In kgs)</th>
                                         <th>Diff (In kgs)</th>
                                         <th>Vendor Name</th>
-                                        <th>Action</th>
                                         <th>Sent RM (In kgs)</th>
                                         <th>Exp Qty (In pcs)</th>
                                         <th>Diff (In kgs)</th>
