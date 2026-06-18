@@ -32484,13 +32484,13 @@ public function deletesupplieritemattachment(){
                         'remark_section_2'=> trim($this->input->post('remark_section_2')),
                     );
 
-                    // if(trim($this->input->post('forgin_id'))){
-                    //    $forgin_id = trim($this->input->post('forgin_id'));
-                    // }else{
-                    //    $forgin_id ='';
-                    // }
+                    if(trim($this->input->post('forgin_item_id_details'))){
+                       $forgin_item_id_details = trim($this->input->post('forgin_item_id_details'));
+                    }else{
+                       $forgin_item_id_details ='';
+                    }
 
-                    $addnewforgingscarpworking = $this->admin_model->saveforginscrapreportdetailsdata('',$data);
+                    $addnewforgingscarpworking = $this->admin_model->saveforginscrapreportdetailsdata($forgin_item_id_details,$data);
                     if($addnewforgingscarpworking){
                         $forginscrapwork_item_report_response['status'] = 'success';
                     $forginscrapwork_item_report_response['error'] = array('item_id_popup'=>strip_tags(form_error('item_id_popup')), 
@@ -32584,6 +32584,7 @@ public function deletesupplieritemattachment(){
     $post_submit = $this->input->post();
     if($post_submit){
         $geteditforginscrap = $this->admin_model->getdataeditforginscrappopupdetails(trim($this->input->post('item_id')));
+
         if($geteditforginscrap){
             $content = $geteditforginscrap[0];
             echo json_encode($content);

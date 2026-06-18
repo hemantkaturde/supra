@@ -85,10 +85,13 @@
                   <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                </div>
 
+               <input type="hidden" class="form-control"  id="forgin_item_id_details" name="forgin_item_id_details">
+               <input type="hidden" class="form-control"  id="vendor_id_popup" name="vendor_id_popup">
+               <input type="hidden" class="form-control"  id="forgin_id_popup" name="forgin_id_popup">
                <input type="hidden" class="form-control"  id="item_id_popup" name="item_id_popup">
-               <!-- <input type="hidden" class="form-control"  id="forgin_id_popup" name="forgin_id_popup" value="<?=$forgin_id;?>">
-               <input type="hidden" class="form-control"  id="vendor_id_popup" name="vendor_id_popup" value="<?=$vendor_po_id_master;?>"> -->
 
+               
+             
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">RM Actual Qty</label>
@@ -141,7 +144,7 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Vendor Name</label>
                   <div class="col-sm-8">
-                        <select class="form-control " name="vendor_id" id="vendor_id">
+                        <select class="form-control serachfilternotrequired searchfilter" name="vendor_id" id="vendor_id">
                            <option st-id="" value="">Select Vendor Name</option>
                               <?php foreach ($vendorList as $key => $value) {?>
                               <option value="<?php echo $value['ven_id'];?>"><?php echo $value['vendor_name']; ?></option>

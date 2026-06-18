@@ -27509,6 +27509,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function saveforginscrapreportdetailsdata($id,$data){
+
            
         if($id){
             $this->db->where('id', $id);
@@ -27625,7 +27626,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $data[$counter]['action']='';
 
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#editforginscrappopupdetails' data-id-item-id='".$value['forgin_scrap_item_id']."' class='fa fa-pencil-square-o editforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
+                //$data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#editforginscrappopupdetails' data-id-item-id='".$value['forgin_scrap_item_id']."' class='fa fa-pencil-square-o editforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-id-item-id='".$value['forgin_scrap_item_id']."' class='fa fa-pencil-square-o editforginscrappopupdetails' aria-hidden='true'></i>  &nbsp "; 
 
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['forgin_scrap_item_id']."' class='fa fa-trash-o deleteforginscrapworkingitemsub' aria-hidden='true'></i>"; 
 
@@ -27661,9 +27663,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getdataeditforginscrappopupdetails($item_id){
 
+        $this->db->select(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.*,'.TBL_VENDOR.'.ven_id,'.TBL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.vendor_id');
+        $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.id', $item_id);
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING_REPORT_DATA);
+        $fetch_result = $query->result_array();
 
-    
-
+        return $fetch_result;
 
     }
 

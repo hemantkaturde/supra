@@ -32133,6 +32133,13 @@ $('#export_excel').on('click', function() {
 					var vendor_id_popup = $('#vendor_id_popup').val();
 
 
+                    var forgin_item_id_details = $('#forgin_item_id_details').val();
+                    var item_id_popup = $('#item_id_popup').val();
+
+					
+
+
+
 					var formData = new FormData($("#saveforginscrapreportdetailsform")[0]);
 					$.ajax({
 						url : "<?php echo base_url();?>admin/saveforginscrapreportdetailsdata",
@@ -32160,7 +32167,18 @@ $('#export_excel').on('click', function() {
 									icon: "success",
 									button: "Ok",
 									},function(){ 
+
+									  if(forgin_item_id_details){
+
+									   window.location.href = "<?php echo base_url().'viewforgingscrapreportitemdetails/'?>"+item_id_popup+"/"+forgin_id_popup+"/"+vendor_id_popup;
+
+
+									  }else{
+
 										window.location.href = "<?php echo base_url().'forgingscrapreportitemdetails/'?>"+forgin_id_popup+"/"+vendor_id_popup;
+
+									  }
+
 								});		
 							}
 							
@@ -32219,9 +32237,9 @@ $('#export_excel').on('click', function() {
 					e.preventDefault();
 
 
-		            var item_id_popup = $('#item_id_popup').val();
-					var forgin_id_popup = $('#forgin_id_popup').val();
-					var vendor_id_popup = $('#vendor_id_popup').val();
+		            var item_id_popup = $('#item_id').val();
+					var forgin_id_popup = $('#forgin_id').val();
+					var vendor_id_popup = $('#vendor_po_id_master').val();
 
 					swal({
 						title: "Are you sure?",
@@ -32271,13 +32289,11 @@ $('#export_excel').on('click', function() {
 
 				$(document).on("click", ".editforginscrappopupdetails", function (e) {
 					e.preventDefault();
-					var elemF = $(this);
-					    $(".loader_ajax").show();
 
+					    var elemF = $(this);
+					
 						var item_id = elemF.attr('data-id-item-id');
 
-
-						
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>admin/getdataeditforginscrappopupdetails",
 							type: "POST",
@@ -32287,29 +32303,78 @@ $('#export_excel').on('click', function() {
 								$(".loader_ajax").hide();
 								if(data == "failure")
 								{
-									$('#supplier_name').val('');
-									$('#supplier_po').val('');
-									$('#supplier_id').val('');
-									$('#supplier_po_id').val('');
+									$('#forgin_item_id_details').val('');
+
+									$('#vendor_id_popup').val('');
+									$('#forgin_id_popup').val('');
+
+									$('#item_id_popup').val('');
+
+									$('#rm_actual_qty_popup').val('');	
+									$('#expected_qty_popup').val('');
+									$('#sent_rm_in_kgs_section_1').val('');
+									$('#exp_qty_in_pcs_section_1').val('');
+									$('#diff_in_kgs_section_1').val('');
+									$('#vendor_id').val('');
+									$('#sent_rm_in_kgs_section_2').val('');
+									$('#exp_qty_in_pcs_section_2').val('');
+									$('#diff_in_kgs_section_2').val('');
+									$('#total_scrap_section_2').val('');
+									$('#remark_section_2').val('');
+
+                                    $('#editforginscrappopupdetails').modal('hide');
+									
 								}
 								else
 								{
 									var data_row = jQuery.parseJSON( data );
 
-									$('#supplier_name').val(data_row.supplier);
-									$('#supplier_po').val(data_row.supplierpo);	
-									$('#supplier_id').val(data_row.supplier_id);
-									$('#supplier_po_id').val(data_row.supplier_po_id);
+									$('#forgin_item_id_details').val(data_row.id);
+
+									$('#vendor_id_popup').val(data_row.vendor_id_popup);
+									$('#forgin_id_popup').val(data_row.forgin_id_popup);
+									$('#item_id_popup').val(data_row.item_id_popup);
+
+
+									$('#rm_actual_qty_popup').val(data_row.rm_actual_qty_popup);	
+									$('#expected_qty_popup').val(data_row.expected_qty_popup);
+									$('#sent_rm_in_kgs_section_1').val(data_row.sent_rm_in_kgs_section_1);
+									$('#exp_qty_in_pcs_section_1').val(data_row.exp_qty_in_pcs_section_1);
+									$('#diff_in_kgs_section_1').val(data_row.diff_in_kgs_section_1);
+									$('#vendor_id').val(data_row.vendor_id);
+									$('#sent_rm_in_kgs_section_2').val(data_row.sent_rm_in_kgs_section_2);
+									$('#exp_qty_in_pcs_section_2').val(data_row.exp_qty_in_pcs_section_2);
+									$('#diff_in_kgs_section_2').val(data_row.diff_in_kgs_section_2);
+									$('#total_scrap_section_2').val(data_row.total_scrap_section_2);
+									$('#remark_section_2').val(data_row.remark_section_2);
+
+									$('#editforginscrappopupdetails').modal('show');
 								
 								}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								   
-									$('#supplier_name').val('');
-									$('#supplier_po').val('');
-									$('#supplier_id').val('');
-									$('#supplier_po_id').val('');				
+							
+									$('#forgin_item_id_details').val('');
+									$('#vendor_id_popup').val('');
+									$('#forgin_id_popup').val('');
+								    $('#item_id_popup').val('');
+
+
+									$('#rm_actual_qty_popup').val('');	
+									$('#expected_qty_popup').val('');
+									$('#sent_rm_in_kgs_section_1').val('');
+									$('#exp_qty_in_pcs_section_1').val('');
+									$('#diff_in_kgs_section_1').val('');
+									$('#vendor_id').val('');
+									$('#sent_rm_in_kgs_section_2').val('');
+									$('#exp_qty_in_pcs_section_2').val('');
+									$('#diff_in_kgs_section_2').val('');
+									$('#total_scrap_section_2').val('');
+									$('#remark_section_2').val('');
+
+									$('#editforginscrappopupdetails').modal('hide');		
 							}
 						});
 						return false;
