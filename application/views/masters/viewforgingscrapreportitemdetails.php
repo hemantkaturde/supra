@@ -44,7 +44,7 @@
                                         <th>RM Actual Qty</th>
                                         <th>Expected Qty (In kgs)</th>
                                         <th>Sent RM (In kgs)</th>
-                                        <th>Diff (In kgs)</th>
+                                        <th>Exp Qty (In pcs)</th>
                                         <th>Vendor Name</th>
                                         <th>Sent RM (In kgs)</th>
                                         <th>Exp Qty (In pcs)</th>
