@@ -42,9 +42,10 @@
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>RM Actual Qty</th>
-                                        <th>Expected Qty (In kgs)</th>
+                                        <th>Expected Qty</th>
                                         <th>Sent RM (In kgs)</th>
                                         <th>Exp Qty (In pcs)</th>
+                                        <th>Diff (In kgs)</th>
                                         <th>Vendor Name</th>
                                         <th>Sent RM (In kgs)</th>
                                         <th>Exp Qty (In pcs)</th>
