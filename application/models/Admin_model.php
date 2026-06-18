@@ -27329,7 +27329,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['forgin_scrap_remark'] =  $value['forgin_scrap_remark'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['forgin_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."forgingscrapreportitemdetails/".$value['forgin_id']."/".$value['vendor_po_id_master']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-o' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."forgingscrapreportitemdetails/".$value['forgin_id']."/".$value['vendor_po_id_master']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>    &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['forgin_id']."' class='fa fa-trash-o deleteforginscrapworking' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -27460,6 +27460,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
         $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
 
@@ -27475,7 +27476,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id_master);
         $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id',TBL_BILL_OF_MATERIAL_ITEM);
         $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+        // $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
