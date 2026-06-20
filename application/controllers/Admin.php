@@ -17852,7 +17852,8 @@ public function downlaoddebitnotevendor($id){
     }
 
   
-    $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
+    //$sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
+    $sub_total_amount = $total_amount_debit +$extra_text_label_val_for_calculation;
     
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
