@@ -17817,9 +17817,9 @@ public function downlaoddebitnotevendor($id){
                 $gst_rate = $value['gst_rate'];
 
                 
-                $cgst_tax_value = 0;
-                $sgst_tax_value = 0;
-                $igst_tax_value = 0;
+                // $cgst_tax_value = 0;
+                // $sgst_tax_value = 0;
+                // $igst_tax_value = 0;
 
 
                 if($value['gst_rate']=='CGST_SGST'){
