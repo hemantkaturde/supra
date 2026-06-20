@@ -1875,7 +1875,7 @@ class Admin_model extends CI_Model
               $chek_in_bom = $this->checkIfexitsvendorrpoinBM($vendor_po_master_id);
               $chek_in_vbom = $this->checkIfexitsvendorrpoinVBM($vendor_po_master_id);
 
-              $data[$counter]['check_vbm_bm_alert'] = ($chek_in_bom == 0 && $chek_in_vbom == 0) ? 1 : 0;
+              $data[$counter]['check_vbm_bm_alert'] = ($chek_in_bom == 0 && $chek_in_vbom == 0) ? 0 : 1;
               $data[$counter]['vendor_po_createddtm'] =  $value['vendor_po_createddtm'];
               $counter++; 
 
