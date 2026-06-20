@@ -1825,6 +1825,7 @@ class Admin_model extends CI_Model
         }
         $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
+         //$this->db->limit(1);
         $this->db->order_by(TBL_VENDOR_PO_MASTER.'.id','DESC');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $fetch_result = $query->result_array();
@@ -1870,13 +1871,42 @@ class Admin_model extends CI_Model
 
                 }
 
-                $counter++; 
+
+              $chek_in_bom = $this->checkIfexitsvendorrpoinBM($vendor_po_master_id);
+              $chek_in_vbom = $this->checkIfexitsvendorrpoinVBM($vendor_po_master_id);
+
+              $data[$counter]['check_vbm_bm_alert'] = ($chek_in_bom == 0 && $chek_in_vbom == 0) ? false : true;
+              $counter++; 
+
             }
         }
 
         return $data;
         
     }
+
+
+
+    public function checkIfexitsvendorrpoinVBM($vendor_po_master_id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number', $vendor_po_master_id);
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function checkIfexitsvendorrpoinBM($vendor_po_master_id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', $vendor_po_master_id);
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
 
     public function checkIfexitsvendorrpo($po_number){
 

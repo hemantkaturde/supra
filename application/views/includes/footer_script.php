@@ -3047,6 +3047,31 @@
 					 { "width": "10%", "targets": 7 },
 					
 	            ],
+
+
+				// 👇 Add this
+				"rowCallback": function(row, data, index) {
+
+				    var createdDate = new Date(data[1]); // "2024-04-18 16:10:13"
+
+					// Next day 3 PM
+					var deadline = new Date(createdDate);
+					deadline.setDate(deadline.getDate() + 1);
+					deadline.setHours(15, 0, 0, 0);
+
+					var now = new Date();
+
+					if (data[8] === false && now > deadline) {
+
+						$(row).css({
+							'background-color': '#ffcccc',
+							'color': '#a10000',
+							'font-weight': 'bold'
+						});
+
+					}	
+				},
+
 	            responsive: true,
 	            "oLanguage": {
 	                "sEmptyTable": "<i>No Vendor PO List Found.</i>",
