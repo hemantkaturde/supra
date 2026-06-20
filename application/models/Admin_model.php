@@ -1809,7 +1809,7 @@ class Admin_model extends CI_Model
     
     public function getVendorpodata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_VENDOR_PO_MASTER.'.id  as vendor_po_master_id');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_VENDOR_PO_MASTER.'.id  as vendor_po_master_id,'.TBL_VENDOR_PO_MASTER.'.createdDtm vendor_po_createddtm');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_VENDOR_PO_MASTER.'.supplier_name','left');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
@@ -1825,7 +1825,7 @@ class Admin_model extends CI_Model
         }
         $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
-         //$this->db->limit(1);
+        //$this->db->limit(1);
         $this->db->order_by(TBL_VENDOR_PO_MASTER.'.id','DESC');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $fetch_result = $query->result_array();
@@ -1875,7 +1875,8 @@ class Admin_model extends CI_Model
               $chek_in_bom = $this->checkIfexitsvendorrpoinBM($vendor_po_master_id);
               $chek_in_vbom = $this->checkIfexitsvendorrpoinVBM($vendor_po_master_id);
 
-              $data[$counter]['check_vbm_bm_alert'] = ($chek_in_bom == 0 && $chek_in_vbom == 0) ? false : true;
+              $data[$counter]['check_vbm_bm_alert'] = ($chek_in_bom == 0 && $chek_in_vbom == 0) ? 1 : 0;
+              $data[$counter]['vendor_po_createddtm'] =  $value['vendor_po_createddtm'];
               $counter++; 
 
             }

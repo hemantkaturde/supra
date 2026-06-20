@@ -3052,7 +3052,8 @@
 				// 👇 Add this
 				"rowCallback": function(row, data, index) {
 
-				    var createdDate = new Date(data[1]); // "2024-04-18 16:10:13"
+				    var createdDate = new Date(data[9]); //
+					//alert(data[8]);
 
 					// Next day 3 PM
 					var deadline = new Date(createdDate);
@@ -3061,7 +3062,7 @@
 
 					var now = new Date();
 
-					if (data[8] === false && now > deadline) {
+					if (data[8] == 1 && now > deadline) {
 
 						$(row).css({
 							'background-color': '#ffcccc',
