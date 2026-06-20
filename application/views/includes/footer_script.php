@@ -3053,6 +3053,8 @@
 				"rowCallback": function(row, data, index) {
 
 				    var createdDate = new Date(data[9]); //
+					
+					//data[8] == 1
 					//alert(data[8]);
 
 					// Next day 3 PM
