@@ -27274,19 +27274,22 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
      public function fetchforgingscrapreportcount($params){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_FORGING_SCARP_WORKING.'.remark as forgin_scrap_remark,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_SUPPLIER.'.supplier_name as supplier_master_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_FORGING_SCARP_WORKING.'.id as forgin_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id_master');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
-        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
+        // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_FORGING_SCARP_WORKING.'.supplier_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.supplier_po_id');
+
 
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
+
 
         $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);
         $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
