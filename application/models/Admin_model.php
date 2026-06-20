@@ -27442,7 +27442,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%')");
         }
 
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id_master);
@@ -27455,7 +27455,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchforgingscarpworkingitemdetailsdata($params,$forgin_id,$vendor_po_id_master){
 
-        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty_bill_of,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_master_item_id,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.rm_type as vendor_po_rm_type');
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty_bill_of,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_master_item_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type as vendor_po_rm_type');
         // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -27473,7 +27473,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".rm_actual_aty LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%')");
         }
 
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id_master);
@@ -27491,8 +27491,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['part_number'] =  $value['part_number'];
                 $data[$counter]['name'] =  $value['name'];
-                $data[$counter]['type_of_raw_material'] =  $value['rm_type'];
-                $data[$counter]['rm_actual_aty'] =  $value['vendor_po_rm_type'];
+                $data[$counter]['type_of_raw_material'] =  $value['vendor_po_rm_type'];
+                $data[$counter]['rm_actual_aty'] =  $value['rm_actual_aty'];
                 $data[$counter]['expected_qty'] =  $value['expected_qty_bill_of'];
             
                 $data[$counter]['action'] ='';
