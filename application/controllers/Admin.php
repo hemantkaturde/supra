@@ -17817,9 +17817,9 @@ public function downlaoddebitnotevendor($id){
                 $gst_rate = $value['gst_rate'];
 
                 
-                // $cgst_tax_value = 0;
-                // $sgst_tax_value = 0;
-                // $igst_tax_value = 0;
+                $cgst_tax_value = 0;
+                $sgst_tax_value = 0;
+                $igst_tax_value = 0;
 
 
                 if($value['gst_rate']=='CGST_SGST'){
@@ -17846,13 +17846,10 @@ public function downlaoddebitnotevendor($id){
                 }
 
                 // $sub_total_amount += $paid_amount;
-                // $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
-                // $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
+                $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
+                $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
             $ii++;       
     }
-
-    $total_amount =   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
-    $total_amount_debit =   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
 
   
     $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
@@ -17876,6 +17873,7 @@ public function downlaoddebitnotevendor($id){
            
              $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_cgst,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_sgst,2);
              $total_debit_amount = number_format(round($subtotalpluspandrcharges_TaX_cgst,2),2) + number_format(round($subtotalpluspandrcharges_TaX_sgst,2),2)  + $sub_total_amount;
+
 
      }else{
 
