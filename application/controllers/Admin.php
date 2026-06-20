@@ -17783,76 +17783,154 @@ public function downlaoddebitnotevendor($id){
         $extra_text_label_val_for_calculation =0;
     }
     
-    foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
+    // foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
 
-        if($value['raw_material_neight_weight']){
-            $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
-        }else{
-            $net_weigth ='';
-        }
+    //     if($value['raw_material_neight_weight']){
+    //         $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
+    //     }else{
+    //         $net_weigth ='';
+    //     }
 
-        if($value['p_nf_charges']){
-            $total_pnf_charges += $value['p_nf_charges'];
-        }else{
-            $total_pnf_charges += 0;
-        }
+    //     if($value['p_nf_charges']){
+    //         $total_pnf_charges += $value['p_nf_charges'];
+    //     }else{
+    //         $total_pnf_charges += 0;
+    //     }
 
-        $paid_amount = $value['rate'] * $value['ok_qty'];
-        $total_paid_amount += $value['rate'] * $value['ok_qty'];
-        $total_debit_amount +=$value['debit_amount'];
+    //     $paid_amount = $value['rate'] * $value['ok_qty'];
+    //     $total_paid_amount += $value['rate'] * $value['ok_qty'];
+    //     $total_debit_amount +=$value['debit_amount'];
 
-        $CartItem .= '
-                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br/>'.$value['fgpart'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</br></td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' '.$value['vendor_po_unit'].'<br/> Recd Qty '.$value['received_quantity'].' '.$value['vendor_po_unit'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' '.$value['vendor_po_unit'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['vendor_po_unit'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_note_rate'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format(round($value['debit_amount'],2),2).'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
-                </tr>';
+    //     $CartItem .= '
+    //             <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br/>'.$value['fgpart'].'</td> 
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</br></td> 
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' '.$value['vendor_po_unit'].'<br/> Recd Qty '.$value['received_quantity'].' '.$value['vendor_po_unit'].'</td>
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' '.$value['vendor_po_unit'].'</td>
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['vendor_po_unit'].'</td> 
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>    
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_note_rate'].'</td>    
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format(round($value['debit_amount'],2),2).'</td>    
+    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+    //             </tr>';
                         
-                $gst_rate = $value['gst_rate'];
+    //             $gst_rate = $value['gst_rate'];
 
                 
-                $cgst_tax_value = 0;
-                $sgst_tax_value = 0;
-                $igst_tax_value = 0;
+    //             $cgst_tax_value = 0;
+    //             $sgst_tax_value = 0;
+    //             $igst_tax_value = 0;
 
 
-                if($value['gst_rate']=='CGST_SGST'){
-                    $cgst_tax_rate = 9;
-                    $sgst_tax_rate = 9;
+    //             if($value['gst_rate']=='CGST_SGST'){
+    //                 $cgst_tax_rate = 9;
+    //                 $sgst_tax_rate = 9;
 
-                    $cgst_tax_value += $value['CGST_value'];
-                    $sgst_tax_value += $value['SGST_value'];
+    //                 $cgst_tax_value += $value['CGST_value'];
+    //                 $sgst_tax_value += $value['SGST_value'];
 
-                }else if($value['gst_rate']=='CGST_SGST_6'){
-                    $cgst_tax_rate = 6;
-                    $sgst_tax_rate = 6;
+    //             }else if($value['gst_rate']=='CGST_SGST_6'){
+    //                 $cgst_tax_rate = 6;
+    //                 $sgst_tax_rate = 6;
 
-                    $cgst_tax_value += $value['CGST_value'];
-                    $sgst_tax_value += $value['SGST_value'];
+    //                 $cgst_tax_value += $value['CGST_value'];
+    //                 $sgst_tax_value += $value['SGST_value'];
 
-                }else if($value['gst_rate']=='IGST'){
-                    $igst_tax_rate = 18;
-                    $igst_tax_value += $value['IGST_value'];
-                }else if($value['gst_rate']=='IGST_12'){
-                    $igst_tax_rate = 12;
-                    $igst_tax_value += $value['IGST_value'];
+    //             }else if($value['gst_rate']=='IGST'){
+    //                 $igst_tax_rate = 18;
+    //                 $igst_tax_value += $value['IGST_value'];
+    //             }else if($value['gst_rate']=='IGST_12'){
+    //                 $igst_tax_rate = 12;
+    //                 $igst_tax_value += $value['IGST_value'];
 
-                }
+    //             }
 
-                // $sub_total_amount += $paid_amount;
-                $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
-                $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
-            $ii++;       
+    //             // $sub_total_amount += $paid_amount;
+    //             $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
+    //             $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
+    //         $ii++;       
+    // }
+
+    $total_paid_amount = 0;
+$total_debit_amount = 0;
+$total_pnf_charges = 0;
+
+$total_cgst_tax_value = 0;
+$total_sgst_tax_value = 0;
+$total_igst_tax_value = 0;
+
+$total_amount = 0;
+$total_amount_debit = 0;
+
+foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
+
+    if (!empty($value['raw_material_neight_weight'])) {
+        $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
+    } else {
+        $net_weigth = '';
     }
 
+    $total_pnf_charges += !empty($value['p_nf_charges']) ? $value['p_nf_charges'] : 0;
+
+    $paid_amount = $value['rate'] * $value['ok_qty'];
+
+    $total_paid_amount += $paid_amount;
+    $total_debit_amount += $value['debit_amount'];
+
+    $CartItem .= '
+        <tr style="border-left:1px solid black;border-right:1px solid black;">
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['name'].'<br/>'.$value['fgpart'].'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['invoice_qty'].' '.$value['vendor_po_unit'].'<br/> Recd Qty '.$value['received_quantity'].' '.$value['vendor_po_unit'].'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['ok_qty'].' '.$value['vendor_po_unit'].'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['less_quantity'].' '.$value['vendor_po_unit'].'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.$value['debit_note_rate'].'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top">'.number_format(round($value['debit_amount'],2),2).'</td>
+            <td style="border-left:1px solid black;border-right:1px solid black;text-align:left;padding:10px;" valign="top"></td>
+        </tr>';
+
+    // GST Calculation
+    if ($value['gst_rate'] == 'CGST_SGST') {
+
+        $cgst_tax_rate = 9;
+        $sgst_tax_rate = 9;
+
+        $total_cgst_tax_value += (float)$value['CGST_value'];
+        $total_sgst_tax_value += (float)$value['SGST_value'];
+
+    } else if ($value['gst_rate'] == 'CGST_SGST_6') {
+
+        $cgst_tax_rate = 6;
+        $sgst_tax_rate = 6;
+
+        $total_cgst_tax_value += (float)$value['CGST_value'];
+        $total_sgst_tax_value += (float)$value['SGST_value'];
+
+    } else if ($value['gst_rate'] == 'IGST') {
+
+        $igst_tax_rate = 18;
+
+        $total_igst_tax_value += (float)$value['IGST_value'];
+
+    } else if ($value['gst_rate'] == 'IGST_12') {
+
+        $igst_tax_rate = 12;
+
+        $total_igst_tax_value += (float)$value['IGST_value'];
+    }
+
+    $ii++;
+}
+
+        $gst_total = $total_cgst_tax_value + $total_sgst_tax_value + $total_igst_tax_value;
+
+        $final_total_amount = $total_paid_amount + $gst_total;
+
+        $final_total_debit_amount = $total_debit_amount + $gst_total;
+
   
-    $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
+        $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
     
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
