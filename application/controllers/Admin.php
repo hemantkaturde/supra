@@ -17536,7 +17536,8 @@ public function downlaoddebitnote($id){
             $ii++;       
     }
 
-    $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
+     $sub_total_amount_1 = $total_debit_amount +$extra_text_label_val_for_calculation;
+     $sub_total_amount = $total_amount_debit +$extra_text_label_val_for_calculation;
 
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
@@ -17671,7 +17672,7 @@ public function downlaoddebitnote($id){
 
                  <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.number_format(round($sub_total_amount,2),2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format(round($sub_total_amount_1,2),2).'</td>
                 </tr>
 
 
