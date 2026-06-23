@@ -17874,7 +17874,7 @@ public function downlaoddebitnotevendor($id){
             </tr>';
            
              $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_cgst,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_sgst,2);
-             $total_debit_amount = number_format(round($subtotalpluspandrcharges_TaX_cgst,2),2) + number_format(round($subtotalpluspandrcharges_TaX_sgst,2),2)  + $sub_total_amount;
+             $total_debit_amount = number_format(round($subtotalpluspandrcharges_TaX_cgst,2),2) + number_format(round($subtotalpluspandrcharges_TaX_sgst,2),2)  + $sub_total_amount_1;
 
 
      }else{
