@@ -17555,8 +17555,8 @@ public function downlaoddebitnote($id){
         //     $total_debit_amount = round($cgst_tax_value,2) + round($sgst_tax_value,2)  + $sub_total_amount;
 
 
-        $subtotalpluspandrcharges_TaX_cgst = $sub_total_amount * $cgst_tax_rate / 100;
-        $subtotalpluspandrcharges_TaX_sgst = $sub_total_amount * $cgst_tax_rate / 100;
+        $subtotalpluspandrcharges_TaX_cgst = $sub_total_amount_1 * $cgst_tax_rate / 100;
+        $subtotalpluspandrcharges_TaX_sgst = $sub_total_amount_1 * $cgst_tax_rate / 100;
 
        
            $tax_value = '<tr style="border: 1px solid black;">               
@@ -17570,7 +17570,7 @@ public function downlaoddebitnote($id){
             </tr>';
            
              $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_cgst,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_sgst,2);
-             $total_debit_amount = round($subtotalpluspandrcharges_TaX_cgst,2) + round($subtotalpluspandrcharges_TaX_sgst,2)  + $sub_total_amount;
+             $total_debit_amount = round($subtotalpluspandrcharges_TaX_cgst,2) + round($subtotalpluspandrcharges_TaX_sgst,2)  + $sub_total_amount_1;
 
 
 
@@ -17578,7 +17578,7 @@ public function downlaoddebitnote($id){
          // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
 
         /*03-10-2024 As Per new Logic*/
-        $subtotalpluspandrcharges_TaX = $sub_total_amount * $igst_tax_rate / 100;
+        $subtotalpluspandrcharges_TaX = $sub_total_amount_1 * $igst_tax_rate / 100;
         $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
         $loop_tax_rate = $igst_tax_rate;
 
@@ -17588,7 +17588,7 @@ public function downlaoddebitnote($id){
                 <td style="border: 1px solid black;padding: 5px;">'.number_format(round($subtotalpluspandrcharges_TaX,2),2).'</td>
             </tr>';
 
-        $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
+        $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount_1;
      }
 
      $tds_amount = $getDebitnotedetailsforInvoice['tds_amount'];
