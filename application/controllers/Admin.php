@@ -17827,22 +17827,22 @@ public function downlaoddebitnotevendor($id){
                     $cgst_tax_rate = 9;
                     $sgst_tax_rate = 9;
 
-                    $cgst_tax_value += $value['CGST_value'];
-                    $sgst_tax_value += $value['SGST_value'];
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
 
                 }else if($value['gst_rate']=='CGST_SGST_6'){
                     $cgst_tax_rate = 6;
                     $sgst_tax_rate = 6;
 
-                    $cgst_tax_value += $value['CGST_value'];
-                    $sgst_tax_value += $value['SGST_value'];
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
 
                 }else if($value['gst_rate']=='IGST'){
                     $igst_tax_rate = 18;
-                    $igst_tax_value += $value['IGST_value'];
+                    $igst_tax_value = $value['IGST_value'];
                 }else if($value['gst_rate']=='IGST_12'){
                     $igst_tax_rate = 12;
-                    $igst_tax_value += $value['IGST_value'];
+                    $igst_tax_value = $value['IGST_value'];
 
                 }
 
