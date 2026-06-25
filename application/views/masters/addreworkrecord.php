@@ -181,7 +181,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Authorized By</label>
-                                            <input type="text" class="form-control" name="authorized_by" value="<?php echo $name; ?>" id="authorized_by">
+                                            <input type="text" class="form-control" name="authorized_by" id="authorized_by">
                                             <p class="error authorized_by_error"></p>
                                         </div>
                                     </div>
