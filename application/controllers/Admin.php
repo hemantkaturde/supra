@@ -30063,7 +30063,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             <table width="100%" style"font-size:14px!important">
             <tr>
                 <th width="6%">NO.</th>
-                <th width="10%">Rej Reas.</th>
+                <th width="15%">Rej Reas.</th>
                 <th width="20%">Rej Reas Not.</th>
                 <th width="10%">Qty In Pcs</th>
                 <th width="20%">After Rew OK Qty</th>
