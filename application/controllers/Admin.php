@@ -30063,12 +30063,13 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             <table width="100%" style"font-size:14px!important">
             <tr>
                 <th width="6%">NO.</th>
-                <th width="10%">Rejected Reason</th>
-                <th width="20%">Rejected Reason Notes</th>
+                <th width="10%">Rej Reas.</th>
+                <th width="20%">Rej Reas Not.</th>
                 <th width="10%">Qty In Pcs</th>
-                <th width="20%">After Rework OK Qty</th>
-                <th width="20%">After Rework Rejection Qty</th>
+                <th width="20%">After Rew OK Qty</th>
+                <th width="20%">After Rew Rej Qty</th>
                 <th width="20%">Rework Done By</th>
+                <th width="20%">Rework Checked By</th>
             </tr>';
 
 
@@ -30088,6 +30089,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                         <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_rej_qty_in_pcs'] ?? '').'</td>
                         <td>'.($row['rework_done_by'] ?? '').'</td>
+                        <td>'.($row['rework_checked_by'] ?? '').'</td>
                     </tr>
                 ';
                 $i++;
@@ -30098,6 +30100,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                 $html .= '
                     <tr>
                         <td>'.$i.'</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
