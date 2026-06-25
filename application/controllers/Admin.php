@@ -30068,8 +30068,8 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                 <th width="10%">Qty In Pcs</th>
                 <th width="20%">After Rew OK Qty</th>
                 <th width="20%">After Rew Rej Qty</th>
-                <th width="20%">Rework Done By</th>
-                <th width="20%">Rework Checked By</th>
+                <th width="20%">Rew Done By</th>
+                <th width="20%">Rew Checked By</th>
             </tr>';
 
 
