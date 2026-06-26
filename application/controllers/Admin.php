@@ -30353,13 +30353,15 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             <table width="100%" style="font-size:15px;!important">
             <tr>
                 <th width="6%">NO.</th>
-                <th width="20%">Rejection Reason</th>
-                <th width="30%">Rejected Reason Notes</th>
-                <th width="10%">Qty Input</th>
-                <th width="20%">After Rework OK Qty</th>
-                <th width="20%">After Rework Rejection Qty</th>
-                <th width="20%">Rework Done By</th>
+                <th width="15%">Rej Reas.</th>
+                <th width="20%">Rej Reas Not.</th>
+                <th width="10%">Qty In Pcs</th>
+                <th width="20%">After Rew OK Qty</th>
+                <th width="20%">After Rew Rej Qty</th>
+                <th width="20%">Rew Done By</th>
+                <th width="20%">Rew Checked By</th>
             </tr>';
+
 
 
             $maxRows = 15;
@@ -30378,6 +30380,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
                         <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_rej_qty_in_pcs'] ?? '').'</td>
                         <td>'.($row['rework_done_by'] ?? '').'</td>
+                        <td>'.($row['rework_checked_by'] ?? '').'</td>
                     </tr>
                 ';
                 $i++;
@@ -30388,6 +30391,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
                 $html .= '
                     <tr>
                         <td>'.$i.'</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
