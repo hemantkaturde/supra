@@ -30257,7 +30257,7 @@ public function printincomingitemdetails_pass_protected($id)
 
 public function printreworkrecordlotnumberrecord_pass_protected($rjection_incoming_item_id,$rework_id){
     
-      require_once FCPATH . 'vendor/autoload.php';
+    require_once FCPATH . 'vendor/autoload.php';
 
     $mpdf = new \Mpdf\Mpdf([
         'margin_left' => 10,
@@ -30267,10 +30267,9 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id,$rjection_incoming_item_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rjection_incoming_item_id,$rework_id);
 
     $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
-
 
     // SAMPLE DATA – you can make dynamic
     $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
