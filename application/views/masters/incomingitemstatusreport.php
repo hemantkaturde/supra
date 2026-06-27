@@ -44,7 +44,7 @@
                                         <label for="email">Status</label>
                                         <select class="form-control" name="status" id="status">
                                             <option value="NA">Select Status</option>
-                                            <option value="Open" selected>Open</option>
+                                            <option value="Open" >Open</option>
                                             <option value="Close">Close</option>
                                         </select>
                                     </div>
