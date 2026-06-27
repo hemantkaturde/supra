@@ -67,7 +67,7 @@
                                     id="view_incomingitemstatus_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
-                                            <th>Part Name</th>
+                                            <th>Part Number</th>
                                             <th>Part Descroption</th>
                                             <th>Vendor Name</th>
                                             <th>Vendor PO NO.</th>
@@ -75,8 +75,10 @@
                                             <th>Lot Number</th>
                                             <th>P.O Qty (in pcs)</th>
                                             <th>Invoice Qty (in Pcs)</th>
-                                            <th>Invoice No.</th>
-                                            <th>Invoice Date</th>
+                                            <!-- <th>Invoice No.</th>
+                                            <th>Invoice Date</th> -->
+                                            <th>Inspection report No</th>
+                                            <th>Checked by</th>
                                             <th>Received Date</th>
                                             <th>Status</th>
                                         </tr>

@@ -27028,8 +27028,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['lot_no'] = $value['lot_no'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 $data[$counter]['invoice_qty'] = $value['invoice_qty'];
-                $data[$counter]['invoice_no'] = $value['invoice_no'];
-                $data[$counter]['invoice_date'] = date("d-m-Y", strtotime($value['invoice_date']));
+                // $data[$counter]['invoice_no'] = $value['invoice_no'];
+                // $data[$counter]['invoice_date'] = date("d-m-Y", strtotime($value['invoice_date']));
+                $data[$counter]['inspectionreport_no'] = '';
+                $data[$counter]['checked_by'] = '';
                 $data[$counter]['received_date'] = date("d-m-Y", strtotime($value['received_date']));
                 $data[$counter]['incoming_item_status'] = $value['incoming_item_status'];               
                 $counter++; 
