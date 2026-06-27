@@ -563,7 +563,7 @@
                                                             <div class="col-sm-9">
                                                                 <select class="form-control" name="incoming_item_status" id="incoming_item_status">
                                                                     <option value="">Select Status</option>
-                                                                    <option value="Open">Open</option>
+                                                                    <option value="Open" selected>Open</option>
                                                                     <option value="Close">Close</option>
                                                                 </select>
                                                                 <p class="error incoming_item_status_error"></p>
