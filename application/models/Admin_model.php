@@ -27354,7 +27354,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function getSupplierdetailsforForginworks($bom_vendor_po_number){
+    public function getSupplierdetailsforForginworks($bom_vendor_po_number){
         
         $this->db->select(TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplierpo,'.TBL_SUPPLIER_PO_MASTER.'.date as supplierdate,'.TBL_SUPPLIER.'.sup_id  as supplier_id,'.TBL_SUPPLIER_PO_MASTER.'.id as supplier_po_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
