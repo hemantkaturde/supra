@@ -26623,6 +26623,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty',
                 TBL_SUPPLIER.'.supplier_name as sup_name',
                 TBL_SUPPLIER_PO_MASTER.'.po_number',
+                TBL_SUPPLIER_PO_MASTER.'.date as sup_po_date',
                 TBL_SUPPLIER_PO_MASTER_ITEM.'.rm_certificate_status',
             ]);
 
@@ -26709,13 +26710,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'part_number' => $row['part_number'] ?? '',
                     'description' => $row['description'] ?? '',
                     'type_of_raw_material' => $row['type_of_raw_material'] ?? '',
-                    'order_qty' => $row['order_oty'] ?? 0,
+                    // 'order_qty' => $row['order_oty'] ?? 0,
                     'vendor_name' => '',
                     'vendor_po' => '',
+                    'vendor_po_date' => '',
                     'sup_nme' => $row['sup_name'] ?? '',
                     'po_number' => $row['po_number'] ?? '',
+                    'sup_po_number' => $row['sup_po_date'] ?? '',
                     'status' => $doc,
-                    'updated_date' => '',
+                    // 'updated_date' => '',
                     'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' data-identity='Supplier' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i>
                     <a href='".base_url()."/supplier_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'>
                     <i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
@@ -26733,6 +26736,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 TBL_VENDOR_PO_MASTER_ITEM.'.order_oty',
                 TBL_VENDOR.'.vendor_name',
                 TBL_VENDOR_PO_MASTER.'.po_number',
+                TBL_VENDOR_PO_MASTER.'.date as vendor_po_date',
                 TBL_VENDOR_PO_MASTER_ITEM.'.rm_certificate_status',
             ]);
 
@@ -26817,13 +26821,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'part_number' => $row['part_number'] ?? '',
                     'description' => $row['description'] ?? '',
                     'type_of_raw_material' => '',
-                    'order_qty' => $row['order_oty'] ?? 0,
+                    // 'order_qty' => $row['order_oty'] ?? 0,
                     'vendor_name' => $row['vendor_name'] ?? '',
                     'vendor_po' => $row['po_number'] ?? '',
+                    'vendor_po_date' => $row['vendor_po_date'] ?? '',
                     'sup_nme' => '',
                     'po_number' => '',
+                    'sup_po_number' => '',
                     'status' => $doc,
-                    'updated_date' => '',
+                    // 'updated_date' => '',
                     'action' => "<i style='font-size: x-large;cursor: pointer;' data-id='".($row['item_id'] ?? 0)."' data-identity='Vendor' class='fa fa-pencil-square-o updatestatusofrmcertificate'></i>
                     <a href='".base_url()."/vendor_po_item_attachment/".htmlspecialchars($row['item_id'] ?? 0)."' target='_blank'>
                     <i style='font-size: x-large;cursor: pointer;' class='fa fa-download'></i></a>"
@@ -26850,13 +26856,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         // ================= SORT =================
 
-        usort($result, function ($a, $b) {
+        // usort($result, function ($a, $b) {
 
-            $dateA = !empty($a['updated_date']) ? strtotime($a['updated_date']) : 0;
-            $dateB = !empty($b['updated_date']) ? strtotime($b['updated_date']) : 0;
+        //     $dateA = !empty($a['updated_date']) ? strtotime($a['updated_date']) : 0;
+        //     $dateB = !empty($b['updated_date']) ? strtotime($b['updated_date']) : 0;
 
-            return $dateB - $dateA;
-        });
+        //     return $dateB - $dateA;
+        // });
 
         // ================= PAGINATION =================
 

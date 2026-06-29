@@ -112,13 +112,15 @@
                                         <th>Part no</th>
                                         <th>Part Description</th>
                                         <th>RM Type</th>
-                                        <th>Order Qty</th>
+                                        <!-- <th>Order Qty</th> -->
                                         <th>Vendor Name</th>
                                         <th>Vendor po</th>
+                                        <th>Vendor PO Date</th>
                                         <th>Supplier name</th>
                                         <th>Supplier PO</th>
+                                        <th>Supplier PO Date</th>
                                         <th>Status</th>
-                                        <th>Uploaded Date</th>
+                                        <!-- <th>Uploaded Date</th> -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>
