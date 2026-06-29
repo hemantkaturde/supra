@@ -31954,11 +31954,11 @@ public function deletesupplieritemattachment(){
         $this->loadViews("masters/rmtestcertificate", $this->global, $data, NULL); 
     }
 
-    public function fetchrmcertificatelist($vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status){
+    public function fetchrmcertificatelist($vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status,$from_date,$to_date){
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status); 
-        $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status); 
+        $totalRecords = $this->admin_model->fetchrmcertificatelistcount($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status,$from_date,$to_date); 
+        $queryRecords = $this->admin_model->fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status,$from_date,$to_date); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

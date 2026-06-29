@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                 <div id="supplier_po_number_div" style="display:none">
+                <div id="supplier_po_number_div" style="display:none">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="supplier_po">Supplier PO</label>
@@ -86,7 +86,6 @@
                     </div>
                 </div>
 
-
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="status">Status</label>
@@ -96,6 +95,27 @@
                             <option value="Reviewed">Reviewed</option>
                         </select>
                         <p class="error status_error"></p>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="row" style="margin-left:4px">
+
+              <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="from_date">From Date</label>
+                        <input type="text" class="form-control datepicker" placeholder="Select From Date" id="from_date" name="from_date">
+                        <p class="error from_date_error"></p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="to_date">To Date</label>
+                        <input type="text" class="form-control datepicker" placeholder="Select To Date" id="to_date" name="to_date">
+                        <p class="error to_date_error"></p>
                     </div>
                 </div>
             </div>

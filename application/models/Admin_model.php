@@ -26304,7 +26304,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $supplier_name,
     $vendor_po_number,
     $supplier_po_number,
-    $status
+    $status,
+    $from_date,
+    $to_date
 ) {
 
     $supplier_count = 0;
@@ -26581,7 +26583,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 }
 
 
-    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status)
+    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status,$from_date,$to_date)
     {
         $data = [];
         $data_vendor = [];
