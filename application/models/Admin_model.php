@@ -26977,18 +26977,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getincomingitemstatusreportdata($params,$from_date,$to_date,$status){
 
-        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_FINISHED_GOODS.'.name as part_discription,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no,'.TBL_INCOMING_DETAILS_ITEM.'.p_o_qty,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty,'.TBL_TDIR.'.report_number,'.TBL_INCOMING_DETAILS_ITEM.'.received_date,'.TBL_TDIR_INCOMING_LOT_DATA.'.checked_by,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status');
+        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_FINISHED_GOODS.'.name as part_discription,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no,'.TBL_INCOMING_DETAILS_ITEM.'.p_o_qty,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty,'.TBL_TDIR.'.report_number,'.TBL_INCOMING_DETAILS_ITEM.'.received_date,'.TBL_TDIR_INCOMING_LOT_DATA.'.checked_by as incoming_checked_by,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status,'.TBL_TDIR_INCOMING_LOT_DATA.'.checked_by as qc_person_name ');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
         $this->db->join(TBL_TDIR_INCOMING_LOT_DATA, TBL_TDIR_INCOMING_LOT_DATA.'.incomping_details_item_id = '.TBL_INCOMING_DETAILS_ITEM.'.id','left');
-
         $this->db->join(TBL_TDIR, TBL_TDIR.'.id = '.TBL_TDIR_INCOMING_LOT_DATA.'.tdir_id','left');
 
 
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".qc_person_name LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_TDIR_INCOMING_LOT_DATA.".qc_person_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
@@ -27042,7 +27041,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 // $data[$counter]['invoice_no'] = $value['invoice_no'];
                 // $data[$counter]['invoice_date'] = date("d-m-Y", strtotime($value['invoice_date']));
                 $data[$counter]['inspectionreport_no'] = $value['report_number'];
-                $data[$counter]['checked_by'] = $value['checked_by'];
+                $data[$counter]['checked_by'] = $value['incoming_checked_by'];
                 $data[$counter]['received_date'] = date("d-m-Y", strtotime($value['received_date']));
                 $data[$counter]['incoming_item_status'] = $value['incoming_item_status'];               
                 $counter++; 
