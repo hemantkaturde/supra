@@ -31072,8 +31072,20 @@ $('#export_excel').on('click', function() {
 						var from_date = $('#from_date').val();
 					    var to_date = $('#to_date').val();
 
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
 
 				});
 
@@ -31125,8 +31137,20 @@ $('#export_excel').on('click', function() {
 						var from_date = $('#from_date').val();
 					    var to_date = $('#to_date').val();
 
+				        if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
 
 				});
 
@@ -31206,7 +31230,21 @@ $('#export_excel').on('click', function() {
 					
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
+				
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 
 				});
 
@@ -31289,7 +31327,21 @@ $('#export_excel').on('click', function() {
 					    var to_date = $('#to_date').val();
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
+				
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 
 				});
 
@@ -31326,8 +31378,11 @@ $('#export_excel').on('click', function() {
 					//getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name);
 				});
 
-				function getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date){
-					$("#view_rm_certificate_report").dataTable().fnDestroy();
+				function getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val){
+					
+			
+				
+				   $("#view_rm_certificate_report").dataTable().fnDestroy();
 
 					var dt = $('#view_rm_certificate_report').DataTable({
 							"columnDefs": [ 
@@ -31356,7 +31411,7 @@ $('#export_excel').on('click', function() {
 							"bProcessing": true,
 							"serverSide": true,
 							"ajax":{
-								url :"<?php echo base_url();?>admin/fetchrmcertificatelist/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name+"/"+vendor_po_number+"/"+supplier_po_number+"/"+status+"/"+from_date+"/"+to_date,
+								url :"<?php echo base_url();?>admin/fetchrmcertificatelist/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name+"/"+vendor_po_number+"/"+supplier_po_number+"/"+status+"/"+form_date_val+"/"+to_date_val,
 								type: "post",
 							},
 						});
@@ -31530,11 +31585,21 @@ $('#export_excel').on('click', function() {
 						// 	$('#vendor_name_div').css('display','none');
 						// 	$('#supplier_name_div').css('display','block');
 						// }		
-						var from_date = $('#from_date').val();
-					    var to_date = $('#to_date').val();
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 
 				});
 
@@ -31568,7 +31633,21 @@ $('#export_excel').on('click', function() {
 					    var to_date = $('#to_date').val();
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
+				
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 
 				});
 
@@ -31619,7 +31698,21 @@ $('#export_excel').on('click', function() {
 					    var to_date = $('#to_date').val();
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
+				
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 				});
 
 
@@ -31670,7 +31763,21 @@ $('#export_excel').on('click', function() {
 					    var to_date = $('#to_date').val();
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
+				
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 
 		     	});
 
@@ -31722,7 +31829,21 @@ $('#export_excel').on('click', function() {
 					    var to_date = $('#to_date').val();
 
 				
-						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,from_date,to_date);
+						if(from_date){
+						   var form_date_val = from_date;
+						}else{
+						   var form_date_val = 'NA';
+						}
+
+						if(to_date){
+						   var to_date_val = to_date;
+						}else{
+						   var to_date_val = 'NA';
+						}
+
+				
+						getRmcertificateList(vendor_supplier_name,vendor_name,supplier_name,vendor_po_number,supplier_po_number,status,form_date_val,to_date_val);
+
 
 				});
 

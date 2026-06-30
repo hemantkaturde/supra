@@ -26305,8 +26305,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $vendor_po_number,
     $supplier_po_number,
     $status,
-    $from_date,
-    $to_date
+    $form_date_val,
+    $to_date_val
 ) {
 
     $supplier_count = 0;
@@ -26400,6 +26400,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
        // Supplier PO Filter
             if($supplier_po_number!== 'null'){
                 $this->db->like(TBL_SUPPLIER_PO_MASTER.'.id', trim($supplier_po_number));
+            }
+
+                   
+            if($form_date_val!='NA'){
+                $this->db->where(TBL_SUPPLIER_PO_MASTER.'.date >=', $form_date_val);
+            }
+
+            if($to_date_val!='NA'){
+                $this->db->where(TBL_SUPPLIER_PO_MASTER.'.date <=', $to_date_val);
             }
 
         $supplier_result = $this->db->get()->result_array() ?? [];
@@ -26513,6 +26522,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->like(TBL_VENDOR_PO_MASTER.'.id', trim($vendor_po_number));
         }
 
+         if($form_date_val!='NA'){
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.date >=', $form_date_val);
+            }
+
+            if($to_date_val!='NA'){
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.date <=', $to_date_val);
+            }
+
         $vendor_result = $this->db->get()->result_array() ?? [];
 
         foreach ($vendor_result as $row) {
@@ -26583,7 +26600,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 }
 
 
-    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status,$from_date,$to_date)
+    public function fetchrmcertificatelistdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$vendor_po_number,$supplier_po_number,$status,$form_date_val,$to_date_val)
     {
         $data = [];
         $data_vendor = [];
@@ -26660,6 +26677,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->like(TBL_SUPPLIER_PO_MASTER.'.id', trim($supplier_po_number));
             }
 
+                
+            if($form_date_val!='NA'){
+                $this->db->where(TBL_SUPPLIER_PO_MASTER.'.date >=', $form_date_val);
+            }
+
+            if($to_date_val!='NA'){
+                $this->db->where(TBL_SUPPLIER_PO_MASTER.'.date <=', $to_date_val);
+            }
+
+
+
             $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id', 'DESC');
 
 
@@ -26707,6 +26735,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                         }
                     }
                 }
+                
 
                 $data[] = [
                     'part_number' => $row['part_number'] ?? '',
@@ -26771,6 +26800,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             // Vendor PO Filter
             if($vendor_po_number!== 'null'){
                 $this->db->like(TBL_VENDOR_PO_MASTER.'.id', trim($vendor_po_number));
+            }
+
+
+            if($form_date_val!='NA'){
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.date >=', $form_date_val);
+            }
+
+            if($to_date_val!='NA'){
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.date <=', $to_date_val);
             }
 
             $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id', 'DESC');
