@@ -31585,6 +31585,10 @@ $('#export_excel').on('click', function() {
 						// 	$('#vendor_name_div').css('display','none');
 						// 	$('#supplier_name_div').css('display','block');
 						// }		
+
+						var from_date = $('#from_date').val();
+					    var to_date = $('#to_date').val();
+
 						if(from_date){
 						   var form_date_val = from_date;
 						}else{
