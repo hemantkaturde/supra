@@ -33,13 +33,13 @@
                             <table width="100%" class="table table-striped table-bordered table-hover rework_record_reason_details" id="rework_record_reason_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Rejected Reason</th>
-                                        <th>Rejected Reason Notes</th>
-                                        <th>Rework Qty (in pcs)</th>
-                                        <th>After Rework OK Qty (in pcs)</th>
-                                        <th>After Rework Rej Qty (in pcs)</th>
-                                        <th>Rework Done By</th>   
-                                        <th>Rework Checked By</th>   
+                                        <th>R/W Reason</th>
+                                        <th>R/W Method</th>
+                                        <th>Qty in pcs</th>
+                                        <th>After R/W OK Qty</th>
+                                        <th>After R/W Rej Qty</th>
+                                        <th>R/W Done By</th>   
+                                        <th>R/W Checked By</th>   
                                         <th>Action</th>
                                     </tr>
                                 </thead>
