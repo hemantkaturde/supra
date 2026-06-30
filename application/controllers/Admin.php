@@ -30063,13 +30063,13 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             <table width="100%" style"font-size:14px!important">
             <tr>
                 <th width="6%">NO.</th>
-                <th width="15%">Rej Reas.</th>
-                <th width="20%">Rej Reas Not.</th>
-                <th width="10%">Qty In Pcs</th>
-                <th width="20%">After Rew OK Qty</th>
-                <th width="20%">After Rew Rej Qty</th>
-                <th width="20%">Rew Done By</th>
-                <th width="20%">Rew Checked By</th>
+                <th width="15%">R/W Reason</th>
+                <th width="20%">R/W Method</th>
+                <th width="10%">Qty in pcs</th>
+                <th width="20%">After R/W OK Qty</th>
+                <th width="20%">After R/W Rej Qty</th>
+                <th width="20%">R/W Done By</th>
+                <th width="20%">R/W Checked By</th>
             </tr>';
 
 
@@ -30352,13 +30352,13 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             <table width="100%" style="font-size:15px;!important">
             <tr>
                 <th width="6%">NO.</th>
-                <th width="15%">Rej Reas.</th>
-                <th width="20%">Rej Reas Not.</th>
-                <th width="10%">Qty In Pcs</th>
-                <th width="20%">After Rew OK Qty</th>
-                <th width="20%">After Rew Rej Qty</th>
-                <th width="20%">Rew Done By</th>
-                <th width="20%">Rew Checked By</th>
+                <th width="15%">R/W Reason</th>
+                <th width="20%">R/W Method</th>
+                <th width="10%">Qty in pcs</th>
+                <th width="20%">After R/W OK Qty</th>
+                <th width="20%">After R/W Rej Qty</th>
+                <th width="20%">R/W Done By</th>
+                <th width="20%">R/W Checked By</th>
             </tr>';
 
 
