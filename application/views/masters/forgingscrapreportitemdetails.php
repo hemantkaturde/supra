@@ -176,13 +176,32 @@
                </div>
 
                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Date</label>
+                  <div class="col-sm-8">
+                     <input type="text" class="form-control datepicker"  id="itemdate"  name="itemdate"></input>
+                     <p class="error itemdate_error"></p>
+                  </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Status</label>
+                  <div class="col-sm-8">
+                        <select class="form-control serachfilternotrequired searchfilter" name="itemstatus" id="itemstatus">
+                              <option value="">Select Status</option>
+                              <option value="Open">Open</option>
+                              <option value="Close">Close</option>
+                        </select>
+                     <p class="error itemstatus_error"></p>
+                  </div>
+               </div>
+
+               <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Remark</label>
                   <div class="col-sm-8">
                      <input type="text" class="form-control"  id="remark_section_2"  name="remark_section_2"></input>
                      <p class="error remark_section_2_error"></p>
                   </div>
                </div>
-
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary btn-xl closerejectionreworkitemdata" data-dismiss="modal">Close</button>
@@ -212,4 +231,18 @@ $(document).ready(function() {
         dropdownParent: $('#myModal')
     });
 });
+</script>
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script>
+   $(function() {
+			$(".datepicker").datepicker({ 
+				// minDate: 0,
+				todayHighlight: true,
+                 dateFormat: 'yy-mm-dd',
+				startDate: new Date()
+			});
+		});
 </script>

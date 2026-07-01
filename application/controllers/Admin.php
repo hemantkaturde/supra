@@ -32487,6 +32487,8 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('diff_in_kgs_section_2','diff_in_kgs_section_2','trim');
                 $this->form_validation->set_rules('total_scrap_section_2','total_scrap_section_2','trim');
                 $this->form_validation->set_rules('remark_section_2','remark_section_2','trim');
+                $this->form_validation->set_rules('itemdate','itemdate','trim');
+                $this->form_validation->set_rules('itemstatus','itemstatus','trim');
 
         
                 if($this->form_validation->run() == FALSE)
@@ -32505,6 +32507,8 @@ public function deletesupplieritemattachment(){
                                                                             'exp_qty_in_pcs_section_2'=>strip_tags(form_error('exp_qty_in_pcs_section_2')),
                                                                             'diff_in_kgs_section_2'=>strip_tags(form_error('diff_in_kgs_section_2')),
                                                                             'total_scrap_section_2'=>strip_tags(form_error('total_scrap_section_2')),
+                                                                            'itemdate'=>strip_tags(form_error('itemdate')),
+                                                                            'itemstatus'=>strip_tags(form_error('itemstatus')),
                                                                             'remark_section_2'=>strip_tags(form_error('remark_section_2')));
             
                 }else{
@@ -32523,6 +32527,8 @@ public function deletesupplieritemattachment(){
                         'exp_qty_in_pcs_section_2'  => trim($this->input->post('exp_qty_in_pcs_section_2')),
                         'diff_in_kgs_section_2'  => trim($this->input->post('diff_in_kgs_section_2')),
                         'total_scrap_section_2'  => trim($this->input->post('total_scrap_section_2')),
+                        'itemdate'=> trim($this->input->post('itemdate')),
+                        'itemstatus'=>trim($this->input->post('itemstatus')),
                         'remark_section_2'=> trim($this->input->post('remark_section_2')),
                     );
 
@@ -32548,6 +32554,8 @@ public function deletesupplieritemattachment(){
                                                                             'exp_qty_in_pcs_section_2'=>strip_tags(form_error('exp_qty_in_pcs_section_2')),
                                                                             'diff_in_kgs_section_2'=>strip_tags(form_error('diff_in_kgs_section_2')),
                                                                             'total_scrap_section_2'=>strip_tags(form_error('total_scrap_section_2')),
+                                                                            'itemdate'=>strip_tags(form_error('itemdate')),
+                                                                            'itemstatus'=>strip_tags(form_error('itemstatus')),
                                                                             'remark_section_2'=>strip_tags(form_error('remark_section_2')));
                                 
                     }

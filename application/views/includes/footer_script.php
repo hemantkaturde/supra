@@ -32615,6 +32615,9 @@ $('#export_excel').on('click', function() {
 									$('#total_scrap_section_2').val('');
 									$('#remark_section_2').val('');
 
+									('#itemdate').val('');
+									('#itemstatus').val('');
+
                                     $('#editforginscrappopupdetails').modal('hide');
 									
 								}
@@ -32641,6 +32644,9 @@ $('#export_excel').on('click', function() {
 									$('#total_scrap_section_2').val(data_row.total_scrap_section_2);
 									$('#remark_section_2').val(data_row.remark_section_2);
 
+									('#itemdate').val(data_row.itemdate);
+									('#itemstatus').val(data_row.itemstatus);
+
 									$('#editforginscrappopupdetails').modal('show');
 								
 								}
@@ -32666,6 +32672,8 @@ $('#export_excel').on('click', function() {
 									$('#diff_in_kgs_section_2').val('');
 									$('#total_scrap_section_2').val('');
 									$('#remark_section_2').val('');
+									('#itemdate').val('');
+									('#itemstatus').val('');
 
 									$('#editforginscrappopupdetails').modal('hide');		
 							}
