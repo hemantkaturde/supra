@@ -186,6 +186,26 @@
                   </div>
                </div>
 
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Date</label>
+                  <div class="col-sm-8">
+                     <input type="text" class="form-control datepicker"  id="itemdate"  name="itemdate"></input>
+                     <p class="error itemdate_error"></p>
+                  </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Status</label>
+                  <div class="col-sm-8">
+                        <select class="form-control serachfilternotrequired searchfilter" name="itemstatus" id="itemstatus">
+                              <option value="">Select Status</option>
+                              <option value="Open">Open</option>
+                              <option value="Close">Close</option>
+                        </select>
+                     <p class="error itemstatus_error"></p>
+                  </div>
+               </div>
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Remark</label>
                   <div class="col-sm-8">
