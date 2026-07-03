@@ -208,7 +208,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="remarks">Remarks</label>
+                                            <label for="remarks">Remarks <span class="required">*</span></label>
                                             <input type="text" class="form-control" id="remarks" value="<?php echo $getTdirdata[0]['remarks']; ?>" name="remarks">
                                             <p class="error remarks_error"></p>
                                         </div>
