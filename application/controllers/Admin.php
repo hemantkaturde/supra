@@ -17511,22 +17511,27 @@ public function downlaoddebitnote($id){
 
 
                    if($value['gst_rate']=='CGST_SGST'){
+                       $cgst_tax_rate = 9;
+                        $sgst_tax_rate = 9;
 
-                        $total_cgst_value += $value['CGST_value'];
-                        $total_sgst_value += $value['SGST_value'];
+                        $total_cgst_value = $value['CGST_value'];
+                        $total_sgst_value = $value['SGST_value'];
 
                     }else if($value['gst_rate']=='CGST_SGST_6'){
 
-                        $total_cgst_value += $value['CGST_value'];
-                        $total_sgst_value += $value['SGST_value'];
+                      $cgst_tax_rate = 6;
+                      $sgst_tax_rate = 6;
+
+                        $total_cgst_value = $value['CGST_value'];
+                        $total_sgst_value = $value['SGST_value'];
 
                     }else if($value['gst_rate']=='IGST'){
-
-                        $total_igst_value += $value['IGST_value'];
+                        $igst_tax_rate = 18;
+                        $total_igst_value = $value['IGST_value'];
 
                     }else if($value['gst_rate']=='IGST_12'){
-
-                        $total_igst_value += $value['IGST_value'];
+                        $igst_tax_rate = 12;
+                        $total_igst_value = $value['IGST_value'];
 
                     }
 
@@ -17577,18 +17582,37 @@ public function downlaoddebitnote($id){
      }else{
          // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
 
-        /*03-10-2024 As Per new Logic*/
-        $subtotalpluspandrcharges_TaX = $sub_total_amount_1 * $igst_tax_rate / 100;
-        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
-        $loop_tax_rate = $igst_tax_rate;
 
-        $tax_value = '
-            <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.number_format(round($subtotalpluspandrcharges_TaX,2),2).'</td>
-            </tr>';
+           if($gst_rate=='Zero_Tax'){
 
-        $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount_1;
+                /*06-06-2026 As Per new Logic*/
+                $subtotalpluspandrcharges_TaX = $sub_total_amount_1;
+                // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
+                // $loop_tax_rate = $igst_tax_rate;
+
+                $tax_value = '
+                    <tr style="border: 1px solid black;">
+                        <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Zero Tax 0%</td>    
+                        <td style="border: 1px solid black;padding: 5px;">0</td>
+                    </tr>';
+
+                $total_debit_amount = $sub_total_amount_1;
+
+        }else{
+
+            /*03-10-2024 As Per new Logic*/
+            $subtotalpluspandrcharges_TaX = $sub_total_amount_1 * $igst_tax_rate / 100;
+            $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
+            $loop_tax_rate = $igst_tax_rate;
+
+            $tax_value = '
+                <tr style="border: 1px solid black;">
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format(round($subtotalpluspandrcharges_TaX,2),2).'</td>
+                </tr>';
+
+            $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount_1;
+        }
      }
 
      $tds_amount = $getDebitnotedetailsforInvoice['tds_amount'];
