@@ -27721,46 +27721,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
-
-
-    public function forginscrapworkingexcelreportcount($params){
-
-             $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
-        $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-
-        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
-        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
-
-
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
-        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
-
-
-
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
-       
-
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
-        }
-
-        $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);
-        $this->db->order_by(TBL_FORGING_SCARP_WORKING.'.id','DESC');
-        $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
-        $rowcount = $query->num_rows();
-        return $rowcount;
-    }
-
-    public function forginscrapworkingexcelreportdata($params){
+    public function forginscrapworkingexcelreportcount($params,$vendor_name,$forgin_report_status,$from_date,$to_date){
 
         $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
         $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
@@ -27777,17 +27738,88 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
         // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
 
-
-
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
        
 
-        if($params['search']['value'] != "") 
+         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemstatus LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+         if($vendor_name != 'NA'){
+          $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
+        }
+
+        if($forgin_report_status != 'NA'){
+          $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus',$forgin_report_status);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate <=", $to_date);
+        }
+
+
+        $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);
+        $this->db->order_by(TBL_FORGING_SCARP_WORKING.'.id','DESC');
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function forginscrapworkingexcelreportdata($params,$vendor_name,$forgin_report_status,$from_date,$to_date){
+
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
+        $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+       
+         if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemstatus LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        if($vendor_name != 'NA'){
+          $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
+        }
+
+        if($forgin_report_status != 'NA'){
+          $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus',$forgin_report_status);
+        }
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate <=", $to_date);
         }
 
         $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);

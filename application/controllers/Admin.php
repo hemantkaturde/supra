@@ -32679,11 +32679,11 @@ public function deletesupplieritemattachment(){
     }
 
     
-    public function forginscrapworkingexcelreport(){
+    public function forginscrapworkingexcelreport($vendor_name,$forgin_report_status,$from_date,$to_date){
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->forginscrapworkingexcelreportcount($params); 
-        $queryRecords = $this->admin_model->forginscrapworkingexcelreportdata($params); 
+        $totalRecords = $this->admin_model->forginscrapworkingexcelreportcount($params,$vendor_name,$forgin_report_status,$from_date,$to_date); 
+        $queryRecords = $this->admin_model->forginscrapworkingexcelreportdata($params,$vendor_name,$forgin_report_status,$from_date,$to_date); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

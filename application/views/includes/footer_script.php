@@ -32696,59 +32696,74 @@ $('#export_excel').on('click', function() {
 
 			$(document).ready(function() {
 	            $("#view_forginscrapworkingexcel_report").dataTable().fnDestroy();
-				// var from_date = $('#from_date').val();
-				// var to_date = $('#to_date').val();
 				var vendor_name = $('#vendor_name').val();
-				getviewforginscrapreportreport(vendor_name);
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var forgin_report_status = $('#forgin_report_status').val();
+				getviewforginscrapreportreport(vendor_name,forgin_report_status,from_date,to_date);
 			});
 
 
 
 			
-			// $(document).on('change','#vendor_name',function(e){  
-			// 	e.preventDefault();
-			// 	$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
-			// 	var from_date = $('#from_date').val();
-			// 	var to_date = $('#to_date').val();
-			// 	var vendor_name = $('#vendor_name').val();
-			// 	getdeliverydayscalculationreport(from_date,to_date,vendor_name);
-			// });
+			$(document).on('change','#vendor_name',function(e){  
+				e.preventDefault();
+				$("#view_forginscrapworkingexcel_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name').val();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var forgin_report_status = $('#forgin_report_status').val();
+				getviewforginscrapreportreport(vendor_name,forgin_report_status,from_date,to_date);
+			});
 
 
-			// $(document).on('change','#from_date',function(e){  
-			// 	e.preventDefault();
-			// 	$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
-			// 	var from_date = $('#from_date').val();
-			// 	var to_date = $('#to_date').val();
-			// 	var vendor_name = $('#vendor_name').val();
-			// 	getdeliverydayscalculationreport(from_date,to_date,vendor_name);
-			// });
+			$(document).on('change','#forgin_report_status',function(e){  
+				e.preventDefault();
+				$("#view_forginscrapworkingexcel_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name').val();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var forgin_report_status = $('#forgin_report_status').val();
+				getviewforginscrapreportreport(vendor_name,forgin_report_status,from_date,to_date);
+			});
 
 
-			// $(document).on('change','#to_date',function(e){  
-			// 	e.preventDefault();
-			// 	$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
-			// 	var from_date = $('#from_date').val();
-			// 	var to_date = $('#to_date').val();
-			// 	var vendor_name = $('#vendor_name').val();
-			// 	getdeliverydayscalculationreport(from_date,to_date,vendor_name);
-			// });
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_forginscrapworkingexcel_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name').val();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var forgin_report_status = $('#forgin_report_status').val();
+				getviewforginscrapreportreport(vendor_name,forgin_report_status,from_date,to_date);
+			});
 
 
-            function getviewforginscrapreportreport(vendor_name){
+			$(document).on('change','#to_date',function(e){  
+				e.preventDefault();
+				$("#view_forginscrapworkingexcel_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name').val();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var forgin_report_status = $('#forgin_report_status').val();
+				getviewforginscrapreportreport(vendor_name,forgin_report_status,from_date,to_date);
+			});
 
 
-				// if(from_date){
-				// 	from_date = from_date;
-				// }else{
-				// 	from_date ='NA';
-				// }
+            function getviewforginscrapreportreport(vendor_name,forgin_report_status,from_date,to_date){
 
-				// if(to_date){
-				// 	to_date = to_date;
-				// }else{
-				// 	to_date ='NA';
-				// }
+
+				if(from_date){
+					from_date = from_date;
+				}else{
+					from_date ='NA';
+				}
+
+				if(to_date){
+					to_date = to_date;
+				}else{
+					to_date ='NA';
+				}
 
 
 				var dt = $('#view_forginscrapworkingexcel_report').DataTable({
@@ -32776,11 +32791,12 @@ $('#export_excel').on('click', function() {
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/forginscrapworkingexcelreport",
+						url :"<?php echo base_url();?>admin/forginscrapworkingexcelreport/"+vendor_name+"/"+forgin_report_status+"/"+from_date+"/"+to_date,
 						type: "post",
 					},
 				});
             }
+
 
 l
             // $(document).on('click','#export_to_excel_delivery_days_report',function(e){

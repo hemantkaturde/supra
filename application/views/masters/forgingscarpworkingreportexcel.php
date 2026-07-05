@@ -50,13 +50,13 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="email">Status</label>
-                                        <select class="form-control" name="inpection_report_status" id="inpection_report_status">
+                                        <select class="form-control" name="forgin_report_status" id="forgin_report_status">
                                             <option st-id="" value="NA">Select Status</option>
                                             <option st-id="" value="NA">ALL</option>
                                             <option value="OPEN">Open </option>
                                             <option value="CLOSE">Close</option>
                                         </select>
-                                        <p class="error inpection_report_status_error"></p>
+                                        <p class="error forgin_report_status_error"></p>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
