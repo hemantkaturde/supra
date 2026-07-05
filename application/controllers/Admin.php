@@ -32774,7 +32774,18 @@ public function deletesupplieritemattachment(){
             $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['exp_qty_in_pcs_section_2']);
             $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['sent_rm_in_kgs_section_2']);
             $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['diff_in_kgs_section_2']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['total_scrap_section_2']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['total_scrap_section_2']);
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('S' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('U' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('V' . $rowCount, '');
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['itemdate']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['itemstatus']);
 
 
             
