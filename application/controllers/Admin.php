@@ -32704,4 +32704,94 @@ public function deletesupplieritemattachment(){
         echo json_encode($json_data);
     }
 
+
+    public function exporttoexcelforginscraprecorddetails($vendor_name,$forgin_report_status,$from_date,$to_date) {
+
+        // create file name
+        $fileName = 'Forgin Scrap Working Report -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->admin_model->exporttoexcelforginscraprecorddetails($vendor_name,$forgin_report_status,$from_date,$to_date);
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Type of raw material');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Description');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Vendor Name'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Vendor PO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Part Number');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'RM Actual Qty');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Expected Qty');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Sent RM (In kgs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Exp Qty (in pcs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Diff (in kgs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Vendor');
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Exp Qty (in pcs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Sent RM (In kgs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Diff (in kgs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Total Scrap (in kgs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Net Weight');
+        $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'Hiya Scrap');
+        $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'Scrap Challan');
+        $objPHPExcel->getActiveSheet()->SetCellValue('S1', 'Scrap Challan Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('T1', 'Scrap sent to');
+        $objPHPExcel->getActiveSheet()->SetCellValue('U1', 'Balance Scrap');
+        $objPHPExcel->getActiveSheet()->SetCellValue('V1', 'Short / Excess');
+        $objPHPExcel->getActiveSheet()->SetCellValue('W1', 'Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('X1', 'Status');
+
+
+        
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+
+            // if($element['vendor_po_devlivey_date']){
+            //     $vendor_po_devlivey_date =date('d-m-Y',strtotime($element['vendor_po_devlivey_date']));
+            // }else{
+            //     $vendor_po_devlivey_date='';
+            // }
+
+
+            // if($element['incoming_item_part_recoved_date']){
+            //     $incoming_item_part_recoved_date =date('d-m-Y',strtotime($element['incoming_item_part_recoved_date']));
+            // }else{
+            //     $incoming_item_part_recoved_date='';
+            // }
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['og_vendor_name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['vendor_po_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $vendor_po_devlivey_date);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $incoming_item_part_recoved_date);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['days_calculation']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['status']);
+            $rowCount++;
+        }
+
+        foreach(range('A','X') as $columnID) {
+            $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        /*********************Autoresize column width depending upon contents END***********************/
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:X1')->getFont()->setBold(true); //Make heading font bold
+        
+        /*********************Add color to heading START**********************/
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('A1:X1')
+                    ->getFill()
+                    ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('99ff99');
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;Filename=$fileName.xls");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+
+    }
+
 }

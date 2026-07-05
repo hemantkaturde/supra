@@ -76,7 +76,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <div style="margin-top:22px">
-                                            <input type="button" class="btn btn-primary" value="Export To Excel" id="export_to_excel_vendor_rejection_report" name="export_to_excel_vendor_rejection_report" />
+                                            <input type="button" class="btn btn-primary" value="Export To Excel" id="export_to_excel_forginscrap_record_details" name="export_to_excel_forginscrap_record_details" />
                                         </div>
                                     </div>
                                 </div>
