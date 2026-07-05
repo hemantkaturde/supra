@@ -32759,12 +32759,13 @@ public function deletesupplieritemattachment(){
             //     $incoming_item_part_recoved_date='';
             // }
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['og_vendor_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['vendor_po_number']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $vendor_po_devlivey_date);
-            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $incoming_item_part_recoved_date);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['days_calculation']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['status']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['type_of_raw_material']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['description']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['vendor_name_from_vendor']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['vendor_po_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['part_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['rm_actual_aty']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['expected_qty']);
             $rowCount++;
         }
 
