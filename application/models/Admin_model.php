@@ -27855,7 +27855,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function exporttoexcelforginscraprecorddetails($vendor_name,$forgin_report_status,$from_date,$to_date){
 
-        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.sent_rm_in_kgs_section_1,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.exp_qty_in_pcs_section_1,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.diff_in_kgs_section_1');
         $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
@@ -27870,7 +27870,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
        
-        
+
         if($vendor_name != 'NA'){
           $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
         }
@@ -27908,6 +27908,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['expected_qty'] =  $value['expected_qty'];
                 $data[$counter]['itemdate'] =  $value['itemdate'];
                 $data[$counter]['itemstatus'] =  $value['itemstatus'];
+                $data[$counter]['sent_rm_in_kgs_section_1'] =  $value['sent_rm_in_kgs_section_1'];
+                $data[$counter]['exp_qty_in_pcs_section_1'] =  $value['exp_qty_in_pcs_section_1'];
+                $data[$counter]['diff_in_kgs_section_1'] =  $value['diff_in_kgs_section_1'];
+
+                
                 $counter++; 
             }
         }
