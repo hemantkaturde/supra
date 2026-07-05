@@ -32770,6 +32770,12 @@ public function deletesupplieritemattachment(){
             $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['exp_qty_in_pcs_section_1']);
             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['diff_in_kgs_section_1']);
 
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['exp_qty_in_pcs_section_2']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['sent_rm_in_kgs_section_2']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['diff_in_kgs_section_2']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['total_scrap_section_2']);
+
 
             
             $rowCount++;
