@@ -27754,7 +27754,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);
-        $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_FORGING_SCARP_WORKING.'.id','DESC');
         $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
         $rowcount = $query->num_rows();
