@@ -32685,8 +32685,150 @@ $('#export_excel').on('click', function() {
 					$(".loader_ajax").hide();
 
 				});
-
-
-
     </script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='View Forging Scrap Report'){?>
+<script type="text/javascript">
+
+
+			$(document).ready(function() {
+	            $("#view_forginscrapworkingexcel_report").dataTable().fnDestroy();
+				// var from_date = $('#from_date').val();
+				// var to_date = $('#to_date').val();
+				var vendor_name = $('#vendor_name').val();
+				getviewforginscrapreportreport(vendor_name);
+			});
+
+
+
+			
+			// $(document).on('change','#vendor_name',function(e){  
+			// 	e.preventDefault();
+			// 	$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+			// 	var from_date = $('#from_date').val();
+			// 	var to_date = $('#to_date').val();
+			// 	var vendor_name = $('#vendor_name').val();
+			// 	getdeliverydayscalculationreport(from_date,to_date,vendor_name);
+			// });
+
+
+			// $(document).on('change','#from_date',function(e){  
+			// 	e.preventDefault();
+			// 	$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+			// 	var from_date = $('#from_date').val();
+			// 	var to_date = $('#to_date').val();
+			// 	var vendor_name = $('#vendor_name').val();
+			// 	getdeliverydayscalculationreport(from_date,to_date,vendor_name);
+			// });
+
+
+			// $(document).on('change','#to_date',function(e){  
+			// 	e.preventDefault();
+			// 	$("#view_delivery_days_calculation_report").dataTable().fnDestroy();
+			// 	var from_date = $('#from_date').val();
+			// 	var to_date = $('#to_date').val();
+			// 	var vendor_name = $('#vendor_name').val();
+			// 	getdeliverydayscalculationreport(from_date,to_date,vendor_name);
+			// });
+
+
+            function getviewforginscrapreportreport(vendor_name){
+
+
+				// if(from_date){
+				// 	from_date = from_date;
+				// }else{
+				// 	from_date ='NA';
+				// }
+
+				// if(to_date){
+				// 	to_date = to_date;
+				// }else{
+				// 	to_date ='NA';
+				// }
+
+
+				var dt = $('#view_forginscrapworkingexcel_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "10%", "targets": 2 },	
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 }
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Forging Scarp Working Report Data Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/forginscrapworkingexcelreport",
+						type: "post",
+					},
+				});
+            }
+
+l
+            // $(document).on('click','#export_to_excel_delivery_days_report',function(e){
+			// 	e.preventDefault();
+			// 	$(".loader_ajax").show();
+
+			// 	var vendor_name  = $("#vendor_name").val();
+	
+			// 	if($("#from_date").val()){
+			// 		var from_date  = $("#from_date").val();
+			// 	}else{
+			// 		var from_date  = 'NA';
+			// 	}
+
+			// 	if($("#to_date").val()){
+			// 		var to_date  = $("#to_date").val();
+			// 	}else{
+			// 		var to_date  = 'NA';
+			// 	}
+
+
+			// 	$.ajax({
+			// 		url : "<?php echo ADMIN_PATH;?>admin/exporttoexceldeleverydaysreport/"+vendor_name+"/"+from_date+"/"+to_date,
+			// 		type: "POST",
+			// 		// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+			// 		success: function(data, textStatus, jqXHR)
+			// 		{
+			// 			$(".loader_ajax").hide();
+			// 			if(data == "failure")
+			// 			{
+			// 				// $(".sales_tracking_report_name_error").html("");
+			// 				alert('No data fond');
+			// 			}
+			// 			else
+			// 			{
+			// 				// $(".sales_tracking_report_name_error").html("");
+			// 				window.location.href = "<?php echo ADMIN_PATH;?>admin/exporttoexceldeleverydaysreport/"+vendor_name+"/"+from_date+"/"+to_date;
+			// 			}
+			// 		},
+			// 		error: function (jqXHR, textStatus, errorThrown)
+			// 		{
+			// 			alert('No data fond');
+			// 			$(".loader_ajax").hide();
+			// 		}
+			// 	});
+			//  return false;
+		    // });
+
+</script>
+<?php } ?>
+

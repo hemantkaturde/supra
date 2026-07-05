@@ -27723,6 +27723,108 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
+    public function forginscrapworkingexcelreportcount($params){
+
+             $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
+        $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
+
+
+
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+       
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_FORGING_SCARP_WORKING.'.id','DESC');
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function forginscrapworkingexcelreportdata($params){
+
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
+        $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
+
+
+
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+       
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_FORGING_SCARP_WORKING.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_FORGING_SCARP_WORKING.'.id','DESC');
+        $query = $this->db->get(TBL_FORGING_SCARP_WORKING);
+        $fetch_result = $query->result_array();
+
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['vendor_name_from_vendor'] =  $value['vendor_name_from_vendor'];
+                $data[$counter]['vendor_po_number'] =  $value['vendor_po_number_master'];
+                $data[$counter]['part_number'] =  $value['part_number'];
+                $data[$counter]['description'] =  $value['description'];
+                $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
+                $data[$counter]['rm_actual_aty'] =  $value['rm_actual_aty'];
+                $data[$counter]['expected_qty'] =  $value['expected_qty'];
+                $data[$counter]['itemdate'] =  $value['itemdate'];
+                $data[$counter]['itemstatus'] =  $value['itemstatus'];
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+
+
+
 }
 
 ?>

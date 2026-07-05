@@ -32655,19 +32655,53 @@ public function deletesupplieritemattachment(){
 
     public function getdataeditforginscrappopupdetails(){
 
-    $post_submit = $this->input->post();
-    if($post_submit){
-        $geteditforginscrap = $this->admin_model->getdataeditforginscrappopupdetails(trim($this->input->post('item_id')));
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditforginscrap = $this->admin_model->getdataeditforginscrappopupdetails(trim($this->input->post('item_id')));
 
-        if($geteditforginscrap){
-            $content = $geteditforginscrap[0];
-            echo json_encode($content);
-        }else{
-            echo 'failure';
+            if($geteditforginscrap){
+                $content = $geteditforginscrap[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
         }
     }
 
 
+    public function forgingscarpworkingreportexcel(){
+            $process = 'View Forging Scrap Report';
+            $processFunction = 'Admin/viewforgingscrapreportitemdetails';
+            $this->logrecord($process,$processFunction);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->global['pageTitle'] = 'View Forging Scrap Report';
+            $this->loadViews("masters/forgingscarpworkingreportexcel", $this->global, $data, NULL);
+    }
+
+    
+    public function forginscrapworkingexcelreport(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->forginscrapworkingexcelreportcount($params); 
+        $queryRecords = $this->admin_model->forginscrapworkingexcelreportdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
     }
 
 }

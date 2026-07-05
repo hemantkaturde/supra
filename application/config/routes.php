@@ -688,6 +688,12 @@ $route['viewforgingscrapreportitemdetails/(:any)/(:any)/(:any)'] = "admin/viewfo
 
 
 
+
+$route['forgingscarpworkingreportexcel'] = "admin/forgingscarpworkingreportexcel";
+
+
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
 
