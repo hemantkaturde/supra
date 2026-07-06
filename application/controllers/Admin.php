@@ -32759,6 +32759,8 @@ public function deletesupplieritemattachment(){
             //     $incoming_item_part_recoved_date='';
             // }
 
+            $net_weigth = $element['sent_rm_in_kgs_section_2'] / $element['exp_qty_in_pcs_section_2'];
+
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['type_of_raw_material']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['description']);
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['vendor_name_from_vendor']);
@@ -32776,7 +32778,7 @@ public function deletesupplieritemattachment(){
             $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['diff_in_kgs_section_2']);
             $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['total_scrap_section_2']);
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $net_weigth);
             $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, '');
             $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, '');
             $objPHPExcel->getActiveSheet()->SetCellValue('S' . $rowCount, '');
