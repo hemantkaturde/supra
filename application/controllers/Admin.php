@@ -32759,7 +32759,12 @@ public function deletesupplieritemattachment(){
             //     $incoming_item_part_recoved_date='';
             // }
 
-            $net_weigth = $element['sent_rm_in_kgs_section_2'] / $element['exp_qty_in_pcs_section_2'];
+
+            $sent_rm = (float) $element['sent_rm_in_kgs_section_2'];
+            $exp_qty = (float) $element['exp_qty_in_pcs_section_2'];
+            $net_weight = ($exp_qty > 0) ? ($sent_rm / $exp_qty) : 0;
+
+
 
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['type_of_raw_material']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['description']);
@@ -32788,8 +32793,6 @@ public function deletesupplieritemattachment(){
 
             $objPHPExcel->getActiveSheet()->SetCellValue('W' . $rowCount, $element['itemdate']);
             $objPHPExcel->getActiveSheet()->SetCellValue('X' . $rowCount, $element['itemstatus']);
-
-
             
             $rowCount++;
         }
