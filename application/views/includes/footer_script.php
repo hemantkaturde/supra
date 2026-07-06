@@ -22262,7 +22262,7 @@
 </script>  
 <?php } ?>
 
-<?php if($pageTitle=='Production Status Report'){ ?>
+<?php if($pageTitle=='Production Status Report' || $pageTitle=='Add Production Status Report Notes'){ ?>
 <script type="text/javascript">
   
 	$(document).ready(function() {
@@ -22412,6 +22412,7 @@
 
 	$(document).on('click','.addnotes',function(e){
 		var elemF = $(this);
+		
 	    e.preventDefault();
 		$.ajax({
 			url : "<?php echo ADMIN_PATH;?>getpreviousaddednotesfordisplay",
@@ -22482,7 +22483,7 @@
 								button: "Ok",
 								},function(){ 
 									$('#addnotes').modal('hide');
-									window.location.href = "<?php echo base_url().'productionstatusreport'?>";
+									window.location.href = "<?php echo base_url().'admin/addproductionstatusreportnotes/'?>"+notes_id+"/"+flag;
 							});		
 						}
 						

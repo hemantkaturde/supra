@@ -32652,7 +32652,6 @@ public function deletesupplieritemattachment(){
 
     }
 
-
     public function getdataeditforginscrappopupdetails(){
 
         $post_submit = $this->input->post();
@@ -32668,7 +32667,6 @@ public function deletesupplieritemattachment(){
         }
     }
 
-
     public function forgingscarpworkingreportexcel(){
             $process = 'View Forging Scrap Report';
             $processFunction = 'Admin/viewforgingscrapreportitemdetails';
@@ -32678,7 +32676,6 @@ public function deletesupplieritemattachment(){
             $this->loadViews("masters/forgingscarpworkingreportexcel", $this->global, $data, NULL);
     }
 
-    
     public function forginscrapworkingexcelreport($vendor_name,$forgin_report_status,$from_date,$to_date){
 
         $params = $_REQUEST;
@@ -32703,7 +32700,6 @@ public function deletesupplieritemattachment(){
             );
         echo json_encode($json_data);
     }
-
 
     public function exporttoexcelforginscraprecorddetails($vendor_name,$forgin_report_status,$from_date,$to_date) {
 
@@ -32822,5 +32818,21 @@ public function deletesupplieritemattachment(){
         $objWriter->save('php://output');
 
     }
+
+    public function addproductionstatusreportnotes($vendor_bill_item_id,$flag){
+
+            $process = 'Add Production Status Report Notes';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['vendor_bill_item_id']= $vendor_bill_item_id;
+            $data['flag']= $flag;
+
+            $data['getpreviousnotesdataproductionstatusreport']= $this->admin_model->getpreviousaddednotesfordisplay($vendor_bill_item_id,$flag);
+
+            $this->global['pageTitle'] = 'Add Production Status Report Notes';
+            $this->loadViews("masters/addproductionstatusreportnotes", $this->global, $data, NULL);
+    }
+
 
 }

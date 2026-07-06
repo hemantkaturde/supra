@@ -15767,8 +15767,12 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
             }else{
                $notes_remark = '';
             }
-            $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' flag='".$value['notes_status']."' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i><small>".$notes_remark."</small>" ;
 
+             // $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' flag='".$value['notes_status']."' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i><small>".$notes_remark."</small>" ;
+
+            // $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' flag='".$value['notes_status']."' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i><small>".$notes_remark."</small>" ;
+
+            $data[$counter]['action'] = "<a href='".ADMIN_PATH."admin/addproductionstatusreportnotes/".$value['vendor_bill_item_id']."/".$value['notes_status']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>";
             $counter++; 
         }
     }
