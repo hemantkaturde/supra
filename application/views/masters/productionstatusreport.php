@@ -76,7 +76,7 @@
                                         <select class="form-control" name="status" id="status">
                                             <option st-id="" value="NA">Select Status</option>
                                             <option st-id="" value="NA">ALL</option>
-                                            <option value="OPEN" selected>Open </option>
+                                            <option value="OPEN">Open </option>
                                             <option value="CLOSE">Close</option>
                                         </select>
                                         <p class="error status_error"></p>
