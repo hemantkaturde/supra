@@ -15917,7 +15917,6 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
     // $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.status', 1);
 
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
-    $this->db->limit($params['length'],$params['start']);
     
     $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
