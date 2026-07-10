@@ -15674,7 +15674,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
 
     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
     $this->db->limit($params['length'],$params['start']);
-    $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
+    $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','ASC');
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
     //$fetch_result = $query->result_array();
@@ -15725,7 +15725,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
-    $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
+    $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','ASC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
     //$fetch_result = $query->result_array();
     $query2 = $query->result_array();
@@ -15860,7 +15860,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
     
     // $this->db->limit($params['length'],$params['start']);
-    $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
+    $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','ASC');
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $query11 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
     //$fetch_result = $query->result_array();
@@ -15910,7 +15910,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
 
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     
-    $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
+    $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','ASC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
     //$fetch_result = $query->result_array();
     $query2 = $query->result_array();
