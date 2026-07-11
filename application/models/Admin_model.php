@@ -16193,9 +16193,9 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     public function fetchsupplierporeportdata($params,$supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation){
         $this->db->select('*,'.TBL_RAWMATERIAL.'.part_number as part_number_fg');
         $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id');
 
 
