@@ -386,6 +386,15 @@
                                         </div>
                                     </div>
 
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="complaint_raised_by">Complaint Raised By</label>
+                                            <input type="text" class="form-control" id="complaint_raised_by" name="complaint_raised_by" value="<?=$getsuppliervendorcomplaintdata['complaint_raised_by']?>">
+                                            <p class="error complaint_raised_by_error"></p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>

@@ -21489,7 +21489,9 @@ public function addnewsuppliervendorcomplaint(){
                 'accept_with_deviation'=>trim($this->input->post('accept_with_deviation')),
                 'do_not_accept_with_deviation'=>trim($this->input->post('do_not_accept_with_deviation')),
                 'remark'=>trim($this->input->post('remark')),
-                'incoming_lot_number'=>trim($this->input->post('incoming_lot_number'))
+                'incoming_lot_number'=>trim($this->input->post('incoming_lot_number')),
+                'complaint_raised_by'=>trim($this->input->post('complaint_raised_by'))
+
 
 
             );
