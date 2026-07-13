@@ -22982,6 +22982,14 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
             </tr>
          </table>
+
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td  style="padding: 5px;text-align: left;border-right: #010101 1px solid">
+                    <p>Complaint Raised By: '.$getsuppliervendorcomplaintdownalod[0]['complaint_raised_by'].'</p>
+                </td> 
+            </tr>
+         </table>
          
 
         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
@@ -22993,13 +23001,7 @@ public function downlaodsuppliervendorcomplaint($id){
          </table>
          
          
-          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
-            <tr style="border: 1px solid black;" valign="top">
-                <td  style="padding: 5px;text-align: left;border-right: #010101 1px solid">
-                    <p>Complaint Raised By: '.$getsuppliervendorcomplaintdownalod[0]['complaint_raised_by'].'</p>
-                </td> 
-            </tr>
-         </table>
+         
          ';
       
 
