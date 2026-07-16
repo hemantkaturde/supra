@@ -31728,16 +31728,16 @@ public function addnewbalancestock(){
                 $rowCount++;
             }
 
-            foreach(range('A','P') as $columnID) {
+            foreach(range('A','Q') as $columnID) {
                 $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
 			}
 			/*********************Autoresize column width depending upon contents END***********************/
 			
-            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->getFont()->setBold(true); //Make heading font bold
+            $objPHPExcel->getActiveSheet()->getStyle('A1:Q1')->getFont()->setBold(true); //Make heading font bold
 			
 			/*********************Add color to heading START**********************/
             $objPHPExcel->getActiveSheet()
-						->getStyle('A1:P1')
+						->getStyle('A1:Q1')
 						->getFill()
 						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
 						->getStartColor()
