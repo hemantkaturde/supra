@@ -22722,7 +22722,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $lotString = implode(', ', $lots);
         }
 
-        return $lotString;
+        return   $lotString;
 
     }
 

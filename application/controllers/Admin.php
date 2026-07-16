@@ -31697,12 +31697,16 @@ public function addnewbalancestock(){
             $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Inspection Report Date'); 
             $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Checked By'); 
             $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'No of Dimensions'); 
-            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Status');
-            $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Remarks');
+            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Lot No');
+            $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Status');
+            $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'Remarks');
 
             // set Row
             $rowCount = 2;
             foreach ($empInfo as $element) {
+
+                $get_lots_details = $this->admin_model->getincomingcheckedbydatagroupforreport($element['tdir_id']);
+
                 $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['report_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['vendor_name']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['po_number']);
@@ -31717,8 +31721,9 @@ public function addnewbalancestock(){
                 $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, date("d-m-Y", strtotime($element['inspection_report_date'])));
                 $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['checked_by']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['no_of_dimensions']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['inspection_report_status']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['remarks']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $get_lots_details);
+                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['inspection_report_status']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, $element['remarks']);
 
                 $rowCount++;
             }
