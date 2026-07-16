@@ -85,6 +85,7 @@
                                             <th>Part name</th>
                                             <th>Buyer name</th>
                                             <th>Vendor Order Qty</th>
+                                            <th>Lot No</th>
                                             <th>Status</th>
                                             <th>Remarks</th>
                                           </tr>

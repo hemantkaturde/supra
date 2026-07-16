@@ -22568,6 +22568,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
+
+                $get_lots_details =  $this->getincomingcheckedbydatagroupforreport($value['tdir_id']);
+
+
+                // print_r($get_lots_details);
+                // exit;
+
+
                 $data[$counter]['report_number'] = $value['report_number'];
                 $data[$counter]['inspection_report_date'] = $value['inspection_report_date'];
                 $data[$counter]['vendor_name'] =  $value['vendor_name_label'];
@@ -22576,6 +22584,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['part_name'] =  $value['name'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name_label'];
                 $data[$counter]['vendor_order_qty'] =  $value['vendor_order_qty'];
+                $data[$counter]['lot_no'] =  $get_lots_details;
                 $data[$counter]['inspection_report_status'] =  $value['inspection_report_status'];
                 $data[$counter]['remark'] =  $value['remarks'];
 
@@ -22674,6 +22683,47 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_TDIR_INCOMING_LOT_DATA);
         $fetch_result = $query->result_array();
         return $fetch_result;
+    }
+
+    public function getincomingcheckedbydatagroupforreport($tdir_id){
+        // $this->db->select('id, qty');
+        // $this->db->where('tdir_id', $tdir_id);
+        // $this->db->order_by('id', 'ASC');
+
+        // $query = $this->db->get(TBL_TDIR_INCOMING_LOT_DATA);
+        // $result = $query->result_array();
+
+        // if (!empty($result)) {
+        //     foreach ($result as $key => &$row) {
+        //         $row['lot_name'] = 'Lot ' . ($key + 1) . ' - (Qty ' . (!empty($row['qty']) ? $row['qty'] : 0) . ')';
+        //     }
+        // }
+        // return $result;
+        //return $fetch_result;
+
+
+        $this->db->select('id, qty');
+        $this->db->where('tdir_id', $tdir_id);
+        $this->db->order_by('id', 'ASC');
+
+        $query = $this->db->get(TBL_TDIR_INCOMING_LOT_DATA);
+        $result = $query->result_array();
+
+        $lotString = '';
+
+        if (!empty($result)) {
+            $lots = [];
+
+            foreach ($result as $key => $row) {
+                $qty = isset($row['qty']) && $row['qty'] !== '' ? $row['qty'] : 0;
+                $lots[] = 'Lot ' . ($key + 1) . ' - (Qty ' . $qty . ')';
+            }
+
+            $lotString = implode(', ', $lots);
+        }
+
+        return $lotString;
+
     }
 
 
