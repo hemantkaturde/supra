@@ -12422,7 +12422,7 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED 3.1 TEST CERTIFICATE</th>
+                    <th align="left" style="border: 1px solid black; color:red" margin-bottom: 10%;>NEED 3.1 TEST CERTIFICATE</th>
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
@@ -14883,10 +14883,12 @@ public function downloadvendorpowithoutsupplier($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black; color:red" margin-bottom: 10%;>NEED 3.1 TEST CERTIFICATE</th>
                     <th align="left" style="border: 1px solid black;padding-left: 10px;" margin-bottom: 10%;>DELIVERY DATE</th>
                     <th align="left" style="border: 1px solid black;padding-left: 10px;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
                 <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;text-align:center"><b>YES<b></td>
                     <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_delivery_date'])).'</td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['ven_work_order'].'</td>
                 </tr>
