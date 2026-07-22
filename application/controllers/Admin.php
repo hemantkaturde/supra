@@ -29996,6 +29996,14 @@ public function printincomingitemdetails($id)
             <td>SUPPLIER NAME</td>
             <td>'.$getdata_itemdetailsdata[0]['actual_supplier_name'].'</td>
         </tr>
+        <tr>
+            <td>CLEANING DONE</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>NO. OF BOXES AFTER CLEANING</td>
+            <td></td>
+        </tr>
     </table>
     ';
 
@@ -30283,6 +30291,14 @@ public function printincomingitemdetails_pass_protected($id)
         <tr>
             <td>SUPPLIER NAME</td>
             <td>'.$getdata_itemdetailsdata[0]['actual_supplier_name'].'</td>
+        </tr>
+        <tr>
+            <td>CLEANING DONE</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>NO. OF BOXES AFTER CLEANING</td>
+            <td></td>
         </tr>
     </table>
     ';
