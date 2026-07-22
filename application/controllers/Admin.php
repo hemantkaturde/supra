@@ -6271,13 +6271,15 @@ class Admin extends BaseController
             $this->form_validation->set_rules('additional_process','Additional process','trim');
             $this->form_validation->set_rules('incoming_item_status','Incoming Item Status','trim');
 
+            $this->form_validation->set_rules('cleaning_required','Cleaning Required','trim');
+
 
             $this->form_validation->set_rules('remarks','Remarks','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_incoming_details_items['status'] = 'failure';
-                $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>strip_tags(form_error('lot_no')),'incoming_item_status'=>strip_tags(form_error('incoming_item_status')));
+                $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>strip_tags(form_error('lot_no')),'incoming_item_status'=>strip_tags(form_error('incoming_item_status')),'cleaning_required'=>strip_tags(form_error('cleaning_required')));
            
             }else{
 
@@ -6361,6 +6363,7 @@ class Admin extends BaseController
                                 'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
                                 'incoming_item_status' =>  trim($this->input->post('incoming_item_status')),
+                                'cleaning_required' =>  trim($this->input->post('cleaning_required')),
                             );
 
                             $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem($incoiming_detail__item_id,$data);
@@ -6433,6 +6436,7 @@ class Admin extends BaseController
                                 'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
                                 'incoming_item_status' =>  trim($this->input->post('incoming_item_status')),
+                                'cleaning_required' =>  trim($this->input->post('cleaning_required')),
                             );
 
                             $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem($incoiming_detail__item_id,$data);
@@ -6521,6 +6525,7 @@ class Admin extends BaseController
                                 'next_process' =>   trim($this->input->post('next_process')),
                                 'additional_process' =>   trim($this->input->post('additional_process')),
                                 'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+                                'cleaning_required' =>  trim($this->input->post('cleaning_required')),
 
                             );
 
@@ -6589,14 +6594,15 @@ class Admin extends BaseController
                             'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                             'pre_remark' =>  trim($this->input->post('pre_remark')),
 
-                                'incoming_item_status' =>  trim($this->input->post('incoming_item_status')),
-                                'lr_no' =>   trim($this->input->post('lr_no')),
-                                'difference_of_gr_weight' =>   trim($this->input->post('difference_of_gr_weight')),
-                                'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
-                                'material_grade' =>   trim($this->input->post('material_grade')),
-                                'next_process' =>   trim($this->input->post('next_process')),
-                                'additional_process' =>   trim($this->input->post('additional_process')),
-                                'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+                            'incoming_item_status' =>  trim($this->input->post('incoming_item_status')),
+                            'lr_no' =>   trim($this->input->post('lr_no')),
+                            'difference_of_gr_weight' =>   trim($this->input->post('difference_of_gr_weight')),
+                            'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
+                            'material_grade' =>   trim($this->input->post('material_grade')),
+                            'next_process' =>   trim($this->input->post('next_process')),
+                            'additional_process' =>   trim($this->input->post('additional_process')),
+                            'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+                            'cleaning_required' =>  trim($this->input->post('cleaning_required')),
 
                         );
 
