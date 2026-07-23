@@ -686,10 +686,15 @@ $route['forgingscrapreportitemdetails/(:any)/(:any)'] = "admin/forgingscraprepor
 
 $route['viewforgingscrapreportitemdetails/(:any)/(:any)/(:any)'] = "admin/viewforgingscrapreportitemdetails/$1/$2/$3";
 
-
-
-
 $route['forgingscarpworkingreportexcel'] = "admin/forgingscarpworkingreportexcel";
+
+$route['cleaningform'] = "admin/cleaningform";
+
+$route['addcleaningform'] = "admin/addcleaningform";
+
+
+
+
 
 
 

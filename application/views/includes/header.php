@@ -431,7 +431,14 @@
                         <a href="<?php echo base_url(); ?>forgingscarpworkingreportexcel">
                           <i class="fa fa-file-excel-o"></i> <span class="menu_label">Forging Scarp Working Report</span>
                         </a>
-                      </li> 
+                       </li> 
+
+
+                        <li class="treeview <?php if($pageUrl=="cleaningform"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>cleaningform">
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">Cleaning Form</span>
+                        </a>
+                        </li> 
 
 
                       <?php  if( $this->session->userdata('roleText')=='Superadmin'){ ?>

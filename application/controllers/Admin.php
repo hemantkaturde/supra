@@ -32884,4 +32884,28 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function cleaningform(){
+        $process = 'Cleaning Form';
+        $processFunction = 'Admin/addjobwork';
+        $this->logrecord($process,$processFunction);
+        //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->global['pageTitle'] = 'Cleaning Form';
+        $this->loadViews("masters/cleaningform", $this->global, $data, NULL);
+    }
+
+
+    public function addcleaningform(){
+        $process = 'Add New Cleaning Form';
+        $processFunction = 'Admin/addjobwork';
+        $this->logrecord($process,$processFunction);
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->global['pageTitle'] = 'Add New Cleaning Form';
+        $this->loadViews("masters/addcleaningform", $this->global, $data, NULL);
+    }
+
+
+
+
+
+
 }
