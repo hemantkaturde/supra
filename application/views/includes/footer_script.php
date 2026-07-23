@@ -24014,6 +24014,7 @@
 									$('#invoice_date').val('');
 									$('#received_qty').val('');
                                     $('#order_qty').val('');
+									$('#no_of_boxes').val('');
 									
 								}
 								else
@@ -24023,6 +24024,7 @@
 									$('#invoice_date').val(data_row_material.invoice_date);
 									$('#received_qty').val(data_row_material.invoice_qty);
 									$('#order_qty').val(data_row_material.p_o_qty);
+									$('#no_of_boxes').val(data_row_material.boxex_goni_bundle);
 									
 								}
 							},
@@ -24032,6 +24034,7 @@
 									$('#invoice_date').val('');
 									$('#received_qty').val('');
 									$('#order_qty').val('');
+									$('#no_of_boxes').val('');
 							}
 						});
 						return false;

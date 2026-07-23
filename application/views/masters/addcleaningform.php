@@ -44,8 +44,6 @@
                                             $financial_year_indian = (date("y") - 1) . "-" . date("y");
                                         }
 
-                                        
-                                
 
                                         if($getPrevioussuppliercustomerCompalinformnumber['report_number']){
                                                 // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
@@ -129,7 +127,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="cleaning_date">Cleaning Date</label>
-                                               <input type="text" class="form-control datepicker" id="cleaning_date" name="cleaning_date">
+                                               <input type="text" class="form-control datepicker" id="cleaning_date" value="<?php echo date('Y-m-d'); ?>" name="cleaning_date">
                                             <p class="error cleaning_date_error"></p>
                                         </div>
                                     </div>
@@ -217,7 +215,11 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="cleaning_status">Status</label>
-                                            <input type="text" class="form-control" id="cleaning_status" name="cleaning_status">
+                                                   <select class="form-control" name="cleaning_status" id="cleaning_status">
+                                                        <option st-id="" value="">Select Status</option>
+                                                        <option value="In Process" selected>In Process</option>
+                                                        <option value="Completed">Completed</option>
+                                                    </select>
                                             <p class="error cleaning_status_error"></p>
                                         </div>
                                     </div>
@@ -233,17 +235,17 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Start Date and Time</label>
-                                            <input type="text" class="form-control datepicker" id="correction" name="correction">
+                                            <label for="start_date_time">Start Date and Time</label>
+                                            <input type="text" class="form-control datepicker" id="start_date_time" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Start Date and Time</label>
-                                            <input type="text" class="form-control datepicker" id="correction" name="correction">
-                                            <p class="error correction_error"></p>
+                                            <label for="end_date_time">End Date and Time</label>
+                                            <input type="text" class="form-control datepicker" id="end_date_time" name="end_date_time">
+                                            <p class="error end_date_time_error"></p>
                                         </div>
                                     </div>
                                 </div>
