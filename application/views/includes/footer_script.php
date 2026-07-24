@@ -23815,8 +23815,48 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New Cleaning Form'){ ?>
+<?php if($pageTitle=='Add New Cleaning Form'  || $pageTitle=='Cleaning Form'){ ?>
 <script type="text/javascript">
+
+
+
+            $(document).ready(function() { 
+				var dt = $('#view_cleaninform').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "8%", "targets": 0 },
+						{ "width": "8%", "targets": 1 },
+						{ "width": "8%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						{ "width": "8%", "targets": 4 },
+						{ "width": "8%", "targets": 5 },
+						{ "width": "8%", "targets": 6 },
+						{ "width": "8%", "targets": 7 },
+						{ "width": "8%", "targets": 8 },
+						{ "width": "8%", "targets": 9 },
+						{ "width": "8%", "targets": 10 },
+						{ "width": "8%", "targets": 11 },
+						{ "width": "8%", "targets": 12 },
+						{ "width": "8%", "targets": 13 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Cleanin Form Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchcleaninform",
+						type: "post",
+					},
+				});
+		    });
+
 
             $(document).on('change','#vendor_name',function(e){  
 				e.preventDefault();
@@ -24040,6 +24080,56 @@
 						return false;
 			
 		    });
+
+
+
+			$(document).on('click','#addnewcleaningformsubmit',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewcleaningform")[0]);
+			   
+				$.ajax({
+					url : "<?php echo base_url();?>addcleaningform",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Cleaning Form Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'cleaningform'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
+
+
+
 
 </script>
 <?php } ?>

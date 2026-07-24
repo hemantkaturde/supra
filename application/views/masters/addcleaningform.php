@@ -29,7 +29,7 @@
                             <h3 class="box-title">Add New Cleaning Form</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addnewcleaningform" action="<?php echo base_url() ?>addnewsuppliervendorcomplaint" method="post" role="form">
+                        <form role="form" id="addnewcleaningform" action="<?php echo base_url() ?>addnewcleaningform" method="post" role="form">
                             <div class="box-body">
                                 <div class="row">
 
@@ -156,14 +156,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3" id="supplier_part_number_div"  style="display:none">
+                                    <!-- <div class="col-md-3" id="supplier_part_number_div"  style="display:none">
                                         <div class="form-group">
                                             <label for="supplier_part_number">Part Number / Drawing No / Rev No</label>
                                             <select class="form-control" name="supplier_part_number" id="supplier_part_number">
                                             </select> 
                                             <p class="error supplier_part_number_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
                                     <div class="col-md-3" id="vendor_part_number_div"  style="display:none">
@@ -233,21 +233,29 @@
                                     </div>
 
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="start_date_time">Start Date and Time</label>
-                                            <input type="text" class="form-control datepicker" id="start_date_time" name="correction">
-                                            <p class="error correction_error"></p>
-                                        </div>
+                                  <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="start_date_time">Start Date and Time</label>
+                                        <input type="text"
+                                            class="form-control datepicker"
+                                            id="start_date_time"
+                                            name="start_date_time"
+                                            value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                        <p class="error start_date_time_error"></p>
                                     </div>
+                                </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="end_date_time">End Date and Time</label>
-                                            <input type="text" class="form-control datepicker" id="end_date_time" name="end_date_time">
-                                            <p class="error end_date_time_error"></p>
-                                        </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="end_date_time">End Date and Time</label>
+                                        <input type="text"
+                                            class="form-control datepicker"
+                                            id="end_date_time"
+                                            name="end_date_time"
+                                            value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                        <p class="error end_date_time_error"></p>
                                     </div>
+                                </div>
                                 </div>
 
 
@@ -263,7 +271,7 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <input type="submit" id="addnewcleaningform" class="btn btn-primary" value="Submit" />
+                                <input type="submit" id="addnewcleaningformsubmit" class="btn btn-primary" value="Submit" />
                                 <input type="button" onclick="location.href = '<?php echo base_url() ?>cleaningform'" class="btn btn-default" value="Back" />
                             </div>
                         </form>

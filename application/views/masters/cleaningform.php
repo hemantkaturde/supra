@@ -38,7 +38,7 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_tdir_report">
+                                    id="view_cleaninform">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Cleaning No.</th>

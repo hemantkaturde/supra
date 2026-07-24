@@ -32894,18 +32894,127 @@ public function deletesupplieritemattachment(){
     }
 
 
-    public function addcleaningform(){
-        $process = 'Add New Cleaning Form';
-        $processFunction = 'Admin/addjobwork';
-        $this->logrecord($process,$processFunction);
-        $data['vendorList']= $this->admin_model->fetchALLvendorList();
-        $this->global['pageTitle'] = 'Add New Cleaning Form';
-        $this->loadViews("masters/addcleaningform", $this->global, $data, NULL);
+    public function fetchcleaninform(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchcleaninformcount($params); 
+        $queryRecords = $this->admin_model->fetchcleaninformdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+
+
     }
 
 
 
 
 
+    public function addcleaningform(){
+
+            $post_submit = $this->input->post();
+            if($post_submit){
+
+                $faddcleaningform_response = array();
+
+                $this->form_validation->set_rules('cleaning_no','Cleaning No','trim|required');
+                $this->form_validation->set_rules('cleaning_date','Cleaning Date','trim');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+                $this->form_validation->set_rules('vendor_part_number','Vendor Part Number','trim');
+                $this->form_validation->set_rules('part_description','Part Description','trim');
+                $this->form_validation->set_rules('incoming_lot_number','Incoming Lot Number','trim');
+                $this->form_validation->set_rules('received_qty','Received Qty','trim');
+                $this->form_validation->set_rules('no_of_boxes','No Of Boxes','trim');
+                $this->form_validation->set_rules('cleaning_status','Cleaning Status','trim');
+                $this->form_validation->set_rules('no_of_boxes_after_cleaning','no_of_boxes_after_cleaning','trim');
+                $this->form_validation->set_rules('start_date_time','start_date_time','trim');
+                $this->form_validation->set_rules('end_date_time','end_date_time','trim');
+                $this->form_validation->set_rules('remark','remark','trim');
+
+
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $faddcleaningform_response['status'] = 'failure';
+                    $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')));
+            
+                }else{
+
+                // $this->form_validation->set_rules('cleaning_no','Cleaning No','trim|required');
+                // $this->form_validation->set_rules('cleaning_date','Cleaning Date','trim');
+                // $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+                // $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+                $this->form_validation->set_rules('vendor_part_number','Vendor Part Number','trim');
+                $this->form_validation->set_rules('part_description','Part Description','trim');
+                $this->form_validation->set_rules('incoming_lot_number','Incoming Lot Number','trim');
+                $this->form_validation->set_rules('received_qty','Received Qty','trim');
+                $this->form_validation->set_rules('no_of_boxes','No Of Boxes','trim');
+                $this->form_validation->set_rules('cleaning_status','Cleaning Status','trim');
+                $this->form_validation->set_rules('no_of_boxes_after_cleaning','no_of_boxes_after_cleaning','trim');
+                $this->form_validation->set_rules('start_date_time','start_date_time','trim');
+                $this->form_validation->set_rules('end_date_time','end_date_time','trim');
+                $this->form_validation->set_rules('remark','remark','trim');
+
+
+
+                    $data = array(
+                        'cleaning_no'   => trim($this->input->post('cleaning_no')),
+                        'cleaning_date'   => trim($this->input->post('cleaning_date')),
+                        'vendor_name'     => trim($this->input->post('vendor_name')),
+                        'vendor_po_number'  => trim($this->input->post('vendor_po_number')),
+                        'vendor_part_number'=> trim($this->input->post('vendor_part_number')),
+                        'part_description'=> trim($this->input->post('part_description')),
+                        'incoming_lot_number'=> trim($this->input->post('incoming_lot_number')),
+                        'received_qty'=> trim($this->input->post('received_qty')),
+                        'no_of_boxes'=> trim($this->input->post('no_of_boxes')),
+                        'cleaning_status'=> trim($this->input->post('cleaning_status')),
+                        'no_of_boxes_after_cleaning'=> trim($this->input->post('no_of_boxes_after_cleaning')),
+                        'start_date_time'=> trim($this->input->post('start_date_time')),
+                        'end_date_time'=> trim($this->input->post('end_date_time')),
+                        'remark'=> trim($this->input->post('remark')),
+                    );
+
+                    // if(trim($this->input->post('forgin_id'))){
+                    //    $forgin_id = trim($this->input->post('forgin_id'));
+                    // }else{
+                    //    $forgin_id ='';
+                    // }
+
+                    $faddcleaningform_submit_reponse = $this->admin_model->addcleaningform('',$data);
+                    if($faddcleaningform_submit_reponse){
+                        $faddcleaningform_response['status'] = 'success';
+                        $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
+
+            echo json_encode($faddcleaningform_response);
+
+            }else{
+
+                $process = 'Add New Cleaning Form';
+                $processFunction = 'Admin/addjobwork';
+                $this->logrecord($process,$processFunction);
+                $data['vendorList']= $this->admin_model->fetchALLvendorList();
+                $this->global['pageTitle'] = 'Add New Cleaning Form';
+                $this->loadViews("masters/addcleaningform", $this->global, $data, NULL);
+            }
+    }
 
 }

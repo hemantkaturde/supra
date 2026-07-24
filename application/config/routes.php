@@ -691,6 +691,7 @@ $route['forgingscarpworkingreportexcel'] = "admin/forgingscarpworkingreportexcel
 $route['cleaningform'] = "admin/cleaningform";
 
 $route['addcleaningform'] = "admin/addcleaningform";
+$route['fetchcleaninform'] = "admin/fetchcleaninform";
 
 
 
