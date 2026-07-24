@@ -23838,6 +23838,7 @@
 						{ "width": "8%", "targets": 11 },
 						{ "width": "8%", "targets": 12 },
 						{ "width": "8%", "targets": 13 },
+						{ "width": "8%", "targets": 14 },
 					
 					],
 					responsive: true,

@@ -28154,6 +28154,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['end_date_time'] =  $value['end_date_time'];
                 $data[$counter]['remark'] =  $value['remark'];
 
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['forgin_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
+                
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['forgin_id']."' class='fa fa-trash-o deleteforginscrapworking' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }

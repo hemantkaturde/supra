@@ -49,6 +49,7 @@
                                             <th>Lot No.</th>
                                             <th>Lot Qty</th>
                                             <th>No. of Boxes</th>
+                                            <th>Cleaning Status</th>
                                             <th>No of Boxes after cleaning</th>
                                             <th>Start Date and Time</th>
                                             <th>End Date and Time</th>
