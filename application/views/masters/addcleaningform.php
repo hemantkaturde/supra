@@ -34,87 +34,181 @@
                                 <div class="row">
 
                                 <?php
+                                        // $current_month = date("n"); // Get the current month without leading zeros
+
+                                        // if ($current_month >= 4) {
+                                        //     // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                        //     $financial_year_indian = date("y") . "-" . (date("y") + 1);
+                                        // } else {
+                                        //     // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                        //     $financial_year_indian = (date("y") - 1) . "-" . date("y");
+                                        // }
+
+
+                                        // if($getPreviouscleaningforpreviousnumber[0]['cleaning_no']){
+                                        //         // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
+                                        //         // $i = end($arr);
+                                        //         // $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //         // $sales_order_number = $inrno;
+
+                                        //         $currentDate = new DateTime();
+
+                                        //         // Check if the current date is on or after April 1st
+                                        //         if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
+                                        //             // If it is, the financial year has started in the current calendar year
+                                        //             //$startYear = date('Y');
+                                        //             $startYear = date('y');
+                                        //             $endYear = $startYear + 1;
+                                        //         } else {
+                                        //             // If it is not, the financial year has started in the previous calendar year
+                                        //             //$endYear = date('Y');
+                                        //             $endYear = date('y');
+                                        //             $startYear = $endYear - 1;
+                                        //         }
+
+                                        //         // Display the financial year
+                                        //         $financialYear = $startYear.$endYear;
+
+                                        //         $string = $getPreviouscleaningforpreviousnumber[0]['cleaning_no'];
+
+                                        //         $explod = explode("/",$string);
+                                            
+                                        //         if($explod[2]== $financial_year_indian ){
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = substr($explod[1], -$n);
+                                        //             //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+    
+                                        //             // $inrno= 'SVC/'.($lastNCharacters+1)."/".$financialYear;
+                                        //             $inrno= 'SQCL'.$financialYear.$lastNCharacters+1;
+                                        //             $report_no = $inrno;
+                                        //         }else{
+
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = 0;
+                                        //             //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+    
+                                        //             $inrno= 'SQCL'.$financialYear.$lastNCharacters+1;
+                                        //             $report_no = $inrno;
+                                        //         }
+
+                                              
+
+                                        // }else{
+
+                                        //     $currentDate = new DateTime();
+
+                                        //     // Check if the current date is on or after April 1st
+                                        //     if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
+                                        //         // If it is, the financial year has started in the current calendar year
+                                        //         //$startYear = date('Y');
+                                        //         $startYear = date('y');
+                                        //         $endYear = $startYear + 1;
+                                        //     } else {
+                                        //         // If it is not, the financial year has started in the previous calendar year
+                                        //         //$endYear = date('Y');
+                                        //         $endYear = date('y');
+                                        //         $startYear = $endYear - 1;
+                                        //     }
+
+                                        //     // Display the financial year
+                                        //     $financialYear = $startYear. $endYear;
+
+                                        //     $report_no = 'SQCL'.$financialYear.'0001';
+                                        // }
+
+
+
+                                        
                                         $current_month = date("n"); // Get the current month without leading zeros
 
                                         if ($current_month >= 4) {
                                             // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                            $financial_year_indian = date("y") . "-" . (date("y") + 1);
+                                            $financial_year_indian = date("y") . "" . (date("y") + 1);
                                         } else {
                                             // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                            $financial_year_indian = (date("y") - 1) . "-" . date("y");
+                                            $financial_year_indian = (date("y") - 1) . "" . date("y");
                                         }
 
+                                        if($getPreviouscleaningforpreviousnumber[0]['cleaning_no']){
+                                            // $arr = str_split($getPreviousPODdetails_number[0]['pod_details_number']);
+                                            // $i = end($arr);
+                                            // $inrno= "SQPD2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $POD_details_number = $inrno;
 
-                                        if($getPreviouscleaningforpreviousnumber['cleaning_no']){
-                                                // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
-                                                // $i = end($arr);
-                                                // $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                // $sales_order_number = $inrno;
+                                            if($first_part_of_string == $financial_year_indian){
 
-                                                $currentDate = new DateTime();
-
-                                                // Check if the current date is on or after April 1st
-                                                if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
-                                                    // If it is, the financial year has started in the current calendar year
-                                                    //$startYear = date('Y');
-                                                    $startYear = date('y');
-                                                    $endYear = $startYear + 1;
-                                                } else {
-                                                    // If it is not, the financial year has started in the previous calendar year
-                                                    //$endYear = date('Y');
-                                                    $endYear = date('y');
-                                                    $startYear = $endYear - 1;
-                                                }
-
-                                                // Display the financial year
-                                                $financialYear = $startYear.$endYear;
-
-                                                $string = $getPreviouscleaningforpreviousnumber['cleaning_no'];
-
-                                                $explod = explode("/",$string);
+                                            }else{}
                                             
-                                                if($explod[2]== $financial_year_indian ){
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($explod[1], -$n);
-                                                    //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-    
-                                                    // $inrno= 'SVC/'.($lastNCharacters+1)."/".$financialYear;
-                                                    $inrno= 'SQCL'.$financialYear.$lastNCharacters+1;
-                                                    $report_no = $inrno;
-                                                }else{
+                                              // New Logic Start Here 
+                                              $getfinancial_year = substr($getPreviouscleaningforpreviousnumber[0]['cleaning_no'], -8);
 
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = 0;
-                                                    //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-    
-                                                    $inrno= 'SQCL'.$financialYear.$lastNCharacters+1;
-                                                    $report_no = $inrno;
-                                                }
+                                              $first_part_of_string = substr($getfinancial_year,0,4);
+                                              $year = substr($first_part_of_string,0,2);
 
+                                              // Current date
+                                              $currentDate = new DateTime();
                                               
+                                              // Financial year in India starts from April 1st
+                                              $financialYearStart = new DateTime("$year-04-01");
+                                              
+                                              // Financial year in India ends on March 31st of the following year
+                                              $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                              
+                                              // Check if the current date falls within the financial year
+                                              if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                 
+                                                  $string = $getPreviouscleaningforpreviousnumber[0]['cleaning_no'];
+                                                  $n = 4; // Number of characters to extract from the end
+                                                  $lastNCharacters = substr($string, -$n);
+                                                  $inrno= "SQCL".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                  $report_no = $inrno;
+  
+                                              } else {
+
+
+                                                if($first_part_of_string == $financial_year_indian){
+                                                    $string = $getPreviouscleaningforpreviousnumber[0]['cleaning_no'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQCL".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $report_no = $inrno;
+
+                                                }else{
+  
+                                                    $string = $getPreviouscleaningforpreviousnumber[0]['cleaning_no'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters1 = substr($string, -$n);
+                                                    
+                                                    if($lastNCharacters1  > 0){
+
+                                                        if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+
+                                                            $string1 =$getPreviouscleaningforpreviousnumber[0]['cleaning_no'];
+                                                        }else{
+                                                            $string1 =0;
+                                                        }
+
+                                                    }else{
+                                                        $string1 =0;
+                                                    }
+
+                                                    $lastNCharacters = substr($string1, -$n);
+                                                    $inrno= "SQCL".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $report_no = $inrno;
+  
+                                                  //$po_number = 'SQPO24250001';
+                                                }
+                                              }  
+                                            /* New Logic End Here */
 
                                         }else{
-
-                                            $currentDate = new DateTime();
-
-                                            // Check if the current date is on or after April 1st
-                                            if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
-                                                // If it is, the financial year has started in the current calendar year
-                                                //$startYear = date('Y');
-                                                $startYear = date('y');
-                                                $endYear = $startYear + 1;
-                                            } else {
-                                                // If it is not, the financial year has started in the previous calendar year
-                                                //$endYear = date('Y');
-                                                $endYear = date('y');
-                                                $startYear = $endYear - 1;
-                                            }
-
-                                            // Display the financial year
-                                            $financialYear = $startYear. $endYear;
-
-                                            $report_no = 'SQCL'.$financialYear.'0001';
+                                            $report_no = 'SQCL'.$financial_year_indian.'0001';
                                         }
+
+
+                                        
+
+
                                     ?>
 
                                     <div class="col-md-3">

@@ -147,8 +147,8 @@
                                             <label for="cleaning_status">Status</label>
                                                    <select class="form-control" name="cleaning_status" id="cleaning_status">
                                                         <option st-id="" value="">Select Status</option>
-                                                        <option value="In Process">In Process</option>
-                                                        <option value="Completed">Completed</option>
+                                                        <option value="In Process" <?php if($getcleaningformdetailsbyid[0]['cleaning_status']=='In Process'){ echo 'Selected'; } ?> >In Process</option>
+                                                        <option value="Completed" <?php if($getcleaningformdetailsbyid[0]['cleaning_status']=='Completed'){ echo 'Selected'; } ?>>Completed</option>
                                                     </select>
                                             <p class="error cleaning_status_error"></p>
                                         </div>
@@ -167,7 +167,7 @@
                                     <div class="form-group">
                                         <label for="start_date_time">Start Date and Time</label>
                                         <input type="text"
-                                            class="form-control datepicker"
+                                            class="form-control datetimepicker"
                                             id="start_date_time"
                                             name="start_date_time"
                                             value="<?php echo date('Y-m-d H:i:s'); ?>">
@@ -179,7 +179,7 @@
                                     <div class="form-group">
                                         <label for="end_date_time">End Date and Time</label>
                                         <input type="text"
-                                            class="form-control datepicker"
+                                            class="form-control datetimepicker"
                                             id="end_date_time"
                                             name="end_date_time"
                                             value="">
@@ -227,6 +227,16 @@
         // minDate: 0,
         todayHighlight: true,
                      dateFormat: 'yy-mm-dd',
+        startDate: new Date()
+    });
+   });
+
+    $(function() {
+    $(".datetimepicker").datepicker({ 
+        // minDate: 0,
+        todayHighlight: true,
+        dateFormat: 'yy-mm-dd',
+        timeFormat: 'HH:mm:ss',
         startDate: new Date()
     });
    });
