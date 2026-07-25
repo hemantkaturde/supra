@@ -68,13 +68,14 @@
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Part Number</th>
-                                            <th>Part Descroption</th>
+                                            <!-- <th>Part Descroption</th> -->
                                             <th>Vendor Name</th>
                                             <th>Vendor PO NO.</th>
                                             <th>QC Person</th>
                                             <th>Lot Number</th>
                                             <th>P.O Qty (in pcs)</th>
                                             <th>Invoice Qty (in Pcs)</th>
+                                            <th>Additional Process</th>
                                             <!-- <th>Invoice No.</th>
                                             <th>Invoice Date</th> -->
                                             <th>Inspection report No</th>
