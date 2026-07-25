@@ -32922,8 +32922,6 @@ public function deletesupplieritemattachment(){
 
 
 
-
-
     public function addcleaningform(){
 
             $post_submit = $this->input->post();
@@ -32989,13 +32987,13 @@ public function deletesupplieritemattachment(){
                         'remark'=> trim($this->input->post('remark')),
                     );
 
-                    // if(trim($this->input->post('forgin_id'))){
-                    //    $forgin_id = trim($this->input->post('forgin_id'));
-                    // }else{
-                    //    $forgin_id ='';
-                    // }
+                    if(trim($this->input->post('cleaningformid'))){
+                       $cleaningformid = trim($this->input->post('cleaningformid'));
+                    }else{
+                       $cleaningformid ='';
+                    }
 
-                    $faddcleaningform_submit_reponse = $this->admin_model->addcleaningform('',$data);
+                    $faddcleaningform_submit_reponse = $this->admin_model->addcleaningform($cleaningformid,$data);
                     if($faddcleaningform_submit_reponse){
                         $faddcleaningform_response['status'] = 'success';
                         $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')));
@@ -33011,27 +33009,39 @@ public function deletesupplieritemattachment(){
                 $this->logrecord($process,$processFunction);
                 $data['vendorList']= $this->admin_model->fetchALLvendorList();
                 $this->global['pageTitle'] = 'Add New Cleaning Form';
+                $data['getPreviouscleaningforpreviousnumber']= $this->admin_model->getPreviouscleaningforpreviousnumber();
                 $this->loadViews("masters/addcleaningform", $this->global, $data, NULL);
             }
     }
 
 
-   
-public function deletecleaningform(){
-    $post_submit = $this->input->post();
-    if($post_submit){
-        $result = $this->admin_model->deletecleaningform(trim($this->input->post('id')));
-        if ($result) {
-                    $process = 'Delete Cleaning Form';
-                    $processFunction = 'Admin/deletecleaningform';
-                    $this->logrecord($process,$processFunction);
-                echo(json_encode(array('status'=>'success')));
-            }
-        else { echo(json_encode(array('status'=>'failed'))); }
-    }else{
-        echo(json_encode(array('status'=>'failed'))); 
+    public function editcleaningform($id){
+            $process = 'Edit Cleaning Form';
+            $processFunction = 'Admin/editcleaninform';
+            $this->logrecord($process,$processFunction);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->global['pageTitle'] = 'Edit Cleaning Form';
+            //$data['getPreviouscleaningforpreviousnumber']= $this->admin_model->getPreviouscleaningforpreviousnumber();
+            $data['getcleaningformdetailsbyid']= $this->admin_model->getcleaningformdetailsbyid($id);
+            $this->loadViews("masters/editcleaningform", $this->global, $data, NULL);
     }
-}
+
+   
+    public function deletecleaningform(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletecleaningform(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Cleaning Form';
+                        $processFunction = 'Admin/deletecleaningform';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
 
 
 

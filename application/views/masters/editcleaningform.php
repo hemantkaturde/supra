@@ -6,11 +6,13 @@
     </style>
 
 
+<?php  //print_r($getcleaningformdetailsbyid);exit; ?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Cleaning Form
+            <i class="fa fa-users"></i> Edit Cleaning Form
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -26,108 +28,36 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add New Cleaning Form</h3>
+                            <h3 class="box-title">Edit Cleaning Form</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewcleaningform" action="<?php echo base_url() ?>addnewcleaningform" method="post" role="form">
                             <div class="box-body">
+
+
+                                <input type="hidden" class="form-control" id="cleaningformid" name="cleaningformid" value="<?=$getcleaningformdetailsbyid[0]['cleaningformid'];?>" readonly>
+
+
+                                <input type="hidden" class="form-control" id="vendor_po_number_cleanind_form_id" name="vendor_po_number_cleanind_form_id" value="<?=$getcleaningformdetailsbyid[0]['vendor_po_number_cleanind_form_id'];?>" readonly>
+                                <input type="hidden" class="form-control" id="vendor_po_number_master" name="vendor_po_number_master" value="<?=$getcleaningformdetailsbyid[0]['vendor_po_number_master'];?>" readonly>
+                                <input type="hidden" class="form-control" id="vendor_part_number_original" name="vendor_part_number_original" value="<?=$getcleaningformdetailsbyid[0]['vendor_part_number'];?>" readonly>
+                                <input type="hidden" class="form-control" id="fn_part_number" name="fn_part_number" value="<?=$getcleaningformdetailsbyid[0]['fn_part_number'];?>" readonly>
+
+                                <input type="hidden" class="form-control" id="incoming_lot_number_og" name="incoming_lot_number_og" value="<?=$getcleaningformdetailsbyid[0]['incoming_lot_number'];?>" readonly>
+
+
                                 <div class="row">
-
-                                <?php
-                                        $current_month = date("n"); // Get the current month without leading zeros
-
-                                        if ($current_month >= 4) {
-                                            // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                            $financial_year_indian = date("y") . "-" . (date("y") + 1);
-                                        } else {
-                                            // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                            $financial_year_indian = (date("y") - 1) . "-" . date("y");
-                                        }
-
-
-                                        if($getPreviouscleaningforpreviousnumber['cleaning_no']){
-                                                // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
-                                                // $i = end($arr);
-                                                // $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                // $sales_order_number = $inrno;
-
-                                                $currentDate = new DateTime();
-
-                                                // Check if the current date is on or after April 1st
-                                                if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
-                                                    // If it is, the financial year has started in the current calendar year
-                                                    //$startYear = date('Y');
-                                                    $startYear = date('y');
-                                                    $endYear = $startYear + 1;
-                                                } else {
-                                                    // If it is not, the financial year has started in the previous calendar year
-                                                    //$endYear = date('Y');
-                                                    $endYear = date('y');
-                                                    $startYear = $endYear - 1;
-                                                }
-
-                                                // Display the financial year
-                                                $financialYear = $startYear.$endYear;
-
-                                                $string = $getPreviouscleaningforpreviousnumber['cleaning_no'];
-
-                                                $explod = explode("/",$string);
-                                            
-                                                if($explod[2]== $financial_year_indian ){
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($explod[1], -$n);
-                                                    //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-    
-                                                    // $inrno= 'SVC/'.($lastNCharacters+1)."/".$financialYear;
-                                                    $inrno= 'SQCL'.$financialYear.$lastNCharacters+1;
-                                                    $report_no = $inrno;
-                                                }else{
-
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = 0;
-                                                    //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-    
-                                                    $inrno= 'SQCL'.$financialYear.$lastNCharacters+1;
-                                                    $report_no = $inrno;
-                                                }
-
-                                              
-
-                                        }else{
-
-                                            $currentDate = new DateTime();
-
-                                            // Check if the current date is on or after April 1st
-                                            if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
-                                                // If it is, the financial year has started in the current calendar year
-                                                //$startYear = date('Y');
-                                                $startYear = date('y');
-                                                $endYear = $startYear + 1;
-                                            } else {
-                                                // If it is not, the financial year has started in the previous calendar year
-                                                //$endYear = date('Y');
-                                                $endYear = date('y');
-                                                $startYear = $endYear - 1;
-                                            }
-
-                                            // Display the financial year
-                                            $financialYear = $startYear. $endYear;
-
-                                            $report_no = 'SQCL'.$financialYear.'0001';
-                                        }
-                                    ?>
-
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="cleaning_no">Cleaning No. <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="cleaning_no" name="cleaning_no" value="<?=$report_no?>" readonly>
+                                            <input type="text" class="form-control" id="cleaning_no" name="cleaning_no" value="<?=$getcleaningformdetailsbyid[0]['cleaning_no'];?>" readonly>
                                         </div>
                                     </div>
                                 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="cleaning_date">Cleaning Date</label>
-                                               <input type="text" class="form-control datepicker" id="cleaning_date" value="<?php echo date('Y-m-d'); ?>" name="cleaning_date">
+                                               <input type="text" class="form-control datepicker" id="cleaning_date" value="<?=$getcleaningformdetailsbyid[0]['cleaning_date'];?>" name="cleaning_date">
                                             <p class="error cleaning_date_error"></p>
                                         </div>
                                     </div>
@@ -138,7 +68,7 @@
                                                     <select class="form-control" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprescrapreturndetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getcleaningformdetailsbyid[0]['vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                             <p class="error vendor_name_error"></p>
@@ -150,7 +80,7 @@
                                     <div class="col-md-3" id="vendor_po_number_div"  style="display:none">
                                         <div class="form-group">
                                             <label for="vendor_po">Vendor PO</label>
-                                            <select class="form-control" name="vendor_po_number" id="vendor_po_number">
+                                            <select class="form-control" name="vendor_po_number" id="vendor_po_number">                                            
                                             </select> 
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
@@ -178,7 +108,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="part_description">Part Description / Component</label>
-                                            <input type="text" class="form-control" id="part_description" name="part_description">
+                                            <input type="text" class="form-control" id="part_description" value="<?=$getcleaningformdetailsbyid[0]['part_description'];?>" name="part_description">
                                             <p class="error part_description_error"></p>
                                         </div>
                                     </div>
@@ -186,7 +116,7 @@
                                     <div class="col-md-3" id="incoming_lot_number_div"  style="display:none">
                                         <div class="form-group">
                                             <label for="incoming_lot_number">Lot Number</label>
-                                            <select class="form-control" name="incoming_lot_number" id="incoming_lot_number">
+                                            <select class="form-control" name="incoming_lot_number" value="<?=$getcleaningformdetailsbyid[0]['incoming_lot_number'];?>" id="incoming_lot_number">
                                             </select> 
                                             <p class="error incoming_lot_number_error"></p>
                                         </div>
@@ -197,14 +127,14 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="received_qty">Lot Qty</label>
-                                            <input type="text" class="form-control" id="received_qty" name="received_qty">
+                                            <input type="text" class="form-control" id="received_qty"  value="<?=$getcleaningformdetailsbyid[0]['received_qty'];?>" name="received_qty">
                                             <p class="error received_qty_error"></p>
                                         </div>
                                     </div>
                                      <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="no_of_boxes">No .Of Boxes</label>
-                                            <input type="text" class="form-control" id="no_of_boxes" name="no_of_boxes">
+                                            <input type="text" class="form-control" id="no_of_boxes"  value="<?=$getcleaningformdetailsbyid[0]['no_of_boxes'];?>" name="no_of_boxes">
                                             <p class="error no_of_boxes_error"></p>
                                         </div>
                                     </div>
@@ -217,7 +147,7 @@
                                             <label for="cleaning_status">Status</label>
                                                    <select class="form-control" name="cleaning_status" id="cleaning_status">
                                                         <option st-id="" value="">Select Status</option>
-                                                        <option value="In Process" selected>In Process</option>
+                                                        <option value="In Process">In Process</option>
                                                         <option value="Completed">Completed</option>
                                                     </select>
                                             <p class="error cleaning_status_error"></p>
@@ -227,7 +157,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="no_of_boxes_after_cleaning">No of Boxes after cleaning</label>
-                                            <input type="text" class="form-control" id="no_of_boxes_after_cleaning" name="no_of_boxes_after_cleaning">
+                                            <input type="text" class="form-control" id="no_of_boxes_after_cleaning"  value="<?=$getcleaningformdetailsbyid[0]['no_of_boxes_after_cleaning'];?>"  name="no_of_boxes_after_cleaning">
                                             <p class="error no_of_boxes_after_cleaning_error"></p>
                                         </div>
                                     </div>
@@ -263,7 +193,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark">
+                                            <input type="text" class="form-control" id="remark" value="<?=$getcleaningformdetailsbyid[0]['remark'];?>" name="remark">
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>
@@ -272,7 +202,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <input type="submit" id="addnewcleaningformsubmit" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>cleaningform'" class="btn btn-default" value="Back" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>cleaningform'"  class="btn btn-default" value="Back" />
                             </div>
                         </form>
                     </div>

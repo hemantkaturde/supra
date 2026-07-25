@@ -23815,7 +23815,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New Cleaning Form'  || $pageTitle=='Cleaning Form'){ ?>
+<?php if($pageTitle=='Add New Cleaning Form'  || $pageTitle=='Cleaning Form' || $pageTitle=='Edit Cleaning Form'){ ?>
 <script type="text/javascript">
 
             $(document).ready(function() { 
@@ -23854,7 +23854,139 @@
 						type: "post",
 					},
 				});
+
+				$('#supplier_po_number_div').css('display','none');
+				$('#vendor_po_number_div').css('display','block');
+
+				var vendor_po_number_cleanind_form_id = $('#vendor_po_number_cleanind_form_id').val();
+				var vendor_po_number_master = $('#vendor_po_number_master').val();
+
+				var vendor_name = $('#vendor_name').val();
+			
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+					type: "POST",
+					data : {'vendor_name' : vendor_name},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+						}
+						else
+						{
+			
+							if (vendor_po_number_cleanind_form_id && vendor_po_number_master) {
+								$('#vendor_po_number').html(
+									'<option value="' + vendor_po_number_cleanind_form_id + '">' + vendor_po_number_master + '</option>'
+								);
+							} else {
+								$('#vendor_po_number').html(data);
+							}
+							
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#vendor_po_number').html();
+						//$(".loader_ajax").hide();
+					}
+				});
+				// return false;
+
+
+				var vendor_po_number = $('#vendor_po_number_cleanind_form_id').val();
+
+				$('#vendor_part_number_div').css('display','block');
+		
+				$("#vendor_part_number").html('');
+
+
+				var vendor_part_number_original = $('#vendor_part_number_original').val();
+				var fn_part_number = $('#fn_part_number').val();
+
+			
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
+					type: "POST",
+					data : {'vendor_po_number' : vendor_po_number},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+						}
+						else
+						{
+
+						if (vendor_part_number_original && vendor_po_number_master) {
+								$('#vendor_part_number').html(
+									'<option value="' + vendor_part_number_original + '">' + fn_part_number + '</option>'
+								);
+							} else {
+								$('#vendor_part_number').html(data);
+							}
+
+							// $('#vendor_part_number').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#vendor_part_number').html();
+					}
+				});
+
+
+				//$(".loader_ajax").show();
+				var vendor_part_number = $('#vendor_part_number').val();
+				var vendor_po_number = $('#vendor_po_number').val();
+
+						
+				$('#incoming_lot_number_div').css('display','block');
+
+				var incoming_lot_number_og = $('#incoming_lot_number_og').val();
+
+				$.ajax({
+						url : "<?php echo ADMIN_PATH;?>admin/vendorpartnumberforincoimglotnumber",
+						type: "POST",
+						data : {'vendor_po_number' : vendor_po_number,'vendor_part_number':vendor_part_number},
+						success: function(data, textStatus, jqXHR)
+						{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#incoming_lot_number').html('<option value="">Select Lot Number</option>');
+								}
+								else
+								{
+
+									if (incoming_lot_number_og) {
+										alert('ss');
+										$('#incoming_lot_number').html(
+											'<option value="' + incoming_lot_number_og + '">' + incoming_lot_number_og + '</option>'
+										);
+									} else {
+										$('#incoming_lot_number').html(data);
+									}
+									//$('#incoming_lot_number').html(data);
+
+								}
+						},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#incoming_lot_number').html();
+							}
+				 });
+				//return false;
+
+
 		    });
+
+			
 
             $(document).on('change','#vendor_name',function(e){  
 				e.preventDefault();
@@ -23901,8 +24033,6 @@
 				$('#vendor_part_number_div').css('display','block');
 		
 				$("#vendor_part_number").html('');
-
-				
 			
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
@@ -23927,41 +24057,42 @@
 					}
 				});
 				return false;
+
 			});
 
-			$(document).on('change','#supplier_part_number',function(e){  
-			         e.preventDefault();
+			// $(document).on('change','#supplier_part_number',function(e){  
+			//          e.preventDefault();
 			
-						//$(".loader_ajax").show();
-						var supplier_part_number = $('#supplier_part_number').val();
-						var supplier_po_number = $('#supplier_po_number').val();
+			// 			//$(".loader_ajax").show();
+			// 			var supplier_part_number = $('#supplier_part_number').val();
+			// 			var supplier_po_number = $('#supplier_po_number').val();
 						
-						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>admin/getPartnumberdetailsforsupplierposuppliervendorpo",
-							type: "POST",
-							data : {'supplier_part_number' : supplier_part_number,'supplier_po_number':supplier_po_number},
-							success: function(data, textStatus, jqXHR)
-							{
-								$(".loader_ajax").hide();
-								if(data == "failure")
-								{
-									$('#part_description').val('');
-								}
-								else
-								{
-									var data_row_material = jQuery.parseJSON( data );
-									$('#part_description').val(data_row_material.type_of_raw_material);
+			// 			$.ajax({
+			// 				url : "<?php echo ADMIN_PATH;?>admin/getPartnumberdetailsforsupplierposuppliervendorpo",
+			// 				type: "POST",
+			// 				data : {'supplier_part_number' : supplier_part_number,'supplier_po_number':supplier_po_number},
+			// 				success: function(data, textStatus, jqXHR)
+			// 				{
+			// 					$(".loader_ajax").hide();
+			// 					if(data == "failure")
+			// 					{
+			// 						$('#part_description').val('');
+			// 					}
+			// 					else
+			// 					{
+			// 						var data_row_material = jQuery.parseJSON( data );
+			// 						$('#part_description').val(data_row_material.type_of_raw_material);
 									
-								}
-							},
-							error: function (jqXHR, textStatus, errorThrown)
-							{
-									$('#part_description').val('');
-							}
-						});
-						return false;
+			// 					}
+			// 				},
+			// 				error: function (jqXHR, textStatus, errorThrown)
+			// 				{
+			// 						$('#part_description').val('');
+			// 				}
+			// 			});
+			// 			return false;
 			
-		    });
+		    // });
 
 			$(document).on('change','#vendor_part_number',function(e){  
 			         e.preventDefault();
@@ -24123,7 +24254,6 @@
 				});
 				return false;
 		    });
-
 
 			$(document).on('click','.deletecleaningform',function(e){
 				var elemF = $(this);

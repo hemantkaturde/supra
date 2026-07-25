@@ -28070,7 +28070,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['remark'] =  $value['remark'];
 
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['cleaningformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcleaningform/".$value['cleaningformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cleaningformid']."' class='fa fa-trash-o deletecleaningform' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -28079,7 +28079,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
-
 
     public function deletecleaningform($id){
 
@@ -28095,8 +28094,35 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }else{
            return FALSE;
         }
-
     }
+
+
+    public function getPreviouscleaningforpreviousnumber(){
+        $this->db->select('cleaning_no');
+        $this->db->where(TBL_CLEANING_FORM.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_CLEANING_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_CLEANING_FORM);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+    public function getcleaningformdetailsbyid($id){
+
+        $this->db->select(TBL_CLEANING_FORM.'.*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number,'.TBL_CLEANING_FORM.'.vendor_po_number as vendor_po_number_cleanind_form_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CLEANING_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CLEANING_FORM.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
+        $this->db->where(TBL_CLEANING_FORM.'.status', 1);
+        $this->db->where(TBL_CLEANING_FORM.'.id', $id);
+        $query = $this->db->get(TBL_CLEANING_FORM);
+        $fetch_result = $query->result_array();
+
+        return  $fetch_result;
+    }
+
 
 
 

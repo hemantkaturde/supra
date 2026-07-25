@@ -694,7 +694,7 @@ $route['addcleaningform'] = "admin/addcleaningform";
 $route['fetchcleaninform'] = "admin/fetchcleaninform";
 
 
-
+$route['editcleaningform/(:any)'] = "admin/editcleaningform/$1";
 
 
 
