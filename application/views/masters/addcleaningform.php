@@ -252,7 +252,7 @@
                                             class="form-control datepicker"
                                             id="end_date_time"
                                             name="end_date_time"
-                                            value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                            value="">
                                         <p class="error end_date_time_error"></p>
                                     </div>
                                 </div>

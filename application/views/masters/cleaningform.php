@@ -46,6 +46,7 @@
                                             <th>Vendor Name</th>
                                             <th>P.O. No.</th>
                                             <th>Part No.</th>
+                                            <th>Part Description.</th>
                                             <th>Lot No.</th>
                                             <th>Lot Qty</th>
                                             <th>No. of Boxes</th>
@@ -53,7 +54,6 @@
                                             <th>No of Boxes after cleaning</th>
                                             <th>Start Date and Time</th>
                                             <th>End Date and Time</th>
-                                            <th>Status</th>
                                             <th>Remark</th>
                                             <th>Action</th>
                                           </tr>

@@ -28081,13 +28081,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchcleaninformdata($params){
 
-           $this->db->select('*');
+        $this->db->select('*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number');
 
         // $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
         // $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
-        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CLEANING_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CLEANING_FORM.'.vendor_po_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_CLEANING_FORM.'.vendor_part_number');
+
+
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
 
         // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
@@ -28141,9 +28147,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['cleaning_no'] =  $value['cleaning_no'];
                 $data[$counter]['cleaning_date'] =  $value['cleaning_date'];
-                $data[$counter]['vendor_name'] =  $value['vendor_name'];
-                $data[$counter]['vendor_po_number'] =  $value['vendor_po_number'];
-                $data[$counter]['vendor_part_number'] =  $value['vendor_part_number'];
+                $data[$counter]['vendor_name'] =  $value['vendor_name_from_vendor'];
+                $data[$counter]['vendor_po_number'] =  $value['vendor_po_number_master'];
+                $data[$counter]['vendor_part_number'] =  $value['fn_part_number'];
                 $data[$counter]['part_description'] =  $value['part_description'];
                 $data[$counter]['incoming_lot_number'] =  $value['incoming_lot_number'];
                 $data[$counter]['received_qty'] =  $value['received_qty'];
@@ -28155,9 +28161,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['remark'] =  $value['remark'];
 
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['forgin_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
-                
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['forgin_id']."' class='fa fa-trash-o deleteforginscrapworking' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['cleaningformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cleaningformid']."' class='fa fa-trash-o deleteforginscrapworking' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
