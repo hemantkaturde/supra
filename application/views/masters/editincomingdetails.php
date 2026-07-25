@@ -559,10 +559,10 @@
                                                         </div>
 
                                                          <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Status</label>
+                                                            <label class="col-sm-3 col-form-label">Status of Additional Process</label>
                                                             <div class="col-sm-9">
                                                                 <select class="form-control" name="incoming_item_status" id="incoming_item_status">
-                                                                    <option value="">Select Status</option>
+                                                                    <option value="">Select Status of Additional Process</option>
                                                                     <option value="Open" selected>Open</option>
                                                                     <option value="Close">Close</option>
                                                                 </select>
