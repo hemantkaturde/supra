@@ -9668,7 +9668,7 @@
 						$('#lot_no').val(fetchResponse.lot_no);
 						$('#remarks').val(fetchResponse.remarks);
 
-						$('#incoming_item_status').val(fetchResponse.incoming_item_status);
+						$('#cleaning_required').val(fetchResponse.cleaning_required);
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
