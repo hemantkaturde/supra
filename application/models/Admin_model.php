@@ -10062,6 +10062,7 @@ class Admin_model extends CI_Model
     .TBL_INCOMING_DETAILS_ITEM.'.qc_person_name as qc_person_name,'
     .TBL_INCOMING_DETAILS_ITEM.'.additional_process as additional_process,'
     .TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status as incoming_item_status,'
+    .TBL_INCOMING_DETAILS_ITEM.'.cleaning_required as cleaning_required,'
 
 
     // .TBL_FINISHED_GOODS.'.sitting_size,'
