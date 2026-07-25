@@ -23125,7 +23125,7 @@
 <?php if($pageTitle=='Search Stock Report'){ ?>
 	<script type="text/javascript">
 
-	       $(document).ready(function() { 
+	    $(document).ready(function() { 
 				var dt = $('#view_search_stock_report').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
@@ -23818,8 +23818,6 @@
 <?php if($pageTitle=='Add New Cleaning Form'  || $pageTitle=='Cleaning Form'){ ?>
 <script type="text/javascript">
 
-
-
             $(document).ready(function() { 
 				var dt = $('#view_cleaninform').DataTable({
 					"columnDefs": [ 
@@ -23857,7 +23855,6 @@
 					},
 				});
 		    });
-
 
             $(document).on('change','#vendor_name',function(e){  
 				e.preventDefault();
@@ -24082,8 +24079,6 @@
 			
 		    });
 
-
-
 			$(document).on('click','#addnewcleaningformsubmit',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
@@ -24127,6 +24122,56 @@
 					}
 				});
 				return false;
+		    });
+
+
+			$(document).on('click','.deletecleaningform',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Cleaningform",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>admin/deletecleaningform",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Cleaningform Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'cleaningform'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Cleaningform deletion cancelled ", "error");
+				}
+			});
 		});
 
 

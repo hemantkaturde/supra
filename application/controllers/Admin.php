@@ -21638,8 +21638,6 @@ public function deletecustomercompalintreport(){
     }else{
         echo(json_encode(array('status'=>'failed'))); 
     }
-
-
 }
 
 
@@ -33016,5 +33014,25 @@ public function deletesupplieritemattachment(){
                 $this->loadViews("masters/addcleaningform", $this->global, $data, NULL);
             }
     }
+
+
+   
+public function deletecleaningform(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletecleaningform(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Cleaning Form';
+                    $processFunction = 'Admin/deletecleaningform';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
 
 }

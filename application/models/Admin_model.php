@@ -28021,57 +28021,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-       public function fetchcleaninformcount($params){
+    public function fetchcleaninformcount($params){
 
-        $this->db->select('*');
-
-        // $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
-        // $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
-        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_FORGING_SCARP_WORKING.'.vendor_id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_FORGING_SCARP_WORKING.'.vendor_po_id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-
-        // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
-        // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
-
-
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
-        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
-
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
-       
-
-        //  if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemstatus LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
-        // }
-
-        //  if($vendor_name != 'NA'){
-        //   $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
-        // }
-
-        // if($forgin_report_status != 'NA'){
-        //   $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus',$forgin_report_status);
-        // }
-
-        // if($from_date!='NA'){
-        //     $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate >=", $from_date);
-        // }
-
-        // if($to_date!='NA'){
-        //     $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate <=", $to_date);
-        // }
-
-
+        $this->db->select(TBL_CLEANING_FORM.'.*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CLEANING_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CLEANING_FORM.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
         $this->db->where(TBL_CLEANING_FORM.'.status', 1);
         $this->db->order_by(TBL_CLEANING_FORM.'.id','DESC');
         $query = $this->db->get(TBL_CLEANING_FORM);
@@ -28081,63 +28037,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchcleaninformdata($params){
 
-        $this->db->select('*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number');
-
-        // $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemdate,'.TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus');
-        // $this->db->join(TBL_FORGING_SCARP_WORKING_REPORT_DATA, TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.forgin_id_popup = '.TBL_FORGING_SCARP_WORKING.'.id');
+        $this->db->select(TBL_CLEANING_FORM.'.*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CLEANING_FORM.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CLEANING_FORM.'.vendor_po_number');
-        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_CLEANING_FORM.'.vendor_part_number');
-
-
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-
-
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
-
-        // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
-        // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id = '.TBL_BILL_OF_MATERIAL.'.id and '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id ='.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
-
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
-        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
-       
-        //  if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".rm_type LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemstatus LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
-        // }
-
-        // if($vendor_name != 'NA'){
-        //   $this->db->where(TBL_VENDOR.'.ven_id',$vendor_name);
-        // }
-
-        // if($forgin_report_status != 'NA'){
-        //   $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.'.itemstatus',$forgin_report_status);
-        // }
-
-        // if($from_date!='NA'){
-        //     $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate >=", $from_date);
-        // }
-
-        // if($to_date!='NA'){
-        //     $this->db->where(TBL_FORGING_SCARP_WORKING_REPORT_DATA.".itemdate <=", $to_date);
-        // }
-
         $this->db->where(TBL_CLEANING_FORM.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_CLEANING_FORM.'.id','DESC');
         $query = $this->db->get(TBL_CLEANING_FORM);
         $fetch_result = $query->result_array();
-
 
         $data = array();
         $counter = 0;
@@ -28162,12 +28071,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editforgingscrapreport/".$value['cleaningformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cleaningformid']."' class='fa fa-trash-o deleteforginscrapworking' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cleaningformid']."' class='fa fa-trash-o deletecleaningform' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
 
         return $data;
+
+    }
+
+
+    public function deletecleaningform($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CLEANING_FORM)){
+              // return TRUE;
+              $this->db->where('id', $id);
+              //$this->db->delete(TBL_SUPPLIER);
+              if($this->db->delete(TBL_CLEANING_FORM)){
+                    return TRUE;
+              }
+        }else{
+           return FALSE;
+        }
 
     }
 
