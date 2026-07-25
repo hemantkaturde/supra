@@ -331,10 +331,9 @@
                                     <div class="form-group">
                                         <label for="start_date_time">Start Date and Time</label>
                                         <input type="text"
-                                            class="form-control datepicker"
+                                            class="form-control datetimepicker"
                                             id="start_date_time"
-                                            name="start_date_time"
-                                            value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                            name="start_date_time">
                                         <p class="error start_date_time_error"></p>
                                     </div>
                                 </div>
@@ -343,7 +342,7 @@
                                     <div class="form-group">
                                         <label for="end_date_time">End Date and Time</label>
                                         <input type="text"
-                                            class="form-control datepicker"
+                                            class="form-control datetimepicker"
                                             id="end_date_time"
                                             name="end_date_time"
                                             value="">
@@ -394,4 +393,19 @@
         startDate: new Date()
     });
    });
+ $(function () {
+    $(".datetimepicker").datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm:ss",
+        controlType: "select",
+        oneLine: true,
+        minDate: 0
+    });
+});
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css">
