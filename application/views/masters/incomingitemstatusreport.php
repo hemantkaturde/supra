@@ -41,9 +41,9 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="email">Status</label>
+                                        <label for="email">Status of Additional Process</label>
                                         <select class="form-control" name="status" id="status">
-                                            <option value="NA">Select Status</option>
+                                            <option value="NA">Select Status of Additional Process</option>
                                             <option value="Open" >Open</option>
                                             <option value="Close">Close</option>
                                         </select>
@@ -80,7 +80,7 @@
                                             <th>Inspection report No</th>
                                             <th>Checked by</th>
                                             <th>Received Date</th>
-                                            <th>Status</th>
+                                            <th>Status of Additional Process</th>
                                         </tr>
                                     </thead>
                                     <tbody>
