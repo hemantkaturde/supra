@@ -30716,9 +30716,12 @@ public function printincomingitemdetailslabelbarcode($id)
                     </span><br>
                     <span style="font-size:16px;">
                         Carton: ' . $i . '/' . $totalLabels . '
-                    </span>,
+                  
                     <span style="font-size:16px;">
-                        Lot No: ' . $lot_number. '
+                        Lot No: ' . $lot_number . ',
+                        <span style="margin-left:15px;">
+                            Cleaning
+                        </span> <span style="font-size:26px;line-height:1;">&#9633;</span>
                     </span>
                 </div>
             </td>
