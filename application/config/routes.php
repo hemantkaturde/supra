@@ -696,6 +696,9 @@ $route['fetchcleaninform'] = "admin/fetchcleaninform";
 
 $route['editcleaningform/(:any)'] = "admin/editcleaningform/$1";
 
+$route['checklistreport'] = "admin/checklistreport";
+
+
 
 
 

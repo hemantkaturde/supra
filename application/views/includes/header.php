@@ -440,6 +440,12 @@
                         </a>
                         </li> 
 
+                        <li class="treeview <?php if($pageUrl=="checklistreport"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>checklistreport">
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">Checklist Report</span>
+                        </a>
+                        </li> 
+
 
                       <?php  if( $this->session->userdata('roleText')=='Superadmin'){ ?>
                           <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">

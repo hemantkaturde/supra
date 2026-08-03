@@ -33056,5 +33056,16 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function checklistreport(){
+        $process = 'Checklist Report';
+        $processFunction = 'Admin/checklistreport';
+        $this->logrecord($process,$processFunction);
+        //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->global['pageTitle'] = 'Checklist Report';
+        $this->loadViews("masters/checklistreport", $this->global, $data, NULL);
+
+    }
+
+
 
 }
