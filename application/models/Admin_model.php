@@ -27868,7 +27868,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
        
-         if($params['search']['value'] != "") 
+        if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
@@ -28032,6 +28032,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_CLEANING_FORM.'.incoming_lot_number','left');
 
+        
+        
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CLEANING_FORM.".cleaning_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".cleaning_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".vendor_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".received_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".no_of_boxes_after_cleaning LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".start_date_time LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".cleaning_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".end_date_time LIKE '%".$params['search']['value']."%')");
+        }
+        
+        
         $this->db->where(TBL_CLEANING_FORM.'.status', 1);
         $this->db->order_by(TBL_CLEANING_FORM.'.id','DESC');
         $query = $this->db->get(TBL_CLEANING_FORM);
@@ -28046,8 +28065,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CLEANING_FORM.'.vendor_po_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
-       
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_CLEANING_FORM.'.incoming_lot_number','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CLEANING_FORM.".cleaning_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".cleaning_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".vendor_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".received_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".no_of_boxes_after_cleaning LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".start_date_time LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".cleaning_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".end_date_time LIKE '%".$params['search']['value']."%')");
+        }
 
         $this->db->where(TBL_CLEANING_FORM.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
