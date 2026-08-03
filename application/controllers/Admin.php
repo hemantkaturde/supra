@@ -22249,6 +22249,9 @@ public function vendorpartnumberforincoimglotnumber(){
 
     $vendor_po_number=$this->input->post('vendor_po_number');
     $vendor_part_number=$this->input->post('vendor_part_number');
+
+    $incoming_lot_number_og=$this->input->post('incoming_lot_number_og');
+
     if($vendor_po_number) {
         $getVendoritemsonly = $this->admin_model->vendorpartnumberforincoimglotnumber($vendor_po_number,$vendor_part_number);
         if(count($getVendoritemsonly) >= 1) {
@@ -22261,6 +22264,12 @@ public function vendorpartnumberforincoimglotnumber(){
                     $selected ='';
                 }
 
+                if($incoming_lot_number_og){
+                     $selected ='selected';
+                }
+                else{
+                    $selected ='';
+                }
                 $content = $content.'<option value="'.$value["incoming_item_id"].'" data_id="'.$value["incoming_item_id"].'" '.$selected.'>'.$value["lot_no"].'</option>';
             }
             echo $content;

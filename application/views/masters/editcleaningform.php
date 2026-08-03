@@ -116,7 +116,7 @@
                                     <div class="col-md-3" id="incoming_lot_number_div"  style="display:none">
                                         <div class="form-group">
                                             <label for="incoming_lot_number">Lot Number</label>
-                                            <select class="form-control" name="incoming_lot_number" value="<?=$getcleaningformdetailsbyid[0]['incoming_lot_number'];?>" id="incoming_lot_number">
+                                            <select class="form-control" name="incoming_lot_number" id="incoming_lot_number">
                                             </select> 
                                             <p class="error incoming_lot_number_error"></p>
                                         </div>

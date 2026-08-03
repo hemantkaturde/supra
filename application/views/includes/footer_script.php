@@ -23942,8 +23942,8 @@
 
 
 				//$(".loader_ajax").show();
-				var vendor_part_number = $('#vendor_part_number').val();
-				var vendor_po_number = $('#vendor_po_number').val();
+				// var vendor_part_number = $('#vendor_part_number').val();
+				// var vendor_po_number = $('#vendor_po_number').val();
 
 						
 				$('#incoming_lot_number_div').css('display','block');
@@ -23953,7 +23953,7 @@
 				$.ajax({
 						url : "<?php echo ADMIN_PATH;?>admin/vendorpartnumberforincoimglotnumber",
 						type: "POST",
-						data : {'vendor_po_number' : vendor_po_number,'vendor_part_number':vendor_part_number},
+						data : {'vendor_po_number' : vendor_po_number,'vendor_part_number':vendor_part_number_original,'incoming_lot_number_og':incoming_lot_number_og},
 						success: function(data, textStatus, jqXHR)
 						{
 								$(".loader_ajax").hide();
@@ -23964,14 +23964,14 @@
 								else
 								{
 
-									if (incoming_lot_number_og) {
-										alert('ss');
-										$('#incoming_lot_number').html(
-											'<option value="' + incoming_lot_number_og + '">' + incoming_lot_number_og + '</option>'
-										);
-									} else {
+									// if (incoming_lot_number_og) {
+									// 	alert('ss');
+									// 	$('#incoming_lot_number').html(
+									// 		'<option value="' + incoming_lot_number_og + '" selected>' + incoming_lot_number_og + '</option>'
+									// 	);
+									// } else {
 										$('#incoming_lot_number').html(data);
-									}
+									// }
 									//$('#incoming_lot_number').html(data);
 
 								}
@@ -23986,8 +23986,7 @@
 
 		    });
 
-			
-
+		
             $(document).on('change','#vendor_name',function(e){  
 				e.preventDefault();
 				//$(".loader_ajax").show();
