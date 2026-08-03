@@ -28039,11 +28039,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchcleaninformdata($params){
 
-        $this->db->select(TBL_CLEANING_FORM.'.*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number');
+        $this->db->select(TBL_CLEANING_FORM.'.*,'.TBL_CLEANING_FORM.'.id as cleaningformid,'.TBL_VENDOR.'.vendor_name as vendor_name_from_vendor,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_master,'.TBL_FINISHED_GOODS.'.part_number as fn_part_number,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as original_lot_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CLEANING_FORM.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CLEANING_FORM.'.vendor_po_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id and '.TBL_FINISHED_GOODS.'.fin_id = '.TBL_CLEANING_FORM.'.vendor_part_number');
+       
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
         $this->db->where(TBL_CLEANING_FORM.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_CLEANING_FORM.'.id','DESC');
@@ -28062,7 +28065,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['vendor_po_number'] =  $value['vendor_po_number_master'];
                 $data[$counter]['vendor_part_number'] =  $value['fn_part_number'];
                 $data[$counter]['part_description'] =  $value['part_description'];
-                $data[$counter]['incoming_lot_number'] =  $value['incoming_lot_number'];
+                $data[$counter]['incoming_lot_number'] =  $value['original_lot_number'];
                 $data[$counter]['received_qty'] =  $value['received_qty'];
                 $data[$counter]['no_of_boxes'] =  $value['no_of_boxes'];
                 $data[$counter]['cleaning_status'] =  $value['cleaning_status'];
