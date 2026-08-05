@@ -32928,8 +32928,6 @@ public function deletesupplieritemattachment(){
             );
         echo json_encode($json_data);
 
-
-
     }
 
 
@@ -33064,6 +33062,113 @@ public function deletesupplieritemattachment(){
         $this->global['pageTitle'] = 'Checklist Report';
         $this->loadViews("masters/checklistreport", $this->global, $data, NULL);
 
+    }
+
+
+    public function fetchchecklistdata(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchchecklistdatacount($params); 
+        $queryRecords = $this->admin_model->fetchchecklistdatadata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+
+    public function addchecklistreport(){
+
+            $post_submit = $this->input->post();
+            if($post_submit){
+
+                $addchecklistreport_response = array();
+
+                $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+                $this->form_validation->set_rules('buyer_invoice_no','Buyer Invoice No','trim|required');
+                $this->form_validation->set_rules('buyer_invoice_date','Buyer Invoice Date','trim|required');
+                $this->form_validation->set_rules('remark','remark','trim');
+
+
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $addchecklistreport_response['status'] = 'failure';
+                    $addchecklistreport_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'buyer_invoice_no'=>strip_tags(form_error('buyer_invoice_no')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'remark'=>strip_tags(form_error('remark')));
+            
+                }else{
+
+                    $data = array(
+                        'buyer_id'   => trim($this->input->post('buyer_name')),
+                        'invoice_no'   => trim($this->input->post('buyer_invoice_no')),
+                        'invoice_date'     => trim($this->input->post('buyer_invoice_date')),
+                        'remark'  => trim($this->input->post('remark'))
+                    );
+
+                    if(trim($this->input->post('checklist_id'))){
+                       $addchecklistreportid = trim($this->input->post('checklist_id'));
+                    }else{
+                       $addchecklistreportid ='';
+                    }
+
+                    $addchecklistreport_response_submit = $this->admin_model->addchecklistreport($addchecklistreportid,$data);
+                    if($addchecklistreport_response_submit){
+                        $addchecklistreport_response['status'] = 'success';
+                        $addchecklistreport_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'buyer_invoice_no'=>strip_tags(form_error('buyer_invoice_no')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
+
+            echo json_encode($addchecklistreport_response);
+
+            }else{
+
+                $process = 'Add New Checklist Report';
+                $processFunction = 'Admin/addjobwork';
+                $this->logrecord($process,$processFunction);
+                $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+                $this->global['pageTitle'] = 'Add New Checklist Report';
+                $this->loadViews("masters/addchecklistreport", $this->global, $data, NULL);
+            }
+    }
+
+    public function deletechecklistrecord(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletechecklistrecord(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Checklist Form';
+                        $processFunction = 'Admin/deletechecklistrecord';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+    public function editchecklistreport($id){
+        $process = 'Edit Checklist Report';
+        $processFunction = 'Admin/editchecklistreport';
+        $this->logrecord($process,$processFunction);
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['getpreviouschecklistreportrecord']= $this->admin_model->getpreviouschecklistreportrecord($id);
+        $this->global['pageTitle'] = 'Edit Checklist Report';
+        $this->loadViews("masters/editchecklistreport", $this->global, $data, NULL);
     }
 
 

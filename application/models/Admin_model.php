@@ -28165,7 +28165,108 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function fetchchecklistdatacount($params){
 
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_CHECKLIST_REPORT.'.buyer_id = '.TBL_BUYER_MASTER.'.buyer_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHECKLIST_REPORT.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHECKLIST_REPORT.'.status', 1);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchchecklistdatadata($params){
+
+        $this->db->select('*,'.TBL_CHECKLIST_REPORT.'.id as checklist_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_CHECKLIST_REPORT.'.buyer_id = '.TBL_BUYER_MASTER.'.buyer_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHECKLIST_REPORT.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHECKLIST_REPORT.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_CHECKLIST_REPORT.'.id','DESC');
+        $query = $this->db->get(TBL_CHECKLIST_REPORT);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['buyer_name'] =  $value['buyer_name'];
+                $data[$counter]['invoice_no'] =  $value['invoice_no'];
+                $data[$counter]['invoice_date'] =  $value['invoice_date'];            
+                $data[$counter]['remark'] =  $value['remark'];
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistreport/".$value['checklist_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_id']."' class='fa fa-trash-o deletechecklistrecord' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+    public function addchecklistreport($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_CHECKLIST_REPORT, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_CHECKLIST_REPORT, $data)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function deletechecklistrecord($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHECKLIST_REPORT)){
+            return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+    public function getpreviouschecklistreportrecord($id){
+    
+        $this->db->select('*,'.TBL_CHECKLIST_REPORT.'.id as checklist_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_CHECKLIST_REPORT.'.buyer_id = '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->where(TBL_CHECKLIST_REPORT.'.status', 1);
+        $this->db->where(TBL_CHECKLIST_REPORT.'.id', $id);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+    
 
 }
 

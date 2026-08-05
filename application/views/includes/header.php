@@ -440,7 +440,7 @@
                         </a>
                         </li> 
 
-                        <li class="treeview <?php if($pageUrl=="checklistreport"){echo 'active';}?>" >
+                        <li class="treeview <?php if($pageUrl=="checklistreport" || $pageUrl=="addchecklistreport" || $pageUrl=="editchecklistreport"){echo 'active';}?>" >
                         <a href="<?php echo base_url(); ?>checklistreport">
                           <i class="fa fa-file-excel-o"></i> <span class="menu_label">Checklist Report</span>
                         </a>

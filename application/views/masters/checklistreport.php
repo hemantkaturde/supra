@@ -23,8 +23,8 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="#">
-                        <i class="fa fa-plus"></i> Add Checklist Report</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addchecklistreport">
+                        <i class="fa fa-plus"></i> Add CheckList Report</a>
                 </div>
             </div>
         </div>
@@ -38,10 +38,10 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_cleaninform">
+                                    id="view_checklistreport">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
-                                            <th>Buyer Name No</th>
+                                            <th>Buyer Name</th>
                                             <th>Invoice Date</th>
                                             <th>Invoice Number</th>
                                             <th>Remark</th>                                          
@@ -53,10 +53,8 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <!-- /.box-body -->
                             <div class="box-footer">
-
                             </div>
                         </div>
                     </div>

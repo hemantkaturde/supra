@@ -33354,3 +33354,132 @@ $('#export_excel').on('click', function() {
 </script>
 <?php } ?>
 
+
+<?php if($pageTitle=='Checklist Report' || $pageTitle=='Add New Checklist Report' || $pageTitle=='Edit Checklist Report'){ ?>
+	<script type="text/javascript">
+	        $(document).ready(function() {
+	    	    var dt = $('#view_checklistreport').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "24%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Check List Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchchecklistdata",
+						type: "post",
+					},
+				});
+	        });
+
+
+			$(document).on('click','#addchecklistreportformsubmit',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addchecklistreportform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addchecklistreport",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "CheckList Form Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'checklistreport'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		    });
+
+
+
+			$(document).on('click','.deletechecklistrecord',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Checklist Report Record",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deletechecklistrecord",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Forging Scarp Working Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>checklistreport";
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Forging Scarp Working deletion cancelled ", "error");
+						}
+					});
+	        });
+
+
+	</script>
+<?php } ?>
