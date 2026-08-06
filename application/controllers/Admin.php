@@ -33099,8 +33099,8 @@ public function deletesupplieritemattachment(){
                 $addchecklistreport_response = array();
 
                 $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
-                $this->form_validation->set_rules('buyer_invoice_no','Buyer Invoice No','trim|required');
-                $this->form_validation->set_rules('buyer_invoice_date','Buyer Invoice Date','trim|required');
+                $this->form_validation->set_rules('buyer_invoice_no','Buyer Invoice No','trim');
+                $this->form_validation->set_rules('buyer_invoice_date','Buyer Invoice Date','trim');
                 $this->form_validation->set_rules('remark','remark','trim');
 
 
