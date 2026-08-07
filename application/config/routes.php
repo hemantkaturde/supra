@@ -700,6 +700,8 @@ $route['checklistreport'] = "admin/checklistreport";
 $route['fetchchecklistdata'] = "admin/fetchchecklistdata";
 $route['addchecklistreport'] = "admin/addchecklistreport";
 $route['editchecklistreport/(:any)'] = "admin/editchecklistreport/$1";
+$route['addchecklistpart/(:any)'] = "admin/addchecklistpart/$1";
+$route['addchecklistpartrecord/(:any)'] = "admin/addchecklistpartrecord/$1";
 
 
 

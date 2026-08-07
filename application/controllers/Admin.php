@@ -33172,5 +33172,29 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function addchecklistpart($id){
+        $process = 'Checklist Report Part';
+        $processFunction = 'Admin/addchecklistpart';
+        $this->logrecord($process,$processFunction);
+        $data['checklistreportid'] = $id;
+        //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->global['pageTitle'] = 'Checklist Report Part';
+        $this->loadViews("masters/addchecklistpart", $this->global, $data, NULL);
+    }
+
+
+    public function addchecklistpartrecord($id){
+        $process = 'Checklist Report Part Record';
+        $processFunction = 'Admin/addchecklistpartrecord';
+        $this->logrecord($process,$processFunction);
+        $data['checklistreportid'] = $id;
+        //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->global['pageTitle'] = 'Checklist Report Part Record';
+        $this->loadViews("masters/addchecklistpartrecord", $this->global, $data, NULL);
+    }
+
+
+    
+
 
 }
