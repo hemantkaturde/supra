@@ -33483,3 +33483,211 @@ $('#export_excel').on('click', function() {
 
 	</script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Checklist Report Part Record' || $pageTitle=='Checklist Report Part'){ ?>
+	<script type="text/javascript">
+
+
+        $(document).ready(function() {
+			var checklistreportid = $('#checklistreportid').val();
+			var buyer_id = $('#buyer_id').val();
+
+				
+	    	var dt = $('#view_checklistreport_part').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "15%", "targets": 4 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Check List Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchchecklistpartrecord/"+checklistreportid+'/'+buyer_id,
+						type: "post",
+					},
+			});
+	    });
+
+        $(document).on('change','#buyer_po_number',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_po_number = $('#buyer_po_number').val();
+			$("#buyer_part_number").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getBuyeritemonlyforchecklist",
+				type: "POST",
+				data : {'buyer_po_number' : buyer_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_part_number').html('<option value="">Select Buyer Part Number</option>');
+					}
+					else
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html(data);
+						$("#buyer_part_number").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#buyer_part_number',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			//var item_id = buyer_part_number
+			var item_id = $('#buyer_part_number').val();
+			$.ajax({
+				url : "<?php echo base_url();?>getbuyeritemdataforitemedit",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						
+					
+						$('#buyer_part_description').val(fetchResponse.description);  
+						//$('#description').val(fetchResponse.description);  
+						$('#buyer_part_delivery_date').val(fetchResponse.buyer_po_part_delivery_date);  
+						//$('#unit').val(fetchResponse.unit);  
+						//$('#rate').val(fetchResponse.rate);  
+						$('#buyer_part_po_qty').val(fetchResponse.order_oty); 
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
+		$(document).on('click','#addchecklistreportpartformsubmit',function(e){
+					e.preventDefault();
+
+					var checklistreportid = $('#checklistreportid').val();
+					var buyer_id = $('#buyer_id').val();
+
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addchecklistreportpartform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addchecklistpartrecord/"+checklistreportid+'/'+buyer_id,
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "CheckList Form Part Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'addchecklistpart/'?>"+checklistreportid+'/'+buyer_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
+
+
+
+		
+		$(document).on('click','.deletechecklistpartrecordpart',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					var checklistreportid = $('#checklistreportid').val();
+					var buyer_id = $('#buyer_id').val();
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Checklist Report Record Part",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deletechecklistpartrecordpart",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Checklist Report Record Part Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>addchecklistpart/"+checklistreportid+"/"+buyer_id;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Checklist Report Record Part deletion cancelled ", "error");
+						}
+					});
+	        });
+
+
+
+		</script>
+<?php } ?>

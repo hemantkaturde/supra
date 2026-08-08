@@ -209,6 +209,8 @@ define('TBL_SUPPLIER_ITEM_ATTACHMENT','tbl_supplier_item_attachment');
 define('TBL_VENDOR_ITEM_ATTACHMENT','tbl_vendor_item_attachment');
 define('TBL_CLEANING_FORM','tbl_cleaning_form');
 define('TBL_CHECKLIST_REPORT','tbl_checklist_report');
+define('TBL_CHECKLIST_REPORT_PART','tbl_checklist_report_part');
+
 
 
 define('TBL_STOREFORM_TICKETS','tbl_storeform_tickets');

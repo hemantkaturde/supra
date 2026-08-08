@@ -29,40 +29,40 @@
                             <h3 class="box-title">Add New Checklist Report Part</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addchecklistreportform" action="<?php echo base_url() ?>addchecklistreportform" method="post" role="form">
+                        <form role="form" id="addchecklistreportpartform" action="<?php echo base_url() ?>addchecklistreportpartform" method="post" role="form">
                             <div class="box-body">
+                                    <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
+                                    <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $buyer_id; ?>">
+
                                     <div class="row">
-                                     <div class="col-md-3" id="vendor_div">
+                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="buyer_name">Buyer PO Number</label>
-                                                    <select class="form-control" name="buyer_name" id="buyer_name">
+                                            <label for="buyer_po_number">Buyer PO Number <span class="required">*</span></label>
+                                                    <select class="form-control" name="buyer_po_number" id="buyer_po_number">
                                                         <option st-id="" value="">Select Buyer Name</option>
-                                                        <?php foreach ($buyerList as $key => $value) {?>
-                                                        <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                                                        <?php foreach ($getbuyerponumbersbyid as $key => $value) {?>
+                                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['sales_order_number']; ?></option>
                                                         <?php } ?>
                                                     </select>
-                                            <p class="error buyer_name_error"></p>
+                                            <p class="error buyer_po_number_error"></p>
                                         </div>
 
-
                                         <div class="form-group">
-                                            <label for="buyer_name">Buyer Part Number</label>
-                                                    <select class="form-control" name="buyer_name" id="buyer_name">
+                                            <label for="buyer_part_number">Buyer Part Number<span class="required">*</span></label>
+                                                    <select class="form-control" name="buyer_part_number" id="buyer_part_number">
                                                         <option st-id="" value="">Select Buyer Name</option>
-                                                        <?php foreach ($buyerList as $key => $value) {?>
-                                                        <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
-                                                        <?php } ?>
                                                     </select>
-                                            <p class="error buyer_name_error"></p>
+                                            <p class="error buyer_part_number_error"></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+
+                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="buyer_invoice_no">Buyer PO Delivery Date</label>
-                                               <input type="text" class="form-control" id="buyer_invoice_no" value="" name="buyer_invoice_no">
-                                            <p class="error buyer_invoice_no_error"></p>
+                                            <label for="buyer_part_description">Buyer PO Part Description</label>
+                                               <input type="text" class="form-control" id="buyer_part_description" name="buyer_part_description">
+                                            <p class="error buyer_part_description_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -70,10 +70,20 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="vendor_po">Buyer PO Qty</label>
-                                            <input type="text" class="form-control datepicker" id="buyer_invoice_date"  name="buyer_invoice_date">
+                                            <label for="buyer_part_delivery_date">Buyer PO Part Delivery Date</label>
+                                               <input type="text" class="form-control" id="buyer_part_delivery_date" name="buyer_part_delivery_date">
+                                            <p class="error buyer_part_delivery_date_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="buyer_part_po_qty">Buyer PO Qty</label>
+                                            <input type="text" class="form-control datepicker" id="buyer_part_po_qty"  name="buyer_part_po_qty">
                                             </select> 
-                                            <p class="error vendor_po_number_error"></p>
+                                            <p class="error buyer_part_po_qty_number_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -82,10 +92,10 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="vendor_po">Dispatch Qty</label>
-                                            <input type="text" class="form-control datepicker" id="buyer_invoice_date"  name="buyer_invoice_date">
+                                            <label for="dispatch_qty">Dispatch Qty</label>
+                                            <input type="text" class="form-control" id="dispatch_qty"  name="dispatch_qty">
                                             </select> 
-                                            <p class="error vendor_po_number_error"></p>
+                                            <p class="error dispatch_qty_number_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,9 +113,12 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <input type="submit" id="addchecklistreportformsubmit" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>checklistreport'" class="btn btn-default" value="Back" />
-                            </div>
+                                <input type="submit" id="addchecklistreportpartformsubmit" class="btn btn-primary" value="Submit" />
+                            <input type="button" 
+                                onclick="location.href='<?php echo base_url() . 'addchecklistpart/' . $checklistreportid . '/' . $buyer_id; ?>'" 
+                                class="btn btn-default" 
+                                value="Back" />
+                                </div>
                         </form>
                     </div>
                 </div>

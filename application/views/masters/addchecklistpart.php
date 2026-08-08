@@ -23,13 +23,17 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url('addchecklistpartrecord/' . $checklistreportid); ?>">
+                    <a class="btn btn-primary" href="<?php echo base_url('addchecklistpartrecord/' . $checklistreportid.'/'.$buyer_id); ?>">
                         Add Checklist Part Details
                     </a>
                 </div>
             </div>
         </div>
         <div class="row">
+
+         <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
+        <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $buyer_id; ?>">
+
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box box-primary"> 
@@ -37,7 +41,7 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_checklistreport">
+                                    id="view_checklistreport_part">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Buyer PO</th>

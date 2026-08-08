@@ -34,7 +34,7 @@
                                     <div class="row">
                                      <div class="col-md-3" id="vendor_div">
                                         <div class="form-group">
-                                            <label for="buyer_name">Buyer Name</label>
+                                            <label for="buyer_name">Buyer Name<span class="required">*</span></label>
                                                     <select class="form-control" name="buyer_name" id="buyer_name">
                                                         <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>

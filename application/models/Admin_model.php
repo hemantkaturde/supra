@@ -1531,6 +1531,7 @@ class Admin_model extends CI_Model
     } 
     
     public function getbuyerpodetails($buyerpoid){
+
         $this->db->select('*');
         $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
         $this->db->where(TBL_BUYER_PO_MASTER.'.id',$buyerpoid);
@@ -28187,7 +28188,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchchecklistdatadata($params){
 
-        $this->db->select('*,'.TBL_CHECKLIST_REPORT.'.id as checklist_id');
+        $this->db->select('*,'.TBL_CHECKLIST_REPORT.'.id as checklist_id,'.TBL_BUYER_MASTER.'.buyer_id as og_buyer_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_CHECKLIST_REPORT.'.buyer_id = '.TBL_BUYER_MASTER.'.buyer_id');
 
         if($params['search']['value'] != "") 
@@ -28218,7 +28219,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistreport/".$value['checklist_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addchecklistpart/".$value['checklist_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> &nbsp";
+                $data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "addchecklistpart/" . $value['checklist_id'] . "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_id']."' class='fa fa-trash-o deletechecklistrecord' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -28267,7 +28268,143 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->result_array();
         return $fetch_result;
     }
-    
+
+
+    public function getbuyerponumbersbyid($buyerpoid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id',$buyerpoid);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function getBuyeritemonlyforchecklist($buyer_po_number){
+
+        $this->db->select('*,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_po_item_id');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function addchecklistreportpart($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_CHECKLIST_REPORT_PART, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_CHECKLIST_REPORT_PART, $data)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
+    public function fetchchecklistpartrecordcount($params,$checklistreportid,$buyer_id){
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART . '.id as checklist_part_id, ' .TBL_BUYER_MASTER . '.buyer_id as og_buyer_id');
+        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART.".dispatch_qty LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.buyer_id', $buyer_id);
+
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.status', 1);
+        $this->db->order_by(TBL_CHECKLIST_REPORT_PART.'.id','DESC');
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function fetchchecklistpartrecorddata($params,$checklistreportid,$buyer_id){
+
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART . '.id as checklist_part_id, ' .TBL_BUYER_MASTER . '.buyer_id as og_buyer_id');
+        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART.".dispatch_qty LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.status', 1);
+
+        //$this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.buyer_id', $buyer_id);
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_CHECKLIST_REPORT_PART.'.id','DESC');
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['sales_order_number'] =  $value['sales_order_number'];
+                $data[$counter]['part_number'] =  $value['part_number'];
+                $data[$counter]['buyer_po_part_delivery_date'] =  $value['buyer_po_part_delivery_date'];            
+                $data[$counter]['order_oty'] =  $value['order_oty'];
+                $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
+                $data[$counter]['action'] = '';
+                //$data[$counter]['action'] .= "<a href='' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
+                //$data[$counter]['action'] .= "<a href='' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_id']."' class='fa fa-trash-o deletechecklistpartrecordpart' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+    public function deletechecklistpartrecordpart($id){
+
+       $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHECKLIST_REPORT_PART)){
+            return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
 
 }
 

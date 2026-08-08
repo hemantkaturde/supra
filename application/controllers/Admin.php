@@ -33172,29 +33172,154 @@ public function deletesupplieritemattachment(){
     }
 
 
-    public function addchecklistpart($id){
+    public function addchecklistpart($id,$buyer_id){
         $process = 'Checklist Report Part';
         $processFunction = 'Admin/addchecklistpart';
         $this->logrecord($process,$processFunction);
         $data['checklistreportid'] = $id;
-        //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['buyer_id'] = $buyer_id;
+        //$data['vendorList']= $this->admin_model->fetchALLvendorList($buyer_id);
         $this->global['pageTitle'] = 'Checklist Report Part';
         $this->loadViews("masters/addchecklistpart", $this->global, $data, NULL);
     }
 
 
-    public function addchecklistpartrecord($id){
-        $process = 'Checklist Report Part Record';
-        $processFunction = 'Admin/addchecklistpartrecord';
-        $this->logrecord($process,$processFunction);
-        $data['checklistreportid'] = $id;
-        //$data['vendorList']= $this->admin_model->fetchALLvendorList();
-        $this->global['pageTitle'] = 'Checklist Report Part Record';
-        $this->loadViews("masters/addchecklistpartrecord", $this->global, $data, NULL);
+    public function addchecklistpartrecord($id,$buyer_id){
+
+            $post_submit = $this->input->post();
+            if($post_submit){
+
+                $addchecklistreportpart_response = array();
+
+                $this->form_validation->set_rules('checklistreportid','checklistreportid','trim');
+                $this->form_validation->set_rules('buyer_id','buyer_id','trim');
+                $this->form_validation->set_rules('buyer_po_number','buyer_po_number','trim|required');
+                $this->form_validation->set_rules('buyer_part_number','buyer_part_number','trim|required');
+                $this->form_validation->set_rules('buyer_part_description','buyer_part_description','trim');
+                $this->form_validation->set_rules('buyer_part_delivery_date','buyer_part_delivery_date','trim');
+                $this->form_validation->set_rules('buyer_part_po_qty','buyer_part_po_qty','trim');
+                $this->form_validation->set_rules('dispatch_qty','dispatch_qty','trim');
+                $this->form_validation->set_rules('remark','remark','trim');
+
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $addchecklistreportpart_response['status'] = 'failure';
+                    $addchecklistreportpart_response['error'] = array('buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_part_number'=>strip_tags(form_error('buyer_part_number')),'buyer_part_description'=>strip_tags(form_error('buyer_part_description')),'buyer_part_delivery_date'=>strip_tags(form_error('buyer_part_delivery_date')),'buyer_part_po_qty'=>strip_tags(form_error('buyer_part_po_qty')),'dispatch_qty'=>strip_tags(form_error('dispatch_qty')));
+            
+                }else{
+
+                    $data = array(
+                        'checklist_report_id'   => trim($this->input->post('checklistreportid')),
+                        'buyer_po_id'   => trim($this->input->post('buyer_po_number')),
+                        'buyer_id'   => trim($this->input->post('buyer_id')),
+                        'part_number_id'     => trim($this->input->post('buyer_part_number')),
+                        'buyer_part_description'     => trim($this->input->post('buyer_part_description')),
+                        'buyer_po_delivery_date'  => trim($this->input->post('buyer_part_delivery_date')),
+                        'buyer_po_qty'  => trim($this->input->post('buyer_part_po_qty')),
+                        'dispatch_qty'  => trim($this->input->post('dispatch_qty')),
+                        'remark'  => trim($this->input->post('remark'))
+                    );
+
+                    // if(trim($this->input->post('checklist_id'))){
+                    //    $addchecklistreportid = trim($this->input->post('checklist_id'));
+                    // }else{
+                    //    $addchecklistreportid ='';
+                    // }
+
+                    $addchecklistreportpart_response_submit = $this->admin_model->addchecklistreportpart('',$data);
+                    if($addchecklistreportpart_response_submit){
+                        $addchecklistreportpart_response['status'] = 'success';
+                        $addchecklistreportpart_response['error'] = array('buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_part_number'=>strip_tags(form_error('buyer_part_number')),'buyer_part_description'=>strip_tags(form_error('buyer_part_description')),'buyer_part_delivery_date'=>strip_tags(form_error('buyer_part_delivery_date')),'buyer_part_po_qty'=>strip_tags(form_error('buyer_part_po_qty')),'dispatch_qty'=>strip_tags(form_error('dispatch_qty')));
+                    }
+                }
+
+            echo json_encode($addchecklistreportpart_response);
+
+            }else{
+                $process = 'Checklist Report Part Record';
+                $processFunction = 'Admin/addchecklistpartrecord';
+                $this->logrecord($process,$processFunction);
+                $data['checklistreportid'] = $id;
+                $data['buyer_id'] = $buyer_id;
+                //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+                $data['getbuyerponumbersbyid']= $this->admin_model->getbuyerponumbersbyid($buyer_id);
+
+                $this->global['pageTitle'] = 'Checklist Report Part Record';
+                $this->loadViews("masters/addchecklistpartrecord", $this->global, $data, NULL);
+            }
     }
 
 
-    
+    public function fetchchecklistpartrecord($checklistreportid,$buyer_id){
+
+
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchchecklistpartrecordcount($params,$checklistreportid,$buyer_id); 
+        $queryRecords = $this->admin_model->fetchchecklistpartrecorddata($params,$checklistreportid,$buyer_id); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+
+    public function getBuyeritemonlyforchecklist(){
+
+        $buyer_po_number=$this->input->post('buyer_po_number');
+        if($buyer_po_number) {
+            $getBuyeritemsonly = $this->admin_model->getBuyeritemonlyforchecklist($buyer_po_number);
+            if(count($getBuyeritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Part Number</option>';
+                foreach($getBuyeritemsonly as $value) {
+
+                    // if($this->input->post('vendor_part_number_id_edit')==$value["fin_id"]){
+                    //     $selected ='selected';
+                    // }else{
+                    //     $selected ='';
+                    // }
+
+                    $content = $content.'<option value="'.$value["buyer_po_item_id"].'"'.$selected.'>'.$value["part_number"].'</option>';
+                }
+                echo $content;
+            } else {
+                echo 'failure';
+            }
+        } else {
+            echo 'failure';
+        }
+    }
+
+    public function deletechecklistpartrecordpart(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletechecklistpartrecordpart(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Checklist Form Part';
+                        $processFunction = 'Admin/deletechecklistpartrecordpart';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
 
 
 }
