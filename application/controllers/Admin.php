@@ -33221,13 +33221,13 @@ public function deletesupplieritemattachment(){
                         'remark'  => trim($this->input->post('remark'))
                     );
 
-                    // if(trim($this->input->post('checklist_id'))){
-                    //    $addchecklistreportid = trim($this->input->post('checklist_id'));
-                    // }else{
-                    //    $addchecklistreportid ='';
-                    // }
+                    if(trim($this->input->post('checklist_item_id'))){
+                       $checklist_item_id = trim($this->input->post('checklist_item_id'));
+                    }else{
+                       $checklist_item_id ='';
+                    }
 
-                    $addchecklistreportpart_response_submit = $this->admin_model->addchecklistreportpart('',$data);
+                    $addchecklistreportpart_response_submit = $this->admin_model->addchecklistreportpart($checklist_item_id,$data);
                     if($addchecklistreportpart_response_submit){
                         $addchecklistreportpart_response['status'] = 'success';
                         $addchecklistreportpart_response['error'] = array('buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_part_number'=>strip_tags(form_error('buyer_part_number')),'buyer_part_description'=>strip_tags(form_error('buyer_part_description')),'buyer_part_delivery_date'=>strip_tags(form_error('buyer_part_delivery_date')),'buyer_part_po_qty'=>strip_tags(form_error('buyer_part_po_qty')),'dispatch_qty'=>strip_tags(form_error('dispatch_qty')));
@@ -33252,9 +33252,6 @@ public function deletesupplieritemattachment(){
 
 
     public function fetchchecklistpartrecord($checklistreportid,$buyer_id){
-
-
-
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->fetchchecklistpartrecordcount($params,$checklistreportid,$buyer_id); 
         $queryRecords = $this->admin_model->fetchchecklistpartrecorddata($params,$checklistreportid,$buyer_id); 
@@ -33319,6 +33316,28 @@ public function deletesupplieritemattachment(){
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
+    }
+
+
+    public function editchecklistpartitemdata($id,$buyer_id){
+
+
+        $process = 'Edit Checklist Part ItemData';
+        $processFunction = 'Admin/editchecklistpartitemdata';
+        $this->logrecord($process,$processFunction);
+        $data['getbuyerponumbersbyid']= $this->admin_model->getbuyerponumbersbyid($buyer_id);
+        $data['getchecklistpartitemdata']= $this->admin_model->getchecklistpartitemdata($id);
+
+
+        // print_r($data['getchecklistpartitemdata']);
+        // exit;
+
+        //$data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        //$data['getpreviouschecklistreportrecord']= $this->admin_model->getpreviouschecklistreportrecord($id);
+        $this->global['pageTitle'] = 'Edit Checklist Part ItemData';
+        $this->loadViews("masters/editchecklistpartitemdata", $this->global, $data, NULL);
+
+
     }
 
 

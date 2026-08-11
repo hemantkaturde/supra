@@ -28212,9 +28212,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
+
+                if($value['invoice_date']=='0000-00-00'){
+                   $invoice_date = "";
+                }else{
+                   $invoice_date =  date("d-m-Y", strtotime($value['invoice_date']));
+                }
+
+
                 $data[$counter]['buyer_name'] =  $value['buyer_name'];
                 $data[$counter]['invoice_no'] =  $value['invoice_no'];
-                $data[$counter]['invoice_date'] =  $value['invoice_date'];            
+                $data[$counter]['invoice_date'] =  $invoice_date;            
                 $data[$counter]['remark'] =  $value['remark'];
 
                 $data[$counter]['action'] = '';
@@ -28376,14 +28384,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['sales_order_number'] =  $value['sales_order_number'];
+                $data[$counter]['sales_order_number'] =  $value['sales_order_number'].' - '.$value['buyer_po_number'];
                 $data[$counter]['part_number'] =  $value['part_number'];
                 $data[$counter]['buyer_po_part_delivery_date'] =  $value['buyer_po_part_delivery_date'];            
                 $data[$counter]['order_oty'] =  $value['order_oty'];
                 $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
                 $data[$counter]['action'] = '';
-                //$data[$counter]['action'] .= "<a href='' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
-                //$data[$counter]['action'] .= "<a href='' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistpartitemdata/".$value['checklist_part_id']. "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
+                $data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "addchecklistpartitemdata/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_id']."' class='fa fa-trash-o deletechecklistpartrecordpart' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -28404,6 +28412,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+
+    public function getchecklistpartitemdata($id){
+
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART . '.id as checklist_part_id, ' .TBL_BUYER_MASTER . '.buyer_id as og_buyer_id,'.TBL_CHECKLIST_REPORT_PART.'.remark as checklist_remark');
+        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.status', 1);
+        //$this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.id', $id);
+        $this->db->order_by(TBL_CHECKLIST_REPORT_PART.'.id','DESC');
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
 
 
 }

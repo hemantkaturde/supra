@@ -33486,7 +33486,7 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='Checklist Report Part Record' || $pageTitle=='Checklist Report Part'){ ?>
+<?php if($pageTitle=='Checklist Report Part Record' || $pageTitle=='Checklist Report Part' || $pageTitle=='Edit Checklist Part ItemData'){ ?>
 	<script type="text/javascript">
 
 
@@ -33520,6 +33520,37 @@ $('#export_excel').on('click', function() {
 						type: "post",
 					},
 			});
+
+			var buyer_po_number = $('#buyer_po_number').val();
+			$("#buyer_part_number").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getBuyeritemonlyforchecklist",
+				type: "POST",
+				data : {'buyer_po_number' : buyer_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_part_number').html('<option value="">Select Buyer Part Number</option>');
+					}
+					else
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html(data);
+						$("#buyer_part_number").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+
+
+			
 	    });
 
         $(document).on('change','#buyer_po_number',function(e){  

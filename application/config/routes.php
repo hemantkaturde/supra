@@ -703,6 +703,8 @@ $route['editchecklistreport/(:any)'] = "admin/editchecklistreport/$1";
 $route['addchecklistpart/(:any)/(:any)'] = "admin/addchecklistpart/$1/$2";
 $route['addchecklistpartrecord/(:any)/(:any)'] = "admin/addchecklistpartrecord/$1/$2";
 
+$route['editchecklistpartitemdata/(:any)/(:any)'] = "admin/editchecklistpartitemdata/$1/$2";
+
 
 
 

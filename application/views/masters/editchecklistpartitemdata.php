@@ -10,15 +10,17 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add Checklist Report Part
+            <i class="fa fa-users"></i> Edit Checklist Report Part
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Checklist Report Part</a></li>
+                    <li class="active"><a href="javascript:void(0);">Edit Checklist Report Part</a></li>
                 </ul>
             </small>
         </h1>
     </section>
+
+    <?php //print_r($getchecklistpartitemdata[0]['buyer_po_id']);exit; ?>
 
     <section class="content">
         <div class="row">
@@ -26,13 +28,15 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add New Checklist Report Part</h3>
+                            <h3 class="box-title">Edit Checklist Report Part</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addchecklistreportpartform" action="<?php echo base_url() ?>addchecklistreportpartform" method="post" role="form">
                             <div class="box-body">
-                                    <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
-                                    <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $buyer_id; ?>">
+                                
+                                    <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $getchecklistpartitemdata[0]['checklist_report_id']; ?>">
+                                    <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $getchecklistpartitemdata[0]['buyer_id']; ?>">
+                                    <input type="hidden" class="form-control" id="checklist_item_id" name="checklist_item_id" value="<?php echo $getchecklistpartitemdata[0]['checklist_part_id']; ?>">
 
                                     <div class="row">
                                      <div class="col-md-3">
@@ -41,7 +45,7 @@
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number">
                                                         <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($getbuyerponumbersbyid as $key => $value) {?>
-                                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['sales_order_number'].' - '.$value['buyer_po_number']; ?></option>
+                                                        <option value="<?php echo $value['id']; ?>" <?php if($getchecklistpartitemdata[0]['buyer_po_id']==$value['id']){ echo 'selected'; }  ?>><?php echo $value['sales_order_number'].' - '.$value['buyer_po_number']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
@@ -61,7 +65,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_part_description">Buyer PO Part Description</label>
-                                               <input type="text" class="form-control" id="buyer_part_description" name="buyer_part_description">
+                                               <input type="text" class="form-control" id="buyer_part_description" value="<?php echo $getchecklistpartitemdata[0]['buyer_part_description']; ?>" name="buyer_part_description">
                                             <p class="error buyer_part_description_error"></p>
                                         </div>
                                     </div>
@@ -71,7 +75,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_part_delivery_date">Buyer PO Part Delivery Date</label>
-                                               <input type="text" class="form-control" id="buyer_part_delivery_date" name="buyer_part_delivery_date">
+                                               <input type="text" class="form-control" id="buyer_part_delivery_date" value="<?php echo $getchecklistpartitemdata[0]['buyer_po_delivery_date']; ?>" name="buyer_part_delivery_date">
                                             <p class="error buyer_part_delivery_date_error"></p>
                                         </div>
                                     </div>
@@ -81,7 +85,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_part_po_qty">Buyer PO Qty</label>
-                                            <input type="text" class="form-control datepicker" id="buyer_part_po_qty"  name="buyer_part_po_qty">
+                                            <input type="text" class="form-control datepicker" id="buyer_part_po_qty" value="<?php echo $getchecklistpartitemdata[0]['buyer_po_qty']; ?>"  name="buyer_part_po_qty">
                                             </select> 
                                             <p class="error buyer_part_po_qty_number_error"></p>
                                         </div>
@@ -93,7 +97,7 @@
                                      <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="dispatch_qty">Dispatch Qty</label>
-                                            <input type="text" class="form-control" id="dispatch_qty"  name="dispatch_qty">
+                                            <input type="text" class="form-control" id="dispatch_qty" value="<?php echo $getchecklistpartitemdata[0]['dispatch_qty']; ?>"  name="dispatch_qty">
                                             </select> 
                                             <p class="error dispatch_qty_number_error"></p>
                                         </div>
@@ -104,7 +108,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark"  name="remark">
+                                            <input type="text" class="form-control" id="remark" value="<?php echo $getchecklistpartitemdata[0]['checklist_remark']; ?>" name="remark">
                                             </select> 
                                             <p class="error remark_error"></p>
                                         </div>
@@ -115,8 +119,7 @@
                             <div class="box-footer">
                                 <input type="submit" id="addchecklistreportpartformsubmit" class="btn btn-primary" value="Submit" />
                             <input type="button" 
-                                onclick="location.href='<?php echo base_url() . 'addchecklistpart/' . $checklistreportid . '/' . $buyer_id; ?>'" 
-                                class="btn btn-default" 
+                                onclick="location.href='<?php echo base_url() . 'addchecklistpart/' . $getchecklistpartitemdata[0]['checklist_report_id'] . '/' . $getchecklistpartitemdata[0]['buyer_id']; ?>'"                                 class="btn btn-default" 
                                 value="Back" />
                                 </div>
                         </form>
