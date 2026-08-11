@@ -33285,11 +33285,13 @@ public function deletesupplieritemattachment(){
                 $content = $content.'<option value="">Select Part Number</option>';
                 foreach($getBuyeritemsonly as $value) {
 
-                    // if($this->input->post('vendor_part_number_id_edit')==$value["fin_id"]){
-                    //     $selected ='selected';
-                    // }else{
-                    //     $selected ='';
-                    // }
+
+
+                    if($this->input->post('part_number_id')==$value["fin_id"]){
+                        $selected ='selected';
+                    }else{
+                        $selected ='';
+                    }
 
                     $content = $content.'<option value="'.$value["buyer_po_item_id"].'"'.$selected.'>'.$value["part_number"].'</option>';
                 }

@@ -33522,11 +33522,13 @@ $('#export_excel').on('click', function() {
 			});
 
 			var buyer_po_number = $('#buyer_po_number').val();
-			$("#buyer_part_number").html('');
-			$.ajax({
+			var part_number_id = $('#part_number_id').val();
+
+				$("#buyer_part_number").html('');
+				$.ajax({
 				url : "<?php echo ADMIN_PATH;?>admin/getBuyeritemonlyforchecklist",
 				type: "POST",
-				data : {'buyer_po_number' : buyer_po_number},
+				data : {'buyer_po_number' : buyer_po_number,'part_number_id':part_number_id},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
@@ -33548,9 +33550,6 @@ $('#export_excel').on('click', function() {
 					//$(".loader_ajax").hide();
 				}
 			});
-
-
-			
 	    });
 
         $(document).on('change','#buyer_po_number',function(e){  
@@ -33662,6 +33661,8 @@ $('#export_excel').on('click', function() {
 					});
 					return false;
 		});
+
+
 
 
 
