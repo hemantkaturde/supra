@@ -706,8 +706,9 @@ $route['addchecklistpartrecord/(:any)/(:any)'] = "admin/addchecklistpartrecord/$
 $route['editchecklistpartitemdata/(:any)/(:any)'] = "admin/editchecklistpartitemdata/$1/$2";
 
 
+$route['checklistpartitemdatavendorincoming/(:any)/(:any)/(:any)'] = "admin/checklistpartitemdatavendorincoming/$1/$2/$3";
 
-
+$route['addchecklistpartitemdatavendorincoming/(:any)/(:any)/(:any)'] = "admin/addchecklistpartitemdatavendorincoming/$1/$2/$3";
 
 
 /* End of file routes.php */

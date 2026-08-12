@@ -33285,8 +33285,6 @@ public function deletesupplieritemattachment(){
                 $content = $content.'<option value="">Select Part Number</option>';
                 foreach($getBuyeritemsonly as $value) {
 
-
-
                     if($this->input->post('part_number_id')==$value["fin_id"]){
                         $selected ='selected';
                     }else{
@@ -33340,6 +33338,32 @@ public function deletesupplieritemattachment(){
         $this->loadViews("masters/editchecklistpartitemdata", $this->global, $data, NULL);
 
 
+    }
+
+
+    public function checklistpartitemdatavendorincoming($checklist_part_id,$og_buyer_id,$checklist_report_id){
+        $process = 'CheckList Part Item Data Vendor Incoming';
+        $processFunction = 'Admin/addjobwork';
+        $this->logrecord($process,$processFunction);
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['checklist_part_id']= $checklist_part_id;
+        $data['og_buyer_id']= $og_buyer_id;
+        $data['checklist_report_id']= $checklist_report_id;
+        $this->global['pageTitle'] = 'CheckList Part Item Data Vendor Incoming';
+        $this->loadViews("masters/checklistpartitemdatavendorincoming", $this->global, $data, NULL);
+    }
+
+
+     public function addchecklistpartitemdatavendorincoming($checklist_part_id,$og_buyer_id,$checklist_report_id){
+        $process = 'Add CheckList Part Item Data Vendor Incoming';
+        $processFunction = 'Admin/addjobwork';
+        $this->logrecord($process,$processFunction);
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['checklist_part_id']= $checklist_part_id;
+        $data['og_buyer_id']= $og_buyer_id;
+        $data['checklist_report_id']= $checklist_report_id;
+        $this->global['pageTitle'] = 'Add CheckList Part Item Data Vendor Incoming';
+        $this->loadViews("masters/addchecklistpartitemdatavendorincoming", $this->global, $data, NULL);
     }
 
 

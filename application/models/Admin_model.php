@@ -28391,7 +28391,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistpartitemdata/".$value['checklist_part_id']. "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
-                $data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "addchecklistpartitemdata/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
+                $data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "checklistpartitemdatavendorincoming/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "/" . $value['checklist_report_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_id']."' class='fa fa-trash-o deletechecklistpartrecordpart' aria-hidden='true'></i>"; 
                 $counter++; 
             }
