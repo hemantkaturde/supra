@@ -33355,16 +33355,43 @@ public function deletesupplieritemattachment(){
 
 
      public function addchecklistpartitemdatavendorincoming($checklist_part_id,$og_buyer_id,$checklist_report_id){
+       
+     
+              
+
+
+
+
+
+     
         $process = 'Add CheckList Part Item Data Vendor Incoming';
         $processFunction = 'Admin/addjobwork';
         $this->logrecord($process,$processFunction);
-        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['checklist_part_buyer_data']= $this->admin_model->getchecklist_part_id($checklist_part_id);
         $data['checklist_part_id']= $checklist_part_id;
         $data['og_buyer_id']= $og_buyer_id;
         $data['checklist_report_id']= $checklist_report_id;
         $this->global['pageTitle'] = 'Add CheckList Part Item Data Vendor Incoming';
         $this->loadViews("masters/addchecklistpartitemdatavendorincoming", $this->global, $data, NULL);
     }
+
+
+    public function getinspectiondataforchecklistreport(){
+        $vendor_po_id=$this->input->post('vendor_po_id');
+        $part_numner_id_og=$this->input->post('part_numner_id_og');
+        if($vendor_po_id) {
+			$getinspectiondataforchecklistreport_data = $this->admin_model->getinspectiondataforchecklistreport_data($vendor_po_id,$part_numner_id_og);
+			if(count($getinspectiondataforchecklistreport_data) >= 1) {
+				echo json_encode($getinspectiondataforchecklistreport_data[0]);
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
 
 
 }

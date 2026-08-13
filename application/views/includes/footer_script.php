@@ -33661,11 +33661,6 @@ $('#export_excel').on('click', function() {
 					});
 					return false;
 		});
-
-
-
-
-
 		
 		$(document).on('click','.deletechecklistpartrecordpart',function(e){
 					var elemF = $(this);
@@ -33722,4 +33717,125 @@ $('#export_excel').on('click', function() {
 
 
 		</script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='CheckList Part Item Data Vendor Incoming' || $pageTitle=='Add CheckList Part Item Data Vendor Incoming'){ ?>
+	<script type="text/javascript">
+
+        $(document).ready(function() {
+			var checklistreportid = $('#checklistreportid').val();
+			var buyer_id = $('#buyer_id').val();
+				
+	    	var dt = $('#view_checklistreport_part').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "20%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "15%", "targets": 4 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Check List Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchchecklistpartrecord/"+checklistreportid+'/'+buyer_id,
+						type: "post",
+					},
+			});
+
+	    });
+		
+
+		$(document).on('change','#vendor_id',function(e){  
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				// $("#customers-list").html('');
+			
+				var vendor_name = $('#vendor_id').val();
+			
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+					type: "POST",
+					data : {'vendor_name' : vendor_name},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#vendor_po_id').html('<option value="">Select Vendor PO Number</option>');
+						}
+						else
+						{
+							// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+							$('#vendor_po_id').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#vendor_po_id').html();
+						//$(".loader_ajax").hide();
+					}
+				});
+				return false;
+	    });
+
+	
+		$(document).on('change','#vendor_po_id',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_id = $('#vendor_po_id').val();
+					var part_numner_id_og = $('#part_numner_id_og').val();
+	
+					$('#report_number').val('');
+					$('#inspection_report_date').val('');	
+
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getinspectiondataforchecklistreport",
+						type: "POST",
+						data : {'vendor_po_id' : vendor_po_id,'part_numner_id_og':part_numner_id_og},
+						success: function(data, textStatus, jqXHR)
+							{
+							    var get_buyerdata = jQuery.parseJSON( data );
+
+								$(".loader_ajax").hide();
+									if(data == "failure")
+											{
+											
+												$('#report_number').val('');
+												$('#inspection_report_date').val('');	
+											}
+											else
+											{
+												
+												$('#report_number').val(get_buyerdata.report_number);
+												$('#inspection_report_date').val(get_buyerdata.inspection_report_date);	
+											}
+									},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											    $('#report_number').val('');
+												$('#inspection_report_date').val('');	
+											
+										}
+									});
+			return false;
+							
+		});
+
+
+
+
+	</script>
 <?php } ?>

@@ -710,6 +710,8 @@ $route['checklistpartitemdatavendorincoming/(:any)/(:any)/(:any)'] = "admin/chec
 
 $route['addchecklistpartitemdatavendorincoming/(:any)/(:any)/(:any)'] = "admin/addchecklistpartitemdatavendorincoming/$1/$2/$3";
 
+$route['getinspectiondataforchecklistreport'] = "admin/getinspectiondataforchecklistreport";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

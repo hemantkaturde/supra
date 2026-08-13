@@ -5,7 +5,6 @@
 }
     </style>
 
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -31,55 +30,53 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addchecklistreportpartform" action="<?php echo base_url() ?>addchecklistreportpartform" method="post" role="form">
                             <div class="box-body">
-                                    <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
-                                    <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $buyer_id; ?>">
-                                    <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
-                                    <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $buyer_id; ?>">
+                                    <input type="hidden" class="form-control" id="checklist_part_id" name="checklist_part_id" value="<?php echo $checklist_part_id; ?>">
+                                    <input type="hidden" class="form-control" id="og_buyer_id" name="og_buyer_id" value="<?php echo $og_buyer_id; ?>">
+                                    <input type="hidden" class="form-control" id="checklist_report_id" name="checklist_report_id" value="<?php echo $checklist_report_id; ?>">
+                                    <input type="hidden" class="form-control" id="part_numner_id_og" name="part_numner_id_og" value="<?php echo $checklist_part_buyer_data[0]['part_number_id_finish_good']; ?>">
 
+
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="buyer_part_number">Part Number<span class="required">*</span></label>
+                                                    <input type="text" class="form-control" id="buyer_part_number" value="<?php echo $checklist_part_buyer_data[0]['part_number']; ?>" name="buyer_part_number">
+                                                <p class="error buyer_part_number_error"></p>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="buyer_po_number">Vendor Name <span class="required">*</span></label>
-                                                    <select class="form-control" name="buyer_po_number" id="buyer_po_number">
+                                            <label for="vendor_id">Vendor Name <span class="required">*</span></label>
+                                                    <select class="form-control" name="vendor_id" id="vendor_id">
                                                         <option st-id="" value="">Select Vendor Name</option>
-                                                        <?php foreach ($getbuyerponumbersbyid as $key => $value) {?>
-                                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['sales_order_number'].' - '.$value['buyer_po_number']; ?></option>
+                                                        <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option value="<?php echo $value['ven_id']; ?>"><?=$value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
-                                            <p class="error buyer_po_number_error"></p>
+                                            <p class="error vendor_id_error"></p>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="buyer_part_number">Vendor PO Number<span class="required">*</span></label>
-                                                    <select class="form-control" name="buyer_part_number" id="buyer_part_number">
+                                            <label for="vendor_po_id">Vendor PO Number<span class="required">*</span></label>
+                                                    <select class="form-control" name="vendor_po_id" id="vendor_po_id">
                                                         <option st-id="" value="">Select Vendor PO Number</option>
                                                     </select>
-                                            <p class="error buyer_part_number_error"></p>
+                                            <p class="error vendor_po_id_error"></p>
                                         </div>
                                     </div>
                                 </div>
 
-                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="buyer_part_number">Vendor Part Number<span class="required">*</span></label>
-                                                    <select class="form-control" name="buyer_part_number" id="buyer_part_number">
-                                                        <option st-id="" value="">Select Vendor Part Number</option>
-                                                    </select>
-                                            <p class="error buyer_part_number_error"></p>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-md-3">
                                          <div class="form-group">
-                                            <label for="buyer_part_number">Report Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker" id="buyer_part_po_qty"  name="buyer_part_po_qty">
-                                            
-                                            <p class="error buyer_part_po_qty_number_error"></p>
-                                            <p class="error buyer_part_number_error"></p>
+                                            <label for="report_number">Report Number<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="report_number"  name="report_number">
+                                            <p class="error report_number_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,9 +84,9 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="buyer_part_po_qty">Inspection Repot Date</label>
-                                            <input type="text" class="form-control datepicker" id="buyer_part_po_qty"  name="buyer_part_po_qty">
-                                            <p class="error buyer_part_po_qty_number_error"></p>
+                                            <label for="inspection_report_date">Inspection Repot Date</label>
+                                            <input type="text" class="form-control datepicker" id="inspection_report_date"  name="inspection_report_date">
+                                            <p class="error inspection_report_date_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -98,9 +95,9 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="dispatch_qty">Sampling Qty</label>
-                                            <input type="text" class="form-control" id="dispatch_qty"  name="dispatch_qty">
-                                            <p class="error dispatch_qty_number_error"></p>
+                                            <label for="sampling_qty">Sampling By</label>
+                                            <input type="text" class="form-control" id="sampling_qty"  name="sampling_qty">
+                                            <p class="error sampling_qty_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -108,9 +105,9 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="dispatch_qty">Team Name</label>
-                                            <input type="text" class="form-control" id="dispatch_qty"  name="dispatch_qty">
-                                            <p class="error dispatch_qty_number_error"></p>
+                                            <label for="team_name">Team Name</label>
+                                            <input type="text" class="form-control" id="team_name"  name="team_name">
+                                            <p class="error team_name_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -118,9 +115,9 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="dispatch_qty">Varified By</label>
-                                            <input type="text" class="form-control" id="dispatch_qty"  name="dispatch_qty">
-                                            <p class="error dispatch_qty_number_error"></p>
+                                            <label for="verified_by">Verified By</label>
+                                            <input type="text" class="form-control" id="verified_by"  name="verified_by">
+                                            <p class="error verified_by_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -129,9 +126,9 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="dispatch_qty">Approved  By</label>
-                                            <input type="text" class="form-control" id="dispatch_qty"  name="dispatch_qty">
-                                            <p class="error dispatch_qty_number_error"></p>
+                                            <label for="approved_by">Approved  By</label>
+                                            <input type="text" class="form-control" id="approved_by"  name="approved_by">
+                                            <p class="error approved_by_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +147,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <input type="submit" id="addchecklistreportpartformsubmit" class="btn btn-primary" value="Submit" />
-                            <input type="button" 
+                                <input type="button" 
                                 onclick="location.href='<?php echo base_url() . 'checklistpartitemdatavendorincoming/' . $checklist_part_id . '/' . $og_buyer_id. '/' . $checklist_report_id; ?>'" 
                                 class="btn btn-default" 
                                 value="Back" />

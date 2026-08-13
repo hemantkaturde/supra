@@ -28431,6 +28431,34 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    
+    public function getchecklist_part_id($checklist_part_id){
+
+        $this->db->select('part_number,'.TBL_FINISHED_GOODS.'.fin_id as part_number_id_finish_good');
+        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.status', 1);
+        //$this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.id', $checklist_part_id);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
+
+      public function getinspectiondataforchecklistreport_data($vendor_id,$part_numner_id_og){
+
+        $this->db->select(TBL_TDIR.'.id,'.TBL_TDIR.'.report_number,'.TBL_TDIR.'.inspection_report_date');
+        $this->db->where(TBL_TDIR.'.part_number', $part_numner_id_og);
+        $this->db->where(TBL_TDIR.'.vendor_po', $vendor_po_id);
+        $this->db->where(TBL_TDIR.'.status', 1);
+        $query_result = $this->db->get(TBL_TDIR)->result_array();
+        return $query_result;
+    }
+
+
 
 }
 
