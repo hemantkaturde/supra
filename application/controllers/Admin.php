@@ -33383,10 +33383,6 @@ public function deletesupplieritemattachment(){
         if($vendor_po_id) {
 			$getinspectiondataforchecklistreport_data = $this->admin_model->getinspectiondataforchecklistreport_data($vendor_po_id,$part_numner_id_og);
 		
-        
-            print_r($getinspectiondataforchecklistreport_data);
-            exit;
-        
             if(count($getinspectiondataforchecklistreport_data) >= 1) {
 				echo json_encode($getinspectiondataforchecklistreport_data[0]);
 			} else {
