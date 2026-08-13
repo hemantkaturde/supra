@@ -28453,7 +28453,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select(TBL_TDIR.'.id,'.TBL_TDIR.'.report_number,'.TBL_TDIR.'.inspection_report_date');
         $this->db->where(TBL_TDIR.'.part_number', $part_numner_id_og);
         $this->db->where(TBL_TDIR.'.vendor_po', $vendor_po_id);
-        $this->db->where(TBL_TDIR.'.status', 1);
         $query_result = $this->db->get(TBL_TDIR)->result_array();
         return $query_result;
     }
