@@ -28450,17 +28450,18 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
       public function getinspectiondataforchecklistreport_data($vendor_po_id,$part_numner_id_og){
 
-       print_r($vendor_po_id);
 
-        print_r('text');
+        $this->db->select(
+            TBL_TDIR . '.id,' .
+            TBL_TDIR . '.report_number,' .
+            TBL_TDIR . '.inspection_report_date'
+        );
 
-       print_r($part_numner_id_og);
-       
+        $this->db->where(TBL_TDIR . '.part_number', $part_numner_id_og);
+        $this->db->where(TBL_TDIR . '.vendor_po', $vendor_po_id);
 
-        $this->db->select(TBL_TDIR.'.id,'.TBL_TDIR.'.report_number,'.TBL_TDIR.'.inspection_report_date');
-        // $this->db->where(TBL_TDIR.'.part_number', $part_numner_id_og);
-        // $this->db->where(TBL_TDIR.'.vendor_po', $vendor_po_id);
         $query_result = $this->db->get(TBL_TDIR)->result_array();
+
         return $query_result;
     }
 
