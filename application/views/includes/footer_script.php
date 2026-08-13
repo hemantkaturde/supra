@@ -33830,12 +33830,57 @@ $('#export_excel').on('click', function() {
 											
 										}
 									});
-			return false;
-							
+			        return false;				
 		});
 
 
+		$(document).on('click','#addchecklistpartitemdatavendorincomingsubmit',function(e){
+					e.preventDefault();
 
+					var checklist_part_id = $('#checklist_part_id').val();
+					var og_buyer_id = $('#og_buyer_id').val();
+					var checklist_report_id = $('#checklist_report_id').val();
+
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addchecklistreportpartform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addchecklistpartitemdatavendorincoming/"+checklist_part_id+'/'+og_buyer_id+'/'+checklist_report_id,
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "CheckList Form Part Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'addchecklistpart/'?>"+checklistreportid+'/'+buyer_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
 
 	</script>
 <?php } ?>

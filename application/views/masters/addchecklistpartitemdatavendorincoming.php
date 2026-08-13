@@ -28,14 +28,12 @@
                             <h3 class="box-title">Add New Checklist Report Part Incoming Data</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addchecklistreportpartform" action="<?php echo base_url() ?>addchecklistreportpartform" method="post" role="form">
+                        <form role="form" id="addchecklistpartitemdatavendorincomingform" action="<?php echo base_url() ?>addchecklistreportpartform" method="post" role="form">
                             <div class="box-body">
                                     <input type="hidden" class="form-control" id="checklist_part_id" name="checklist_part_id" value="<?php echo $checklist_part_id; ?>">
                                     <input type="hidden" class="form-control" id="og_buyer_id" name="og_buyer_id" value="<?php echo $og_buyer_id; ?>">
                                     <input type="hidden" class="form-control" id="checklist_report_id" name="checklist_report_id" value="<?php echo $checklist_report_id; ?>">
                                     <input type="hidden" class="form-control" id="part_numner_id_og" name="part_numner_id_og" value="<?php echo $checklist_part_buyer_data[0]['part_number_id_finish_good']; ?>">
-
-
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -74,7 +72,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                          <div class="form-group">
-                                            <label for="report_number">Report Number<span class="required">*</span></label>
+                                            <label for="report_number">Report Number</label>
                                             <input type="text" class="form-control" id="report_number"  name="report_number">
                                             <p class="error report_number_error"></p>
                                         </div>
@@ -95,9 +93,9 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="sampling_qty">Sampling By</label>
-                                            <input type="text" class="form-control" id="sampling_qty"  name="sampling_qty">
-                                            <p class="error sampling_qty_error"></p>
+                                            <label for="sampling_by">Sampling By</label>
+                                            <input type="text" class="form-control" id="sampling_by"  name="sampling_by">
+                                            <p class="error sampling_by_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -146,12 +144,9 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <input type="submit" id="addchecklistreportpartformsubmit" class="btn btn-primary" value="Submit" />
-                                <input type="button" 
-                                onclick="location.href='<?php echo base_url() . 'checklistpartitemdatavendorincoming/' . $checklist_part_id . '/' . $og_buyer_id. '/' . $checklist_report_id; ?>'" 
-                                class="btn btn-default" 
-                                value="Back" />
-                                </div>
+                                <input type="submit" id="addchecklistpartitemdatavendorincomingsubmit" class="btn btn-primary" value="Submit" />
+                                <input type="button" onclick="location.href='<?php echo base_url() . 'checklistpartitemdatavendorincoming/' . $checklist_part_id . '/' . $og_buyer_id. '/' . $checklist_report_id; ?>'" class="btn btn-default" value="Back" />
+                            </div>
                         </form>
                     </div>
                 </div>

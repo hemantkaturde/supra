@@ -28448,7 +28448,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-      public function getinspectiondataforchecklistreport_data($vendor_id,$part_numner_id_og){
+      public function getinspectiondataforchecklistreport_data($vendor_po_id,$part_numner_id_og){
 
         $this->db->select(TBL_TDIR.'.id,'.TBL_TDIR.'.report_number,'.TBL_TDIR.'.inspection_report_date');
         $this->db->where(TBL_TDIR.'.part_number', $part_numner_id_og);
