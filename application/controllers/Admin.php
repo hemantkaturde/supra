@@ -33382,7 +33382,12 @@ public function deletesupplieritemattachment(){
         $part_numner_id_og=$this->input->post('part_numner_id_og');
         if($vendor_po_id) {
 			$getinspectiondataforchecklistreport_data = $this->admin_model->getinspectiondataforchecklistreport_data($vendor_po_id,$part_numner_id_og);
-			if(count($getinspectiondataforchecklistreport_data) >= 1) {
+		
+        
+            print_r($getinspectiondataforchecklistreport_data);
+            exit;
+        
+            if(count($getinspectiondataforchecklistreport_data) >= 1) {
 				echo json_encode($getinspectiondataforchecklistreport_data[0]);
 			} else {
 				echo 'failure';
