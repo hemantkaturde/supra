@@ -33712,7 +33712,7 @@ $('#export_excel').on('click', function() {
 						swal("Cancelled", "Checklist Report Record Part deletion cancelled ", "error");
 						}
 					});
-	        });
+	    });
 
 
 
@@ -33888,6 +33888,63 @@ $('#export_excel').on('click', function() {
 					});
 					return false;
 		});
+
+
+		$(document).on('click','.deletechecklistpartitemdatavendorincoming',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					var checklist_part_id = $('#checklist_part_id').val();
+					var og_buyer_id = $('#og_buyer_id').val();
+					var checklist_report_id = $('#checklist_report_id').val();
+
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Checklist Report Part Incoming Data",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deletechecklistpartitemdatavendorincoming",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Checklist Checklist Report Part Incoming Data Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>checklistpartitemdatavendorincoming/"+checklist_report_id+"/"+og_buyer_id+"/"+checklist_part_id;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Checklist Report Record Part deletion cancelled ", "error");
+						}
+					});
+	    });
+
+
 
 	</script>
 <?php } ?>

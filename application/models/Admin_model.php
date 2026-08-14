@@ -28485,28 +28485,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-      public function fetechchecklistitemincomingreportcount($params){
-        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART . '.id as checklist_part_id, ' .TBL_BUYER_MASTER . '.buyer_id as og_buyer_id');
-        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
-        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
-        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+    public function fetechchecklistitemincomingreportcount($params){
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og');
+        $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
+        // $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.buyer_part_number');
 
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_CHECKLIST_REPORT_PART.".dispatch_qty LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".inspection_report_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".sampling_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".team_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".verified_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".approved_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".remark LIKE '%".$params['search']['value']."%')");
         }
 
-        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
-        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.buyer_id', $buyer_id);
-
-        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.status', 1);
-        $this->db->order_by(TBL_CHECKLIST_REPORT_PART.'.id','DESC');
-        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+       // $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
+       // $this->db->where(TBL_CHECKLIST_REPORT_PART.'.buyer_id', $buyer_id);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -28521,14 +28523,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
         $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.buyer_part_number');
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_CHECKLIST_REPORT_PART.".dispatch_qty LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".inspection_report_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".sampling_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".team_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".verified_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".approved_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.".remark LIKE '%".$params['search']['value']."%')");
+        }
 
 
         //$this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
@@ -28558,14 +28565,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] = '';
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistpartitemdata/".$value['checklist_part_id']. "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
                 //$data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "checklistpartitemdatavendorincoming/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "/" . $value['checklist_report_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_id']."' class='fa fa-trash-o deletechecklistpartrecordpart' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_incoming_id']."' class='fa fa-trash-o deletechecklistpartitemdatavendorincoming' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
         return $data;
     }
 
+    public function deletechecklistpartitemdatavendorincoming($id){
 
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE)){
+            return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
 
 
 }

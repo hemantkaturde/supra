@@ -33472,5 +33472,21 @@ public function deletesupplieritemattachment(){
 
     }
 
+    public function deletechecklistpartitemdatavendorincoming(){
+      $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletechecklistpartitemdatavendorincoming(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Checklist Part Item Data Vendor Incoming';
+                        $processFunction = 'Admin/deletechecklistpartitemdatavendorincoming';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
 
 }

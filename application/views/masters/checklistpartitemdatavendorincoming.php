@@ -33,6 +33,11 @@
         </div>
 
 
+         <input type="hidden" class="form-control" id="checklist_part_id" name="checklist_part_id" value="<?php echo $checklist_part_id; ?>">
+         <input type="hidden" class="form-control" id="og_buyer_id" name="og_buyer_id" value="<?php echo $og_buyer_id; ?>">
+         <input type="hidden" class="form-control" id="checklist_report_id" name="checklist_report_id" value="<?php echo $checklist_report_id; ?>">
+
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
