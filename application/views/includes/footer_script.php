@@ -33727,20 +33727,27 @@ $('#export_excel').on('click', function() {
         $(document).ready(function() {
 			var checklistreportid = $('#checklistreportid').val();
 			var buyer_id = $('#buyer_id').val();
-				
-	    	var dt = $('#view_checklistreport_part').DataTable({
+			var checklistreportid = $('#checklistreportid').val();
+			var buyer_id = $('#buyer_id').val();	
+
+	    	var dt = $('#view_checklist_item_incoming_report_data').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "20%", "targets": 0 },
-						{ "width": "20%", "targets": 1 },
-						{ "width": "20%", "targets": 2 },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
 						{ "width": "10%", "targets": 3 },
-						{ "width": "15%", "targets": 4 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 },
+						{ "width": "10%", "targets": 9 },
 						
 					],
 					responsive: true,
 					"oLanguage": {
-						"sEmptyTable": "<i>No Check List Found.</i>",
+						"sEmptyTable": "<i>No Checklist Report Part Incoming Data Found.</i>",
 					}, 
 					"bSort" : false,
 					"bFilter":true,
@@ -33749,7 +33756,7 @@ $('#export_excel').on('click', function() {
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchchecklistpartrecord/"+checklistreportid+'/'+buyer_id,
+						url :"<?php echo base_url();?>admin/fetechchecklistitemincomingreportdata/",
 						type: "post",
 					},
 			});
@@ -33842,7 +33849,7 @@ $('#export_excel').on('click', function() {
 					var checklist_report_id = $('#checklist_report_id').val();
 
 					$(".loader_ajax").show();
-					var formData = new FormData($("#addchecklistreportpartform")[0]);
+					var formData = new FormData($("#addchecklistpartitemdatavendorincomingform")[0]);
 					$.ajax({
 						url : "<?php echo base_url();?>admin/addchecklistpartitemdatavendorincoming/"+checklist_part_id+'/'+og_buyer_id+'/'+checklist_report_id,
 						type: "POST",
@@ -33869,7 +33876,7 @@ $('#export_excel').on('click', function() {
 									icon: "success",
 									button: "Ok",
 									},function(){ 
-										window.location.href = "<?php echo base_url().'addchecklistpart/'?>"+checklistreportid+'/'+buyer_id;
+										window.location.href = "<?php echo base_url().'checklistpartitemdatavendorincoming/'?>"+checklist_part_id+'/'+og_buyer_id+'/'+checklist_report_id;
 								});		
 							}
 							

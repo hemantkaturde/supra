@@ -33354,26 +33354,79 @@ public function deletesupplieritemattachment(){
     }
 
 
-     public function addchecklistpartitemdatavendorincoming($checklist_part_id,$og_buyer_id,$checklist_report_id){
+    public function addchecklistpartitemdatavendorincoming($checklist_part_id,$og_buyer_id,$checklist_report_id){
        
      
-              
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $addchecklistpartitemdatavendorincoming_response = array();
+
+                $this->form_validation->set_rules('part_numner_id_og','Part Numner Id OG','trim|required');
+                $this->form_validation->set_rules('vendor_id','Vendor Id','trim|required');
+                $this->form_validation->set_rules('vendor_po_id','Vendor PO ID','trim');
+                $this->form_validation->set_rules('report_number','Report Number','trim');
+                $this->form_validation->set_rules('inspection_report_date','Inspection Report Date','trim');
+                $this->form_validation->set_rules('sampling_by','Sampling By','trim');
+                $this->form_validation->set_rules('team_name','Team Name','trim');
+                $this->form_validation->set_rules('verified_by','Verified By','trim');
+                $this->form_validation->set_rules('approved_by','Approved By','trim');
+                $this->form_validation->set_rules('remark','remark','trim');
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $addchecklistpartitemdatavendorincoming_response['status'] = 'failure';
+                    $addchecklistpartitemdatavendorincoming_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'buyer_invoice_no'=>strip_tags(form_error('buyer_invoice_no')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'remark'=>strip_tags(form_error('remark')));
+            
+                }else{
+
+                    $data = array(
+
+                        'checklist_report_id'   => trim($this->input->post('checklist_report_id')),
+                        'checklist_part_id'   => trim($this->input->post('checklist_part_id')),
+                        'og_buyer_id'   => trim($this->input->post('og_buyer_id')),
+                        'buyer_part_number'=>  trim($this->input->post('part_numner_id_og')),
+                        // 'part_numner_id_og'   => trim($this->input->post('part_numner_id_og')),
+                        'vendor_id'   => trim($this->input->post('vendor_id')),
+                        'vendor_po_id'     => trim($this->input->post('vendor_po_id')),
+                        'report_number'     => trim($this->input->post('report_number')),
+                        'inspection_report_date'     => trim($this->input->post('inspection_report_date')),
+                        'sampling_by'     => trim($this->input->post('sampling_by')),
+                        'team_name'     => trim($this->input->post('team_name')),
+                        'verified_by'     => trim($this->input->post('verified_by')),
+                        'approved_by'     => trim($this->input->post('approved_by')),
+                        'remark'  => trim($this->input->post('remark'))
+                    );
+
+                    // if(trim($this->input->post('checklist_id'))){
+                    //    $addchecklistreportid = trim($this->input->post('checklist_id'));
+                    // }else{
+                    //    $addchecklistreportid ='';
+                    // }
+
+                    $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistpartitemdatavendorincoming('',$data);
+                    if($addchecklistpartitemdatavendorincoming_submit){
+                        $addchecklistpartitemdatavendorincoming_response['status'] = 'success';
+                        $addchecklistpartitemdatavendorincoming_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'buyer_invoice_no'=>strip_tags(form_error('buyer_invoice_no')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
+
+            echo json_encode($addchecklistpartitemdatavendorincoming_response);
 
 
+        }else{
 
-
-
-     
-        $process = 'Add CheckList Part Item Data Vendor Incoming';
-        $processFunction = 'Admin/addjobwork';
-        $this->logrecord($process,$processFunction);
-        $data['vendorList']= $this->admin_model->fetchALLvendorList();
-        $data['checklist_part_buyer_data']= $this->admin_model->getchecklist_part_id($checklist_part_id);
-        $data['checklist_part_id']= $checklist_part_id;
-        $data['og_buyer_id']= $og_buyer_id;
-        $data['checklist_report_id']= $checklist_report_id;
-        $this->global['pageTitle'] = 'Add CheckList Part Item Data Vendor Incoming';
-        $this->loadViews("masters/addchecklistpartitemdatavendorincoming", $this->global, $data, NULL);
+            $process = 'Add CheckList Part Item Data Vendor Incoming';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['checklist_part_buyer_data']= $this->admin_model->getchecklist_part_id($checklist_part_id);
+            $data['checklist_part_id']= $checklist_part_id;
+            $data['og_buyer_id']= $og_buyer_id;
+            $data['checklist_report_id']= $checklist_report_id;
+            $this->global['pageTitle'] = 'Add CheckList Part Item Data Vendor Incoming';
+            $this->loadViews("masters/addchecklistpartitemdatavendorincoming", $this->global, $data, NULL);
+            
+        }
     }
 
 
@@ -33393,6 +33446,31 @@ public function deletesupplieritemattachment(){
 		}
     }
 
+    public function fetechchecklistitemincomingreportdata(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetechchecklistitemincomingreportcount($params); 
+        $queryRecords = $this->admin_model->fetechchecklistitemincomingreportdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
 
 
 }
