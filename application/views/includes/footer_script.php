@@ -33721,7 +33721,7 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='CheckList Part Item Data Vendor Incoming' || $pageTitle=='Add CheckList Part Item Data Vendor Incoming'){ ?>
+<?php if($pageTitle=='CheckList Part Item Data Vendor Incoming' || $pageTitle=='Add CheckList Part Item Data Vendor Incoming' || $pageTitle=='Edit CheckList Part Item Data Vendor Incoming'){ ?>
 	<script type="text/javascript">
 
         $(document).ready(function() {
@@ -33759,6 +33759,36 @@ $('#export_excel').on('click', function() {
 						url :"<?php echo base_url();?>admin/fetechchecklistitemincomingreportdata/",
 						type: "post",
 					},
+			});
+
+
+			var vendor_name = $('#vendor_id').val();
+		    var vendor_po_id = $('#vendor_po_id_og').val();
+
+			
+			$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+					type: "POST",
+					data : {'vendor_name' : vendor_name,'vendor_po_id':vendor_po_id},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#vendor_po_id').html('<option value="">Select Vendor PO Number</option>');
+						}
+						else
+						{
+							// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+							$('#vendor_po_id').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#vendor_po_id').html();
+						//$(".loader_ajax").hide();
+					}
 			});
 
 	    });

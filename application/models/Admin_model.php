@@ -28517,7 +28517,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetechchecklistitemincomingreportdata($params){
 
-        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og');
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg');
         $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
         // $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
@@ -28555,15 +28555,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 
                 $data[$counter]['po_number'] =  $value['po_number'];
                 $data[$counter]['vendor_name'] =  $value['vendor_name_og'];
+                $data[$counter]['part_number_fg'] =  $value['part_number_fg'];
                 $data[$counter]['report_number'] =  $value['report_number'];            
                 $data[$counter]['inspection_report_date'] =  $value['inspection_report_date'];
                 $data[$counter]['sampling_by'] =  $value['sampling_by'];
                 $data[$counter]['team_name'] =  $value['team_name'];
                 $data[$counter]['verified_by'] =  $value['verified_by'];
                 $data[$counter]['approved_by'] =  $value['approved_by'];
-                $data[$counter]['remark'] =  $value['remark'];
+                // $data[$counter]['remark'] =  $value['remark'];
                 $data[$counter]['action'] = '';
-                //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistpartitemdata/".$value['checklist_part_id']. "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistitemincomingreportdata/".$value['checklist_part_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
                 //$data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "checklistpartitemdatavendorincoming/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "/" . $value['checklist_report_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_incoming_id']."' class='fa fa-trash-o deletechecklistpartitemdatavendorincoming' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -28582,6 +28583,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
            return FALSE;
         }
 
+    }
+
+
+    public function geteditchecklistitemincomingreportdata($checklist_part_incoming_id){
+
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg,'.TBL_VENDOR.'.ven_id as vendor_id_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.remark as checklist_report_part_number');
+        $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
+        // $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.buyer_part_number');
+
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id',$checklist_part_incoming_id);
+        $this->db->order_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id','DESC');
+        
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
     }
 
 

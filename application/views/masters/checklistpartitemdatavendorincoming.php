@@ -51,7 +51,7 @@
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Vendor PO</th>
                                             <th>Vendor Name</th>
-                                            <th>Part</th>
+                                            <th>Part Number</th>
                                             <th>Report Number</th>        
                                             <th>Inspection Report Date</th>
                                             <th>Sampling By</th>

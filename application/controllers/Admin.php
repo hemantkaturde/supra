@@ -33397,13 +33397,13 @@ public function deletesupplieritemattachment(){
                         'remark'  => trim($this->input->post('remark'))
                     );
 
-                    // if(trim($this->input->post('checklist_id'))){
-                    //    $addchecklistreportid = trim($this->input->post('checklist_id'));
-                    // }else{
-                    //    $addchecklistreportid ='';
-                    // }
+                    if(trim($this->input->post('check_list_incoming_checklist_id'))){
+                       $check_list_incoming_checklist_id = trim($this->input->post('check_list_incoming_checklist_id'));
+                    }else{
+                       $check_list_incoming_checklist_id ='';
+                    }
 
-                    $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistpartitemdatavendorincoming('',$data);
+                    $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistpartitemdatavendorincoming($check_list_incoming_checklist_id,$data);
                     if($addchecklistpartitemdatavendorincoming_submit){
                         $addchecklistpartitemdatavendorincoming_response['status'] = 'success';
                         $addchecklistpartitemdatavendorincoming_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'buyer_invoice_no'=>strip_tags(form_error('buyer_invoice_no')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'remark'=>strip_tags(form_error('remark')));
@@ -33486,6 +33486,27 @@ public function deletesupplieritemattachment(){
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
+    }
+
+
+    public function editchecklistitemincomingreportdata($checklist_part_incoming_id){
+
+            $process = 'Edit CheckList Part Item Data Vendor Incoming';
+            $processFunction = 'Admin/editchecklistitemincomingreportdata';
+            $this->logrecord($process,$processFunction);
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['geteditchecklistitemincomingreportdata']= $this->admin_model->geteditchecklistitemincomingreportdata($checklist_part_incoming_id);
+            
+            // print_r('<pre>');
+            // print_r($data['geteditchecklistitemincomingreportdata']);
+            // print_r('</pre>');
+            // exit;
+            
+            // $data['checklist_part_id']= $checklist_part_id;
+            // $data['og_buyer_id']= $og_buyer_id;
+            // $data['checklist_report_id']= $checklist_report_id;
+            $this->global['pageTitle'] = 'Edit CheckList Part Item Data Vendor Incoming';
+            $this->loadViews("masters/editchecklistitemincomingreportdata", $this->global, $data, NULL);
     }
 
 
