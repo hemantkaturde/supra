@@ -33371,6 +33371,7 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('verified_by','Verified By','trim');
                 $this->form_validation->set_rules('approved_by','Approved By','trim');
                 $this->form_validation->set_rules('remark','remark','trim');
+                
 
                 if($this->form_validation->run() == FALSE)
                 {
@@ -33402,6 +33403,9 @@ public function deletesupplieritemattachment(){
                     }else{
                        $check_list_incoming_checklist_id ='';
                     }
+
+                    print_r($check_list_incoming_checklist_id);
+                    exit;
 
                     $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistpartitemdatavendorincoming($check_list_incoming_checklist_id,$data);
                     if($addchecklistpartitemdatavendorincoming_submit){

@@ -33878,6 +33878,10 @@ $('#export_excel').on('click', function() {
 					var og_buyer_id = $('#og_buyer_id').val();
 					var checklist_report_id = $('#checklist_report_id').val();
 
+					// alert(checklist_part_id);
+					// alert(og_buyer_id);
+					// alert(checklist_report_id);
+
 					$(".loader_ajax").show();
 					var formData = new FormData($("#addchecklistpartitemdatavendorincomingform")[0]);
 					$.ajax({
