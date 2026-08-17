@@ -715,6 +715,9 @@ $route['getinspectiondataforchecklistreport'] = "admin/getinspectiondataforcheck
 $route['editchecklistitemincomingreportdata/(:any)'] = "admin/editchecklistitemincomingreportdata/$1";
 
 
+$route['addchecklistformincominglot/(:any)'] = "admin/addchecklistformincominglot/$1";
+
+
 
 
 

@@ -33515,4 +33515,15 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function addchecklistformincominglot($checklist_part_incoming_id){
+        $process = 'Add CheckList Add Incoming Lot Number';
+        $processFunction = 'Admin/addjobwork';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add CheckList Add Incoming Lot Number';
+        $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
+    }
+
+
+
+
 }
