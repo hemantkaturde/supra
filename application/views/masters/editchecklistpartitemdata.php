@@ -47,7 +47,7 @@
                                         <div class="form-group">
                                             <label for="buyer_po_number">Buyer PO Number <span class="required">*</span></label>
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number">
-                                                        <option st-id="" value="">Select Buyer Name</option>
+                                                        <option st-id="" value="">Select Buyer PO Number</option>
                                                         <?php foreach ($getbuyerponumbersbyid as $key => $value) {?>
                                                         <option value="<?php echo $value['id']; ?>" <?php if($getchecklistpartitemdata[0]['buyer_po_id']==$value['id']){ echo 'selected'; }  ?>><?php echo $value['sales_order_number'].' - '.$value['buyer_po_number']; ?></option>
                                                         <?php } ?>
