@@ -150,8 +150,8 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <input type="submit" id="addchecklistpartitemdatavendorincomingsubmit" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href='<?php echo base_url() . 'checklistpartitemdatavendorincoming/' . $checklist_part_id . '/' . $og_buyer_id. '/' . $checklist_report_id; ?>'" class="btn btn-default" value="Back" />
-                            </div>
+                                <input type="button" onclick="location.href='<?php echo base_url() . 'checklistpartitemdatavendorincoming/' . $geteditchecklistitemincomingreportdata[0]['checklist_part_id'] . '/' . $geteditchecklistitemincomingreportdata[0]['og_buyer_id'] . '/' . $geteditchecklistitemincomingreportdata[0]['checklist_report_id']; ?>'" class="btn btn-default" value="Back" />
+                                </div>
                         </form>
                     </div>
                 </div>
