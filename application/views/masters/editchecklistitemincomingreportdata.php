@@ -78,7 +78,7 @@
                                     <div class="col-md-3">
                                          <div class="form-group">
                                             <label for="report_number">Report Number</label>
-                                            <input type="text" class="form-control" id="report_number" value="<?php echo $geteditchecklistitemincomingreportdata[0]['vendor_id_number'];?>" name="report_number">
+                                            <input type="text" class="form-control" id="report_number" value="<?php echo $geteditchecklistitemincomingreportdata[0]['report_number'];?>" name="report_number">
                                             <p class="error report_number_error"></p>
                                         </div>
                                     </div>

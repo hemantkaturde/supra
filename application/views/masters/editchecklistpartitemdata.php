@@ -37,8 +37,6 @@
                                     <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $getchecklistpartitemdata[0]['checklist_report_id']; ?>">
                                     <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $getchecklistpartitemdata[0]['buyer_id']; ?>">
                                     <input type="hidden" class="form-control" id="checklist_item_id" name="checklist_item_id" value="<?php echo $getchecklistpartitemdata[0]['checklist_part_id']; ?>">
-
-
                                     <input type="hidden" class="form-control" id="part_number_id" name="part_number_id" value="<?php echo $getchecklistpartitemdata[0]['part_number_id']; ?>">
 
 
