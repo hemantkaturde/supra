@@ -87,7 +87,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="inspection_report_date">Inspection Repot Date</label>
+                                            <label for="inspection_report_date">Inspection Report Date</label>
                                             <input type="text" class="form-control datepicker" id="inspection_report_date" value="<?php echo $geteditchecklistitemincomingreportdata[0]['inspection_report_date'];?>" name="inspection_report_date">
                                             <p class="error inspection_report_date_error"></p>
                                         </div>
