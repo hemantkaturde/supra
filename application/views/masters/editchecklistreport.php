@@ -59,11 +59,21 @@
                                     </div>
                                 </div>
 
+                                <?php  
+                                
+                                 if($getpreviouschecklistreportrecord[0]['invoice_date']=='0000-00-00'){
+                                   $invoice_date_buyer_invoice_date = '';
+                                 }else{
+                                    $invoice_date_buyer_invoice_date = $getpreviouschecklistreportrecord[0]['invoice_date'];
+                                 }
+                                
+                                ?>
+
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="vendor_po">Buyer Invoice Date</label>
-                                            <input type="text" class="form-control datepicker" id="buyer_invoice_date" value="<?php echo $getpreviouschecklistreportrecord[0]['invoice_date']; ?>"  name="buyer_invoice_date">
+                                            <input type="text" class="form-control datepicker" id="buyer_invoice_date" value="<?php echo $invoice_date_buyer_invoice_date; ?>"  name="buyer_invoice_date">
                                             </select> 
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
