@@ -28588,7 +28588,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function geteditchecklistitemincomingreportdata($checklist_part_incoming_id){
 
-        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg,'.TBL_VENDOR.'.ven_id as vendor_id_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.remark as checklist_report_part_number');
+        $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg,'.TBL_VENDOR.'.ven_id as vendor_id_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.remark as checklist_report_part_number,'.TBL_FINISHED_GOODS.'.fin_id as part_number_id_finish_good');
         $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
         // $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');

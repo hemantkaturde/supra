@@ -33358,6 +33358,8 @@ public function deletesupplieritemattachment(){
        
      
         $post_submit = $this->input->post();
+
+    
         if($post_submit){
             $addchecklistpartitemdatavendorincoming_response = array();
 
@@ -33404,8 +33406,7 @@ public function deletesupplieritemattachment(){
                        $check_list_incoming_checklist_id ='';
                     }
 
-                    print_r($check_list_incoming_checklist_id);
-                    exit;
+            
 
                     $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistpartitemdatavendorincoming($check_list_incoming_checklist_id,$data);
                     if($addchecklistpartitemdatavendorincoming_submit){

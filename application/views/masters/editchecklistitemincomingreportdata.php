@@ -35,8 +35,8 @@
                                     <input type="hidden" class="form-control" id="checklist_part_id" name="checklist_part_id" value="<?php echo $geteditchecklistitemincomingreportdata[0]['checklist_part_id']; ?>">
                                     <input type="hidden" class="form-control" id="og_buyer_id" name="og_buyer_id" value="<?php echo $geteditchecklistitemincomingreportdata[0]['og_buyer_id']; ?>">
                                     <input type="hidden" class="form-control" id="checklist_report_id" name="checklist_report_id" value="<?php echo $geteditchecklistitemincomingreportdata[0]['checklist_report_id']; ?>">
-                                    <input type="hidden" class="form-control" id="part_numner_id_og" name="part_numner_id_og" value="<?php echo $checklist_part_buyer_data[0]['part_number_id_finish_good']; ?>">
-                                    <input type="hidden" class="form-control" id="check_list_incoming_checklist_id" name="check_list_incoming_checklist_id" value="<?php echo $checklist_part_buyer_data[0]['checklist_part_incoming_id']; ?>">
+                                    <input type="hidden" class="form-control" id="part_numner_id_og" name="part_numner_id_og" value="<?php echo $geteditchecklistitemincomingreportdata[0]['part_number_id_finish_good']; ?>">
+                                    <input type="hidden" class="form-control" id="check_list_incoming_checklist_id" name="check_list_incoming_checklist_id" value="<?php echo $geteditchecklistitemincomingreportdata[0]['checklist_part_incoming_id']; ?>">
 
 
 
