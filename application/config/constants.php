@@ -202,25 +202,18 @@ define('TBL_REWORK_RECORD','tbl_rework_record');
 define('TBL_REWORK_RECORD_REASON_DATA','tbl_rework_record_reason_data');
 define('TBL_BALANCE_STOCK_DATA','tbl_balance_stock');
 define('TBL_BALANCE_STOCK_DETAILS','tbl_balance_stock_details');
-
-
 define('TBL_INSTRUMENT_MASTER_DETAILS','tbl_instrument_master_details');
 define('TBL_SUPPLIER_ITEM_ATTACHMENT','tbl_supplier_item_attachment');
 define('TBL_VENDOR_ITEM_ATTACHMENT','tbl_vendor_item_attachment');
 define('TBL_CLEANING_FORM','tbl_cleaning_form');
 define('TBL_CHECKLIST_REPORT','tbl_checklist_report');
 define('TBL_CHECKLIST_REPORT_PART','tbl_checklist_report_part');
-
-
-
 define('TBL_STOREFORM_TICKETS','tbl_storeform_tickets');
 define('TBL_INSTRUMENT_MASTER','tbl_instrument_master');
 define('TBL_STOREFORM_QTY_ASSIGN','tbl_storeform_qty_assign');
 define('TBL_FORGING_SCARP_WORKING','tbl_forging_scarp_working');
 define('TBL_FORGING_SCARP_WORKING_REPORT_DATA','tbl_forging_scarp_working_report_data');
-
 define('TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE','tbl_checklist_report_part_inspection_date');
-
 
 
 
