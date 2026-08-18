@@ -34042,11 +34042,33 @@ $('#export_excel').on('click', function() {
 			});
 			return false;
 		});
+		$(document).on('click','#backModal',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			console.log("LOT NO:"+elemF.attr('data-id'));
+			$.ajax({
+				url : "<?php echo base_url();?>getlotdetailsforeditincomingdata",
+				type: "POST",
+				data : 'id='+elemF.attr('data-id'),
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						console.log(fetchResponse);
+						$('#received_date').val(fetchResponse.received_date);  
+						$('#received_qty').val(fetchResponse.invoice_qty);  
+
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
 
 		$(document).on('click','#submitLotNumber',function(e){
 					e.preventDefault();
 					var checklist_incoming_part_id = $('#checklist_incoming_part_id').val();
-
 					$(".loader_ajax").show();
 					var formData = new FormData($("#addincominglotdataform")[0]);
 					$.ajax({

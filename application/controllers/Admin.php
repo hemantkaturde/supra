@@ -33621,5 +33621,15 @@ public function deletesupplieritemattachment(){
             echo(json_encode(array('status'=>'failed'))); 
         }
     }
+    public function getlotdetailsforeditincomingdata(){
+        $id = trim($this->input->post('id'));
+        $getincominglotdataedit = $this->admin_model->getsingleincominglot($id);
+        if($getincominglotdataedit){
+            $content = $getincominglotdataedit[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
 
 }
