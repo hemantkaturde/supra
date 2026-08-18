@@ -34033,6 +34033,9 @@ $('#export_excel').on('click', function() {
 				{
 					    var fetchResponse = $.parseJSON(data);
 						console.log(fetchResponse);
+						$('#received_date').val(fetchResponse.received_date);  
+						$('#received_qty').val(fetchResponse.invoice_qty);  
+
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
