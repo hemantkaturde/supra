@@ -33520,6 +33520,8 @@ public function deletesupplieritemattachment(){
         $processFunction = 'Admin/addjobwork';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add CheckList Add Incoming Lot Number';
+        
+        
         $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
     }
 

@@ -217,6 +217,7 @@ define('TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE','tbl_checklist_report_part_in
 
 
 
+
 define('SMTP_HOST','mail.supraexports.in');
 define('SMTP_USER','supraportal@supraexports.in');
 define('SMTP_PASS','tR(OyPzdk3h[');

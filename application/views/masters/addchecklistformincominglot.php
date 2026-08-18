@@ -23,14 +23,10 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addchecklistpartitemdatavendorincoming/<?php echo $checklist_part_id; ?>/<?php echo $og_buyer_id; ?>/<?php echo $checklist_report_id; ?>">
-                        Add Item
-                    </a>                        
+                   <a class="btn btn-primary" data-toggle="modal" data-target="#backModal"> Add Lot Number </a>
                 </div>
             </div>
         </div>
-
-        <input type="hidden" class="form-control" id="checklist_part_id" name="checklist_part_id" value="<?php echo $checklist_part_id; ?>">
         
         <div class="row">
             <div class="col-xs-12">
@@ -61,10 +57,57 @@
                     </div>
                     <!-- /.box -->
                 </div>
-            </div>
+        </div>
     </section>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="backModal" tabindex="-1" role="dialog" aria-labelledby="backModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="backModalLabel">Add New Lot Number</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- Vendor Name -->
+                <div class="form-group">
+                    <label for="vendor_id">Vendor Name <span class="required">*</span></label>
+                    <select class="form-control" name="vendor_id" id="vendor_id">
+                        <option value="">Select Vendor Name</option>
+                        <?php foreach ($vendorList as $key => $value) { ?>
+                            <option value="<?php echo $value['ven_id']; ?>">
+                                <?php echo $value['vendor_name']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                    <p class="error vendor_id_error"></p>
+                </div>
+
+                <!-- Received Date -->
+                <div class="form-group">
+                    <label for="received_date">Received Date <span class="required">*</span></label>
+                    <input type="date" class="form-control" name="received_date" id="received_date">
+                    <p class="error received_date_error"></p>
+                </div>
+
+                <!-- Received Quantity -->
+                <div class="form-group">
+                    <label for="received_qty"> Received Qty <span class="required">*</span></label>
+                    <input type="number" class="form-control" name="received_qty" id="received_qty" placeholder="Enter Received Quantity">
+                    <p class="error received_qty_error"></p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="submitLotNumber">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
