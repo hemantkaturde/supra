@@ -34045,10 +34045,10 @@ $('#export_excel').on('click', function() {
 			return false;
 		});
 
-		$(document).on('click','#editlotdetailsforchecklistincomingformsubmit',function(e){
+		$(document).on('click','#submitLotNumber',function(e){
 					e.preventDefault();
 					var checklist_incoming_part_id = $('#checklist_incoming_part_id').val();
-					
+
 					$(".loader_ajax").show();
 					var formData = new FormData($("#addincominglotdataform")[0]);
 					$.ajax({
@@ -34077,7 +34077,7 @@ $('#export_excel').on('click', function() {
 									icon: "success",
 									button: "Ok",
 									},function(){ 
-										window.location.href = "<?php echo base_url().'addchecklistpart/'?>"+checklistreportid+'/'+buyer_id;
+										window.location.href = "<?php echo base_url().'addchecklistformincominglot/'?>"+checklist_incoming_part_id;
 								});		
 							}
 							
