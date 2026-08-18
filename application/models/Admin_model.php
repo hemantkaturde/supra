@@ -28647,7 +28647,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
     public function fetchchecklistincominglotnocount($params,$id){
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM,TBL_INCOMING_DETAILS_ITEM . '.id = ' . TBL_CHECKLIST_INCOMING_LOT_DATA . '.lot_number');
 
         if($params['search']['value'] != "") 
@@ -28666,7 +28666,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchchecklistincominglotnodata($params,$id){
 
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM,TBL_INCOMING_DETAILS_ITEM . '.id = ' . TBL_CHECKLIST_INCOMING_LOT_DATA . '.lot_number');
 
         if($params['search']['value'] != "") 
