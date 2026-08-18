@@ -33521,6 +33521,11 @@ public function deletesupplieritemattachment(){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add CheckList Add Incoming Lot Number';
         
+        $data['geteditchecklistitemincomingreportdata']= $this->admin_model->geteditchecklistitemincomingreportdata($checklist_part_incoming_id);
+        $data['getIncomindlotforchecklistlastreport'] =  $this->admin_model->getIncomindlotforchecklistlastreport($data['geteditchecklistitemincomingreportdata'][0]['vendor_po_id'],$data['geteditchecklistitemincomingreportdata'][0]['buyer_part_number']);
+        
+
+
         
         $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
     }

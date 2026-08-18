@@ -74,30 +74,31 @@
             <div class="modal-body">
                 <!-- Vendor Name -->
                 <div class="form-group">
-                    <label for="vendor_id">Vendor Name <span class="required">*</span></label>
+                    <label for="vendor_id">Lot Number <span class="required">*</span></label>
                     <select class="form-control" name="vendor_id" id="vendor_id">
                         <option value="">Select Vendor Name</option>
-                        <?php foreach ($vendorList as $key => $value) { ?>
-                            <option value="<?php echo $value['ven_id']; ?>">
-                                <?php echo $value['vendor_name']; ?>
+                        <?php foreach ($getIncomindlotforchecklistlastreport as $key => $value) { ?>
+                            <option value="<?php echo $value['id']; ?>">
+                                <?php echo $value['lot_no']; ?>
                             </option>
                         <?php } ?>
                     </select>
-                    <p class="error vendor_id_error"></p>
+                    <span class="text-danger vendor_id_error"></span>
                 </div>
 
                 <!-- Received Date -->
                 <div class="form-group">
-                    <label for="received_date">Received Date <span class="required">*</span></label>
-                    <input type="date" class="form-control" name="received_date" id="received_date">
-                    <p class="error received_date_error"></p>
+                    <label for="received_date">Received Date <span class="required">*</span>
+                    </label>
+                    <input type="date" class="form-control" name="received_date" id="received_date" value="<?php echo date('Y-m-d'); ?>">
+                    <span class="text-danger received_date_error"></span>
                 </div>
 
                 <!-- Received Quantity -->
                 <div class="form-group">
                     <label for="received_qty"> Received Qty <span class="required">*</span></label>
-                    <input type="number" class="form-control" name="received_qty" id="received_qty" placeholder="Enter Received Quantity">
-                    <p class="error received_qty_error"></p>
+                    <input type="number"  class="form-control" name="received_qty" id="received_qty" placeholder="Enter Received Quantity">
+                    <span class="text-danger received_qty_error"></span>
                 </div>
             </div>
 
