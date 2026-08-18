@@ -33525,7 +33525,6 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('received_date','Received Date','trim|required');
                 $this->form_validation->set_rules('received_qty','Received Qty','trim|required');
                 
-
                 if($this->form_validation->run() == FALSE)
                 {
                     $addchecklistpartitemdatavendorincoming_response['status'] = 'failure';
@@ -33549,6 +33548,9 @@ public function deletesupplieritemattachment(){
                     $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistforincominglotdata($checklist_incoming_part_id,$data);
                     if($addchecklistpartitemdatavendorincoming_submit){
                         $addchecklistpartitemdatavendorincoming_response['status'] = 'success';
+                        $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
+                    }else{
+                        $addchecklistpartitemdatavendorincoming_response['status'] = 'error';
                         $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
                     }
                 }

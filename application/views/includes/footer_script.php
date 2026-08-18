@@ -34060,6 +34060,7 @@ $('#export_excel').on('click', function() {
 						processData: false,
 						success: function(data, textStatus, jqXHR)
 						{
+							console.log(data);
 							var fetchResponse = $.parseJSON(data);
 							if(fetchResponse.status == "failure")
 							{
@@ -34073,7 +34074,7 @@ $('#export_excel').on('click', function() {
 							{
 								swal({
 									title: "Success",
-									text: "CheckList Form Part Successfully Added!",
+									text: "Incoming Lot Form Part Successfully Added!",
 									icon: "success",
 									button: "Ok",
 									},function(){ 
