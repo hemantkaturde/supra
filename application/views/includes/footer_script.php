@@ -34091,7 +34091,32 @@ $('#export_excel').on('click', function() {
 					return false;
 		});
 
-
+		$(document).ready(function() {
+			var checklist_incoming_part_id = $('#checklist_incoming_part_id').val();	
+	    	var dt = $('#view_checklist_incoming_lotno_data').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 }
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Incoming Lot Number Data Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetechchecklistincominglotnodata/"+checklist_incoming_part_id,
+						type: "post",
+					},
+			   });
+	    });
 
 
 		

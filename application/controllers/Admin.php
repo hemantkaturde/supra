@@ -33549,9 +33549,6 @@ public function deletesupplieritemattachment(){
                     if($addchecklistpartitemdatavendorincoming_submit){
                         $addchecklistpartitemdatavendorincoming_response['status'] = 'success';
                         $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
-                    }else{
-                        $addchecklistpartitemdatavendorincoming_response['status'] = 'error';
-                        $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
                     }
                 }
 
@@ -33586,5 +33583,28 @@ public function deletesupplieritemattachment(){
         }
     }
 
+    public function fetechchecklistincominglotnodata($id){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchchecklistincominglotnocount($params,$id); 
+        $queryRecords = $this->admin_model->fetchchecklistincominglotnodata($params,$id); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
 
 }

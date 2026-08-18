@@ -36,7 +36,7 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_checklist_item_incoming_report_data">
+                                    id="view_checklist_incoming_lotno_data">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Lot No</th>
@@ -119,6 +119,7 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script>
+    
 $(function() {
     $(".datepicker").datepicker({
         // minDate: 0,
