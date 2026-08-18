@@ -28647,7 +28647,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
     public function fetchchecklistincominglotnocount($params,$id){
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM,TBL_INCOMING_DETAILS_ITEM . '.id = ' . TBL_CHECKLIST_INCOMING_LOT_DATA . '.lot_number');
 
         if($params['search']['value'] != "") 
@@ -28666,7 +28666,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchchecklistincominglotnodata($params,$id){
 
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.id as basetbl_id');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM,TBL_INCOMING_DETAILS_ITEM . '.id = ' . TBL_CHECKLIST_INCOMING_LOT_DATA . '.lot_number');
 
         if($params['search']['value'] != "") 
@@ -28691,7 +28691,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] = '';
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistpartitemdata/".$value['checklist_part_id']. "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
                 // $data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "checklistpartitemdatavendorincoming/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "/" . $value['checklist_report_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
-                // $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['checklist_part_id']."' class='fa fa-trash-o deletechecklistpartrecordpart' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['basetbl_id']."' class='fa fa-trash-o deletechecklistincominglotno' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
