@@ -74,23 +74,23 @@
             <div class="modal-body">
                 <!-- Vendor Name -->
                 <div class="form-group">
-                    <label for="vendor_id">Lot Number <span class="required">*</span></label>
-                    <select class="form-control" name="vendor_id" id="vendor_id">
+                    <label for="lot_no">Lot Number <span class="required">*</span></label>
+                    <select class="form-control" name="lot_no" id="lot_no">
                         <option value="">Select Vendor Name</option>
                         <?php foreach ($getIncomindlotforchecklistlastreport as $key => $value) { ?>
-                            <option value="<?php echo $value['id']; ?>">
+                            <option value="<?php echo $value['incoming_details_item_id']; ?>">
                                 <?php echo $value['lot_no']; ?>
                             </option>
                         <?php } ?>
                     </select>
-                    <span class="text-danger vendor_id_error"></span>
+                    <span class="text-danger lot_no_error"></span>
                 </div>
 
                 <!-- Received Date -->
                 <div class="form-group">
                     <label for="received_date">Received Date <span class="required">*</span>
                     </label>
-                    <input type="date" class="form-control" name="received_date" id="received_date" value="<?php echo date('Y-m-d'); ?>">
+                    <input type="text" class="form-control" name="received_date" id="received_date">
                     <span class="text-danger received_date_error"></span>
                 </div>
 

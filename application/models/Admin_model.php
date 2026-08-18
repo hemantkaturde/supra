@@ -28616,7 +28616,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+    public function getlotdetailsforchecklistincomingdata($id){
 
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.received_date,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id',$id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
 
 }
 

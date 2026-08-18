@@ -33714,8 +33714,6 @@ $('#export_excel').on('click', function() {
 					});
 	    });
 
-
-
 		</script>
 <?php } ?>
 
@@ -33981,4 +33979,72 @@ $('#export_excel').on('click', function() {
 
 
 	</script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Add CheckList Add Incoming Lot Number'){ ?>
+<script type="text/javascript">
+
+        $(document).ready(function() {
+			var buyer_id = $('#buyer_id').val();	
+	    	var dt = $('#view_checklist_item_incoming_report_data').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 },
+						{ "width": "10%", "targets": 9 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Checklist Report Part Incoming Data Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetechchecklistitemincomingreportdata/",
+						type: "post",
+					},
+			   });
+	    });
+
+		$(document).on('change','#lot_no',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var lot_no = $('#lot_no').val();
+			console.log("LOT NO:"+lot_no);
+			$.ajax({
+				url : "<?php echo base_url();?>getlotdetailsforchecklistincomingdata",
+				type: "POST",
+				data : 'id='+lot_no,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						console.log(fetchResponse);
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
+
+
+
+		
+</script>
 <?php } ?>

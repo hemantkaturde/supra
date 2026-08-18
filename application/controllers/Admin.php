@@ -33524,13 +33524,21 @@ public function deletesupplieritemattachment(){
         $data['geteditchecklistitemincomingreportdata']= $this->admin_model->geteditchecklistitemincomingreportdata($checklist_part_incoming_id);
         $data['getIncomindlotforchecklistlastreport'] =  $this->admin_model->getIncomindlotforchecklistlastreport($data['geteditchecklistitemincomingreportdata'][0]['vendor_po_id'],$data['geteditchecklistitemincomingreportdata'][0]['buyer_part_number']);
         
-
-
-        
         $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
     }
 
-
+    public function getlotdetailsforchecklistincomingdata(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getlotdetailsforchecklistincomingedit = $this->admin_model->getlotdetailsforchecklistincomingdata(trim($this->input->post('id')));
+            if($getlotdetailsforchecklistincomingedit){
+                $content = $getlotdetailsforchecklistincomingedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
 
 
 }
