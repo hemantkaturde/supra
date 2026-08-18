@@ -34045,6 +34045,51 @@ $('#export_excel').on('click', function() {
 			return false;
 		});
 
+		$(document).on('click','#editlotdetailsforchecklistincomingformsubmit',function(e){
+					e.preventDefault();
+					var checklist_incoming_part_id = $('#checklist_incoming_part_id').val();
+					
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addincominglotdataform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addchecklistformincominglot/"+checklist_incoming_part_id,
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "CheckList Form Part Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'addchecklistpart/'?>"+checklistreportid+'/'+buyer_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
+
 
 
 

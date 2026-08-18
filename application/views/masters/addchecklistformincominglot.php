@@ -70,9 +70,10 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title" id="backModalLabel">Add New Lot Number</h4>
             </div>
-
+            <form id="addincominglotdataform">
             <div class="modal-body">
                 <!-- Vendor Name -->
+                <input type="hidden" name="checklist_incoming_part_id" id="checklist_incoming_part_id">
                 <div class="form-group">
                     <label for="lot_no">Lot Number <span class="required">*</span></label>
                     <select class="form-control" name="lot_no" id="lot_no">
@@ -106,6 +107,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="submitLotNumber">Submit</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

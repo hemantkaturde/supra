@@ -33516,15 +33516,59 @@ public function deletesupplieritemattachment(){
 
 
     public function addchecklistformincominglot($checklist_part_incoming_id){
-        $process = 'Add CheckList Add Incoming Lot Number';
-        $processFunction = 'Admin/addjobwork';
-        $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Add CheckList Add Incoming Lot Number';
         
-        $data['geteditchecklistitemincomingreportdata']= $this->admin_model->geteditchecklistitemincomingreportdata($checklist_part_incoming_id);
-        $data['getIncomindlotforchecklistlastreport'] =  $this->admin_model->getIncomindlotforchecklistlastreport($data['geteditchecklistitemincomingreportdata'][0]['vendor_po_id'],$data['geteditchecklistitemincomingreportdata'][0]['buyer_part_number']);
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $addchecklistpartitemdatavendorincoming_response = array();
+
+                $this->form_validation->set_rules('lot_no','Lot Numner','trim|required');
+                $this->form_validation->set_rules('received_date','Received Date','trim|required');
+                $this->form_validation->set_rules('received_qty','Received Qty','trim|required');
+                
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $addchecklistpartitemdatavendorincoming_response['status'] = 'failure';
+                    $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
+                }else{
+                    $data = array(
+
+                        'lot_number'   => trim($this->input->post('lot_no')),
+                        'received_date'   => trim($this->input->post('received_date')),
+                        'received_qty'   => trim($this->input->post('received_qty')),
+                        'checklist_report_part_id'=>  trim($this->input->post('checklist_incoming_part_id')),
+                        'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s')
+                    );
+
+                    // if(trim($this->input->post('check_list_incoming_checklist_id'))){
+                    //    $check_list_incoming_checklist_id = trim($this->input->post('check_list_incoming_checklist_id'));
+                    // }else{
+                       $checklist_incoming_part_id ='';
+                    // }
+
+                    $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistforincominglotdata($checklist_incoming_part_id,$data);
+                    if($addchecklistpartitemdatavendorincoming_submit){
+                        $addchecklistpartitemdatavendorincoming_response['status'] = 'success';
+                        $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
+                    }
+                }
+
+            echo json_encode($addchecklistpartitemdatavendorincoming_response);
+
+
+        }else{
+            $process = 'Add CheckList Add Incoming Lot Number';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add CheckList Add Incoming Lot Number';
+            
+            $data['geteditchecklistitemincomingreportdata']= $this->admin_model->geteditchecklistitemincomingreportdata($checklist_part_incoming_id);
+            $data['getIncomindlotforchecklistlastreport'] =  $this->admin_model->getIncomindlotforchecklistlastreport($data['geteditchecklistitemincomingreportdata'][0]['vendor_po_id'],$data['geteditchecklistitemincomingreportdata'][0]['buyer_part_number']);
+            
+            $data['checklist_part_incoming_id'] = $checklist_part_incoming_id;
+            $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
+        }
         
-        $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
     }
 
     public function getlotdetailsforchecklistincomingdata(){

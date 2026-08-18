@@ -28628,6 +28628,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function addchecklistforincominglotdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_CHECKLIST_INCOMING_LOT_DATA, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_CHECKLIST_INCOMING_LOT_DATA, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
 }
 
 ?>
