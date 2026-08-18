@@ -28639,7 +28639,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
         } else {
             if($this->db->insert(TBL_CHECKLIST_INCOMING_LOT_DATA, $data)) {
-                return $this->db->insert_id();
+                return TRUE;
             } else {
                 return FALSE;
             }
