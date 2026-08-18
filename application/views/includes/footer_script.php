@@ -34096,8 +34096,8 @@ $('#export_excel').on('click', function() {
 	    	var dt = $('#view_checklist_incoming_lotno_data').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "10%", "targets": 1 },
+						{ "width": "40%", "targets": 0 },
+						{ "width": "50%", "targets": 1 },
 						{ "width": "10%", "targets": 2 }
 						
 					],
@@ -34119,6 +34119,54 @@ $('#export_excel').on('click', function() {
 	    });
 
 
+		$(document).on('click','.deletechecklistincominglotno',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+					var checklist_incoming_part_id = $('#checklist_incoming_part_id').val();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Incoming Lot Record Part",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deleteincominglotrecord",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Incoming Lot Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>addchecklistformincominglot/"+checklist_incoming_part_id;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Checklist Report Record Part deletion cancelled ", "error");
+						}
+					});
+	    });
 		
 </script>
 <?php } ?>

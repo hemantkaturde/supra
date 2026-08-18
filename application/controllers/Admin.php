@@ -33606,5 +33606,20 @@ public function deletesupplieritemattachment(){
             );
         echo json_encode($json_data);
     }
+    public function deleteincominglotrecord(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteincominglotrecord(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Incoming Lot Form Part';
+                        $processFunction = 'Admin/deleteincominglotrecord';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
 
 }

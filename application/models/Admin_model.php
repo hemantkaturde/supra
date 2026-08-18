@@ -28687,7 +28687,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['lot_no'] =  $value['lot_no'];
                 $data[$counter]['received_qty'] =  $value['received_qty'];
-                $data[$counter]['received_date'] =  $value['received_date'];
+                $data[$counter]['received_date'] =  date('d-m-Y', strtotime($value['received_date']));
                 $data[$counter]['action'] = '';
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchecklistpartitemdata/".$value['checklist_part_id']. "/" . $value['og_buyer_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
                 // $data[$counter]['action'] .= "<a href='" . ADMIN_PATH . "checklistpartitemdatavendorincoming/" . $value['checklist_part_id'] . "/" . $value['og_buyer_id'] . "/" . $value['checklist_report_id'] . "' style='cursor: pointer;' target='_blank'><i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>&nbsp;";  
@@ -28697,7 +28697,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
         return $data;
     }
-
+    function deleteincominglotrecord($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHECKLIST_INCOMING_LOT_DATA)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
 }
 
 ?>
