@@ -68,7 +68,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="backModalLabel">Add New Lot Number</h4>
+                <h4 class="modal-title" id="backModalLabel">Add Lot Number</h4>
             </div>
             <form id="addincominglotdataform">
             <div class="modal-body">
@@ -78,7 +78,7 @@
                 <div class="form-group">
                     <label for="lot_no">Lot Number <span class="required">*</span></label>
                     <select class="form-control serachfilternotrequired searchfilter" name="lot_no" id="lot_no">
-                        <option value="">Select Vendor Name</option>
+                        <option value="">Select Lot Number</option>
                         <?php foreach ($getIncomindlotforchecklistlastreport as $key => $value) { ?>
                             <option value="<?php echo $value['incoming_details_item_id']; ?>">
                                 <?php echo $value['lot_no']; ?>
