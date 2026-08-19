@@ -34056,8 +34056,10 @@ $('#export_excel').on('click', function() {
 						console.log(fetchResponse);
 						$('#received_date').val(fetchResponse.received_date);  
 						$('#received_qty').val(fetchResponse.invoice_qty);
-						$('#lot_no').val(fetchResponse.lot_number); 
+						// $('#lot_no').val(fetchResponse.lot_number); 
 						$('#incoming_lot_id').val(fetchResponse.baseTbl_id); 
+						var option = new Option(fetchResponse.lot_no,fetchResponse.lot_number,true,true);
+    					$('#lot_no').append(option).trigger('change');
 
 				},
 				error: function (jqXHR, textStatus, errorThrown)
