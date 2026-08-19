@@ -74,6 +74,7 @@
             <div class="modal-body">
                 <!-- Vendor Name -->
                 <input type="hidden" name="checklist_incoming_part_id" id="checklist_incoming_part_id" value="<?= $checklist_part_incoming_id; ?>">
+                <input type="hidden" name="incoming_lot_id" id="incoming_lot_id" value="">
                 <div class="form-group">
                     <label for="lot_no">Lot Number <span class="required">*</span></label>
                     <select class="form-control" name="lot_no" id="lot_no">
