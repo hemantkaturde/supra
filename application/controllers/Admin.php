@@ -33539,13 +33539,13 @@ public function deletesupplieritemattachment(){
                         'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s')
                     );
 
-                    // if(trim($this->input->post('check_list_incoming_checklist_id'))){
-                    //    $check_list_incoming_checklist_id = trim($this->input->post('check_list_incoming_checklist_id'));
-                    // }else{
-                       $checklist_incoming_part_id ='';
-                    // }
+                    if(trim($this->input->post('incoming_lot_id'))){
+                       $incoming_lot_id = trim($this->input->post('incoming_lot_id'));
+                    }else{
+                       $incoming_lot_id ='';
+                    }
 
-                    $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistforincominglotdata('',$data);
+                    $addchecklistpartitemdatavendorincoming_submit = $this->admin_model->addchecklistforincominglotdata($incoming_lot_id,$data);
                     if($addchecklistpartitemdatavendorincoming_submit){
                         $addchecklistpartitemdatavendorincoming_response['status'] = 'success';
                         $addchecklistpartitemdatavendorincoming_response['error'] = array('received_date'=>strip_tags(form_error('received_date')), 'received_qty'=>strip_tags(form_error('received_qty')),'lot_no'=>strip_tags(form_error('lot_no')));
