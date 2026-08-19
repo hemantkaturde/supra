@@ -34054,8 +34054,8 @@ $('#export_excel').on('click', function() {
 				{
 					    var fetchResponse = $.parseJSON(data);
 						console.log(fetchResponse);
-						$('#received_date').val(fetchResponse.received_date);  
-						$('#received_qty').val(fetchResponse.invoice_qty);
+						$('#received_date').val(fetchResponse.received_date1);  
+						$('#received_qty').val(fetchResponse.invoice_qty1);
 						// $('#lot_no').val(fetchResponse.lot_number); 
 						$('#incoming_lot_id').val(fetchResponse.baseTbl_id); 
 						var option = new Option(fetchResponse.lot_no,fetchResponse.lot_number,true,true);
