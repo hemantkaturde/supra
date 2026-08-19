@@ -77,7 +77,7 @@
                 <input type="hidden" name="incoming_lot_id" id="incoming_lot_id" value="">
                 <div class="form-group">
                     <label for="lot_no">Lot Number <span class="required">*</span></label>
-                    <select class="form-control" name="lot_no" id="lot_no">
+                    <select class="form-control serachfilternotrequired searchfilter" name="lot_no" id="lot_no">
                         <option value="">Select Vendor Name</option>
                         <?php foreach ($getIncomindlotforchecklistlastreport as $key => $value) { ?>
                             <option value="<?php echo $value['incoming_details_item_id']; ?>">
