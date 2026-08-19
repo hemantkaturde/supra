@@ -34042,7 +34042,7 @@ $('#export_excel').on('click', function() {
 			});
 			return false;
 		});
-		$(document).on('click','#backModal',function(e){  
+		$(document).on('click','.editIncomingbtn',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
 			console.log("LOT NO:"+elemF.attr('data-id'));
