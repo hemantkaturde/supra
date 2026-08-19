@@ -28689,7 +28689,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['received_qty'] =  $value['received_qty'];
                 $data[$counter]['received_date'] =  date('d-m-Y', strtotime($value['received_date']));
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<button data-id='".$value['basetbl_id']."' class='editIncomingbtn' data-toggle='modal' data-target='#backModal'  style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></button> &nbsp";
+                $data[$counter]['action'] .= "<button data-id='".$value['id']."' class='editIncomingbtn' data-toggle='modal' data-target='#backModal'  style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></button> &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['basetbl_id']."' class='fa fa-trash-o deletechecklistincominglotno' aria-hidden='true'></i>"; 
                 $counter++; 
             }
