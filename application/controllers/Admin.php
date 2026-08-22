@@ -2998,7 +2998,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('value','Value','trim|required');
             $this->form_validation->set_rules('unit','Unit','trim');
             $this->form_validation->set_rules('buyer_po_delivery_date','Buyer PO Delivery Date','trim');
-            $this->form_validation->set_rules('packaging_instraction','Packaging Instraction','trim');
+            $this->form_validation->set_rules('packaging_instraction','Packaging Instraction','trim|required');
             $this->form_validation->set_rules('item_po_status','Item PO Status','trim|required');
             $this->form_validation->set_rules('item_remark_box','Item Remark Box','trim');
 
@@ -33567,6 +33567,7 @@ public function deletesupplieritemattachment(){
             $data['checklist_part_incoming_id'] = $checklist_part_incoming_id;
             $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
         }
+        
         
     }
 

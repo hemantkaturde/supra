@@ -140,7 +140,7 @@
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <th>Buyer PO Delivery Date</th>
-                                                        <th>Packaging Instruction</th>
+                                                        <th>Packaging Instructions</th>
                                                         <th>Item PO Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -264,7 +264,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Packaging Instruction</label>
+                                                        <label class="col-sm-3 col-form-label">Packaging Instruction <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                              <select class="form-control" name="packaging_instraction" id="packaging_instraction">
                                                                 <option value="">Select Packaging Instruction</option>
@@ -296,7 +296,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Remarks</label>
+                                                        <label class="col-sm-3 col-form-label">Packaging Remarks</label>
                                                         <div class="col-sm-9">
                                                             <textarea type="text" class="form-control"  id="item_remark_box"  name="item_remark_box" required></textarea>
                                                             <p class="error item_remark_box_error"></p>
