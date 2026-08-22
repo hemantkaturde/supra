@@ -71,7 +71,7 @@
                                             <!-- <th>Part Descroption</th> -->
                                             <th>Vendor Name</th>
                                             <th>Vendor PO NO.</th>
-                                            <th>QC Person</th>
+                                            <th>Inspection Report Status</th>
                                             <th>Lot Number</th>
                                             <th>P.O Qty (in pcs)</th>
                                             <th>Invoice Qty (in Pcs)</th>
