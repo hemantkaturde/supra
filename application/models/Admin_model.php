@@ -11963,7 +11963,7 @@ class Admin_model extends CI_Model
 
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
 
-        $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction as packing_instrauction_status');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction as packing_instrauction_status,'.TBL_BUYER_PO_MASTER_ITEM.'.item_remark_box');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -12055,7 +12055,7 @@ class Admin_model extends CI_Model
                                 $buyer_invoice_number = '';
                                 $buyer_invoice_qty = '';
                                 $buyer_invoice_date = '';
-                                $remark = '';
+                                $remark = $value['item_remark_box'];
                             }
 
                             $data_packaing_details[$counter_packaing_details]['export_invoice_number'] = $buyer_invoice_number;
@@ -12098,7 +12098,7 @@ class Admin_model extends CI_Model
                             $buyer_invoice_number = '';
                             $buyer_invoice_qty = '';
                             $buyer_invoice_date = '';
-                            $remark = '';
+                            $remark = $value['item_remark_box'];;
                         }
 
                         $data[$counter]['export_invoice_number'] = $buyer_invoice_number;
