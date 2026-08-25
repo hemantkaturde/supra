@@ -93,7 +93,7 @@
                                         <th>Export Qty</th>
                                         <th>Export Invoice Date</th>
                                         <th>Packing Instruction Status</th>
-                                        <th>Remarks</th>
+                                        <th>Packaging Remarks</th>
                                     </tr>
                                 </thead>
                                 <tbody>

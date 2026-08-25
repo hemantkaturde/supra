@@ -28713,6 +28713,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $data = $query->result_array();
         return $data;
     }
+
+    public function fetchincomingdeatilsforcopy($edit_id){
+        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.material_match_to_drawing,'.TBL_INCOMING_DETAILS_ITEM.'.material_grade, '.TBL_INCOMING_DETAILS_ITEM.'.next_process,'.TBL_INCOMING_DETAILS_ITEM.'.additional_process,'.TBL_INCOMING_DETAILS_ITEM.'.qc_person_name,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_item_status');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$edit_id);
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->row();
+        return $fetch_result;
+    }
 }
 
 ?>

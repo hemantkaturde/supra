@@ -9319,6 +9319,39 @@
 			return false;
 	    });
 
+		$(document).on('change', '#checked_for_copy_incoming_item', function(e) {
+    		if ($(this).is(':checked')) {
+				var item_id = $("#incomingdetail_editid").val();
+				$.ajax({
+					url: "<?php echo base_url();?>admin/getcopyincomingitem",
+					type: "POST",
+					data: 'id=' + item_id,
+					success: function(data, textStatus, jqXHR) {
+						var fetchResponse = $.parseJSON(data);
+						$('#material_match_to_drawing').val(fetchResponse.material_match_to_drawing);
+						$('#material_grade').val(fetchResponse.material_grade);
+						$('#next_process').val(fetchResponse.next_process);
+						$('#additional_process').val(fetchResponse.additional_process);
+						$('#qc_person_name').val(fetchResponse.qc_person_name);
+						$("#incoming_item_status").val(fetchResponse.incoming_item_status);
+						// Keep checkbox checked
+						$('#checked_for_copy_incoming_item').prop('checked', true);
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						$(".loader_ajax").hide();
+					}
+        		});
+    		} else {
+				$('#material_match_to_drawing').val('');
+				$('#material_grade').val('');
+				$('#next_process').val('');
+				$('#additional_process').val('');
+				$('#qc_person_name').val('');
+				$("#incoming_item_status").val('');
+			}
+
+		});
+		
 		$(document).on('change', '#invoice_qty', function(){	
 
 				$("#invoice_qty_in_kgs").val();

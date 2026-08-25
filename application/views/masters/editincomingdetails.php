@@ -492,12 +492,18 @@
                                                         </div>
 
                                 
-                                                         <div class="form-group row">
+                                                        <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Difference of GR Weight</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control" id="difference_of_gr_weight"
                                                                     name="difference_of_gr_weight">
                                                                 <p class="error difference_of_gr_weight_error"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Fetch Details</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="checkbox" zoom="2" id="checked_for_copy_incoming_item">
                                                             </div>
                                                         </div>
 

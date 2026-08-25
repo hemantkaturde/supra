@@ -6624,7 +6624,12 @@ class Admin extends BaseController
             echo json_encode($save_incoming_details_items);
         }
     }
-
+    
+    public function getcopyincomingitem(){
+        $id = $this->input->post('id');
+        $rowData = $this->admin_model->fetchincomingdeatilsforcopy($id);
+        echo json_encode($rowData);
+    }
 
     public function deleteIncomingDetails(){
 
