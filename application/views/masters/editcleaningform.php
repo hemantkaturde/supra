@@ -190,7 +190,7 @@
                                         <label for="end_date_time">End Date and Time</label>
                                         <input type="text"
                                             class="form-control datetimepicker"
-                                            id="end_date_time"
+                                            id="end_date_time"  value="<?= date('Y-m-d H:i:s'); ?>"
                                             value="<?=$getcleaningformdetailsbyid[0]['end_date_time'];?>" 
                                             name="end_date_time">
                                         <p class="error end_date_time_error"></p>
