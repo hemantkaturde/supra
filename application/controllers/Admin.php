@@ -32958,13 +32958,14 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('start_date_time','start_date_time','trim');
                 $this->form_validation->set_rules('end_date_time','end_date_time','trim');
                 $this->form_validation->set_rules('remark','remark','trim');
+                $this->form_validation->set_rules('cleaning_responsible_person','remark','trim');
 
 
 
                 if($this->form_validation->run() == FALSE)
                 {
                     $faddcleaningform_response['status'] = 'failure';
-                    $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')));
+                    $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')),'cleaning_responsible_person'=>strip_tags(form_error('cleaning_responsible_person')));
             
                 }else{
 
@@ -32982,6 +32983,7 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('start_date_time','start_date_time','trim');
                 $this->form_validation->set_rules('end_date_time','end_date_time','trim');
                 $this->form_validation->set_rules('remark','remark','trim');
+                $this->form_validation->set_rules('cleaning_responsible_person','cleaning_responsible_person','trim');
 
 
 
@@ -33000,6 +33002,7 @@ public function deletesupplieritemattachment(){
                         'start_date_time'=> trim($this->input->post('start_date_time')),
                         'end_date_time'=> trim($this->input->post('end_date_time')),
                         'remark'=> trim($this->input->post('remark')),
+                        'cleaning_responsible_person' => trim($this->input->post('cleaning_responsible_person')),
                     );
 
                     if(trim($this->input->post('cleaningformid'))){
@@ -33011,7 +33014,7 @@ public function deletesupplieritemattachment(){
                     $faddcleaningform_submit_reponse = $this->admin_model->addcleaningform($cleaningformid,$data);
                     if($faddcleaningform_submit_reponse){
                         $faddcleaningform_response['status'] = 'success';
-                        $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')));
+                        $faddcleaningform_response['error'] = array('cleaning_no'=>strip_tags(form_error('cleaning_no')), 'cleaning_date'=>strip_tags(form_error('cleaning_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_description'=>strip_tags(form_error('part_description')),'incoming_lot_number'=>strip_tags(form_error('incoming_lot_number')),'received_qty'=>strip_tags(form_error('received_qty')),'no_of_boxes'=>strip_tags(form_error('no_of_boxes')),'cleaning_status'=>strip_tags(form_error('cleaning_status')),'no_of_boxes_after_cleaning'=>strip_tags(form_error('no_of_boxes_after_cleaning')),'start_date_time'=>strip_tags(form_error('start_date_time')),'end_date_time'=>strip_tags(form_error('end_date_time')),'remark'=>strip_tags(form_error('remark')),'cleaning_responsible_person'=>strip_tags(form_error('remark')));
                     }
                 }
 
