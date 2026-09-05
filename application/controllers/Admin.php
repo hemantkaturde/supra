@@ -30722,16 +30722,16 @@ public function printincomingitemdetailslabelbarcode($id)
                     align-items:center;
                 ">
                     <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br>
-                    <span style="font-size:16px; font-weight:bold;">
+                    <span style="font-size:15px; font-weight:bold;">
                         P.O.No: ' . $po_number . '
                     </span><br>
-                    <span style="font-size:16px;">
+                    <span style="font-size:15px;">
                         Part No: ' . $part_number . '
                     </span><br>
-                    <span style="font-size:16px;">
+                    <span style="font-size:15px;">
                         Carton: ' . $i . '/' . $totalLabels . '
                   
-                    <span style="font-size:16px;">
+                    <span style="font-size:15px;">
                         Lot No: ' . $lot_number . ',
                         <span style="margin-left:15px;">
                             Cleaning
