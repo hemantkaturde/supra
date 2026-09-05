@@ -27102,8 +27102,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
         $this->db->join(TBL_TDIR_INCOMING_LOT_DATA, TBL_TDIR_INCOMING_LOT_DATA.'.incomping_details_item_id = '.TBL_INCOMING_DETAILS_ITEM.'.id','left');
-        //$this->db->join(TBL_TDIR, TBL_TDIR.'.id = '.TBL_TDIR_INCOMING_LOT_DATA.'.tdir_id','left');
-        $this->db->join(TBL_TDIR, TBL_TDIR.'.id = '.TBL_TDIR_INCOMING_LOT_DATA.'.tdir_id');
+        $this->db->join(TBL_TDIR, TBL_TDIR.'.id = '.TBL_TDIR_INCOMING_LOT_DATA.'.tdir_id','left');
+        //$this->db->join(TBL_TDIR, TBL_TDIR.'.id = '.TBL_TDIR_INCOMING_LOT_DATA.'.tdir_id');
 
 
         if($params['search']['value'] != "") 
