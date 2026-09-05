@@ -301,7 +301,7 @@
                                             <input type="text" class="form-control" id="no_of_boxes" name="no_of_boxes">
                                             <p class="error no_of_boxes_error"></p>
                                         </div>
-                                        <div class="col-md-3">
+                                       
                                         <div class="form-group">
                                             <label for="cleaning_responsible_person">Cleaning Responsible Person</label>
                                             <input type="text" class="form-control" id="cleaning_responsible_person" name="cleaning_responsible_person">
