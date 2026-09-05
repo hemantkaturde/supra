@@ -27134,6 +27134,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.".received_date <=", $to_date);
         }
 
+        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.id');
+
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
 
