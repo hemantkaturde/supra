@@ -300,12 +300,12 @@
                                             <label for="no_of_boxes">No .Of Boxes</label>
                                             <input type="text" class="form-control" id="no_of_boxes" name="no_of_boxes">
                                             <p class="error no_of_boxes_error"></p>
-                                        </div>
-                                       
-                                        <div class="form-group">
-                                            <label for="cleaning_responsible_person">Cleaning Responsible Person</label>
-                                            <input type="text" class="form-control" id="cleaning_responsible_person" name="cleaning_responsible_person">
-                                            <p class="error cleaning_responsible_person_error"></p>
+
+                                            <div class="form-group">
+                                                <label for="cleaning_responsible_person">Cleaning Responsible Person</label>
+                                                <input type="text" class="form-control" id="cleaning_responsible_person" name="cleaning_responsible_person">
+                                                <p class="error cleaning_responsible_person_error"></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
