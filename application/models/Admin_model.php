@@ -28729,6 +28729,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->row();
         return $fetch_result;
     }
+    
 }
 
 ?>
