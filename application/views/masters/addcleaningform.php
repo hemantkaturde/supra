@@ -351,8 +351,8 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="end_date_time">End Date and Time</label>
-                                        <input type="text"
+                                        <!-- <label for="end_date_time">End Date and Time</label> -->
+                                        <input type="hidden"
                                             class="form-control datetimepicker"
                                             id="end_date_time"
                                             name="end_date_time"
