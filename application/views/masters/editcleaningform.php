@@ -178,7 +178,7 @@
                                             class="form-control datetimepicker"
                                             id="start_date_time"
                                             value="<?=$getcleaningformdetailsbyid[0]['start_date_time'];?>" 
-                                            name="start_date_time"
+                                            name="start_date_time" readonly
                                             >
                                         <p class="error start_date_time_error"></p>
                                     </div>
