@@ -356,7 +356,7 @@
                                             class="form-control datetimepicker"
                                             id="end_date_time"
                                             name="end_date_time"
-                                            value="">
+                                            value="" readonly>
                                         <p class="error end_date_time_error"></p>
                                     </div>
                                 </div>
