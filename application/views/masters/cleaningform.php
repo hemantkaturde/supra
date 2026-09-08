@@ -54,7 +54,7 @@
                                             <th>No of Boxes after cleaning</th>
                                             <th>Start Date and Time</th>
                                             <th>End Date and Time</th>
-                                            <th>Remark</th>
+                                            <th>Cleaning Responsible Person</th>
                                             <th>Action</th>
                                           </tr>
                                     </thead>

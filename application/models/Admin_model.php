@@ -28053,6 +28053,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_CLEANING_FORM.".no_of_boxes_after_cleaning LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CLEANING_FORM.".start_date_time LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CLEANING_FORM.".cleaning_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".cleaning_responsible_person LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CLEANING_FORM.".end_date_time LIKE '%".$params['search']['value']."%')");
         }
         
@@ -28086,6 +28087,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_CLEANING_FORM.".no_of_boxes_after_cleaning LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CLEANING_FORM.".start_date_time LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CLEANING_FORM.".cleaning_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CLEANING_FORM.".cleaning_responsible_person LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CLEANING_FORM.".end_date_time LIKE '%".$params['search']['value']."%')");
         }
 
@@ -28114,7 +28116,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['no_of_boxes_after_cleaning'] =  $value['no_of_boxes_after_cleaning'];
                 $data[$counter]['start_date_time'] =  $value['start_date_time'];
                 $data[$counter]['end_date_time'] =  $value['end_date_time'];
-                $data[$counter]['remark'] =  $value['remark'];
+                $data[$counter]['cleaning_responsible_person'] =  $value['cleaning_responsible_person'];
 
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcleaningform/".$value['cleaningformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a> &nbsp";
