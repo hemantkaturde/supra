@@ -30208,7 +30208,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                
                <table width="100%" cellspacing="0" cellpadding="0"  style="margin-top:80px; border:0;">
                     <tr>
-                        <td align="right">
+                        <td align="center" style="border:0;">
                             <b>Approved by Quality Department after Rework</b>
                         </td>
                     </tr>
