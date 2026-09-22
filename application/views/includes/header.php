@@ -447,6 +447,13 @@
                         </li> 
 
 
+                        <li class="treeview <?php if($pageUrl=="qcinternalaudit"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>qcinternalaudit">
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">QC Internal Audit</span>
+                        </a>
+                        </li> 
+
+
                       <?php  if( $this->session->userdata('roleText')=='Superadmin'){ ?>
                           <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
                               <a href="#">

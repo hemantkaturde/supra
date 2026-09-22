@@ -28733,6 +28733,84 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->row();
         return $fetch_result;
     }
+
+
+    /* =========================================================
+    * QC INTERNAL AUDIT
+    * ========================================================= */
+
+    public function get_qc_internal_audit_list()
+    {
+        $this->db->order_by('id', 'DESC');
+        return $this->db->get('qc_internal_audit')->result();
+    }
+
+
+    /* Get single audit record */
+    public function get_qc_internal_audit($id)
+    {
+        return $this->db
+            ->where('id', $id)
+            ->get('qc_internal_audit')
+            ->row();
+    }
+
+
+    /* Get next Audit Number */
+    public function get_next_qc_internal_audit_no()
+    {
+        $this->db->select('audit_no');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(1);
+
+        $query = $this->db->get('qc_internal_audit');
+
+        if ($query->num_rows() > 0) {
+
+            $last_no = $query->row()->audit_no;
+
+            // Extract numeric part
+            preg_match('/(\d+)$/', $last_no, $matches);
+
+            if (!empty($matches[1])) {
+                $next_no = (int)$matches[1] + 1;
+            } else {
+                $next_no = 1;
+            }
+
+        } else {
+            $next_no = 1;
+        }
+
+        return 'QCA-' . str_pad($next_no, 4, '0', STR_PAD_LEFT);
+    }
+
+
+    /* Insert */
+    public function insert_qc_internal_audit($data)
+    {
+        return $this->db->insert('qc_internal_audit', $data);
+    }
+
+
+    /* Update */
+    public function update_qc_internal_audit($id, $data)
+    {
+        return $this->db
+            ->where('id', $id)
+            ->update('qc_internal_audit', $data);
+    }
+
+
+    /* Delete */
+    public function delete_qc_internal_audit($id)
+    {
+        return $this->db
+            ->where('id', $id)
+            ->delete('qc_internal_audit');
+    }
+
+
 }
 
 ?>

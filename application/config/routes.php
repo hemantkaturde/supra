@@ -722,6 +722,15 @@ $route['getlotdetailsforeditincomingdata'] = "admin/getlotdetailsforeditincoming
 
 
 
+$route['qcinternalaudit'] = 'admin/qcinternalauditlist';
+$route['qcinternalauditadd'] = 'admin/qcinternalauditadd';
+$route['qcinternalauditsave'] = 'admin/qcinternalauditsave';
+$route['qcinternalauditedit/(:num)'] = 'admin/qcinternalauditedit/$1';
+$route['qcinternalauditupdate/(:num)'] = 'admin/qcinternalauditupdate/$1';
+$route['qcinternalauditdelete/(:num)'] = 'admin/qcinternalauditdelete/$1';
+$route['qcinternalauditlist'] = 'admin/qcinternalauditlist';
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
 

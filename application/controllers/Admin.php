@@ -30141,7 +30141,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             </tr>';
 
 
-            $maxRows = 15;
+            $maxRows = 7;
             $i = 1;
 
             /* Print data rows */
@@ -30203,6 +30203,107 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                             <td>'.$checking_date.'</td>
                         </tr>
                     </table>';
+
+               $html .= '
+               
+               <table width="100%" cellspacing="0" cellpadding="0"  style="margin-top:80px; border:0;">
+                    <tr>
+                        <td align="right">
+                            <b>Approved by Quality Department after Rework</b>
+                        </td>
+                    </tr>
+                </table>
+               
+               <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse; table-layout:fixed;">
+
+                <!-- Heading -->
+                <tr height="30">
+                    <td width="16%" align="center" style="border:1px solid #000;">
+                        <b>Dimension</b>
+                    </td>
+
+                    <td width="8.4%" align="center" style="border:1px solid #000;" colspan="10">
+                        <b>Observed Value</b>
+                    </td>
+                </tr>
+
+                <!-- TL -->
+                <tr height="55">
+                    <td width="16%" style="border:1px solid #000; padding-left:5px;">
+                        <b></b><br>
+                        
+                    </td>
+
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                </tr>
+
+                <!-- Hex -->
+                <tr height="55">
+                    <td width="16%" style="border:1px solid #000; padding-left:5px;">
+                        <b></b><br>
+                       
+                    </td>
+
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                </tr>
+
+                <!-- Dia -->
+                <tr height="55">
+                    <td width="16%" style="border:1px solid #000; padding-left:5px;">
+                        <b></b><br>
+                        
+                    </td>
+
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                </tr>
+
+                    <!-- TL -->
+                <tr height="55">
+                    <td width="16%" style="border:1px solid #000; padding-left:5px;">
+                        <b></b><br>
+                        
+                    </td>
+
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                    <td width="8.4%" style="width:8.4%; height:55px; border:1px solid #000;"></td>
+                </tr>
+
+            </table>';
 
     // WRITE PDF
     $mpdf->WriteHTML($html);
@@ -33640,5 +33741,115 @@ public function deletesupplieritemattachment(){
             echo 'failure';
         }
     }
+
+    
+    public function qcinternalauditlist()
+    {
+            $data['title'] = 'QC Internal Audit';
+            $process = 'QC Internal Audit';
+            $processFunction = 'Admin/qcinternalauditlist';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'QC Internal Audit';
+            //$this->load->view('masters/qcinternalauditlist', $data);
+            $this->loadViews("masters/qcinternalauditlist", $this->global, $data, NULL);
+    }
+
+
+    public function qcinternalauditadd()
+    {
+        $data['title'] = 'Add QC Internal Audit';
+
+        $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+
+        $this->load->view('masters/qcinternalauditadd', $data);
+    }
+
+
+    public function qcinternalauditedit($id)
+    {
+        $data['title'] = 'Edit QC Internal Audit';
+
+        $data['audit'] = $this->admin_model->get_qc_internal_audit($id);
+
+        if (empty($data['audit'])) {
+            show_404();
+        }
+
+        $this->load->view('masters/qcinternalauditedit', $data);
+    }
+
+    public function qcinternalauditsave()
+    {
+        $data = $this->input->post();
+
+        if (empty($data['audit_no'])) {
+            $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+        }
+
+        $this->admin_model->insert_qc_internal_audit($data);
+
+        redirect('qcinternalauditlist');
+    }
+
+
+    public function qcinternalauditupdate($id)
+    {
+        $data = $this->input->post();
+
+        $this->admin_model->update_qc_internal_audit($id, $data);
+
+        redirect('qcinternalauditlist');
+    }
+
+
+    public function qcinternalauditdelete($id)
+    {
+        $this->admin_model->delete_qc_internal_audit($id);
+
+        redirect('qcinternalauditlist');
+    }
+
+
+    public function qcinternalauditajax()
+    {
+        $records = $this->admin_model->get_qc_internal_audit_list();
+
+        $data = array();
+
+        foreach ($records as $row) {
+
+            $action = '';
+
+            $action .= '<a href="' . base_url('qcinternalauditedit/' . $row->id) . '" 
+                        class="btn btn-sm btn-primary">
+                        <i class="fa fa-edit"></i>
+                        </a> ';
+
+            $action .= '<a href="' . base_url('qcinternalauditdelete/' . $row->id) . '" 
+                        class="btn btn-sm btn-danger"
+                        onclick="return confirm(\'Are you sure you want to delete this audit?\');">
+                        <i class="fa fa-trash"></i>
+                        </a>';
+
+            $data[] = array(
+                $row->audit_no,
+                $row->audit_date,
+                $row->vendor_name,
+                $row->vendor_po_no,
+                $row->buyer_name,
+                $row->buyer_po_no,
+                $row->fg_part_no,
+                $row->fg_received_qty,
+                $row->verified_by,
+                $action
+            );
+        }
+
+        echo json_encode(array(
+            'data' => $data
+        ));
+    }
+
+
 
 }
