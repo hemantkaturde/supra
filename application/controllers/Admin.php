@@ -33059,7 +33059,7 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('start_date_time','start_date_time','trim');
                 $this->form_validation->set_rules('end_date_time','end_date_time','trim');
                 $this->form_validation->set_rules('remark','remark','trim');
-                $this->form_validation->set_rules('cleaning_responsible_person','remark','trim');
+                $this->form_validation->set_rules('cleaning_responsible_person','remark','trim|required');
 
 
 
