@@ -68,7 +68,7 @@
                                                         }   
                                                         
                                                         ?>
-                                                    <option <?php if($getexportetails[0]['part_number_id']==$value['fin_id']){ echo 'selected';} ?> value="<?php echo $value['fin_id']; ?>" data_buyer_po_number="<?php echo $value['buyer_po_number'];?>" data_buyer_po_date="<?php echo $value['buyer_po_part_delivery_date'];?>" ><?php echo $value['part_number'].' - '.$value['buyer_po_number']. $buyer_po_part_delivery_date; ?> </option>
+                                                    <option <?php if($getexportetails[0]['part_number_id']==$value['fin_id'] && $getexportetails[0]['buyer_po_number_id'] == $value['buyer_po_id']){ echo 'selected';} ?> value="<?php echo $value['fin_id']; ?>" data_buyer_po_number="<?php echo $value['buyer_po_number'];?>" data_buyer_po_date="<?php echo $value['buyer_po_part_delivery_date'];?>" ><?php echo $value['part_number'].' - '.$value['buyer_po_number']. $buyer_po_part_delivery_date; ?> </option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error part_number_error"></p>
