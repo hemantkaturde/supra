@@ -19889,8 +19889,6 @@ public function checkifpackingintractionalreadyexists(){
 
 public function downlaod_production_status_report($vendor_name,$status,$vendor_po_number,$part_number_id) {
 
-    // create file name
-    $fileName = 'Production_status_Report -'.date('d-m-Y').'.xlsx';  
     // load excel library
     $empInfo = $this->admin_model->getallproductionreportstatusdata($vendor_name,$status,$vendor_po_number,$part_number_id);
 
@@ -19960,7 +19958,11 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
 
 
     $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-      
+
+    // Get vendor name form Array Direct From Object  24-09-2026 
+    $v_name =  $empInfo[0]['vendorname'];
+    $fileName = 'Production Files for -'.$v_name.'-'.date('d-m-Y').'.xlsx';  
+   
     header('Content-Type: application/vnd.ms-excel');
     header("Content-Disposition: attachment;Filename=$fileName.xls");
     header('Cache-Control: max-age=0');
