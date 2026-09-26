@@ -33760,10 +33760,11 @@ public function deletesupplieritemattachment(){
     public function qcinternalauditadd()
     {
         $data['title'] = 'Add QC Internal Audit';
-
+        $process = 'QC Internal Audit';
+        $processFunction = 'Admin/qcinternalauditlist';
         $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
-
-        $this->load->view('masters/qcinternalauditadd', $data);
+        $this->global['pageTitle'] = 'Add QC Internal Audit';
+        $this->loadViews('masters/qcinternalauditadd',$this->global ,$data, NULL);
     }
 
 
