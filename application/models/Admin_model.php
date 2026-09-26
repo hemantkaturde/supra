@@ -28832,6 +28832,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    
+    public function getBuyerItemsforDisplayBybuyeridforqia($buyer_po_id){
+
+        $this->db->select('*');
+		$this->db->where('buyer_po_id', $buyer_po_id);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        //$this->db->order_by('sales_order_number','ASC');
+        $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM)->result_array();
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+		
+        return $query_result;
+
+    }
+
+
 }
 
 ?>

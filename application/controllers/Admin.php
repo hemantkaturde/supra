@@ -33880,7 +33880,27 @@ public function deletesupplieritemattachment(){
     }
 
 
+    public function getBuyerItemsforDisplayBybuyeridforqia(){
+        $buyer_po_id=$this->input->post('buyer_po_id');
+        if($buyer_po_id) {
+			$getbuyerdetails = $this->admin_model->getBuyerItemsforDisplayBybuyeridforqia($buyer_po_id);
+			if(count($getbuyerdetails) >= 1) {
+                $content = $content.'<option value="">Select F.G Part No</option>';
+				foreach($getbuyerdetails as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["part_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+
     
+
 
 
 

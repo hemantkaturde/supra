@@ -34267,11 +34267,40 @@ $('#export_excel').on('click', function() {
 			return false;
 		});
 
+		$(document).on('change','#buyer_po_number_qc_audit',function(e){  
+			e.preventDefault();
+			var buyer_po_id = $('#buyer_po_number_qc_audit').val();
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplayBybuyeridforqia",
+				type: "POST",
+				data : {'buyer_po_id' : buyer_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#fg_part_no_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						$('#fg_part_no_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+						$('#fg_part_no_qc_audit').html(data);
+						//$("#customers-list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#fg_part_no_qc_audit').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
 
 
-
-
-
+		
 
 </script>
 <?php } ?>

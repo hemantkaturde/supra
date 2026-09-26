@@ -730,6 +730,9 @@ $route['qcinternalauditupdate/(:num)'] = 'admin/qcinternalauditupdate/$1';
 $route['qcinternalauditdelete/(:num)'] = 'admin/qcinternalauditdelete/$1';
 $route['qcinternalauditlist'] = 'admin/qcinternalauditlist';
 $route['getBuyerPonumberbyBuyeridforqc'] = 'admin/getBuyerPonumberbyBuyeridforqc';
+$route['getBuyerItemsforDisplayBybuyeridforqia'] = 'admin/getBuyerItemsforDisplayBybuyeridforqia';
+
+
 
 
 
