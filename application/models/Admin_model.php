@@ -28742,7 +28742,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function get_qc_internal_audit_list()
     {
         $this->db->order_by('id', 'DESC');
-        return $this->db->get('qc_internal_audit')->result();
+        return $this->db->get('tbl_qc_internal_audit')->result();
     }
 
 
@@ -28751,7 +28751,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         return $this->db
             ->where('id', $id)
-            ->get('qc_internal_audit')
+            ->get('tbl_qc_internal_audit')
             ->row();
     }
 
@@ -28763,7 +28763,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->order_by('id', 'DESC');
         $this->db->limit(1);
 
-        $query = $this->db->get('qc_internal_audit');
+        $query = $this->db->get('tbl_qc_internal_audit');
 
         if ($query->num_rows() > 0) {
 
@@ -28789,7 +28789,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     /* Insert */
     public function insert_qc_internal_audit($data)
     {
-        return $this->db->insert('qc_internal_audit', $data);
+        return $this->db->insert('tbl_qc_internal_audit', $data);
     }
 
 
@@ -28798,7 +28798,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         return $this->db
             ->where('id', $id)
-            ->update('qc_internal_audit', $data);
+            ->update('tbl_qc_internal_audit', $data);
     }
 
 
@@ -28807,7 +28807,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         return $this->db
             ->where('id', $id)
-            ->delete('qc_internal_audit');
+            ->delete('tbl_qc_internal_audit');
     }
 
 
