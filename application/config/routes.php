@@ -729,6 +729,9 @@ $route['qcinternalauditedit/(:num)'] = 'admin/qcinternalauditedit/$1';
 $route['qcinternalauditupdate/(:num)'] = 'admin/qcinternalauditupdate/$1';
 $route['qcinternalauditdelete/(:num)'] = 'admin/qcinternalauditdelete/$1';
 $route['qcinternalauditlist'] = 'admin/qcinternalauditlist';
+$route['getBuyerPonumberbyBuyeridforqc'] = 'admin/getBuyerPonumberbyBuyeridforqc';
+
+
 
 
 /* End of file routes.php */

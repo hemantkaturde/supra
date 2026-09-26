@@ -33763,6 +33763,7 @@ public function deletesupplieritemattachment(){
         $process = 'QC Internal Audit';
         $processFunction = 'Admin/qcinternalauditlist';
         $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $this->global['pageTitle'] = 'Add QC Internal Audit';
         $this->loadViews('masters/qcinternalauditadd',$this->global ,$data, NULL);
     }
@@ -33852,6 +33853,35 @@ public function deletesupplieritemattachment(){
             'data' => $data
         ));
     }
+
+
+    public function getBuyerPonumberbyBuyeridforqc(){
+
+		if($this->input->post('buyer_name')) {
+			$getAllponumber = $this->admin_model->getBuyerPonumberbyBuyeridforqc($this->input->post('buyer_name'));
+			if(count($getAllponumber) >= 1) {
+                $content = $content.'<option value="">Select Buyer Number</option>';
+				foreach($getAllponumber as $value) {
+                    // if($value['po_status']=='Open'){
+					//   $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
+                    // }
+                    //  if($value['po_status']=='Open'){
+					  $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
+                    // }
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
+    
+
 
 
 
