@@ -33863,10 +33863,10 @@ public function deletesupplieritemattachment(){
                 $content = $content.'<option value="">Select Buyer Number</option>';
 				foreach($getAllponumber as $value) {
                     // if($value['po_status']=='Open'){
-					//   $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
+					   $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
                     // }
                     //  if($value['po_status']=='Open'){
-					  $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
+					// $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
                     // }
 				}
 				echo $content;
