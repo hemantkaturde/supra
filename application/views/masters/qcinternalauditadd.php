@@ -201,7 +201,12 @@
                                     <div class="box-body">
                                         <div class="panel-body">
                                         <form id="qcInternalAuditForm"  method="post" action="">
-                                            <table class="qc-table">
+                                            
+
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <table class="qc-table">
                                                 <tr>
                                                     <td class="qc-label"> ID No.</td>
                                                     <td style="width:180px;">
@@ -237,7 +242,7 @@
                                                 <tr>
                                                     <td class="qc-label">FG Part No.</td>
                                                     <td>
-                                                        <select name="fg_part_no_qc_audit" id="fg_part_no_qc_audit" class="form-control input-sm">
+                                                        <select class="fg_part_no_qc_audit_getincoming" name="fg_part_no_qc_audit" id="fg_part_no_qc_audit" class="form-control input-sm">
                                                             <option value="">Select FG Part No </option>
                                                         </select>
                                                     </td>
@@ -258,12 +263,14 @@
                                                     <td class="qc-label"> Vendor Name </td>
                                                     <td>
                                                         <input type="text" name="vendor_name_qc_audit" id="vendor_name_qc_audit">
+                                                        <input type="hidden" name="vendor_id_qc_audit" id="vendor_id_qc_audit">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="qc-label"> Vendor P.O. No.</td>
                                                     <td>
                                                         <input type="text" name="vendor_po_no_qc_audit" id="vendor_po_no_qc_audit">
+                                                        <input type="hidden" name="vendor_po_id_qc_audit" id="vendor_po_id_qc_audit">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -297,6 +304,17 @@
                                             </table>
                                             <br>
                                             <br>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div id="incoming-data"></div>
+                                                </div>
+                                            </div>
+
+                                        
+
+
+                                            
                                             <!-- =========================================
                                                     CHECK POINTS
                                                 ========================================== -->

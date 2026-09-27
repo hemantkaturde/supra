@@ -34299,8 +34299,6 @@ $('#export_excel').on('click', function() {
 			return false;
 		});
 
-
-
 		$(document).on('change','#fg_part_no_qc_audit',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
@@ -34319,6 +34317,8 @@ $('#export_excel').on('click', function() {
 						$('#vendor_po_no_qc_audit').val(fetchResponse.po_number);  
 						$('#vendor_po_qty_qc_audit').val(fetchResponse.vendor_po_qty); 
 						$('#fg_received_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
+						$('#vendor_id_qc_audit').val(fetchResponse.ven_id); 
+						$('#vendor_po_id_qc_audit').val(fetchResponse.vendor_po_id);
 						
 				},
 				error: function (jqXHR, textStatus, errorThrown)
@@ -34328,5 +34328,40 @@ $('#export_excel').on('click', function() {
 			});
 			return false;
 		});
+
+
+		$(document).on('change','.fg_part_no_qc_audit_getincoming',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			 var fg_part_no_qc_audit = $('#fg_part_no_qc_audit').val();
+			 var fg_part_no_qc_audit_getincoming = $('#fg_part_no_qc_audit_getincoming').val();
+			 $("#incoming-data").html('');
+			// $.ajax({
+			// 	url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
+			// 	type: "POST",
+			// 	data : {'buyer_po_number' : buyer_po_number},
+			// 	success: function(data, textStatus, jqXHR)
+			// 	{
+			// 		$(".loader_ajax").hide();
+			// 		if(data == "failure")
+			// 		{
+			// 			//$('#incoming-data').html('<option value="">Select Buyer PO Number</option>');
+			// 		}
+			// 		else
+			// 		{
+			// 			//$("#incoming-data").html(data);
+
+			// 		}
+			// 	},
+			// 	error: function (jqXHR, textStatus, errorThrown)
+			// 	{
+			// 		//$('#incoming-data').html();
+			// 	}
+			// });
+			// return false;
+		});
+
+
+
 </script>
 <?php } ?>
