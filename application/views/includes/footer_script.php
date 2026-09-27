@@ -34315,10 +34315,13 @@ $('#export_excel').on('click', function() {
 						$('#buyer_po_qty_qc_audit').val(fetchResponse.order_oty);  
 						$('#vendor_name_qc_audit').val(fetchResponse.vendor_name);  
 						$('#vendor_po_no_qc_audit').val(fetchResponse.po_number);  
-						$('#vendor_po_qty_qc_audit').val(fetchResponse.vendor_po_qty); 
-						$('#fg_received_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
+						$('#vendor_po_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
+						// $('#fg_received_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
 						$('#vendor_id_qc_audit').val(fetchResponse.ven_id); 
 						$('#vendor_po_id_qc_audit').val(fetchResponse.vendor_po_id);
+                        $('#og_part_id').val(fetchResponse.fin_id);
+
+						
 						
 				},
 				error: function (jqXHR, textStatus, errorThrown)
@@ -34335,7 +34338,7 @@ $('#export_excel').on('click', function() {
 			//$(".loader_ajax").show();
 			 var vendor_id_qc_audit = $('#vendor_id_qc_audit').val();
 			 var vendor_po_id_qc_audit = $('#vendor_po_id_qc_audit').val();
-			 var fg_part_no_qc_audit = $('#fg_part_no_qc_audit').val();
+			 var fg_part_no_qc_audit = $('#og_part_id').val();
 
 			 $("#incoming_data_qc_audit").html('');
 			 $.ajax({

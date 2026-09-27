@@ -250,6 +250,7 @@
                                                 <tr>
                                                     <td class="qc-label"> FG Part Description </td>
                                                     <td>
+                                                        <input type="hidden" name="og_part_id" id="og_part_id">
                                                         <input type="text" name="fg_part_description_qc_audit" id="fg_part_description_qc_audit">
                                                     </td>
                                                 </tr>
@@ -278,10 +279,6 @@
                                                     <td>
                                                         <input type="number" id="vendor_po_qty_qc_audit" name="vendor_po_qty_qc_audit">
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="qc-label">FG Received Qty</td>
-                                                    <td><input type="number" name="fg_received_qty_qc_audit" id="fg_received_qty_qc_audit"></td>
                                                 </tr>
                                             </table>
                                             <br>
