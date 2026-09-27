@@ -307,7 +307,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div id="incoming-data"></div>
+                                                    <div id="incoming_data_qc_audit"></div>
                                                 </div>
                                             </div>
 

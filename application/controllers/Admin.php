@@ -33911,6 +33911,58 @@ public function deletesupplieritemattachment(){
             }
         }
     }
+
+
+
+    public function getincomingItemsforDisplayqulitychecking(){
+
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+
+            $vendor_id_qc_audit = $this->input->post('vendor_id_qc_audit');
+            $vendor_po_id_qc_audit = $this->input->post('vendor_po_id_qc_audit');
+            $fg_part_no_qc_audit = $this->input->post('fg_part_no_qc_audit');
+
+            // print_r($buyer_po_number);
+            // exit;
+        
+            // load table library
+            $this->load->library('table');
+            
+            // set heading
+            //$this->table->set_heading('Part Number', 'Description', 'Order Qty','Unit', 'Rate','Value');
+            $this->table->set_heading('Lot Number', 'Lot Qty', 'Invoice. No.');
+
+            // set template
+            $style = array('table_open'  => '<p><b>Received Qty</b></p><table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
+
+            $this->table->set_template($style);
+
+            $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.lot_no,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_no');
+            $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+
+            
+            //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+            
+            //$this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+            //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item where pre_buyer_po_number='.$buyer_po_number.')');
+            $this->db->where(TBL_INCOMING_DETAILS.'.vendor_name',$vendor_id_qc_audit);
+            $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number',$vendor_po_id_qc_audit);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$fg_part_no_qc_audit);
+            $query_result = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+
+            $data = $query_result->result_array();
+            
+            if($data){
+                echo $this->table->generate($query_result);
+
+            }else{
+                echo '';
+            }
+    
+       }
+    }
     
 
 

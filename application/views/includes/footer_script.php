@@ -34333,32 +34333,34 @@ $('#export_excel').on('click', function() {
 		$(document).on('change','.fg_part_no_qc_audit_getincoming',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
+			 var vendor_id_qc_audit = $('#vendor_id_qc_audit').val();
+			 var vendor_po_id_qc_audit = $('#vendor_po_id_qc_audit').val();
 			 var fg_part_no_qc_audit = $('#fg_part_no_qc_audit').val();
-			 var fg_part_no_qc_audit_getincoming = $('#fg_part_no_qc_audit_getincoming').val();
-			 $("#incoming-data").html('');
-			// $.ajax({
-			// 	url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
-			// 	type: "POST",
-			// 	data : {'buyer_po_number' : buyer_po_number},
-			// 	success: function(data, textStatus, jqXHR)
-			// 	{
-			// 		$(".loader_ajax").hide();
-			// 		if(data == "failure")
-			// 		{
-			// 			//$('#incoming-data').html('<option value="">Select Buyer PO Number</option>');
-			// 		}
-			// 		else
-			// 		{
-			// 			//$("#incoming-data").html(data);
 
-			// 		}
-			// 	},
-			// 	error: function (jqXHR, textStatus, errorThrown)
-			// 	{
-			// 		//$('#incoming-data').html();
-			// 	}
-			// });
-			// return false;
+			 $("#incoming_data_qc_audit").html('');
+			 $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getincomingItemsforDisplayqulitychecking",
+				type: "POST",
+				data : {'vendor_id_qc_audit' : vendor_id_qc_audit,'vendor_po_id_qc_audit' : vendor_po_id_qc_audit,'fg_part_no_qc_audit':fg_part_no_qc_audit},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#incoming_data_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						$("#incoming_data_qc_audit").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					//$('#incoming_data_qc_audit').html();
+				}
+			 });
+			return false;
 		});
 
 

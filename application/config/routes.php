@@ -733,6 +733,7 @@ $route['getBuyerPonumberbyBuyeridforqc'] = 'admin/getBuyerPonumberbyBuyeridforqc
 $route['getBuyerItemsforDisplayBybuyeridforqia'] = 'admin/getBuyerItemsforDisplayBybuyeridforqia';
 $route['getbuyeritemdataforforqia'] = 'admin/getbuyeritemdataforforqia';
 
+$route['getincomingItemsforDisplayqulitychecking'] = "admin/getincomingItemsforDisplayqulitychecking";
 
 
 
