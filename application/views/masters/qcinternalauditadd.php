@@ -243,56 +243,38 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="qc-label">
-                                                        FG Part Description
-                                                    </td>
+                                                    <td class="qc-label"> FG Part Description </td>
                                                     <td>
-                                                        <input type="text"
-                                                                name="fg_part_description">
+                                                        <input type="text" name="fg_part_description_qc_audit" id="fg_part_description_qc_audit">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="qc-label">
-                                                        Buyer P.O. Qty
-                                                    </td>
+                                                    <td class="qc-label"> Buyer P.O. Qty </td>
                                                     <td>
-                                                        <input type="number"
-                                                                name="buyer_po_qty">
+                                                        <input type="number" name="buyer_po_qty_qc_audit" id="buyer_po_qty_qc_audit" >
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="qc-label">
-                                                        Vendor Name
-                                                    </td>
+                                                    <td class="qc-label"> Vendor Name </td>
                                                     <td>
-                                                        <input type="text"
-                                                                name="vendor_name">
+                                                        <input type="text" name="vendor_name_qc_audit" id="vendor_name_qc_audit">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="qc-label">
-                                                        Vendor P.O. No.
-                                                    </td>
+                                                    <td class="qc-label"> Vendor P.O. No.</td>
                                                     <td>
-                                                        <input type="text"
-                                                                name="vendor_po_no">
+                                                        <input type="text" name="vendor_po_no_qc_audit" id="vendor_po_no_qc_audit">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="qc-label">
-                                                        Vendor P.O. Qty
-                                                    </td>
+                                                    <td class="qc-label">Vendor P.O. Qty</td>
                                                     <td>
-                                                        <input type="number"   name="vendor_po_qty">
+                                                        <input type="number" id="vendor_po_qty_qc_audit" name="vendor_po_qty_qc_audit">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="qc-label">
-                                                        FG Received Qty
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="fg_received_qty">
-                                                    </td>
+                                                    <td class="qc-label">FG Received Qty</td>
+                                                    <td><input type="number" name="fg_received_qty_qc_audit" id="fg_received_qty_qc_audit"></td>
                                                 </tr>
                                             </table>
                                             <br>

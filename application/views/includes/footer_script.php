@@ -34300,7 +34300,33 @@ $('#export_excel').on('click', function() {
 		});
 
 
-		
 
+		$(document).on('change','#fg_part_no_qc_audit',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			//var item_id = buyer_part_number
+			var item_id = $('#fg_part_no_qc_audit').val();
+			$.ajax({
+				url : "<?php echo base_url();?>getbuyeritemdataforforqia",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#fg_part_description_qc_audit').val(fetchResponse.description);  
+						$('#buyer_po_qty_qc_audit').val(fetchResponse.order_oty);  
+						$('#vendor_name_qc_audit').val(fetchResponse.vendor_name);  
+						$('#vendor_po_no_qc_audit').val(fetchResponse.po_number);  
+						$('#vendor_po_qty_qc_audit').val(fetchResponse.vendor_po_qty); 
+						$('#fg_received_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
 </script>
 <?php } ?>

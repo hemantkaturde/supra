@@ -33899,6 +33899,18 @@ public function deletesupplieritemattachment(){
     }
 
 
+      public function getbuyeritemdataforforqia(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getbuyeritemdataforforqia = $this->admin_model->getbuyeritemdataforforqia(trim($this->input->post('id')));
+            if($getbuyeritemdataforforqia){
+                $content = $getbuyeritemdataforforqia[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
     
 
 

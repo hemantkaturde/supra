@@ -28849,6 +28849,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getbuyeritemdataforforqia($id){
+
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction,'.TBL_BUYER_PO_MASTER_ITEM.'.item_po_status,'.TBL_BUYER_PO_MASTER_ITEM.'.inco_terms,'.TBL_BUYER_PO_MASTER_ITEM.'.item_remark_box,'.TBL_VENDOR.'.vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_po_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_actual_reved_qty');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $id);
+    $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+  }
+
+
+
 }
 
 ?>
