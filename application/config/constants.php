@@ -215,6 +215,7 @@ define('TBL_FORGING_SCARP_WORKING','tbl_forging_scarp_working');
 define('TBL_FORGING_SCARP_WORKING_REPORT_DATA','tbl_forging_scarp_working_report_data');
 define('TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE','tbl_checklist_report_part_inspection_date');
 define('TBL_CHECKLIST_INCOMING_LOT_DATA','tbl_checklist_incoming_lot_data');
+define('TBL_QC_INTERNAL_AUDIT','tbl_qc_internal_audit');
 
 
 

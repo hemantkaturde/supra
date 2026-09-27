@@ -34231,8 +34231,41 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='Add QC Internal Audit'){ ?>
+<?php if($pageTitle=='Add QC Internal Audit' || $pageTitle=='QC Internal Audit List'){ ?>
 <script type="text/javascript">
+
+        $(document).ready(function() {
+			    var dt = $('#view_qc_internal_audit').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "8%", "targets": 0 },
+						{ "width": "8%", "targets": 1 },	
+						{ "width": "15%", "targets": 2 },
+						{ "width": "15%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "8%", "targets": 8 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>QC Internal Audit Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchqcinternalauditlist",
+						type: "post",
+					},
+				});
+        });
+
 
         $(document).on('change','#buyer_name_qc_audit',function(e){  
 			e.preventDefault();
@@ -34367,6 +34400,100 @@ $('#export_excel').on('click', function() {
 		});
 
 
+		$(document).on('click','#saveqcinternalaudit',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#qcinternalauditaddform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>qcinternalauditadd",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "QC Internal Audit Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								$("#modal-md").hide();
+								window.location.href = "<?php echo base_url().'qcinternalaudit'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+		$(document).on('click','.deleteqcinternalaudit',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "QC Internal Audit Record",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>admin/deleteqcinternalaudit",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "QC Internal Audit Record Part Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>qcinternalaudit";
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "QC Internal Audit Part deletion cancelled ", "error");
+						}
+					});
+	    });
 
 </script>
 <?php } ?>

@@ -46,14 +46,14 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_qc_internal_audit">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Audit No</th>
+                                        <th>QC Audit No</th>
                                         <th>Audit Date</th>
-                                        <th>Vendor Name</th>
-                                        <th>Vendor PO</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer PO</th>
                                         <th>FG Part No</th>
                                         <th>FG Received Qty</th>
+                                        <th>Vendor Name</th>
+                                        <th>Vendor PO</th>
                                         <th>Verified By</th>
                                         <th>Action</th>
                                     </tr>

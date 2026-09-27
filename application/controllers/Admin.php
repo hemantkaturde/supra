@@ -33718,6 +33718,7 @@ public function deletesupplieritemattachment(){
             );
         echo json_encode($json_data);
     }
+
     public function deleteincominglotrecord(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -33733,6 +33734,7 @@ public function deletesupplieritemattachment(){
             echo(json_encode(array('status'=>'failed'))); 
         }
     }
+
     public function getlotdetailsforeditincomingdata(){
         $id = trim($this->input->post('id'));
         $getincominglotdataedit = $this->admin_model->getsingleincominglot($id);
@@ -33747,11 +33749,11 @@ public function deletesupplieritemattachment(){
     
     public function qcinternalauditlist()
     {
-            $data['title'] = 'QC Internal Audit';
-            $process = 'QC Internal Audit';
+            $data['title'] = 'QC Internal Audit List';
+            $process = 'QC Internal Audit List';
             $processFunction = 'Admin/qcinternalauditlist';
             $this->logrecord($process,$processFunction);
-            $this->global['pageTitle'] = 'QC Internal Audit';
+            $this->global['pageTitle'] = 'QC Internal Audit List';
             //$this->load->view('masters/qcinternalauditlist', $data);
             $this->loadViews("masters/qcinternalauditlist", $this->global, $data, NULL);
     }
@@ -33759,100 +33761,171 @@ public function deletesupplieritemattachment(){
 
     public function qcinternalauditadd()
     {
-        $data['title'] = 'Add QC Internal Audit';
-        $process = 'QC Internal Audit';
-        $processFunction = 'Admin/qcinternalauditlist';
-        $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
-        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
-        $this->global['pageTitle'] = 'Add QC Internal Audit';
-        $this->loadViews('masters/qcinternalauditadd',$this->global ,$data, NULL);
-    }
-
-
-    public function qcinternalauditedit($id)
-    {
-        $data['title'] = 'Edit QC Internal Audit';
-
-        $data['audit'] = $this->admin_model->get_qc_internal_audit($id);
-
-        if (empty($data['audit'])) {
-            show_404();
+        $post_submit = $this->input->post();
+        if($post_submit){
+                $qcinternalauditadd_response = array();
+                $this->form_validation->set_rules('qc_internal_audit_no','QC Internal Audit No','trim|required');
+                $this->form_validation->set_rules('qc_internal_audit_date','QC Internal Audit Date','trim|required');
+                $this->form_validation->set_rules('buyer_name_qc_audit','Buyer Name QC Audit','trim|required');
+                $this->form_validation->set_rules('buyer_po_number_qc_audit','Buyer PO Number_qc_audit','trim|required');
+                $this->form_validation->set_rules('fg_part_no_qc_audit','FG Part No QC Audit','trim');
+                $this->form_validation->set_rules('fg_part_description_qc_audit','fg_part_description_qc_audit','trim');
+                $this->form_validation->set_rules('buyer_po_qty_qc_audit','buyer_po_qty_qc_audit','trim');
+                $this->form_validation->set_rules('vendor_id_qc_audit','vendor_id_qc_audit','trim');
+                $this->form_validation->set_rules('vendor_po_id_qc_audit','vendor_po_id_qc_audit','trim');
+                $this->form_validation->set_rules('vendor_po_qty_qc_audit','vendor_po_qty_qc_audit','trim');
+                $this->form_validation->set_rules('dispatch_qty_qc_adit','dispatch_qty_qc_adit','trim');
+                
+                if($this->form_validation->run() == FALSE)
+                {
+                    $qcinternalauditadd_response['status'] = 'failure';
+                    $qcinternalauditadd_response['error'] = array('qc_internal_audit_no'=>strip_tags(form_error('qc_internal_audit_no')),'qc_internal_audit_date'=>strip_tags(form_error('qc_internal_audit_date')),'buyer_name_qc_audit'=>strip_tags(form_error('buyer_name_qc_audit')),'buyer_po_number_qc_audit'=>strip_tags(form_error('buyer_po_number_qc_audit')),'fg_part_no_qc_audit'=>strip_tags(form_error('fg_part_no_qc_audit')),'fg_part_description_qc_audit'=>strip_tags(form_error('fg_part_description_qc_audit')),'buyer_po_qty_qc_audit'=>strip_tags(form_error('buyer_po_qty_qc_audit')),'vendor_id_qc_audit'=>strip_tags(form_error('vendor_id_qc_audit')), 'vendor_po_id_qc_audit'=>strip_tags(form_error('vendor_po_id_qc_audit')),'vendor_po_qty_qc_audit'=>strip_tags(form_error('vendor_po_qty_qc_audit')),'dispatch_qty_qc_adit'=>strip_tags(form_error('dispatch_qty_qc_adit')));
+            
+                }else{
+                    $data = array(
+                        'qc_internal_audit_no'   => trim($this->input->post('qc_internal_audit_no')),
+                        'qc_internal_audit_date'   => trim($this->input->post('qc_internal_audit_date')),
+                        'buyer_name_qc_audit'   => trim($this->input->post('buyer_name_qc_audit')),
+                        'buyer_po_number_qc_audit'=>  trim($this->input->post('buyer_po_number_qc_audit')),
+                        'fg_part_no_qc_audit'   => trim($this->input->post('fg_part_no_qc_audit')),
+                        'fg_part_description_qc_audit'     => trim($this->input->post('fg_part_description_qc_audit')),
+                        'buyer_po_qty_qc_audit'     => trim($this->input->post('buyer_po_qty_qc_audit')),
+                        'vendor_id_qc_audit'     => trim($this->input->post('vendor_id_qc_audit')),
+                        'vendor_po_id_qc_audit' => trim($this->input->post('vendor_po_id_qc_audit')),
+                        'vendor_po_qty_qc_audit'     => trim($this->input->post('vendor_po_qty_qc_audit')),
+                        'dispatch_qty_qc_adit'     => trim($this->input->post('dispatch_qty_qc_adit'))
+                    );
+                    $qcinternalaudit_submit = $this->admin_model->qcinternalauditadd($check_list_incoming_checklist_id,$data);
+                    if($qcinternalaudit_submit){
+                        $qcinternalauditadd_response['status'] = 'success';
+                        $qcinternalauditadd_response['error'] = array('qc_internal_audit_no'=>strip_tags(form_error('qc_internal_audit_no')),'qc_internal_audit_date'=>strip_tags(form_error('qc_internal_audit_date')),'buyer_name_qc_audit'=>strip_tags(form_error('buyer_name_qc_audit')),'buyer_po_number_qc_audit'=>strip_tags(form_error('buyer_po_number_qc_audit')),'fg_part_no_qc_audit'=>strip_tags(form_error('fg_part_no_qc_audit')),'fg_part_description_qc_audit'=>strip_tags(form_error('fg_part_description_qc_audit')),'buyer_po_qty_qc_audit'=>strip_tags(form_error('buyer_po_qty_qc_audit')),'vendor_id_qc_audit'=>strip_tags(form_error('vendor_id_qc_audit')), 'vendor_po_id_qc_audit'=>strip_tags(form_error('vendor_po_id_qc_audit')),'vendor_po_qty_qc_audit'=>strip_tags(form_error('vendor_po_qty_qc_audit')),'dispatch_qty_qc_adit'=>strip_tags(form_error('dispatch_qty_qc_adit')));
+                    }
+                }
+            echo json_encode($qcinternalauditadd_response);
+                
+        }else{
+            $data['title'] = 'Add QC Internal Audit';
+            $process = 'QC Internal Audit';
+            $processFunction = 'Admin/qcinternalauditlist';
+            // $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $this->global['pageTitle'] = 'Add QC Internal Audit';
+            $this->loadViews('masters/qcinternalauditadd',$this->global ,$data, NULL);
         }
-
-        $this->load->view('masters/qcinternalauditedit', $data);
+       
     }
 
-    public function qcinternalauditsave()
+    public function fetchqcinternalauditlist()
     {
-        $data = $this->input->post();
-
-        if (empty($data['audit_no'])) {
-            $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
-        }
-
-        $this->admin_model->insert_qc_internal_audit($data);
-
-        redirect('qcinternalauditlist');
-    }
-
-
-    public function qcinternalauditupdate($id)
-    {
-        $data = $this->input->post();
-
-        $this->admin_model->update_qc_internal_audit($id, $data);
-
-        redirect('qcinternalauditlist');
-    }
-
-
-    public function qcinternalauditdelete($id)
-    {
-        $this->admin_model->delete_qc_internal_audit($id);
-
-        redirect('qcinternalauditlist');
-    }
-
-
-    public function qcinternalauditajax()
-    {
-        $records = $this->admin_model->get_qc_internal_audit_list();
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchqcinternalauditlistcount($params,$id); 
+        $queryRecords = $this->admin_model->fetchqcinternalauditlistdata($params,$id); 
 
         $data = array();
-
-        foreach ($records as $row) {
-
-            $action = '';
-
-            $action .= '<a href="' . base_url('qcinternalauditedit/' . $row->id) . '" 
-                        class="btn btn-sm btn-primary">
-                        <i class="fa fa-edit"></i>
-                        </a> ';
-
-            $action .= '<a href="' . base_url('qcinternalauditdelete/' . $row->id) . '" 
-                        class="btn btn-sm btn-danger"
-                        onclick="return confirm(\'Are you sure you want to delete this audit?\');">
-                        <i class="fa fa-trash"></i>
-                        </a>';
-
-            $data[] = array(
-                $row->audit_no,
-                $row->audit_date,
-                $row->vendor_name,
-                $row->vendor_po_no,
-                $row->buyer_name,
-                $row->buyer_po_no,
-                $row->fg_part_no,
-                $row->fg_received_qty,
-                $row->verified_by,
-                $action
-            );
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
         }
-
-        echo json_encode(array(
-            'data' => $data
-        ));
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    
     }
+
+
+    // public function qcinternalauditedit($id)
+    // {
+    //     $data['title'] = 'Edit QC Internal Audit';
+
+    //     $data['audit'] = $this->admin_model->get_qc_internal_audit($id);
+
+    //     if (empty($data['audit'])) {
+    //         show_404();
+    //     }
+
+    //     $this->load->view('masters/qcinternalauditedit', $data);
+    // }
+
+    // public function qcinternalauditsave()
+    // {
+    //     $data = $this->input->post();
+
+    //     if (empty($data['audit_no'])) {
+    //         $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+    //     }
+
+    //     $this->admin_model->insert_qc_internal_audit($data);
+
+    //     redirect('qcinternalauditlist');
+    // }
+
+
+    // public function qcinternalauditupdate($id)
+    // {
+    //     $data = $this->input->post();
+
+    //     $this->admin_model->update_qc_internal_audit($id, $data);
+
+    //     redirect('qcinternalauditlist');
+    // }
+
+
+    // public function qcinternalauditdelete($id)
+    // {
+    //     $this->admin_model->delete_qc_internal_audit($id);
+
+    //     redirect('qcinternalauditlist');
+    // }
+
+
+    // public function qcinternalauditajax()
+    // {
+    //     $records = $this->admin_model->get_qc_internal_audit_list();
+
+    //     $data = array();
+
+    //     foreach ($records as $row) {
+
+    //         $action = '';
+
+    //         $action .= '<a href="' . base_url('qcinternalauditedit/' . $row->id) . '" 
+    //                     class="btn btn-sm btn-primary">
+    //                     <i class="fa fa-edit"></i>
+    //                     </a> ';
+
+    //         $action .= '<a href="' . base_url('qcinternalauditdelete/' . $row->id) . '" 
+    //                     class="btn btn-sm btn-danger"
+    //                     onclick="return confirm(\'Are you sure you want to delete this audit?\');">
+    //                     <i class="fa fa-trash"></i>
+    //                     </a>';
+
+    //         $data[] = array(
+    //             $row->audit_no,
+    //             $row->audit_date,
+    //             $row->vendor_name,
+    //             $row->vendor_po_no,
+    //             $row->buyer_name,
+    //             $row->buyer_po_no,
+    //             $row->fg_part_no,
+    //             $row->fg_received_qty,
+    //             $row->verified_by,
+    //             $action
+    //         );
+    //     }
+
+    //     echo json_encode(array(
+    //         'data' => $data
+    //     ));
+    // }
 
 
     public function getBuyerPonumberbyBuyeridforqc(){
@@ -33898,8 +33971,7 @@ public function deletesupplieritemattachment(){
 		}
     }
 
-
-      public function getbuyeritemdataforforqia(){
+    public function getbuyeritemdataforforqia(){
         $post_submit = $this->input->post();
         if($post_submit){
             $getbuyeritemdataforforqia = $this->admin_model->getbuyeritemdataforforqia(trim($this->input->post('id')));
@@ -33911,8 +33983,6 @@ public function deletesupplieritemattachment(){
             }
         }
     }
-
-
 
     public function getincomingItemsforDisplayqulitychecking(){
 
@@ -33960,10 +34030,23 @@ public function deletesupplieritemattachment(){
     
        }
     }
+
+
+    public function deleteqcinternalaudit(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteqcinternalaudit(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'QC Internal Audit Delete';
+                        $processFunction = 'Admin/deleteqcinternalaudit';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
     
-
-
-
-
 
 }

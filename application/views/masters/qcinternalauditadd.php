@@ -189,33 +189,32 @@
                                     <div class="box">
                                       <div class="box-body">
                                         <div class="panel-body">
-                                          <form id="qcInternalAuditForm" method="post" action="">
+                                         <form role="form" id="qcinternalauditaddform" action="<?php echo base_url() ?>qcinternalauditaddform" method="post" role="form">
                                             <div class="row">
                                               <div class="col-md-6">
                                                 <table class="qc-table">
                                                   <tr>
-                                                    <td class="qc-label"> ID No.</td>
+                                                    <td class="qc-label"> ID No.<span class="required">*</span></td>
                                                     <td style="width:180px;">
                                                       <input type="text" name="qc_internal_audit_no" id="qc_internal_audit_no" value="SQPCA2526001">
                                                     </td>
                                                   </tr>
                                                   <tr> <?php $current_date = date('Y-m-d');?> <td class="qc-label"> Date </td>
                                                     <td>
-                                                      <input type="date" name="qc_internal_audit_date" id="qc_internal_audit_date" value="
-															<?php echo $current_date;?>">
+                                                      <input type="date" name="qc_internal_audit_date" id="qc_internal_audit_date" value="<?php echo $current_date;?>">
                                                     </td>
                                                   </tr>
                                                   <tr>
-                                                    <td class="qc-label">Buyer Name</td>
+                                                    <td class="qc-label">Buyer Name <span class="required">*</span></td>
                                                     <td>
                                                       <select name="buyer_name_qc_audit" id="buyer_name_qc_audit" class="form-control input-sm">
-                                                        <option st-id="" value="">Select Buyer Name</option> <?php foreach ($buyerList as $key => $value) {?> <option value="
-																	<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLitemList[0]['pre_buyer_name']){ echo 'selected';} ?>> <?php echo $value['buyer_name']; ?> </option> <?php } ?>
+                                                        <option st-id="" value="">Select Buyer Name</option> <?php foreach ($buyerList as $key => $value) {?> 
+                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLitemList[0]['pre_buyer_name']){ echo 'selected';} ?>> <?php echo $value['buyer_name']; ?> </option> <?php } ?>
                                                       </select>
                                                     </td>
                                                   </tr>
                                                   <tr>
-                                                    <td class="qc-label">Buyer P.O. No.</td>
+                                                    <td class="qc-label">Buyer P.O. No.<span class="required">*</span></td>
                                                     <td>
                                                       <select name="buyer_po_number_qc_audit" id="buyer_po_number_qc_audit" class="form-control input-sm">
                                                         <option value="">Select Buyer PO Number</option>
@@ -223,7 +222,7 @@
                                                     </td>
                                                   </tr>
                                                   <tr>
-                                                    <td class="qc-label">FG Part No.</td>
+                                                    <td class="qc-label">FG Part No.<span class="required">*</span></td>
                                                     <td>
                                                       <select class="fg_part_no_qc_audit_getincoming" name="fg_part_no_qc_audit" id="fg_part_no_qc_audit" class="form-control input-sm">
                                                         <option value="">Select FG Part No </option>
@@ -274,7 +273,7 @@
                                                       <b> Dispatch Qty (in Pcs) </b>
                                                     </td>
                                                     <td style="width:292px;">
-                                                      <input type="number" name="dispatch_qty" placeholder="Buyer Invoice qty from packaging with invoice no">
+                                                      <input type="number" id="dispatch_qty_qc_adit" name="dispatch_qty_qc_adit" placeholder="Buyer Invoice qty from packaging with invoice no">
                                                     </td>
                                                   </tr>
                                                 </table>
@@ -477,8 +476,7 @@
                                             <br>
                                             <!-- BUTTONS -->
                                             <div class="text-right qc-save-area">
-                                              <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-save"></i> Save </button>
+                                              <button type="submit" id="saveqcinternalaudit" class="btn btn-primary"><i class="fa fa-save"></i> Save </button>
                                               <button type="reset" class="btn btn-default"> Reset </button>
                                             </div>
                                           </form>
@@ -489,7 +487,5 @@
                                 </div>
                               </section>
                             </div>
-                            <script type="text/javascript" src="
-																																						<?php echo base_url(); ?>
-                    assets/js/common.js" charset="utf-8">
+                            <script type="text/javascript" src="assets/js/common.js" charset="utf-8">
                             </script>

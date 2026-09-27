@@ -28703,6 +28703,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
         return $data;
     }
+
+
     function deleteincominglotrecord($id){
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
@@ -28712,6 +28714,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
            return FALSE;
         }
     }
+
     function getsingleincominglot($id){
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty as received_qty1,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date as received_date1,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.id as baseTbl_id');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM,TBL_INCOMING_DETAILS_ITEM . '.id = ' . TBL_CHECKLIST_INCOMING_LOT_DATA . '.lot_number');
@@ -28739,80 +28742,80 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     * QC INTERNAL AUDIT
     * ========================================================= */
 
-    public function get_qc_internal_audit_list()
-    {
-        $this->db->order_by('id', 'DESC');
-        return $this->db->get('tbl_qc_internal_audit')->result();
-    }
+    // public function get_qc_internal_audit_list()
+    // {
+    //     $this->db->order_by('id', 'DESC');
+    //     return $this->db->get('tbl_qc_internal_audit')->result();
+    // }
 
 
-    /* Get single audit record */
-    public function get_qc_internal_audit($id)
-    {
-        return $this->db
-            ->where('id', $id)
-            ->get('tbl_qc_internal_audit')
-            ->row();
-    }
+    // /* Get single audit record */
+    // public function get_qc_internal_audit($id)
+    // {
+    //     return $this->db
+    //         ->where('id', $id)
+    //         ->get('tbl_qc_internal_audit')
+    //         ->row();
+    // }
 
 
-    /* Get next Audit Number */
-    public function get_next_qc_internal_audit_no()
-    {
-        $this->db->select('audit_no');
-        $this->db->order_by('id', 'DESC');
-        $this->db->limit(1);
+    // /* Get next Audit Number */
+    // public function get_next_qc_internal_audit_no()
+    // {
+    //     $this->db->select('audit_no');
+    //     $this->db->order_by('id', 'DESC');
+    //     $this->db->limit(1);
 
-        $query = $this->db->get('tbl_qc_internal_audit');
+    //     $query = $this->db->get('tbl_qc_internal_audit');
 
-        if ($query->num_rows() > 0) {
+    //     if ($query->num_rows() > 0) {
 
-            $last_no = $query->row()->audit_no;
+    //         $last_no = $query->row()->audit_no;
 
-            // Extract numeric part
-            preg_match('/(\d+)$/', $last_no, $matches);
+    //         // Extract numeric part
+    //         preg_match('/(\d+)$/', $last_no, $matches);
 
-            if (!empty($matches[1])) {
-                $next_no = (int)$matches[1] + 1;
-            } else {
-                $next_no = 1;
-            }
+    //         if (!empty($matches[1])) {
+    //             $next_no = (int)$matches[1] + 1;
+    //         } else {
+    //             $next_no = 1;
+    //         }
 
-        } else {
-            $next_no = 1;
-        }
+    //     } else {
+    //         $next_no = 1;
+    //     }
 
-        return 'QCA-' . str_pad($next_no, 4, '0', STR_PAD_LEFT);
-    }
-
-
-    /* Insert */
-    public function insert_qc_internal_audit($data)
-    {
-        return $this->db->insert('tbl_qc_internal_audit', $data);
-    }
+    //     return 'QCA-' . str_pad($next_no, 4, '0', STR_PAD_LEFT);
+    // }
 
 
-    /* Update */
-    public function update_qc_internal_audit($id, $data)
-    {
-        return $this->db
-            ->where('id', $id)
-            ->update('tbl_qc_internal_audit', $data);
-    }
+    // /* Insert */
+    // public function insert_qc_internal_audit($data)
+    // {
+    //     return $this->db->insert('tbl_qc_internal_audit', $data);
+    // }
 
 
-    /* Delete */
-    public function delete_qc_internal_audit($id)
-    {
-        return $this->db
-            ->where('id', $id)
-            ->delete('tbl_qc_internal_audit');
-    }
+    // /* Update */
+    // public function update_qc_internal_audit($id, $data)
+    // {
+    //     return $this->db
+    //         ->where('id', $id)
+    //         ->update('tbl_qc_internal_audit', $data);
+    // }
+
+
+    // /* Delete */
+    // public function delete_qc_internal_audit($id)
+    // {
+    //     return $this->db
+    //         ->where('id', $id)
+    //         ->delete('tbl_qc_internal_audit');
+    // }
 
 
 
-      public function getBuyerPonumberbyBuyeridforqc($buyer_name){
+    public function getBuyerPonumberbyBuyeridforqc($buyer_name){
 
         $this->db->select(TBL_BUYER_PO_MASTER.'.*');
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id');
@@ -28851,21 +28854,132 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getbuyeritemdataforforqia($id){
 
-    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction,'.TBL_BUYER_PO_MASTER_ITEM.'.item_po_status,'.TBL_BUYER_PO_MASTER_ITEM.'.inco_terms,'.TBL_BUYER_PO_MASTER_ITEM.'.item_remark_box,'.TBL_VENDOR.'.vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_po_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_actual_reved_qty,'.TBL_VENDOR.'.ven_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id');
-    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
-    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
-    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction,'.TBL_BUYER_PO_MASTER_ITEM.'.item_po_status,'.TBL_BUYER_PO_MASTER_ITEM.'.inco_terms,'.TBL_BUYER_PO_MASTER_ITEM.'.item_remark_box,'.TBL_VENDOR.'.vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_po_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_actual_reved_qty,'.TBL_VENDOR.'.ven_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
 
-    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $id);
-    $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
-    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
-    $fetch_result = $query->result_array();
-    return $fetch_result;
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $id);
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
-  }
+    }
 
+
+    public function qcinternalauditadd($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_QC_INTERNAL_AUDIT, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_QC_INTERNAL_AUDIT, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
+    public function fetchqcinternalauditlistcount($params){
+
+        $this->db->select(TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_no,'.TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_QC_INTERNAL_AUDIT.'.buyer_po_qty_qc_audit,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_BUYER_MASTER,TBL_BUYER_MASTER . '.buyer_id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_name_qc_audit');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_BUYER_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_po_number_qc_audit');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' .TBL_QC_INTERNAL_AUDIT . '.fg_part_no_qc_audit');
+        $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.vendor_po_id_qc_audit');
+        $this->db->join(TBL_VENDOR,TBL_VENDOR. '.ven_id = ' . TBL_QC_INTERNAL_AUDIT . '.vendor_id_qc_audit');
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_QC_INTERNAL_AUDIT.".qc_internal_audit_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_INTERNAL_AUDIT.".qc_internal_audit_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_INTERNAL_AUDIT.".buyer_po_qty_qc_audit LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->order_by(TBL_QC_INTERNAL_AUDIT.'.id','DESC');
+        $query = $this->db->get(TBL_QC_INTERNAL_AUDIT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function fetchqcinternalauditlistdata($params){
+
+        $this->db->select(TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_no,'.TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_QC_INTERNAL_AUDIT.'.buyer_po_qty_qc_audit,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_VENDOR.'.vendor_name,'.TBL_QC_INTERNAL_AUDIT.'.id as qc_internal_audit_id');
+        $this->db->join(TBL_BUYER_MASTER,TBL_BUYER_MASTER . '.buyer_id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_name_qc_audit');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_BUYER_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_po_number_qc_audit');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' .TBL_QC_INTERNAL_AUDIT . '.fg_part_no_qc_audit');
+        $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.vendor_po_id_qc_audit');
+        $this->db->join(TBL_VENDOR,TBL_VENDOR. '.ven_id = ' . TBL_QC_INTERNAL_AUDIT . '.vendor_id_qc_audit');
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_QC_INTERNAL_AUDIT.".qc_internal_audit_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_INTERNAL_AUDIT.".qc_internal_audit_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_INTERNAL_AUDIT.".buyer_po_qty_qc_audit LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->order_by(TBL_QC_INTERNAL_AUDIT.'.id','DESC');
+        $query = $this->db->get(TBL_QC_INTERNAL_AUDIT);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['qc_internal_audit_no'] =  $value['qc_internal_audit_no'];
+                $data[$counter]['qc_internal_audit_date'] =  date('d-m-Y', strtotime($value['qc_internal_audit_date']));
+                $data[$counter]['buyer_name'] =  $value['buyer_name'];
+                $data[$counter]['sales_order_number'] =  $value['sales_order_number'].'-'.$value['buyer_po_number'];
+                $data[$counter]['part_number'] =  $value['part_number'];
+                $data[$counter]['buyer_po_qty_qc_audit'] =  $value['buyer_po_qty_qc_audit'];
+                $data[$counter]['vendor_name'] =  $value['vendor_name'];
+                $data[$counter]['vendor_po'] =  $value['vendor_po'];
+                $data[$counter]['verify_by'] =  '';
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateRawmaterial/".$value['raw_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['qc_internal_audit_id']."' class='fa fa-trash-o deleteqcinternalaudit' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+    function deleteqcinternalaudit($id){
+        $this->db->where('id', $id);
+        if($this->db->delete(TBL_QC_INTERNAL_AUDIT)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
 
 
 }
