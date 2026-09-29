@@ -347,11 +347,7 @@
                                               <tr class="qc-tall">
                                                 <td> Visual 100% checking </td>
                                                 <td class="qc-center">
-                                                  <select name="visual_team" class="form-control input-sm">
-                                                    <option value=""> Team Drop Down </option>
-                                                    <option value="Team 1"> Team 1 </option>
-                                                    <option value="Team 2"> Team 2 </option>
-                                                  </select>
+                                                 <input type="text" name="observation_visual_100">
                                                 </td>
                                                 <td>
                                                   <input type="text" name="observation_visual_100">
@@ -361,9 +357,7 @@
                                               <tr class="qc-large">
                                                 <td> Sampling as per the sampling plan Doc. No. SIS/R Rev.02 </td>
                                                 <td class="qc-center">
-                                                  <select name="sampling_team_member" class="form-control input-sm">
-                                                    <option value=""> Team member drop down of the above selected team </option>
-                                                  </select>
+                                                 <input type="text" name="observation_visual_100">
                                                 </td>
                                                 <td>
                                                   <input type="text" name="observation_sampling">
@@ -407,11 +401,7 @@
                                               <tr>
                                                 <td> Packing </td>
                                                 <td class="qc-center">
-                                                  <select name="packing_team" class="form-control input-sm">
-                                                    <option value=""> Team Drop Down </option>
-                                                    <option value="Team 1"> Team 1 </option>
-                                                    <option value="Team 2"> Team 2 </option>
-                                                  </select>
+                                                 <input type="text" name="observation_visual_100">
                                                 </td>
                                                 <td>
                                                   <input type="text" name="observation_packing">
@@ -456,19 +446,18 @@
                                                 <td>
                                                   <div class="footer-field">
                                                     <label> Verified by :- </label>
-                                                    <input type="text" name="verified_by_footer" class="footer-input">
+                                                    
                                                   </div>
                                                 </td>
                                                 <td>
                                                   <div class="footer-field">
-                                                    <label> Name from form or print </label>
-                                                    <input type="text" name="verified_name" class="footer-input">
+                                                   <input type="text" name="verified_by_footer" class="footer-input">
                                                   </div>
                                                 </td>
                                                 <td>
                                                   <div class="footer-field">
                                                     <label> Doc. No. </label>
-                                                    <input type="text" name="doc_no" value="" class="footer-input">
+                                                    <input type="text" name="doc_no" value="SQ/PR/O55 Rev. 00" class="footer-input">
                                                   </div>
                                                 </td>
                                               </tr>
