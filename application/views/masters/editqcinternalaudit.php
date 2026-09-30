@@ -1,3 +1,6 @@
+                            
+                            <?php //print_r($qcinternalauditdata[0]);exit;  ?>
+                            
                             <style>
                               .qc-table {
                                 /* width: 100%; */
@@ -166,7 +169,7 @@
                               <!-- Content Header -->
                               <section class="content-header">
                                 <h1>
-                                  <i class="fa fa-check-square-o"></i> QC Internal Audit <small> Add, Edit, Delete </small>
+                                  <i class="fa fa-check-square-o"></i> Edit QC Internal Audit <small> Add, Edit, Delete </small>
                                 </h1>
                               </section>
                               <section class="content">
@@ -196,12 +199,13 @@
                                                   <tr>
                                                     <td class="qc-label"> ID No.<span class="required">*</span></td>
                                                     <td style="width:180px;">
-                                                      <input type="text" name="qc_internal_audit_no" id="qc_internal_audit_no" value="SQPCA2526001">
+                                                      <input type="text" name="qc_internal_audit_no" id="qc_internal_audit_no" value="<?=$qcinternalauditdata[0]['qc_internal_audit_no'];?>">
+                                                      <input type="hidden" name="qc_internal_audit_edit_id" id="qc_internal_audit_edit_id" value="<?=$qcinternalauditdata[0]['qc_internal_audit_id'];?>">
                                                     </td>
                                                   </tr>
                                                   <tr> <?php $current_date = date('Y-m-d');?> <td class="qc-label"> Date </td>
                                                     <td>
-                                                      <input type="date" name="qc_internal_audit_date" id="qc_internal_audit_date" value="<?php echo $current_date;?>">
+                                                      <input type="date" name="qc_internal_audit_date" id="qc_internal_audit_date" value="<?=$qcinternalauditdata[0]['qc_internal_audit_date'];?>">
                                                     </td>
                                                   </tr>
                                                   <tr>
@@ -209,7 +213,7 @@
                                                     <td>
                                                       <select name="buyer_name_qc_audit" id="buyer_name_qc_audit" class="form-control input-sm">
                                                         <option st-id="" value="">Select Buyer Name</option> <?php foreach ($buyerList as $key => $value) {?> 
-                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLitemList[0]['pre_buyer_name']){ echo 'selected';} ?>> <?php echo $value['buyer_name']; ?> </option> <?php } ?>
+                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$qcinternalauditdata[0]['buyer_name_qc_audit']){ echo 'selected';} ?>> <?php echo $value['buyer_name']; ?> </option> <?php } ?>
                                                       </select>
                                                     </td>
                                                   </tr>
@@ -233,33 +237,33 @@
                                                     <td class="qc-label"> FG Part Description </td>
                                                     <td>
                                                       <input type="hidden" name="og_part_id" id="og_part_id">
-                                                      <input type="text" name="fg_part_description_qc_audit" id="fg_part_description_qc_audit">
+                                                      <input type="text" name="fg_part_description_qc_audit" id="fg_part_description_qc_audit" value="<?=$qcinternalauditdata[0]['fg_part_description_qc_audit'];?>">
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td class="qc-label"> Buyer P.O. Qty </td>
                                                     <td>
-                                                      <input type="number" name="buyer_po_qty_qc_audit" id="buyer_po_qty_qc_audit">
+                                                      <input type="number" name="buyer_po_qty_qc_audit" id="buyer_po_qty_qc_audit" value="<?=$qcinternalauditdata[0]['buyer_po_qty_qc_audit'];?>">
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td class="qc-label"> Vendor Name </td>
                                                     <td>
-                                                      <input type="text" name="vendor_name_qc_audit" id="vendor_name_qc_audit">
-                                                      <input type="hidden" name="vendor_id_qc_audit" id="vendor_id_qc_audit">
+                                                      <input type="text" name="vendor_name_qc_audit" id="vendor_name_qc_audit" value="<?=$qcinternalauditdata[0]['vendor_name'];?>">
+                                                      <input type="hidden" name="vendor_id_qc_audit" id="vendor_id_qc_audit" value="<?=$qcinternalauditdata[0]['vendor_id_qc_audit'];?>">
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td class="qc-label"> Vendor P.O. No.</td>
                                                     <td>
-                                                      <input type="text" name="vendor_po_no_qc_audit" id="vendor_po_no_qc_audit">
-                                                      <input type="hidden" name="vendor_po_id_qc_audit" id="vendor_po_id_qc_audit">
+                                                      <input type="text" name="vendor_po_no_qc_audit" id="vendor_po_no_qc_audit"  value="<?=$qcinternalauditdata[0]['vendor_po'];?>">
+                                                      <input type="hidden" name="vendor_po_id_qc_audit" id="vendor_po_id_qc_audit" value="<?=$qcinternalauditdata[0]['vendor_po_id_qc_audit'];?>">
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td class="qc-label">Vendor P.O. Qty</td>
                                                     <td>
-                                                      <input type="number" id="vendor_po_qty_qc_audit" name="vendor_po_qty_qc_audit">
+                                                      <input type="number" id="vendor_po_qty_qc_audit" name="vendor_po_qty_qc_audit" value="<?=$qcinternalauditdata[0]['vendor_po_qty_qc_audit'];?>">
                                                     </td>
                                                   </tr>
                                                 </table>
@@ -273,7 +277,7 @@
                                                       <b> Dispatch Qty (in Pcs) </b>
                                                     </td>
                                                     <td style="width:292px;">
-                                                      <input type="text" id="dispatch_qty_qc_adit" name="dispatch_qty_qc_adit" placeholder="Buyer Invoice qty from packaging with invoice no">
+                                                      <input type="text" id="dispatch_qty_qc_adit" name="dispatch_qty_qc_adit"  value="<?=$qcinternalauditdata[0]['dispatch_qty_qc_adit'];?>">
                                                     </td>
                                                   </tr>
                                                 </table>
@@ -297,70 +301,70 @@
                                               <tr>
                                                 <td> Verify the received material </td>
                                                 <td>
-                                                  <input type="text" name="input_1">
+                                                  <input type="text" name="input_1" value="<?=$qcinternalauditdata[0]['input_1'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_2">
+                                                  <input type="text" name="input_2" value="<?=$qcinternalauditdata[0]['input_2'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 2 -->
                                               <tr class="qc-tall">
                                                 <td> Enter the incoming details from the invoice details </td>
                                                 <td>
-                                                  <input type="text" name="input_3">
+                                                  <input type="text" name="input_3" value="<?=$qcinternalauditdata[0]['input_3'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_4">
+                                                  <input type="text" name="input_4" value="<?=$qcinternalauditdata[0]['input_4'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 3 -->
                                               <tr class="qc-tall">
                                                 <td> Visual checking of material as per the invoice declaration &amp; check if it is matching </td>
                                                 <td>
-                                                  <input type="text" name="input_5">
+                                                  <input type="text" name="input_5" value="<?=$qcinternalauditdata[0]['input_5'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_6">
+                                                  <input type="text" name="input_6" value="<?=$qcinternalauditdata[0]['input_6'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 4 -->
                                               <tr>
                                                 <td> Additional Process </td>
                                                 <td class="qc-center">
-                                                  <input type="text" name="input_7">
+                                                  <input type="text" name="input_7" value="<?=$qcinternalauditdata[0]['input_7'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_8">
+                                                  <input type="text" name="input_8" value="<?=$qcinternalauditdata[0]['input_8'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 5 -->
                                               <tr class="qc-tall">
                                                 <td> Dimensions report Doc. No.SID/RI34 Rev. 13 </td>
                                                 <td>
-                                                  <input type="text" name="input_9">
+                                                  <input type="text" name="input_9" value="<?=$qcinternalauditdata[0]['input_9'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_10">
+                                                  <input type="text" name="input_10" value="<?=$qcinternalauditdata[0]['input_10'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 6 -->
                                               <tr class="qc-tall">
                                                 <td> Visual 100% checking </td>
                                                 <td class="qc-center">
-                                                 <input type="text" name="input_11">
+                                                 <input type="text" name="input_11" value="<?=$qcinternalauditdata[0]['input_11'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_12">
+                                                  <input type="text" name="input_12" value="<?=$qcinternalauditdata[0]['input_12'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 7 -->
                                               <tr class="qc-large">
                                                 <td> Sampling as per the sampling plan Doc. No. SIS/R Rev.02 </td>
                                                 <td class="qc-center">
-                                                 <input type="text" name="input_13">
+                                                 <input type="text" name="input_13" value="<?=$qcinternalauditdata[0]['input_13'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_14">
+                                                  <input type="text" name="input_14" value="<?=$qcinternalauditdata[0]['input_14'];?>">
                                                 </td>
                                               </tr>
                                               <!-- 8 -->
@@ -368,76 +372,76 @@
                                                 <td> Rework material - (Yes or No) &amp; if Yes Rework Challan No.</td>
                                                 <td class="qc-center">
                                                   <select name="input_15" class="form-control input-sm">
-                                                    <option value=""> Yes / No </option>
-                                                    <option value="Yes"> Yes </option>
-                                                    <option value="No"> No </option>
+                                                    <option value=""> Select Yes / No </option>
+                                                    <option value="Yes" <?php if($qcinternalauditdata[0]['input_15']=='Yes'){ echo 'Selected';} ?>> Yes </option>
+                                                    <option value="No" <?php if($qcinternalauditdata[0]['input_15']=='No'){ echo 'Selected';} ?>> No </option>
                                                   </select>
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_16">
+                                                  <input type="text" name="input_16" value="<?=$qcinternalauditdata[0]['input_16'];?>">
                                                 </td>
                                               </tr>
                                               <!-- REWORK CHALLAN -->
                                               <tr>
                                                 <td>Dispatch Invoice Generated By</td>
                                                 <td class="qc-center">
-                                                  <input type="text" name="input_17">
+                                                  <input type="text" name="input_17" value="<?=$qcinternalauditdata[0]['input_17'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_18">
+                                                  <input type="text" name="input_18" value="<?=$qcinternalauditdata[0]['input_18'];?>">
                                                 </td>
                                               </tr>
                                               <!-- REJECTION -->
                                               <tr>
                                                 <td> Rejection Material </td>
                                                 <td class="qc-center">
-                                                  <textarea name="input_19"></textarea>
+                                                  <textarea name="input_19"><?=$qcinternalauditdata[0]['input_19'];?></textarea>
                                                 </td>
                                                 <td>
-                                                  <textarea name="input_20"></textarea>
+                                                  <textarea name="input_20"><?=$qcinternalauditdata[0]['input_20'];?></textarea>
                                                 </td>
                                               </tr>
                                               <!-- PACKING -->
                                               <tr>
                                                 <td> Packing </td>
                                                 <td class="qc-center">
-                                                 <input type="text" name="input_21">
+                                                 <input type="text" name="input_21" value="<?=$qcinternalauditdata[0]['input_21'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_22">
+                                                  <input type="text" name="input_22" value="<?=$qcinternalauditdata[0]['input_22'];?>">
                                                 </td>
                                               </tr>
                                               <!-- REVIEW -->
                                               <tr>
                                                 <td> Review &amp; verify check list </td>
                                                 <td class="qc-center">
-                                                  <input type="text" name="input_23">
+                                                  <input type="text" name="input_23" value="<?=$qcinternalauditdata[0]['input_23'];?>">
                                                 </td>
                                                 <td>
-                                                  <input type="text" name="input_24">
+                                                  <input type="text" name="input_24" value="<?=$qcinternalauditdata[0]['input_24'];?>">
                                                 </td>
                                               </tr>
                                               <!-- PRE EXPORT -->
                                               <tr>
                                                 <td> Pre Exports details </td>
                                                 <td>
-                                                  <textarea name="input_25"></textarea>
+                                                  <textarea name="input_25"><?=$qcinternalauditdata[0]['input_25'];?></textarea>
                                                 </td>
                                                 <td>
-                                                  <textarea name="input_26"></textarea>
+                                                  <textarea name="input_26"><?=$qcinternalauditdata[0]['input_26'];?></textarea>
                                                 </td>
                                               </tr>
                                               <!-- SEA / AIR -->
                                               <tr>
                                                 <td> By Sea/By Air </td>
                                                 <td>
-                                                  <input type="text" name="input_27">
+                                                  <input type="text" name="input_27" value="<?=$qcinternalauditdata[0]['input_27'];?>">
                                                 </td>
                                                 <td>
                                                   <select name="input_28" class="form-control input-sm">
                                                     <option value=""> Select </option>
-                                                    <option value="Sea"> By Sea </option>
-                                                    <option value="Air"> By Air </option>
+                                                    <option value="Sea" <?php if($qcinternalauditdata[0]['input_28']=='Sea'){ echo 'Selected';} ?>> By Sea </option>
+                                                    <option value="Air" <?php if($qcinternalauditdata[0]['input_28']=='Sea'){ echo 'Selected';} ?>> By Air </option>
                                                   </select>
                                                 </td>
                                               </tr>
@@ -451,13 +455,13 @@
                                                 </td>
                                                 <td>
                                                   <div class="footer-field">
-                                                   <input type="text" name="input_29" class="footer-input">
+                                                   <input type="text" name="input_29" class="footer-input" value="<?=$qcinternalauditdata[0]['input_29'];?>">
                                                   </div>
                                                 </td>
                                                 <td>
                                                   <div class="footer-field">
                                                     <label> Doc. No. </label>
-                                                    <input type="text" name="input_30" value="SQ/PR/O55 Rev. 00" class="footer-input">
+                                                    <input type="text" name="input_30" value="SQ/PR/O55 Rev. 00" class="footer-input" value="<?=$qcinternalauditdata[0]['input_30'];?>">
                                                   </div>
                                                 </td>
                                               </tr>

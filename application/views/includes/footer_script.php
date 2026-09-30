@@ -34231,7 +34231,7 @@ $('#export_excel').on('click', function() {
 
 
 
-<?php if($pageTitle=='Add QC Internal Audit' || $pageTitle=='QC Internal Audit List'){ ?>
+<?php if($pageTitle=='Add QC Internal Audit' || $pageTitle=='QC Internal Audit List' || $pageTitle=='Edit QC Internal Audit'){ ?>
 <script type="text/javascript">
 
         $(document).ready(function() {
@@ -34265,6 +34265,41 @@ $('#export_excel').on('click', function() {
 					},
 				});
         });
+
+        // On EDit Function
+
+		$(document).ready(function() {
+
+		   $("#customers-list").html('');
+			var buyer_name = $('#buyer_name_qc_audit').val();
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyeridforqc",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_po_number_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+						$('#buyer_po_number_qc_audit').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number_qc_audit').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+
+		});
 
 
         $(document).on('change','#buyer_name_qc_audit',function(e){  

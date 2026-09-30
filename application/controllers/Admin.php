@@ -33775,6 +33775,36 @@ public function deletesupplieritemattachment(){
                 $this->form_validation->set_rules('vendor_po_id_qc_audit','vendor_po_id_qc_audit','trim');
                 $this->form_validation->set_rules('vendor_po_qty_qc_audit','vendor_po_qty_qc_audit','trim');
                 $this->form_validation->set_rules('dispatch_qty_qc_adit','dispatch_qty_qc_adit','trim');
+                $this->form_validation->set_rules('input_1', 'Input 1', 'trim');
+                $this->form_validation->set_rules('input_2', 'Input 2', 'trim');
+                $this->form_validation->set_rules('input_3', 'Input 3', 'trim');
+                $this->form_validation->set_rules('input_4', 'Input 4', 'trim');
+                $this->form_validation->set_rules('input_5', 'Input 5', 'trim');
+                $this->form_validation->set_rules('input_6', 'Input 6', 'trim');
+                $this->form_validation->set_rules('input_7', 'Input 7', 'trim');
+                $this->form_validation->set_rules('input_8', 'Input 8', 'trim');
+                $this->form_validation->set_rules('input_9', 'Input 9', 'trim');
+                $this->form_validation->set_rules('input_10', 'Input 10', 'trim');
+                $this->form_validation->set_rules('input_11', 'Input 11', 'trim');
+                $this->form_validation->set_rules('input_12', 'Input 12', 'trim');
+                $this->form_validation->set_rules('input_13', 'Input 13', 'trim');
+                $this->form_validation->set_rules('input_14', 'Input 14', 'trim');
+                $this->form_validation->set_rules('input_15', 'Input 15', 'trim');
+                $this->form_validation->set_rules('input_16', 'Input 16', 'trim');
+                $this->form_validation->set_rules('input_17', 'Input 17', 'trim');
+                $this->form_validation->set_rules('input_18', 'Input 18', 'trim');
+                $this->form_validation->set_rules('input_19', 'Input 19', 'trim');
+                $this->form_validation->set_rules('input_20', 'Input 20', 'trim');
+                $this->form_validation->set_rules('input_21', 'Input 21', 'trim');
+                $this->form_validation->set_rules('input_22', 'Input 22', 'trim');
+                $this->form_validation->set_rules('input_23', 'Input 23', 'trim');
+                $this->form_validation->set_rules('input_24', 'Input 24', 'trim');
+                $this->form_validation->set_rules('input_25', 'Input 25', 'trim');
+                $this->form_validation->set_rules('input_26', 'Input 26', 'trim');
+                $this->form_validation->set_rules('input_27', 'Input 27', 'trim');
+                $this->form_validation->set_rules('input_28', 'Input 28', 'trim');
+                $this->form_validation->set_rules('input_29', 'Input 29', 'trim');
+                $this->form_validation->set_rules('input_30', 'Input 30', 'trim');
                 
                 if($this->form_validation->run() == FALSE)
                 {
@@ -33793,9 +33823,51 @@ public function deletesupplieritemattachment(){
                         'vendor_id_qc_audit'     => trim($this->input->post('vendor_id_qc_audit')),
                         'vendor_po_id_qc_audit' => trim($this->input->post('vendor_po_id_qc_audit')),
                         'vendor_po_qty_qc_audit'     => trim($this->input->post('vendor_po_qty_qc_audit')),
-                        'dispatch_qty_qc_adit'     => trim($this->input->post('dispatch_qty_qc_adit'))
+                        'dispatch_qty_qc_adit'     => trim($this->input->post('dispatch_qty_qc_adit')),
+
+
+                        'input_1' => trim($this->input->post('input_1')),
+                        'input_2' => trim($this->input->post('input_2')),
+                        'input_3' => trim($this->input->post('input_3')),
+                        'input_4' => trim($this->input->post('input_4')),
+                        'input_5' => trim($this->input->post('input_5')),
+                        'input_6' => trim($this->input->post('input_6')),
+                        'input_7' => trim($this->input->post('input_7')),
+                        'input_8' => trim($this->input->post('input_8')),
+                        'input_9' => trim($this->input->post('input_9')),
+                        'input_10' => trim($this->input->post('input_10')),
+                        'input_11' => trim($this->input->post('input_11')),
+                        'input_12' => trim($this->input->post('input_12')),
+                        'input_13' => trim($this->input->post('input_13')),
+                        'input_14' => trim($this->input->post('input_14')),
+                        'input_15' => trim($this->input->post('input_15')),
+                        'input_16' => trim($this->input->post('input_16')),
+                        'input_17' => trim($this->input->post('input_17')),
+                        'input_18' => trim($this->input->post('input_18')),
+                        'input_19' => trim($this->input->post('input_19')),
+                        'input_20' => trim($this->input->post('input_20')),
+                        'input_21' => trim($this->input->post('input_21')),
+                        'input_22' => trim($this->input->post('input_22')),
+                        'input_23' => trim($this->input->post('input_23')),
+                        'input_24' => trim($this->input->post('input_24')),
+                        'input_25' => trim($this->input->post('input_25')),
+                        'input_26' => trim($this->input->post('input_26')),
+                        'input_27' => trim($this->input->post('input_27')),
+                        'input_28' => trim($this->input->post('input_28')),
+                        'input_29' => trim($this->input->post('input_29')),
+                        'input_30' => trim($this->input->post('input_30'))
+
                     );
-                    $qcinternalaudit_submit = $this->admin_model->qcinternalauditadd($check_list_incoming_checklist_id,$data);
+
+
+                    if(trim($this->input->post('qc_internal_audit_edit_id'))){
+                     $qc_internal_audit_edit_id = trim($this->input->post('qc_internal_audit_edit_id'));
+                    }else{
+                     $qc_internal_audit_edit_id = '';
+                    }
+
+
+                    $qcinternalaudit_submit = $this->admin_model->qcinternalauditadd($qc_internal_audit_edit_id,$data);
                     if($qcinternalaudit_submit){
                         $qcinternalauditadd_response['status'] = 'success';
                         $qcinternalauditadd_response['error'] = array('qc_internal_audit_no'=>strip_tags(form_error('qc_internal_audit_no')),'qc_internal_audit_date'=>strip_tags(form_error('qc_internal_audit_date')),'buyer_name_qc_audit'=>strip_tags(form_error('buyer_name_qc_audit')),'buyer_po_number_qc_audit'=>strip_tags(form_error('buyer_po_number_qc_audit')),'fg_part_no_qc_audit'=>strip_tags(form_error('fg_part_no_qc_audit')),'fg_part_description_qc_audit'=>strip_tags(form_error('fg_part_description_qc_audit')),'buyer_po_qty_qc_audit'=>strip_tags(form_error('buyer_po_qty_qc_audit')),'vendor_id_qc_audit'=>strip_tags(form_error('vendor_id_qc_audit')), 'vendor_po_id_qc_audit'=>strip_tags(form_error('vendor_po_id_qc_audit')),'vendor_po_qty_qc_audit'=>strip_tags(form_error('vendor_po_qty_qc_audit')),'dispatch_qty_qc_adit'=>strip_tags(form_error('dispatch_qty_qc_adit')));
@@ -34046,7 +34118,20 @@ public function deletesupplieritemattachment(){
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
-     }
+    }
+
+
+    public function editqcinternalaudit($id){
+        $data['title'] = 'Edit QC Internal Audit';
+        $process = 'Edit QC Internal Audit';
+        $processFunction = 'Admin/editqcinternalaudit';
+        // $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+        $data['qcinternalauditdata']= $this->admin_model->getqcinternalauditdataforedit($id);
+        $this->global['pageTitle'] = 'Edit QC Internal Audit';
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $this->global['pageTitle'] = 'Edit QC Internal Audit';
+        $this->loadViews('masters/editqcinternalaudit',$this->global ,$data, NULL);
+    }
     
 
 }
