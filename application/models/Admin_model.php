@@ -28998,6 +28998,39 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+      public function generateqcinternalauditNo()
+    {
+        $month = date('m');
+        $year  = date('Y');
+
+        if($month >= 4){
+            $fyStart = $year;
+            $fyEnd   = $year + 1;
+        } else {
+            $fyStart = $year - 1;
+            $fyEnd   = $year;
+        }
+
+        $fyShort = substr($fyStart, -2) . substr($fyEnd, -2);
+
+        $this->db->like('qc_internal_audit_no', 'SQPCA' . $fyShort);
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get('tbl_qc_internal_audit');
+
+        if($query->num_rows() > 0){
+            $last = $query->row()->qc_internal_audit_no;
+            $lastCount = intval(substr($last, -3));
+            $newCount = $lastCount + 1;
+        } else {
+            $newCount = 1;
+        }
+
+        $running = str_pad($newCount, 3, '0', STR_PAD_LEFT);
+
+        return "SQPCA" . $fyShort . $running;
+    }
+
+
 
 
 

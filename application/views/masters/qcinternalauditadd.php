@@ -196,7 +196,7 @@
                                                   <tr>
                                                     <td class="qc-label"> ID No.<span class="required">*</span></td>
                                                     <td style="width:180px;">
-                                                      <input type="text" name="qc_internal_audit_no" id="qc_internal_audit_no" value="SQPCA2526001">
+                                                      <input type="text" name="qc_internal_audit_no" id="qc_internal_audit_no" value="<?=$audit_auto_no;?>">
                                                     </td>
                                                   </tr>
                                                   <tr> <?php $current_date = date('Y-m-d');?> <td class="qc-label"> Date </td>

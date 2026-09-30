@@ -33880,6 +33880,7 @@ public function deletesupplieritemattachment(){
             $process = 'QC Internal Audit';
             $processFunction = 'Admin/qcinternalauditlist';
             // $data['audit_no'] = $this->admin_model->get_next_qc_internal_audit_no();
+            $data['audit_auto_no'] = $this->admin_model->generateqcinternalauditNo();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $this->global['pageTitle'] = 'Add QC Internal Audit';
             $this->loadViews('masters/qcinternalauditadd',$this->global ,$data, NULL);
