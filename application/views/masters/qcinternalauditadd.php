@@ -466,7 +466,7 @@
                                             <!-- BUTTONS -->
                                             <div class="text-right qc-save-area">
                                               <button type="submit" id="saveqcinternalaudit" class="btn btn-primary"><i class="fa fa-save"></i> Save </button>
-                                              <button type="reset" class="btn btn-default"> Back </button>
+                                              <input type="button" onclick="location.href = '<?php echo base_url() ?>qcinternalaudit'" class="btn btn-default" value="Back" />
                                             </div>
                                           </form>
                                         </div>
