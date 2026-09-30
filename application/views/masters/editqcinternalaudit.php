@@ -220,6 +220,7 @@
                                                   <tr>
                                                     <td class="qc-label">Buyer P.O. No.<span class="required">*</span></td>
                                                     <td>
+                                                      <input type="hidden" name="original_buyer_po_number_qc_audit" id="original_buyer_po_number_qc_audit" value="<?=$qcinternalauditdata[0]['buyer_po_number_qc_audit'];?>">
                                                       <select name="buyer_po_number_qc_audit" id="buyer_po_number_qc_audit" class="form-control input-sm">
                                                         <option value="">Select Buyer PO Number</option>
                                                       </select>
@@ -228,6 +229,7 @@
                                                   <tr>
                                                     <td class="qc-label">FG Part No.<span class="required">*</span></td>
                                                     <td>
+                                                      <input type="hidden" name="og_fg_part_no_qc_audit" id="og_fg_part_no_qc_audit" value="<?=$qcinternalauditdata[0]['fg_part_no_qc_audit'];?>">
                                                       <select class="fg_part_no_qc_audit_getincoming" name="fg_part_no_qc_audit" id="fg_part_no_qc_audit" class="form-control input-sm">
                                                         <option value="">Select FG Part No </option>
                                                       </select>

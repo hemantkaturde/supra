@@ -34008,8 +34008,14 @@ public function deletesupplieritemattachment(){
                 $content = $content.'<option value="">Select Buyer Number</option>';
 				foreach($getAllponumber as $value) {
                     // if($value['po_status']=='Open'){
-					   $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
-                    // }
+                            
+                    if($this->input->post('original_buyer_po_number_qc_audit')==$value["id"]){
+                      $selected = 'Selected';
+                    }else{
+                      $selected = '';
+                    }
+
+                       $content = $content . '<option value="' . $value["id"] . '" ' . $selected . '>' . $value["sales_order_number"] . ' - ' . $value["buyer_po_number"] . '</option>';                    // }
                     //  if($value['po_status']=='Open'){
 					// $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
                     // }
@@ -34032,7 +34038,13 @@ public function deletesupplieritemattachment(){
 			if(count($getbuyerdetails) >= 1) {
                 $content = $content.'<option value="">Select F.G Part No</option>';
 				foreach($getbuyerdetails as $value) {
-					$content = $content.'<option value="'.$value["id"].'">'.$value["part_number"].'</option>';
+
+        
+                 $selected = ($this->input->post('og_fg_part_no_qc_audit') == $value["id"]) ? 'selected' : '';
+
+                 $content .= '<option value="' . $value["id"] . '" ' . $selected . '>' . $value["part_number"] . '</option>';
+
+
 				}
 				echo $content;
 			} else {

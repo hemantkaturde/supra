@@ -28922,7 +28922,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchqcinternalauditlistdata($params){
 
-        $this->db->select(TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_no,'.TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_QC_INTERNAL_AUDIT.'.buyer_po_qty_qc_audit,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_VENDOR.'.vendor_name,'.TBL_QC_INTERNAL_AUDIT.'.id as qc_internal_audit_id');
+        $this->db->select(TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_no,'.TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_QC_INTERNAL_AUDIT.'.buyer_po_qty_qc_audit,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_VENDOR.'.vendor_name,'.TBL_QC_INTERNAL_AUDIT.'.id as qc_internal_audit_id,'.TBL_QC_INTERNAL_AUDIT.'.input_29');
         $this->db->join(TBL_BUYER_MASTER,TBL_BUYER_MASTER . '.buyer_id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_name_qc_audit');
         $this->db->join(TBL_BUYER_PO_MASTER,TBL_BUYER_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_po_number_qc_audit');
         $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' .TBL_QC_INTERNAL_AUDIT . '.fg_part_no_qc_audit');
@@ -28939,6 +28939,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_QC_INTERNAL_AUDIT.".buyer_po_qty_qc_audit LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_INTERNAL_AUDIT.".input_29 LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
         }
@@ -28961,7 +28962,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['buyer_po_qty_qc_audit'] =  $value['buyer_po_qty_qc_audit'];
                 $data[$counter]['vendor_name'] =  $value['vendor_name'];
                 $data[$counter]['vendor_po'] =  $value['vendor_po'];
-                $data[$counter]['verify_by'] =  '';
+                $data[$counter]['verify_by'] =  $value['input_29'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqcinternalaudit/".$value['qc_internal_audit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['qc_internal_audit_id']."' class='fa fa-trash-o deleteqcinternalaudit' aria-hidden='true'></i>"; 
