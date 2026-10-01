@@ -34043,7 +34043,7 @@ public function deletesupplieritemattachment(){
         
                  $selected = ($this->input->post('og_fg_part_no_qc_audit') == $value["id"]) ? 'selected' : '';
 
-                 $content .= '<option value="' . $value["id"] . '" ' . $selected . '>' . $value["part_number"] . '</option>';
+                 $content .= '<option value="' . $value["fin_id"] . '" ' . $selected . '>' . $value["part_number"] . '</option>';
 
 
 				}
