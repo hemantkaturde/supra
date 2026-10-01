@@ -34077,7 +34077,7 @@ public function deletesupplieritemattachment(){
 
             $vendor_id_qc_audit = $this->input->post('vendor_id_qc_audit');
             $vendor_po_id_qc_audit = $this->input->post('vendor_po_id_qc_audit');
-            $fg_part_no_qc_audit = $this->input->post('fg_part_no_qc_audit');
+            $og_part_id = $this->input->post('og_part_id');
         
             // load table library
             $this->load->library('table');
@@ -34101,7 +34101,7 @@ public function deletesupplieritemattachment(){
             //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item where pre_buyer_po_number='.$buyer_po_number.')');
             $this->db->where(TBL_INCOMING_DETAILS.'.vendor_name',$vendor_id_qc_audit);
             $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number',$vendor_po_id_qc_audit);
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$fg_part_no_qc_audit);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$og_part_id);
             $query_result = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
 
             $data = $query_result->result_array();
