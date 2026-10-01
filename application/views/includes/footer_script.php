@@ -34336,9 +34336,6 @@ $('#export_excel').on('click', function() {
         });
 
 
-
-
-
         $(document).on('change','#buyer_name_qc_audit',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
