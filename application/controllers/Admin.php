@@ -34041,7 +34041,7 @@ public function deletesupplieritemattachment(){
 				foreach($getbuyerdetails as $value) {
 
         
-                 $selected = ($this->input->post('og_fg_part_no_qc_audit') == $value["id"]) ? 'selected' : '';
+                 $selected = ($this->input->post('og_fg_part_no_qc_audit') == $value["fin_id"]) ? 'selected' : '';
 
                  $content .= '<option value="' . $value["fin_id"] . '" ' . $selected . '>' . $value["part_number"] . '</option>';
 
