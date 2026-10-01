@@ -443,7 +443,7 @@
                                                   <select name="input_28" class="form-control input-sm">
                                                     <option value=""> Select </option>
                                                     <option value="Sea" <?php if($qcinternalauditdata[0]['input_28']=='Sea'){ echo 'Selected';} ?>> By Sea </option>
-                                                    <option value="Air" <?php if($qcinternalauditdata[0]['input_28']=='Sea'){ echo 'Selected';} ?>> By Air </option>
+                                                    <option value="Air" <?php if($qcinternalauditdata[0]['input_28']=='Air'){ echo 'Selected';} ?>> By Air </option>
                                                   </select>
                                                 </td>
                                               </tr>
