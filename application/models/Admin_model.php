@@ -28894,7 +28894,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select(TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_no,'.TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_QC_INTERNAL_AUDIT.'.buyer_po_qty_qc_audit,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_VENDOR.'.vendor_name,'.TBL_QC_INTERNAL_AUDIT.'.id as qc_internal_audit_id,'.TBL_QC_INTERNAL_AUDIT.'.input_29');
         $this->db->join(TBL_BUYER_MASTER,TBL_BUYER_MASTER . '.buyer_id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_name_qc_audit');
         $this->db->join(TBL_BUYER_PO_MASTER,TBL_BUYER_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_po_number_qc_audit');
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id && '.TBL_BUYER_PO_MASTER_ITEM.'.id ='.TBL_QC_INTERNAL_AUDIT.'.fg_part_no_qc_audit');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id AND '.TBL_BUYER_PO_MASTER_ITEM.'.id ='.TBL_QC_INTERNAL_AUDIT.'.fg_part_no_qc_audit');
         $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' .TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.vendor_po_id_qc_audit');
         $this->db->join(TBL_VENDOR,TBL_VENDOR. '.ven_id = ' . TBL_QC_INTERNAL_AUDIT . '.vendor_id_qc_audit');
@@ -28926,7 +28926,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select(TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_no,'.TBL_QC_INTERNAL_AUDIT.'.qc_internal_audit_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_QC_INTERNAL_AUDIT.'.buyer_po_qty_qc_audit,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_VENDOR.'.vendor_name,'.TBL_QC_INTERNAL_AUDIT.'.id as qc_internal_audit_id,'.TBL_QC_INTERNAL_AUDIT.'.input_29');
         $this->db->join(TBL_BUYER_MASTER,TBL_BUYER_MASTER . '.buyer_id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_name_qc_audit');
         $this->db->join(TBL_BUYER_PO_MASTER,TBL_BUYER_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.buyer_po_number_qc_audit');
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id && '.TBL_BUYER_PO_MASTER_ITEM.'.id ='.TBL_QC_INTERNAL_AUDIT.'.fg_part_no_qc_audit');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id AND '.TBL_BUYER_PO_MASTER_ITEM.'.id ='.TBL_QC_INTERNAL_AUDIT.'.fg_part_no_qc_audit');
         $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' .TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' .TBL_QC_INTERNAL_AUDIT . '.vendor_po_id_qc_audit');
         $this->db->join(TBL_VENDOR,TBL_VENDOR. '.ven_id = ' . TBL_QC_INTERNAL_AUDIT . '.vendor_id_qc_audit');
