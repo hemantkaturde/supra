@@ -34445,10 +34445,11 @@ $('#export_excel').on('click', function() {
 				data : 'id='+item_id,
 				success: function(data, textStatus, jqXHR)
 				{
+					    $("#incoming_data_qc_audit").html('');
 					    var fetchResponse = $.parseJSON(data);
 						$('#fg_part_description_qc_audit').val(fetchResponse.description);  
 						$('#buyer_po_qty_qc_audit').val(fetchResponse.order_oty);  
-						$('#vendor_name_qc_audit').val(fetchResponse.vendor_name);  
+						$('#vendor_name_qc_audit').val(fetchResponse.og_v_name);  
 						$('#vendor_po_no_qc_audit').val(fetchResponse.po_number);  
 						$('#vendor_po_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
 						// $('#fg_received_qty_qc_audit').val(fetchResponse.vendor_actual_reved_qty); 
@@ -34466,7 +34467,7 @@ $('#export_excel').on('click', function() {
 
 							var og_part_id =fetchResponse.fin_id;
 
-							$("#incoming_data_qc_audit").html('');
+							
 							$.ajax({
 								url : "<?php echo ADMIN_PATH;?>getincomingItemsforDisplayqulitychecking",
 								type: "POST",
