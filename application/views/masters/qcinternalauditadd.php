@@ -245,8 +245,8 @@
                                                   <tr>
                                                     <td class="qc-label"> Vendor Name </td>
                                                     <td>
-                                                      <input type="hidden" name="vendor_name_qc_audit" id="vendor_name_qc_audit">
-                                                      <input type="text" name="vendor_id_qc_audit" id="vendor_id_qc_audit">
+                                                      <input type="text" name="vendor_name_qc_audit" id="vendor_name_qc_audit">
+                                                      <input type="hidden" name="vendor_id_qc_audit" id="vendor_id_qc_audit">
                                                     </td>
                                                   </tr>
                                                   <tr>
