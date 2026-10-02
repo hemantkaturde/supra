@@ -34336,37 +34336,37 @@ $('#export_excel').on('click', function() {
         });
 
 
-        // $(document).ready(function() {
+        $(document).ready(function() {
 
-		//      var vendor_id_qc_audit = $('#vendor_id_qc_audit').val();
-		// 	 var vendor_po_id_qc_audit = $('#vendor_po_id_qc_audit').val();
-		// 	 var og_part_id = $('#og_part_id').val();
+		     var vendor_id_qc_audit = $('#vendor_id_qc_audit').val();
+			 var vendor_po_id_qc_audit = $('#vendor_po_id_qc_audit').val();
+			 var og_part_id = $('#og_part_id').val();
 
-		// 	 $("#incoming_data_qc_audit").html('');
-		// 	 $.ajax({
-		// 		url : "<?php echo ADMIN_PATH;?>getincomingItemsforDisplayqulitychecking",
-		// 		type: "POST",
-		// 		data : {'vendor_id_qc_audit' : vendor_id_qc_audit,'vendor_po_id_qc_audit' : vendor_po_id_qc_audit,'og_part_id':og_part_id},
-		// 		success: function(data, textStatus, jqXHR)
-		// 		{
-		// 			$(".loader_ajax").hide();
-		// 			if(data == "failure")
-		// 			{
-		// 				//$('#incoming_data_qc_audit').html('<option value="">Select Buyer PO Number</option>');
-		// 			}
-		// 			else
-		// 			{
-		// 				$("#incoming_data_qc_audit").html(data);
+			 $("#incoming_data_qc_audit").html('');
+			 $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getincomingItemsforDisplayqulitychecking",
+				type: "POST",
+				data : {'vendor_id_qc_audit' : vendor_id_qc_audit,'vendor_po_id_qc_audit' : vendor_po_id_qc_audit,'og_part_id':og_part_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#incoming_data_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						$("#incoming_data_qc_audit").html(data);
 
-		// 			}
-		// 		},
-		// 		error: function (jqXHR, textStatus, errorThrown)
-		// 		{
-		// 			//$('#incoming_data_qc_audit').html();
-		// 		}
-		// 	 });
-		// 	return false;
-        // });
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					//$('#incoming_data_qc_audit').html();
+				}
+			 });
+			return false;
+        });
 
 
         $(document).on('change','#buyer_name_qc_audit',function(e){  
