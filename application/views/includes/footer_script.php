@@ -34460,9 +34460,11 @@ $('#export_excel').on('click', function() {
 
 						 
 
-							var vendor_id_qc_audit = $('#vendor_id_qc_audit').val();
-							var vendor_po_id_qc_audit = $('#vendor_po_id_qc_audit').val();
-							var og_part_id = $('#og_part_id').val();
+							var vendor_id_qc_audit = fetchResponse.ven_id;
+							var vendor_po_id_qc_audit =fetchResponse.vendor_po_id;
+							// var og_part_id = $('#og_part_id').val();
+
+							 $('#og_part_id').val(fetchResponse.fin_id);
 
 							$("#incoming_data_qc_audit").html('');
 							$.ajax({
