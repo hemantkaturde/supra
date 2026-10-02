@@ -28184,6 +28184,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".checklistreportno LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".status_main LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
         }
@@ -28205,6 +28207,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".checklistreportno LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".status_main LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
         }
@@ -28231,7 +28235,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['checklistreportno'] =  $value['checklistreportno'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name'];
                 $data[$counter]['invoice_no'] =  $value['invoice_no'];
-                $data[$counter]['invoice_date'] =  $invoice_date;            
+                $data[$counter]['invoice_date'] =  $invoice_date;          
+                $data[$counter]['mode_of_shipment'] =  $value['mode_of_shipment'];             
+                $data[$counter]['status_main'] =  $value['status_main'];           
                 $data[$counter]['remark'] =  $value['remark'];
 
                 $data[$counter]['action'] = '';

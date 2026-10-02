@@ -45,6 +45,8 @@
                                             <th>Buyer Name</th>
                                             <th>Invoice Date</th>
                                             <th>Invoice Number</th>
+                                            <th>Mode Of Shipment</th>
+                                            <th>Status</th>
                                             <th>Remark</th>                                          
                                             <th>Action</th>
                                           </tr>
