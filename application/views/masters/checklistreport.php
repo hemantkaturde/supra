@@ -41,6 +41,7 @@
                                     id="view_checklistreport">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
+                                            <th>CheckList Report No</th>    
                                             <th>Buyer Name</th>
                                             <th>Invoice Date</th>
                                             <th>Invoice Number</th>

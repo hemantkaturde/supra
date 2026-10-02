@@ -33171,6 +33171,7 @@ public function deletesupplieritemattachment(){
         $this->logrecord($process,$processFunction);
         //$data['vendorList']= $this->admin_model->fetchALLvendorList();
         $this->global['pageTitle'] = 'Checklist Report';
+        
         $this->loadViews("masters/checklistreport", $this->global, $data, NULL);
 
     }
@@ -33224,9 +33225,12 @@ public function deletesupplieritemattachment(){
                 }else{
 
                     $data = array(
+                        'checklistreportno'   => trim($this->input->post('checklistreportno')),
                         'buyer_id'   => trim($this->input->post('buyer_name')),
                         'invoice_no'   => trim($this->input->post('buyer_invoice_no')),
                         'invoice_date'     => trim($this->input->post('buyer_invoice_date')),
+                        'mode_of_shipment'     => trim($this->input->post('mode_of_shipment')),
+                        'status_main'     => trim($this->input->post('status_main')),
                         'remark'  => trim($this->input->post('remark'))
                     );
 
@@ -33251,6 +33255,7 @@ public function deletesupplieritemattachment(){
                 $processFunction = 'Admin/addjobwork';
                 $this->logrecord($process,$processFunction);
                 $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+                $data['checklist_auto_no'] = $this->admin_model->generatechecklistautono();
                 $this->global['pageTitle'] = 'Add New Checklist Report';
                 $this->loadViews("masters/addchecklistreport", $this->global, $data, NULL);
             }

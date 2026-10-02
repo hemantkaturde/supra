@@ -33394,11 +33394,12 @@ $('#export_excel').on('click', function() {
 	    	    var dt = $('#view_checklistreport').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "20%", "targets": 0 },
-						{ "width": "20%", "targets": 1 },
+						{ "width": "15%", "targets": 0 },
+						{ "width": "15%", "targets": 1 },
 						{ "width": "20%", "targets": 2 },
-						{ "width": "24%", "targets": 3 },
+						{ "width": "20%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
 						
 					],
 					responsive: true,

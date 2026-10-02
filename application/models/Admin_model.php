@@ -28183,6 +28183,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where("(".TBL_CHECKLIST_REPORT.".invoice_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".checklistreportno LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
         }
@@ -28203,6 +28204,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where("(".TBL_CHECKLIST_REPORT.".invoice_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".checklistreportno LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
         }
@@ -28226,7 +28228,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                    $invoice_date =  date("d-m-Y", strtotime($value['invoice_date']));
                 }
 
-
+                $data[$counter]['checklistreportno'] =  $value['checklistreportno'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name'];
                 $data[$counter]['invoice_no'] =  $value['invoice_no'];
                 $data[$counter]['invoice_date'] =  $invoice_date;            
@@ -29034,6 +29036,37 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function generatechecklistautono()
+    {
+        $month = date('m');
+        $year  = date('Y');
+
+        if($month >= 4){
+            $fyStart = $year;
+            $fyEnd   = $year + 1;
+        } else {
+            $fyStart = $year - 1;
+            $fyEnd   = $year;
+        }
+
+        $fyShort = substr($fyStart, -2) . substr($fyEnd, -2);
+
+        $this->db->like('checklistreportno', 'SQCL' . $fyShort);
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get('tbl_checklist_report');
+
+        if($query->num_rows() > 0){
+            $last = $query->row()->checklistreportno;
+            $lastCount = intval(substr($last, -3));
+            $newCount = $lastCount + 1;
+        } else {
+            $newCount = 1;
+        }
+
+        $running = str_pad($newCount, 3, '0', STR_PAD_LEFT);
+
+        return "SQCL" . $fyShort . $running;
+    }
 
 
 

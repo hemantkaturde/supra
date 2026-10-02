@@ -32,7 +32,15 @@
                         <form role="form" id="addchecklistreportform" action="<?php echo base_url() ?>addchecklistreportform" method="post" role="form">
                             <div class="box-body">
                                     <div class="row">
+
+                                    
                                      <div class="col-md-3" id="vendor_div">
+                                        <div class="form-group">
+                                            <label for="checklistreportno">CheckList Report No</label>
+                                               <input type="text" class="form-control" id="checklistreportno" value="<?=$checklist_auto_no;?>" name="checklistreportno">
+                                            <p class="error checklistreportno_error"></p>
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="buyer_name">Buyer Name<span class="required">*</span></label>
                                                     <select class="form-control" name="buyer_name" id="buyer_name">
@@ -67,6 +75,31 @@
                                 </div>
 
                                 <div class="row">
+                                <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="mode_of_shipment">Mode Of Shipment</label>
+                                                    <select class="form-control" name="mode_of_shipment" id="mode_of_shipment">
+                                                        <option st-id="" value="">Select Mode Of Shipment</option>
+                                                        <option st-id="" value="Air">Air</option>
+                                                        <option st-id="" value="Sea">Sea</option>
+                                                        <option st-id="" value="Sample">Sample</option>
+                                                    </select>
+                                            <p class="error mode_of_shipment_error"></p>
+                                        </div>
+                                         <div class="form-group">
+                                               <label for="status_main">Status</label>
+                                                    <select class="form-control" name="status_main" id="status_main">
+                                                        <option st-id="" value="">Select Status</option>
+                                                        <option st-id="" value="Open">Open</option>
+                                                        <option st-id="" value="Close">Close</option>
+                                                    </select>
+                                            <p class="error status_main_error"></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
@@ -75,6 +108,7 @@
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->

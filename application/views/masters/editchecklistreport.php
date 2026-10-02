@@ -36,7 +36,15 @@
                                     <input type="hidden" class="form-control" id="checklist_id" value="<?php echo $getpreviouschecklistreportrecord[0]['checklist_id']; ?>" name="checklist_id">
 
                                     <div class="row">
+                                        
                                      <div class="col-md-3" id="vendor_div">
+
+                                      <div class="form-group">
+                                            <label for="checklistreportno">CheckList Report No</label>
+                                               <input type="text" class="form-control" id="checklistreportno" value="<?=$getpreviouschecklistreportrecord[0]['checklistreportno'];?>" name="checklistreportno">
+                                            <p class="error checklistreportno_error"></p>
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="buyer_name">Buyer Name</label>
                                                     <select class="form-control" name="buyer_name" id="buyer_name">
@@ -79,6 +87,33 @@
                                         </div>
                                     </div>
                                 </div>
+
+                               <div class="row">
+                                <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="mode_of_shipment">Mode Of Shipment</label>
+                                                    <select class="form-control" name="mode_of_shipment" id="mode_of_shipment">
+                                                        <option st-id="" value="">Select Mode Of Shipment</option>
+                                                        <option st-id="" <?php if($getpreviouschecklistreportrecord[0]['mode_of_shipment']=='Air'){ echo 'Selected';} ?> value="Air">Air</option>
+                                                        <option st-id="" <?php if($getpreviouschecklistreportrecord[0]['mode_of_shipment']=='Sea'){ echo 'Selected';} ?> value="Sea">Sea</option>
+                                                        <option st-id="" <?php if($getpreviouschecklistreportrecord[0]['mode_of_shipment']=='Sample'){ echo 'Selected';} ?> value="Sample">Sample</option>
+                                                    </select>
+                                            <p class="error mode_of_shipment_error"></p>
+                                        </div>
+                                         <div class="form-group">
+                                               <label for="status_main">Status</label>
+                                                    <select class="form-control" name="status_main" id="status_main">
+                                                        <option st-id="" value="">Select Status</option>
+                                                        <option st-id="" <?php if($getpreviouschecklistreportrecord[0]['status_main']=='Open'){ echo 'Selected';} ?> value="Open">Open</option>
+                                                        <option st-id="" <?php if($getpreviouschecklistreportrecord[0]['status_main']=='Close'){ echo 'Selected';} ?> value="Close">Close</option>
+                                                    </select>
+                                            <p class="error status_main_error"></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
 
                                 <div class="row">
                                     <div class="col-md-3">
