@@ -238,7 +238,7 @@
                                                   <tr>
                                                     <td class="qc-label"> FG Part Description </td>
                                                     <td>
-                                                      <input type="hidden" name="og_part_id" id="og_part_id">
+                                                      <input type="text" name="og_part_id" id="og_part_id">
                                                       <input type="text" name="fg_part_description_qc_audit" id="fg_part_description_qc_audit" value="<?=$qcinternalauditdata[0]['fg_part_description_qc_audit'];?>">
                                                     </td>
                                                   </tr>
