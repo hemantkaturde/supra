@@ -34486,6 +34486,8 @@ $('#export_excel').on('click', function() {
 					if(data == "failure")
 					{
 						//$('#incoming_data_qc_audit').html('<option value="">Select Buyer PO Number</option>');
+						$("#incoming_data_qc_audit").html();
+
 					}
 					else
 					{
@@ -34495,7 +34497,7 @@ $('#export_excel').on('click', function() {
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 				{
-					//$('#incoming_data_qc_audit').html();
+					$('#incoming_data_qc_audit').html();
 				}
 			 });
 			return false;
