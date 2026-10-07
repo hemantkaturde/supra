@@ -28385,7 +28385,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->where(TBL_CHECKLIST_REPORT_PART.'.status', 1);
 
-        //$this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
         $this->db->where(TBL_CHECKLIST_REPORT_PART.'.buyer_id', $buyer_id);
 
         $this->db->limit($params['length'],$params['start']);
