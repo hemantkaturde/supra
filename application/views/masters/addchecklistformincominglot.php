@@ -81,7 +81,7 @@
                         <option value="">Select Lot Number</option>
                         <?php foreach ($getIncomindlotforchecklistlastreport as $key => $value) { ?>
                             <option value="<?php echo $value['incoming_details_item_id']; ?>">
-                                <?php echo $value['lot_no']; ?>
+                                <?php echo $value['lot_no'].'- Checked By'.$value['checked_by']; ?>
                             </option>
                         <?php } ?>
                     </select>

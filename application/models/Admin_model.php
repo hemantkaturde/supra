@@ -28629,7 +28629,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
      public function getIncomindlotforchecklistlastreport($vendor_po_id,$buyer_part_number){
 
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_TDIR_INCOMING_LOT_DATA.'.checked_by');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
 
         $this->db->join(TBL_TDIR_INCOMING_LOT_DATA, TBL_TDIR_INCOMING_LOT_DATA.'.incomping_details_item_id = '.TBL_INCOMING_DETAILS_ITEM.'.id  and '.TBL_TDIR_INCOMING_LOT_DATA.'.fin_part_id='.TBL_INCOMING_DETAILS_ITEM.'.part_number');
