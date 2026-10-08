@@ -28631,6 +28631,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+
+        $this->db->join(TBL_TDIR_INCOMING_LOT_DATA, TBL_TDIR_INCOMING_LOT_DATA.'.incomping_details_item_id = '.TBL_INCOMING_DETAILS_ITEM.'.id  and '.TBL_TDIR_INCOMING_LOT_DATA.'.fin_part_id='.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number',$vendor_po_id);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$buyer_part_number);
