@@ -34,6 +34,19 @@
                     <div class="box box-primary"> 
                         <?php $this->load->helper("form"); ?>
                         <div class="box-body">
+
+                            <h4>
+                                <p><b>Checklist Report Number :</b> <?=$getChecklistForminfo[0]['checklistreportno'] ?></p>
+                                <p><b>Buyer Name :</b> <?=$getChecklistForminfo[0]['buyer_name'] ?></p>
+                                <!-- <p><b>Invoice Date :</b> <?=$getChecklistForminfo[0]['invoice_date'] ?></p>
+                                <p><b>Invoice Number :</b> <?=$getChecklistForminfo[0]['invoice_no'] ?></p>
+                                <p><b>Mode Of Shipment :</b> <?=$getChecklistForminfo[0]['mode_of_shipment'] ?></p>
+                                <p><b>Status :</b> <?=$getChecklistForminfo[0]['status_main'] ?></p>
+                                <p><b>Remark :</b> <?=$getChecklistForminfo[0]['remark'] ?></p> -->
+                            
+                            </h4>
+
+
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
                                     id="view_checklist_incoming_lotno_data">
