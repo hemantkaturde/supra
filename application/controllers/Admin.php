@@ -33468,6 +33468,9 @@ public function deletesupplieritemattachment(){
         $data['checklist_part_id']= $checklist_part_id;
         $data['og_buyer_id']= $og_buyer_id;
         $data['checklist_report_id']= $checklist_report_id;
+
+        $data['getChecklistForminfo']= $this->admin_model->getChecklistForminfo($checklist_report_id);
+
         $this->global['pageTitle'] = 'CheckList Part Item Data Vendor Incoming';
         $this->loadViews("masters/checklistpartitemdatavendorincoming", $this->global, $data, NULL);
     }
