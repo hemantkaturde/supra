@@ -48,8 +48,8 @@
                             <h4>
                                 <p><b>Checklist Report Number :</b> <?=$getChecklistForminfo[0]['checklistreportno'] ?></p>
                                 <p><b>Buyer Name :</b> <?=$getChecklistForminfo[0]['buyer_name'] ?></p>
-                                <p><b>Buyer PO :</b> <?=$getchecklistpartinfofordiaplay[0]['sales_order_number'] ?></p>
-                                <p><b>Buyer Part Number :</b> <?=$getchecklistpartinfofordiaplay[0]['part_number'] ?></p>
+                                <p><b>Buyer PO :</b> <?=$getchecklistpartinfofordiaplay[0]['sales_order_number'].'-'.$getchecklistpartinfofordiaplay[0]['buyer_po_number']?></p>
+                                <p><b>Part Number :</b> <?=$getchecklistpartinfofordiaplay[0]['part_number'] ?></p>
                                  <!-- <p><b>Mode Of Shipment :</b> <?=$getChecklistForminfo[0]['mode_of_shipment'] ?></p>
                                 <p><b>Status :</b> <?=$getChecklistForminfo[0]['status_main'] ?></p>
                                 <p><b>Remark :</b> <?=$getChecklistForminfo[0]['remark'] ?></p> -->
