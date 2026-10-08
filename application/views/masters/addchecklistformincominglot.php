@@ -38,6 +38,9 @@
                             <h4>
                                 <p><b>Checklist Report Number :</b> <?=$getChecklistForminfo[0]['checklistreportno'] ?></p>
                                 <p><b>Buyer Name :</b> <?=$getChecklistForminfo[0]['buyer_name'] ?></p>
+                                <p><b>Vendor Name :</b> <?=$geteditchecklistitemincomingreportdata[0]['vendor_name_og']?></p>
+                                <p><b>Vendor PO :</b> <?=$geteditchecklistitemincomingreportdata[0]['po_number']?></p>
+                                <p><b>Part Number :</b> <?=$geteditchecklistitemincomingreportdata[0]['part_number'] ?></p>
                                 <!-- <p><b>Invoice Date :</b> <?=$getChecklistForminfo[0]['invoice_date'] ?></p>
                                 <p><b>Invoice Number :</b> <?=$getChecklistForminfo[0]['invoice_no'] ?></p>
                                 <p><b>Mode Of Shipment :</b> <?=$getChecklistForminfo[0]['mode_of_shipment'] ?></p>
