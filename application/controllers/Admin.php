@@ -33294,6 +33294,9 @@ public function deletesupplieritemattachment(){
         $this->logrecord($process,$processFunction);
         $data['checklistreportid'] = $id;
         $data['buyer_id'] = $buyer_id;
+
+        $data['getChecklistForminfo']= $this->admin_model->getChecklistForminfo($id);
+
         //$data['vendorList']= $this->admin_model->fetchALLvendorList($buyer_id);
         $this->global['pageTitle'] = 'Checklist Report Part';
         $this->loadViews("masters/addchecklistpart", $this->global, $data, NULL);

@@ -12,6 +12,7 @@
                 </ul>
             </small>
         </h1>
+        
     </section>
     <section class="content">
         <div class="row">
@@ -21,6 +22,9 @@
                     <li class="active"><a href="javascript:void(0);">Checklist Report</a></li>
                 </ul>
             </div>
+
+
+
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                     <a class="btn btn-primary" href="<?php echo base_url('addchecklistpartrecord/' . $checklistreportid.'/'.$buyer_id); ?>">
@@ -30,15 +34,19 @@
             </div>
         </div>
         <div class="row">
-
-         <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
+        <input type="hidden" class="form-control" id="checklistreportid" name="checklistreportid" value="<?php echo $checklistreportid; ?>">
         <input type="hidden" class="form-control" id="buyer_id" name="buyer_id" value="<?php echo $buyer_id; ?>">
-
+        
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box box-primary"> 
                         <?php $this->load->helper("form"); ?>
                         <div class="box-body">
+                             <h4>
+                                <p><b>Checklist Report Number :</b> <?=$getChecklistForminfo[0]['checklistreportno'] ?></p>
+                                <p><b>Buyer Name :</b> <?=$getChecklistForminfo[0]['buyer_name'] ?></p>
+                            
+                            </h4>
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
                                     id="view_checklistreport_part">

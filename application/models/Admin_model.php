@@ -29086,6 +29086,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getChecklistForminfo($checklistreportid){
+
+        $this->db->select('*,'.TBL_CHECKLIST_REPORT.'.id as checklist_id,'.TBL_BUYER_MASTER.'.buyer_id as og_buyer_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_CHECKLIST_REPORT.'.buyer_id = '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->where(TBL_CHECKLIST_REPORT.'.id',$checklistreportid);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
 
 }
 
