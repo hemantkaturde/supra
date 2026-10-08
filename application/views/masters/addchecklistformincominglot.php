@@ -78,11 +78,20 @@
                 <div class="form-group">
                     <label for="lot_no">Lot Number <span class="required">*</span></label>
                     <select class="form-control serachfilternotrequired searchfilter" name="lot_no" id="lot_no">
-                        <option value="">Select Lot Number</option>
+                       <option value="">Select Lot Number</option>
+
                         <?php foreach ($getIncomindlotforchecklistlastreport as $key => $value) { ?>
+
                             <option value="<?php echo $value['incoming_details_item_id']; ?>">
-                                <?php echo $value['lot_no'].'- Checked By :'.$value['checked_by']; ?>
+                                <?php 
+                                    echo $value['lot_no'];
+
+                                    if (!empty($value['checked_by'])) {
+                                        echo ' - Checked By : ' . $value['checked_by'];
+                                    }
+                                ?>
                             </option>
+
                         <?php } ?>
                     </select>
                     <span class="text-danger lot_no_error"></span>
