@@ -28500,7 +28500,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetechchecklistitemincomingreportcount($params){
+    public function fetechchecklistitemincomingreportcount($params,$checklist_part_id_1,$og_buyer_id_1,$checklist_report_id){
         $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og');
         $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
@@ -28523,6 +28523,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
        // $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
        // $this->db->where(TBL_CHECKLIST_REPORT_PART.'.buyer_id', $buyer_id);
+
+       
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_report_id', $checklist_report_id);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.og_buyer_id', $og_buyer_id_1);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id', $checklist_part_id_1);
+
+
         $query = $this->db->get(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -28530,7 +28537,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetechchecklistitemincomingreportdata($params){
+    public function fetechchecklistitemincomingreportdata($params,$checklist_part_id_1,$og_buyer_id_1,$checklist_report_id){
 
         $this->db->select('*, '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.id as checklist_part_incoming_id,'.TBL_VENDOR.'.vendor_name as vendor_name_og,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg');
         $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
@@ -28553,8 +28560,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
 
-        //$this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id', $checklistreportid);
-        //$this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.buyer_id', $buyer_id);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_report_id', $checklist_report_id);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.og_buyer_id', $og_buyer_id_1);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id', $checklist_part_id_1);
 
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id','DESC');

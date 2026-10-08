@@ -33567,11 +33567,11 @@ public function deletesupplieritemattachment(){
 		}
     }
 
-    public function fetechchecklistitemincomingreportdata(){
+    public function fetechchecklistitemincomingreportdata($checklist_part_id_1,$og_buyer_id_1,$checklist_report_id){
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->fetechchecklistitemincomingreportcount($params); 
-        $queryRecords = $this->admin_model->fetechchecklistitemincomingreportdata($params); 
+        $totalRecords = $this->admin_model->fetechchecklistitemincomingreportcount($params,$checklist_part_id_1,$og_buyer_id_1,$checklist_report_id); 
+        $queryRecords = $this->admin_model->fetechchecklistitemincomingreportdata($params,$checklist_part_id_1,$og_buyer_id_1,$checklist_report_id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

@@ -33762,6 +33762,11 @@ $('#export_excel').on('click', function() {
 			var checklistreportid = $('#checklistreportid').val();
 			var buyer_id = $('#buyer_id').val();	
 
+			var checklist_part_id_1 = $('#checklist_part_id').val();	
+			var og_buyer_id_1 = $('#og_buyer_id').val();	
+			var checklist_report_id = $('#checklist_report_id').val();	
+
+
 	    	var dt = $('#view_checklist_item_incoming_report_data').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
@@ -33788,7 +33793,7 @@ $('#export_excel').on('click', function() {
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/fetechchecklistitemincomingreportdata/",
+						url :"<?php echo base_url();?>admin/fetechchecklistitemincomingreportdata/"+checklist_part_id_1+"/"+og_buyer_id_1+"/"+checklist_report_id,
 						type: "post",
 					},
 			});
