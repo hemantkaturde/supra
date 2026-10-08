@@ -33687,7 +33687,7 @@ public function deletesupplieritemattachment(){
             $data['getIncomindlotforchecklistlastreport'] =  $this->admin_model->getIncomindlotforchecklistlastreport($data['geteditchecklistitemincomingreportdata'][0]['vendor_po_id'],$data['geteditchecklistitemincomingreportdata'][0]['buyer_part_number']);
             
 
-            $data['getChecklistForminfo']= $this->admin_model->getChecklistForminfo($data['geteditchecklistitemincomingreportdata']['checklist_report_id']);
+            $data['getChecklistForminfo']= $this->admin_model->getChecklistForminfo($data['geteditchecklistitemincomingreportdata'][0]['checklist_report_id']);
 
             $data['checklist_part_incoming_id'] = $checklist_part_incoming_id;
             $this->loadViews("masters/addchecklistformincominglot", $this->global, $data, NULL);
