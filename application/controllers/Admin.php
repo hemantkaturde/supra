@@ -34169,6 +34169,9 @@ public function deletesupplieritemattachment(){
         $this->global['pageTitle'] = 'Edit QC Internal Audit';
         $this->loadViews('masters/editqcinternalaudit',$this->global ,$data, NULL);
     }
+
+
+    
     
 
 }
