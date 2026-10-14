@@ -34172,18 +34172,30 @@ public function deletesupplieritemattachment(){
 
 
    
+
 public function printchecklistreport($id)
 {
+    // Fetch checklist data
+    $result = $this->admin_model->getchecklistdatabychecklistid($id);
+    $checklist = $result[0] ?? [];
+
+    if (empty($checklist)) {
+        show_error('Checklist report not found.', 404);
+        return;
+    }
+
     // Load mPDF
     $mpdf = new \Mpdf\Mpdf([
-        'mode'          => 'utf-8',
-        'format'        => 'A4-L',
-        'margin_left'   => 5,
-        'margin_right'  => 5,
-        'margin_top'    => 5,
-        'margin_bottom' => 5,
-        'margin_header' => 0,
-        'margin_footer' => 0
+        'mode'              => 'utf-8',
+        'format'            => 'A4-L',
+        'margin_left'       => 5,
+        'margin_right'      => 5,
+        'margin_top'        => 5,
+        'margin_bottom'     => 5,
+        'margin_header'     => 0,
+        'margin_footer'     => 0,
+        'default_font'      => 'dejavusans',
+        'default_font_size' => 9
     ]);
 
     $mpdf->SetTitle('CHECK LIST FOR DISPATCH');
@@ -34197,13 +34209,16 @@ public function printchecklistreport($id)
 
 <style>
     body {
-        font-family: sans-serif;
-        font-size: 7px;
-        color: #222;
+        font-family: dejavusans, sans-serif;
+        font-size: 9pt;
+        color: #000000;
+        margin: 0;
+        padding: 0;
     }
 
     table {
         border-collapse: collapse;
+        border-spacing: 0;
     }
 
     .header-table {
@@ -34213,109 +34228,154 @@ public function printchecklistreport($id)
     }
 
     .header-table td {
-        border: 1px solid #999;
-        padding: 4px;
+        border: 1px solid #000000;
+        padding: 5px;
         vertical-align: middle;
+        font-size: 9pt;
+        font-weight: bold;
+        color: #000000;
     }
 
     .title {
         text-align: center;
-        font-size: 15px;
-        font-weight: normal;
-        height: 20px;
+        font-size: 16pt !important;
+        font-weight: bold;
+        height: 30px;
     }
 
-    .meta {
-        height: 18px;
-        font-size: 7px;
+    .report-number {
+        text-align: right;
+        font-size: 10pt !important;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .meta td {
+        height: 23px;
+        font-size: 8.5pt;
+        font-weight: bold;
     }
 
     .dispatch {
         width: 100%;
         table-layout: fixed;
+        border-collapse: collapse;
     }
 
     .dispatch th {
-        border: 1px solid #999;
-        background-color: #aaa;
-        color: #fff;
+        border: 1px solid #000000;
+        background-color: #B5B5B5;
+        color: #000000;
         text-align: center;
         vertical-align: middle;
-        font-size: 6px;
-        font-weight: normal;
-        padding: 4px 1px;
-        height: 32px;
+        font-size: 8pt;
+        font-weight: bold;
+        padding: 5px 2px;
+        height: 38px;
+        line-height: 1.2;
     }
 
     .dispatch td {
-        border: 1px solid #999;
+        border: 1px solid #000000;
         text-align: center;
         vertical-align: middle;
-        font-size: 7px;
-        padding: 4px 1px;
-        height: 31px;
+        font-size: 9pt;
+        font-weight: bold;
+        color: #000000;
+        padding: 5px 2px;
+        height: 35px;
+        line-height: 1.2;
         word-wrap: break-word;
     }
 
     .part {
-        font-size: 8px !important;
+        font-size: 9pt !important;
+        font-weight: bold;
     }
 
     .hand {
-        font-size: 9px !important;
+        font-size: 10pt !important;
+        font-weight: bold;
     }
 
     .bottom {
         width: 100%;
-        margin-top: 7px;
+        table-layout: fixed;
+        margin-top: 8px;
     }
 
     .bottom td {
-        border: 1px solid #999;
+        border: 1px solid #000000;
         height: 28px;
-        padding: 5px;
+        padding: 6px;
         vertical-align: top;
+        font-size: 9pt;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    .blank-row td {
+        height: 25px;
     }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <table class="header-table">
     <tr>
-        <td colspan="7" class="title">
-            CHECK LIST FOR DISPATCH
+        <td colspan="14" style="padding:0;">
+            <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <td class="title" style="width:80%; border:none;">
+                        CHECK LIST FOR DISPATCH
+                    </td>
+                    <td class="report-number" style="width:20%; border:none;">
+                        {{checklistreportno}}
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
+
     <tr class="meta">
         <td colspan="4">
-            <b>BUYER:</b> Drill Saw
+            <b>BUYER:</b> {{buyer_name}}
         </td>
-        <td colspan="2">
-            <b>INVOICE NO.-MG:</b> 114/2627
+
+        <td colspan="4">
+            <b>INVOICE NO.-MG:</b> {{invoice_no}}
         </td>
-        <td>
-            <b>DATE:</b> 08.06.2026
+
+        <td colspan="3">
+            <b>DATE:</b> {{invoice_date}}
+        </td>
+
+        <td colspan="3">
+            <b>Mode Of Shipment:</b> {{mode_of_shipment}}
         </td>
     </tr>
 </table>
 
+<!-- DISPATCH CHECKLIST -->
 <table class="dispatch">
+
     <colgroup>
         <col style="width:3%">
         <col style="width:5%">
         <col style="width:8%">
-        <col style="width:17%">
+        <col style="width:16%">
         <col style="width:6%">
         <col style="width:7%">
         <col style="width:7%">
         <col style="width:6%">
-        <col style="width:7%">
         <col style="width:6%">
+        <col style="width:5%">
         <col style="width:8%">
         <col style="width:6%">
         <col style="width:7%">
-        <col style="width:7%">
+        <col style="width:10%">
     </colgroup>
 
     <thead>
@@ -34474,7 +34534,7 @@ public function printchecklistreport($id)
             <td>AJ</td>
         </tr>
 
-        <tr>
+        <tr class="blank-row">
             <td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td>
@@ -34483,6 +34543,7 @@ public function printchecklistreport($id)
     </tbody>
 </table>
 
+<!-- DETAILS AND REMARKS -->
 <table class="bottom">
     <tr>
         <td width="50%">DETAILS GIVEN BY:</td>
@@ -34498,11 +34559,40 @@ public function printchecklistreport($id)
 </html>
 HTML;
 
-    // Generate PDF
-    $mpdf->WriteHTML($html);
+    // Replace placeholders with database values
+    $replacements = [
+        '{{checklistreportno}}' => htmlspecialchars(
+            (string) ($checklist['checklistreportno'] ?? ''),
+            ENT_QUOTES,
+            'UTF-8'
+        ),
+        '{{buyer_name}}' => htmlspecialchars(
+            (string) ($checklist['buyer_name'] ?? ''),
+            ENT_QUOTES,
+            'UTF-8'
+        ),
+        '{{invoice_no}}' => htmlspecialchars(
+            (string) ($checklist['invoice_no'] ?? ''),
+            ENT_QUOTES,
+            'UTF-8'
+        ),
+        '{{invoice_date}}' => htmlspecialchars(
+            (string) ($checklist['invoice_date'] ?? ''),
+            ENT_QUOTES,
+            'UTF-8'
+        ),
+        '{{mode_of_shipment}}' => htmlspecialchars(
+            (string) ($checklist['mode_of_shipment'] ?? ''),
+            ENT_QUOTES,
+            'UTF-8'
+        )
+    ];
 
-    // Display PDF in browser
-    $mpdf->Output('dispatch_checklist_' . $id . '.pdf', 'D');
+    $html = strtr($html, $replacements);
+
+    // Generate and display PDF in browser
+    $mpdf->WriteHTML($html);
+    $mpdf->Output('dispatch_checklist_' . $id . '.pdf', 'I');
 }
 
 

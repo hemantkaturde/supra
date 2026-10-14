@@ -28234,8 +28234,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $data[$counter]['checklistreportno'] =  $value['checklistreportno'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name'];
-                $data[$counter]['invoice_no'] =  $value['invoice_no'];
-                $data[$counter]['invoice_date'] =  $invoice_date;          
+                $data[$counter]['invoice_date'] =  $invoice_date;      
+                $data[$counter]['invoice_no'] =  $value['invoice_no'];    
                 $data[$counter]['mode_of_shipment'] =  $value['mode_of_shipment'];             
                 $data[$counter]['status_main'] =  $value['status_main'];           
                 $data[$counter]['remark'] =  $value['remark'];
@@ -29136,6 +29136,60 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
 
     }
+
+
+
+
+     public function getchecklistdatabychecklistid($id){
+
+        $this->db->select('*,'.TBL_CHECKLIST_REPORT.'.id as checklist_id,'.TBL_BUYER_MASTER.'.buyer_id as og_buyer_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_CHECKLIST_REPORT.'.buyer_id = '.TBL_BUYER_MASTER.'.buyer_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHECKLIST_REPORT.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".checklistreportno LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".status_main LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHECKLIST_REPORT.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                if($value['invoice_date']=='0000-00-00'){
+                   $invoice_date = "";
+                }else{
+                   $invoice_date =  date("d-m-Y", strtotime($value['invoice_date']));
+                }
+
+                $data[$counter]['checklistreportno'] =  $value['checklistreportno'];
+                $data[$counter]['buyer_name'] =  $value['buyer_name'];
+                $data[$counter]['invoice_date'] =  $invoice_date;      
+                $data[$counter]['invoice_no'] =  $value['invoice_no'];    
+                $data[$counter]['mode_of_shipment'] =  $value['mode_of_shipment'];             
+                $data[$counter]['status_main'] =  $value['status_main'];           
+                $data[$counter]['remark'] =  $value['remark'];
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
 
 
 }
