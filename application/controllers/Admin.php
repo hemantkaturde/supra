@@ -34184,6 +34184,9 @@ public function printchecklistreport($id)
         return;
     }
 
+
+    
+
     // Load mPDF
     $mpdf = new \Mpdf\Mpdf([
         'mode'              => 'utf-8',
@@ -34232,13 +34235,13 @@ public function printchecklistreport($id)
         padding: 5px;
         vertical-align: middle;
         font-size: 9pt;
-        font-weight: bold;
+        /* font-weight: bold; */
         color: #000000;
     }
 
     .title {
         text-align: center;
-        font-size: 16pt !important;
+        font-size: 25pt !important;
         font-weight: bold;
         height: 30px;
     }
@@ -34246,14 +34249,14 @@ public function printchecklistreport($id)
     .report-number {
         text-align: right;
         font-size: 10pt !important;
-        font-weight: bold;
+        /* font-weight: bold; */
         white-space: nowrap;
     }
 
     .meta td {
         height: 23px;
         font-size: 8.5pt;
-        font-weight: bold;
+        /* font-weight: bold; */
     }
 
     .dispatch {
@@ -34269,7 +34272,7 @@ public function printchecklistreport($id)
         text-align: center;
         vertical-align: middle;
         font-size: 8pt;
-        font-weight: bold;
+        /* font-weight: bold; */
         padding: 5px 2px;
         height: 38px;
         line-height: 1.2;
@@ -34280,7 +34283,7 @@ public function printchecklistreport($id)
         text-align: center;
         vertical-align: middle;
         font-size: 9pt;
-        font-weight: bold;
+        /* font-weight: bold; */
         color: #000000;
         padding: 5px 2px;
         height: 35px;
@@ -34290,12 +34293,12 @@ public function printchecklistreport($id)
 
     .part {
         font-size: 9pt !important;
-        font-weight: bold;
+        /* font-weight: bold; */
     }
 
     .hand {
         font-size: 10pt !important;
-        font-weight: bold;
+        /* font-weight: bold; */
     }
 
     .bottom {
@@ -34310,7 +34313,7 @@ public function printchecklistreport($id)
         padding: 6px;
         vertical-align: top;
         font-size: 9pt;
-        font-weight: bold;
+        /* font-weight: bold; */
         color: #000000;
     }
 
@@ -34415,7 +34418,7 @@ public function printchecklistreport($id)
             <td>RO</td>
         </tr>
 
-        <tr>
+        <!-- <tr>
             <td>2</td>
             <td>500</td>
             <td>72671<br>17.04.26</td>
@@ -34532,14 +34535,14 @@ public function printchecklistreport($id)
             <td></td>
             <td>Ajay</td>
             <td>AJ</td>
-        </tr>
+        </tr> -->
 
-        <tr class="blank-row">
+        <!-- <tr class="blank-row">
             <td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td>
             <td></td><td></td>
-        </tr>
+        </tr> -->
     </tbody>
 </table>
 
