@@ -736,6 +736,8 @@ $route['getBuyerItemsforDisplayBybuyeridforqia'] = 'admin/getBuyerItemsforDispla
 $route['getbuyeritemdataforforqia'] = 'admin/getbuyeritemdataforforqia';
 $route['getincomingItemsforDisplayqulitychecking'] = "admin/getincomingItemsforDisplayqulitychecking";
 $route['editqcinternalaudit/(:num)'] = 'admin/editqcinternalaudit/$1';
+$route['printchecklistreport/(:num)'] = 'admin/printchecklistreport/$1';
+
 
 
 

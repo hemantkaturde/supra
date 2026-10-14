@@ -34171,6 +34171,341 @@ public function deletesupplieritemattachment(){
     }
 
 
+   
+public function printchecklistreport($id)
+{
+    // Load mPDF
+    $mpdf = new \Mpdf\Mpdf([
+        'mode'          => 'utf-8',
+        'format'        => 'A4-L',
+        'margin_left'   => 5,
+        'margin_right'  => 5,
+        'margin_top'    => 5,
+        'margin_bottom' => 5,
+        'margin_header' => 0,
+        'margin_footer' => 0
+    ]);
+
+    $mpdf->SetTitle('CHECK LIST FOR DISPATCH');
+
+    // HTML Content
+    $html = <<<'HTML'
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+    body {
+        font-family: sans-serif;
+        font-size: 7px;
+        color: #222;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    .header-table {
+        width: 100%;
+        table-layout: fixed;
+        margin-bottom: 5px;
+    }
+
+    .header-table td {
+        border: 1px solid #999;
+        padding: 4px;
+        vertical-align: middle;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 15px;
+        font-weight: normal;
+        height: 20px;
+    }
+
+    .meta {
+        height: 18px;
+        font-size: 7px;
+    }
+
+    .dispatch {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .dispatch th {
+        border: 1px solid #999;
+        background-color: #aaa;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 6px;
+        font-weight: normal;
+        padding: 4px 1px;
+        height: 32px;
+    }
+
+    .dispatch td {
+        border: 1px solid #999;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 7px;
+        padding: 4px 1px;
+        height: 31px;
+        word-wrap: break-word;
+    }
+
+    .part {
+        font-size: 8px !important;
+    }
+
+    .hand {
+        font-size: 9px !important;
+    }
+
+    .bottom {
+        width: 100%;
+        margin-top: 7px;
+    }
+
+    .bottom td {
+        border: 1px solid #999;
+        height: 28px;
+        padding: 5px;
+        vertical-align: top;
+    }
+</style>
+</head>
+
+<body>
+
+<table class="header-table">
+    <tr>
+        <td colspan="7" class="title">
+            CHECK LIST FOR DISPATCH
+        </td>
+    </tr>
+    <tr class="meta">
+        <td colspan="4">
+            <b>BUYER:</b> Drill Saw
+        </td>
+        <td colspan="2">
+            <b>INVOICE NO.-MG:</b> 114/2627
+        </td>
+        <td>
+            <b>DATE:</b> 08.06.2026
+        </td>
+    </tr>
+</table>
+
+<table class="dispatch">
+    <colgroup>
+        <col style="width:3%">
+        <col style="width:5%">
+        <col style="width:8%">
+        <col style="width:17%">
+        <col style="width:6%">
+        <col style="width:7%">
+        <col style="width:7%">
+        <col style="width:6%">
+        <col style="width:7%">
+        <col style="width:6%">
+        <col style="width:8%">
+        <col style="width:6%">
+        <col style="width:7%">
+        <col style="width:7%">
+    </colgroup>
+
+    <thead>
+        <tr>
+            <th>SR.<br>NO.</th>
+            <th>PO QTY</th>
+            <th>PO NO. AND<br>DATE</th>
+            <th>DESCRIPTION / PART NO.</th>
+            <th>FINAL DISPATCH<br>QTY</th>
+            <th>RECEIVED ON FROM<br>SUPPLIER</th>
+            <th>RECEIVED DATE</th>
+            <th>VENDOR</th>
+            <th>SAMPLING<br>BY</th>
+            <th>REPORT NO.</th>
+            <th>INSPECTION REPORT<br>DATE</th>
+            <th>TEAM NAME</th>
+            <th>ISSUED BY</th>
+            <th>APPROVED</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>500</td>
+            <td>73233<br>01.07.26</td>
+            <td class="part">Brass Flange<br>24170082</td>
+            <td class="hand">527</td>
+            <td>528</td>
+            <td>28.05.26</td>
+            <td>RUDRA</td>
+            <td>Sonali</td>
+            <td>2627<br>0414</td>
+            <td>Bedba<br>2-6-26</td>
+            <td>A&amp;D</td>
+            <td>Rohit</td>
+            <td>RO</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>500</td>
+            <td>72671<br>17.04.26</td>
+            <td class="part">Brass Flange<br>24170082</td>
+            <td class="hand">606</td>
+            <td>614</td>
+            <td>28.04.26</td>
+            <td>RUDRA</td>
+            <td>Vijeta</td>
+            <td>2627<br>0345</td>
+            <td>Bedba<br>25-5-26</td>
+            <td>A&amp;D</td>
+            <td>Rohit</td>
+            <td>RO</td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>500</td>
+            <td>73233<br>01.07.26</td>
+            <td class="part">Brass Flange<br>24170082</td>
+            <td></td>
+            <td>526</td>
+            <td>28.05.26</td>
+            <td>RUDRA</td>
+            <td></td>
+            <td>2627<br>0414</td>
+            <td>3-6-26</td>
+            <td></td>
+            <td></td>
+            <td>RO</td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>500</td>
+            <td>73233<br>01.07.26</td>
+            <td class="part">Brass Flange<br>24170101</td>
+            <td class="hand">506</td>
+            <td>512</td>
+            <td>05.06.26</td>
+            <td>RUDRA</td>
+            <td>Rohini</td>
+            <td>2627<br>0438</td>
+            <td>Bedba<br>6-6-26</td>
+            <td></td>
+            <td>Rohit</td>
+            <td>RO</td>
+        </tr>
+
+        <tr>
+            <td>5</td>
+            <td>500</td>
+            <td>73233<br>01.07.26</td>
+            <td class="part">Brass Flange<br>24170087</td>
+            <td class="hand">528</td>
+            <td>550</td>
+            <td>02.06.26</td>
+            <td>RUDRA</td>
+            <td>Sonali</td>
+            <td>2627<br>0432</td>
+            <td>4/6/26</td>
+            <td></td>
+            <td>Nitin</td>
+            <td>N</td>
+        </tr>
+
+        <tr>
+            <td>6</td>
+            <td>3000</td>
+            <td>73233<br>01.07.26</td>
+            <td class="part">Brass Flange<br>24170006</td>
+            <td class="hand">3200</td>
+            <td>3221</td>
+            <td>01.06.26</td>
+            <td>RUDRA</td>
+            <td>Sonali</td>
+            <td>2627<br>0427</td>
+            <td>Bedba<br>4-6-26</td>
+            <td></td>
+            <td>Rohit</td>
+            <td>RO</td>
+        </tr>
+
+        <tr>
+            <td>7</td>
+            <td>2500</td>
+            <td>73233<br>01.07.26</td>
+            <td class="part">Brass Flange<br>24170008+03</td>
+            <td class="hand">1504</td>
+            <td>400<br>699<br>592</td>
+            <td>29.05.26<br>01.06.26</td>
+            <td>RUDRA</td>
+            <td>Sonali<br>Pratiksha<br>Avanti</td>
+            <td>2627<br>0432</td>
+            <td>Shubham<br>5-6-26</td>
+            <td></td>
+            <td>Shubham</td>
+            <td>SH</td>
+        </tr>
+
+        <tr>
+            <td>8</td>
+            <td>1000</td>
+            <td>72437<br>03.04.26</td>
+            <td class="part">Brass Flange<br>24170005 - Only one M4 Thread</td>
+            <td class="hand">1076</td>
+            <td>1088</td>
+            <td>07.05.26</td>
+            <td>RUDRA</td>
+            <td>Samrudhi</td>
+            <td>2627<br>0430</td>
+            <td>Ajay<br>04/06/26</td>
+            <td></td>
+            <td>Ajay</td>
+            <td>AJ</td>
+        </tr>
+
+        <tr>
+            <td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="bottom">
+    <tr>
+        <td width="50%">DETAILS GIVEN BY:</td>
+        <td width="50%">REMARKS:</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+</body>
+</html>
+HTML;
+
+    // Generate PDF
+    $mpdf->WriteHTML($html);
+
+    // Display PDF in browser
+    $mpdf->Output('dispatch_checklist_' . $id . '.pdf', 'D');
+}
+
+
     
     
 
