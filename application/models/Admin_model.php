@@ -29185,7 +29185,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $query = $this->db->get(TBL_CHECKLIST_REPORT);
         // $fetch_result = $query->result_array();
 
-        $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR.'.vendor_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.report_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.team_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.verified_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.approved_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.inspection_report_date');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR.'.vendor_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.report_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.team_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.verified_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.approved_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.inspection_report_date,'.TBL_CHECKLIST_REPORT_PART.'.buyer_po_qty,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_CHECKLIST_REPORT_PART.'.buyer_po_qty');
 
         $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
         $this->db->join(TBL_CHECKLIST_REPORT_PART, TBL_CHECKLIST_REPORT_PART.'.id = '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id');
@@ -29229,9 +29229,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                  $data[$counter]['verified_by'] =  $value['verified_by'];
                  $data[$counter]['approved_by'] =  $value['approved_by'];
                  $data[$counter]['inspection_report_date'] =  $value['inspection_report_date'];    
-                // $data[$counter]['mode_of_shipment'] =  $value['mode_of_shipment'];             
-                // $data[$counter]['status_main'] =  $value['status_main'];           
-                // $data[$counter]['remark'] =  $value['remark'];
+                 $data[$counter]['buyer_po_qty'] =  $value['buyer_po_qty'];             
+                 $data[$counter]['buyer_po_number'] =  $value['buyer_po_number'];           
+                 $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
 
 
 

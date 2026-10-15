@@ -34210,10 +34210,10 @@ public function printchecklistreport($id)
         $rowsHtml .= '
         <tr>
             <td>' . $sr_no++ . '</td>
-            <td>' . $e('po_qty') . '</td>
+            <td>' . $e('buyer_po_qty') . '</td>
 
             <td>
-                ' . $e('sales_order_number') . '<br>
+                ' . $e('buyer_po_number') . '<br>
                 ' . $e('buyer_po_date') . '
             </td>
 
@@ -34223,7 +34223,7 @@ public function printchecklistreport($id)
             </td>
 
             <td class="hand">
-                ' . $e('final_dispatch_qty') . '
+                ' . $e('dispatch_qty') . ' 
             </td>
 
             <td>' . nl2br($e('received_qty')) . '</td>
