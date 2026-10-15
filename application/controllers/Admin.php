@@ -34214,7 +34214,7 @@ public function printchecklistreport($id)
 
             <td>
                 ' . $e('buyer_po_number') . '<br>
-                ' . $e('buyer_po_date') . '
+                ' . $e('buyer_po_part_delivery_date') . '
             </td>
 
             <td class="part">
