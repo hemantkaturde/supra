@@ -29185,12 +29185,21 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $query = $this->db->get(TBL_CHECKLIST_REPORT);
         // $fetch_result = $query->result_array();
 
-        $this->db->select('*');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number');
 
-        // $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_part_id');
-        // $this->db->join(TBL_CHECKLIST_REPORT_PART, TBL_CHECKLIST_REPORT_PART.'.id = '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id');
-        // $this->db->join(TBL_CHECKLIST_REPORT, TBL_CHECKLIST_REPORT.'.id = '.TBL_CHECKLIST_REPORT_PART.'.checklist_report_id');
-        // $this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
+        $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
+        $this->db->join(TBL_CHECKLIST_REPORT_PART, TBL_CHECKLIST_REPORT_PART.'.id = '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id');
+        $this->db->join(TBL_CHECKLIST_REPORT, TBL_CHECKLIST_REPORT.'.id = '.TBL_CHECKLIST_REPORT_PART.'.checklist_report_id');
+
+
+        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+
+        
+
+        $this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
         $query = $this->db->get(TBL_CHECKLIST_INCOMING_LOT_DATA);
         $fetch_result = $query->result_array();
 
@@ -29201,15 +29210,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
 
-                if($value['received_date']=='0000-00-00'){
-                   $received_date = "";
-                }else{
-                   $received_date =  date("d-m-Y", strtotime($value['received_date']));
-                }
+                // if($value['received_date']=='0000-00-00'){
+                //    $received_date = "";
+                // }else{
+                //    $received_date =  date("d-m-Y", strtotime($value['received_date']));
+                // }
 
-                $data[$counter]['lot_number'] =  $value['lot_number'];
-                $data[$counter]['received_qty'] =  $value['received_qty'];
-                $data[$counter]['received_date'] =  $received_date;      
+                 $data[$counter]['sales_order_number'] =  $value['sales_order_number'];
+                 $data[$counter]['buyer_po_date'] =  $value['buyer_po_date'];
+                 $data[$counter]['part_description'] =  $value['part_description'];
+                 $data[$counter]['part_number'] =  $value['part_number'];
+
+                // $data[$counter]['lot_number'] =  $value['lot_number'];
+                // $data[$counter]['received_qty'] =  $value['received_qty'];
+                // $data[$counter]['received_date'] =  $received_date;      
                 // $data[$counter]['invoice_no'] =  $value['invoice_no'];    
                 // $data[$counter]['mode_of_shipment'] =  $value['mode_of_shipment'];             
                 // $data[$counter]['status_main'] =  $value['status_main'];           

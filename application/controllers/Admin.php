@@ -34184,24 +34184,59 @@ public function printchecklistreport($id)
         return;
     }
 
-
     // Fetch checklist part data
     $result_1 = $this->admin_model->getchecklistpartdatabychecklistidforpdf($id);
-    $checklist_part_data = $result_1[0] ?? [];
 
-    print_r($checklist_part_data);
-    exit;
-
-    if (empty($checklist_part_data)) {
+    if (empty($result_1)) {
         show_error('Checklist report not found.', 404);
         return;
     }
 
+    // Generate dynamic table rows
+    $rowsHtml = '';
+    $sr_no = 1;
 
+    foreach ($result_1 as $item) {
 
+        // Escape database values
+        $e = function ($key) use ($item) {
+            return htmlspecialchars(
+                (string) ($item[$key] ?? ''),
+                ENT_QUOTES,
+                'UTF-8'
+            );
+        };
 
+        $rowsHtml .= '
+        <tr>
+            <td>' . $sr_no++ . '</td>
+            <td>' . $e('po_qty') . '</td>
 
+            <td>
+                ' . $e('sales_order_number') . '<br>
+                ' . $e('buyer_po_date') . '
+            </td>
 
+            <td class="part">
+                ' . $e('part_description') . '<br>
+                ' . $e('part_number') . '
+            </td>
+
+            <td class="hand">
+                ' . $e('final_dispatch_qty') . '
+            </td>
+
+            <td>' . nl2br($e('received_qty')) . '</td>
+            <td>' . $e('received_date') . '</td>
+            <td>' . $e('vendor') . '</td>
+            <td>' . nl2br($e('sampling_by')) . '</td>
+            <td>' . nl2br($e('report_no')) . '</td>
+            <td>' . nl2br($e('inspection_report_date')) . '</td>
+            <td>' . $e('team_name') . '</td>
+            <td>' . $e('issued_by') . '</td>
+            <td>' . $e('approved') . '</td>
+        </tr>';
+    }
 
     // Load mPDF
     $mpdf = new \Mpdf\Mpdf([
@@ -34221,362 +34256,216 @@ public function printchecklistreport($id)
 
     // HTML Content
     $html = <<<'HTML'
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 
-    <style>
-        body {
-            font-family: dejavusans, sans-serif;
-            font-size: 9pt;
-            color: #000000;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+    body {
+        font-family: dejavusans, sans-serif;
+        font-size: 9pt;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+    }
 
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
 
-        .header-table {
-            width: 100%;
-            table-layout: fixed;
-            margin-bottom: 5px;
-        }
+    .header-table {
+        width: 100%;
+        table-layout: fixed;
+        margin-bottom: 5px;
+    }
 
-        .header-table td {
-            border: 1px solid #000000;
-            padding: 5px;
-            vertical-align: middle;
-            font-size: 9pt;
-            /* font-weight: bold; */
-            color: #000000;
-        }
+    .header-table td {
+        border: 1px solid #000000;
+        padding: 5px;
+        vertical-align: middle;
+        font-size: 9pt;
+        color: #000000;
+    }
 
-        .title {
-            text-align: center;
-            font-size: 25pt !important;
-            font-weight: bold;
-            height: 30px;
-        }
+    .title {
+        text-align: center;
+        font-size: 25pt !important;
+        font-weight: bold;
+        height: 30px;
+    }
 
-        .report-number {
-            text-align: right;
-            font-size: 10pt !important;
-            /* font-weight: bold; */
-            white-space: nowrap;
-        }
+    .report-number {
+        text-align: right;
+        font-size: 10pt !important;
+        white-space: nowrap;
+    }
 
-        .meta td {
-            height: 23px;
-            font-size: 8.5pt;
-            /* font-weight: bold; */
-        }
+    .meta td {
+        height: 23px;
+        font-size: 8.5pt;
+    }
 
-        .dispatch {
-            width: 100%;
-            table-layout: fixed;
-            border-collapse: collapse;
-        }
+    .dispatch {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
 
-        .dispatch th {
-            border: 1px solid #000000;
-            background-color: #B5B5B5;
-            color: #000000;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 8pt;
-            /* font-weight: bold; */
-            padding: 5px 2px;
-            height: 38px;
-            line-height: 1.2;
-        }
+    .dispatch th {
+        border: 1px solid #000000;
+        background-color: #B5B5B5;
+        color: #000000;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 8pt;
+        padding: 5px 2px;
+        height: 38px;
+        line-height: 1.2;
+    }
 
-        .dispatch td {
-            border: 1px solid #000000;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 9pt;
-            /* font-weight: bold; */
-            color: #000000;
-            padding: 5px 2px;
-            height: 35px;
-            line-height: 1.2;
-            word-wrap: break-word;
-        }
+    .dispatch td {
+        border: 1px solid #000000;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 9pt;
+        color: #000000;
+        padding: 5px 2px;
+        height: 35px;
+        line-height: 1.2;
+        word-wrap: break-word;
+    }
 
-        .part {
-            font-size: 9pt !important;
-            /* font-weight: bold; */
-        }
+    .part {
+        font-size: 9pt !important;
+    }
 
-        .hand {
-            font-size: 10pt !important;
-            /* font-weight: bold; */
-        }
+    .hand {
+        font-size: 10pt !important;
+    }
 
-        .bottom {
-            width: 100%;
-            table-layout: fixed;
-            margin-top: 8px;
-        }
+    .bottom {
+        width: 100%;
+        table-layout: fixed;
+        margin-top: 8px;
+    }
 
-        .bottom td {
-            border: 1px solid #000000;
-            height: 28px;
-            padding: 6px;
-            vertical-align: top;
-            font-size: 9pt;
-            /* font-weight: bold; */
-            color: #000000;
-        }
+    .bottom td {
+        border: 1px solid #000000;
+        height: 28px;
+        padding: 6px;
+        vertical-align: top;
+        font-size: 9pt;
+        color: #000000;
+    }
 
-        .blank-row td {
-            height: 25px;
-        }
-    </style>
-    </head>
+    .blank-row td {
+        height: 25px;
+    }
+</style>
+</head>
 
-    <body>
+<body>
 
-    <!-- HEADER -->
-    <table class="header-table">
+<!-- HEADER -->
+<table class="header-table">
+    <tr>
+        <td colspan="14" style="padding:0;">
+            <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <td class="title" style="width:80%; border:none;">
+                        CHECK LIST FOR DISPATCH
+                    </td>
+
+                    <td class="report-number" style="width:20%; border:none;">
+                        {{checklistreportno}}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr class="meta">
+        <td colspan="4">
+            <b>BUYER:</b> {{buyer_name}}
+        </td>
+
+        <td colspan="4">
+            <b>INVOICE NO.-MG:</b> {{invoice_no}}
+        </td>
+
+        <td colspan="3">
+            <b>DATE:</b> {{invoice_date}}
+        </td>
+
+        <td colspan="3">
+            <b>Mode Of Shipment:</b> {{mode_of_shipment}}
+        </td>
+    </tr>
+</table>
+
+<!-- DISPATCH CHECKLIST -->
+<table class="dispatch">
+
+    <colgroup>
+        <col style="width:3%">
+        <col style="width:5%">
+        <col style="width:8%">
+        <col style="width:16%">
+        <col style="width:6%">
+        <col style="width:7%">
+        <col style="width:7%">
+        <col style="width:6%">
+        <col style="width:6%">
+        <col style="width:5%">
+        <col style="width:8%">
+        <col style="width:6%">
+        <col style="width:7%">
+        <col style="width:10%">
+    </colgroup>
+
+    <thead>
         <tr>
-            <td colspan="14" style="padding:0;">
-                <table style="width:100%; border-collapse:collapse;">
-                    <tr>
-                        <td class="title" style="width:80%; border:none;">
-                            CHECK LIST FOR DISPATCH
-                        </td>
-                        <td class="report-number" style="width:20%; border:none;">
-                            {{checklistreportno}}
-                        </td>
-                    </tr>
-                </table>
-            </td>
+            <th>SR.<br>NO.</th>
+            <th>PO QTY</th>
+            <th>PO NO. AND<br>DATE</th>
+            <th>DESCRIPTION / PART NO.</th>
+            <th>FINAL DISPATCH<br>QTY</th>
+            <th>RECEIVED ON FROM<br>SUPPLIER</th>
+            <th>RECEIVED DATE</th>
+            <th>VENDOR</th>
+            <th>SAMPLING<br>BY</th>
+            <th>REPORT NO.</th>
+            <th>INSPECTION REPORT<br>DATE</th>
+            <th>TEAM NAME</th>
+            <th>ISSUED BY</th>
+            <th>APPROVED</th>
         </tr>
+    </thead>
 
-        <tr class="meta">
-            <td colspan="4">
-                <b>BUYER:</b> {{buyer_name}}
-            </td>
+    <tbody>
+        {{checklist_rows}}
+    </tbody>
 
-            <td colspan="4">
-                <b>INVOICE NO.-MG:</b> {{invoice_no}}
-            </td>
+</table>
 
-            <td colspan="3">
-                <b>DATE:</b> {{invoice_date}}
-            </td>
+<!-- DETAILS AND REMARKS -->
+<table class="bottom">
+    <tr>
+        <td width="50%">DETAILS GIVEN BY:</td>
+        <td width="50%">REMARKS:</td>
+    </tr>
 
-            <td colspan="3">
-                <b>Mode Of Shipment:</b> {{mode_of_shipment}}
-            </td>
-        </tr>
-    </table>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 
-    <!-- DISPATCH CHECKLIST -->
-    <table class="dispatch">
-
-        <colgroup>
-            <col style="width:3%">
-            <col style="width:5%">
-            <col style="width:8%">
-            <col style="width:16%">
-            <col style="width:6%">
-            <col style="width:7%">
-            <col style="width:7%">
-            <col style="width:6%">
-            <col style="width:6%">
-            <col style="width:5%">
-            <col style="width:8%">
-            <col style="width:6%">
-            <col style="width:7%">
-            <col style="width:10%">
-        </colgroup>
-
-        <thead>
-            <tr>
-                <th>SR.<br>NO.</th>
-                <th>PO QTY</th>
-                <th>PO NO. AND<br>DATE</th>
-                <th>DESCRIPTION / PART NO.</th>
-                <th>FINAL DISPATCH<br>QTY</th>
-                <th>RECEIVED ON FROM<br>SUPPLIER</th>
-                <th>RECEIVED DATE</th>
-                <th>VENDOR</th>
-                <th>SAMPLING<br>BY</th>
-                <th>REPORT NO.</th>
-                <th>INSPECTION REPORT<br>DATE</th>
-                <th>TEAM NAME</th>
-                <th>ISSUED BY</th>
-                <th>APPROVED</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>500</td>
-                <td>73233<br>01.07.26</td>
-                <td class="part">Brass Flange<br>24170082</td>
-                <td class="hand">527</td>
-                <td>528</td>
-                <td>28.05.26</td>
-                <td>RUDRA</td>
-                <td>Sonali</td>
-                <td>2627<br>0414</td>
-                <td>Bedba<br>2-6-26</td>
-                <td>A&amp;D</td>
-                <td>Rohit</td>
-                <td>RO</td>
-            </tr>
-
-            <!-- <tr>
-                <td>2</td>
-                <td>500</td>
-                <td>72671<br>17.04.26</td>
-                <td class="part">Brass Flange<br>24170082</td>
-                <td class="hand">606</td>
-                <td>614</td>
-                <td>28.04.26</td>
-                <td>RUDRA</td>
-                <td>Vijeta</td>
-                <td>2627<br>0345</td>
-                <td>Bedba<br>25-5-26</td>
-                <td>A&amp;D</td>
-                <td>Rohit</td>
-                <td>RO</td>
-            </tr>
-
-            <tr>
-                <td>3</td>
-                <td>500</td>
-                <td>73233<br>01.07.26</td>
-                <td class="part">Brass Flange<br>24170082</td>
-                <td></td>
-                <td>526</td>
-                <td>28.05.26</td>
-                <td>RUDRA</td>
-                <td></td>
-                <td>2627<br>0414</td>
-                <td>3-6-26</td>
-                <td></td>
-                <td></td>
-                <td>RO</td>
-            </tr>
-
-            <tr>
-                <td>4</td>
-                <td>500</td>
-                <td>73233<br>01.07.26</td>
-                <td class="part">Brass Flange<br>24170101</td>
-                <td class="hand">506</td>
-                <td>512</td>
-                <td>05.06.26</td>
-                <td>RUDRA</td>
-                <td>Rohini</td>
-                <td>2627<br>0438</td>
-                <td>Bedba<br>6-6-26</td>
-                <td></td>
-                <td>Rohit</td>
-                <td>RO</td>
-            </tr>
-
-            <tr>
-                <td>5</td>
-                <td>500</td>
-                <td>73233<br>01.07.26</td>
-                <td class="part">Brass Flange<br>24170087</td>
-                <td class="hand">528</td>
-                <td>550</td>
-                <td>02.06.26</td>
-                <td>RUDRA</td>
-                <td>Sonali</td>
-                <td>2627<br>0432</td>
-                <td>4/6/26</td>
-                <td></td>
-                <td>Nitin</td>
-                <td>N</td>
-            </tr>
-
-            <tr>
-                <td>6</td>
-                <td>3000</td>
-                <td>73233<br>01.07.26</td>
-                <td class="part">Brass Flange<br>24170006</td>
-                <td class="hand">3200</td>
-                <td>3221</td>
-                <td>01.06.26</td>
-                <td>RUDRA</td>
-                <td>Sonali</td>
-                <td>2627<br>0427</td>
-                <td>Bedba<br>4-6-26</td>
-                <td></td>
-                <td>Rohit</td>
-                <td>RO</td>
-            </tr>
-
-            <tr>
-                <td>7</td>
-                <td>2500</td>
-                <td>73233<br>01.07.26</td>
-                <td class="part">Brass Flange<br>24170008+03</td>
-                <td class="hand">1504</td>
-                <td>400<br>699<br>592</td>
-                <td>29.05.26<br>01.06.26</td>
-                <td>RUDRA</td>
-                <td>Sonali<br>Pratiksha<br>Avanti</td>
-                <td>2627<br>0432</td>
-                <td>Shubham<br>5-6-26</td>
-                <td></td>
-                <td>Shubham</td>
-                <td>SH</td>
-            </tr>
-
-            <tr>
-                <td>8</td>
-                <td>1000</td>
-                <td>72437<br>03.04.26</td>
-                <td class="part">Brass Flange<br>24170005 - Only one M4 Thread</td>
-                <td class="hand">1076</td>
-                <td>1088</td>
-                <td>07.05.26</td>
-                <td>RUDRA</td>
-                <td>Samrudhi</td>
-                <td>2627<br>0430</td>
-                <td>Ajay<br>04/06/26</td>
-                <td></td>
-                <td>Ajay</td>
-                <td>AJ</td>
-            </tr> -->
-
-            <!-- <tr class="blank-row">
-                <td></td><td></td><td></td><td></td>
-                <td></td><td></td><td></td><td></td>
-                <td></td><td></td><td></td><td></td>
-                <td></td><td></td>
-            </tr> -->
-        </tbody>
-    </table>
-
-    <!-- DETAILS AND REMARKS -->
-    <table class="bottom">
-        <tr>
-            <td width="50%">DETAILS GIVEN BY:</td>
-            <td width="50%">REMARKS:</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
-    </body>
-    </html>
-    HTML;
+</body>
+</html>
+HTML;
 
     // Replace placeholders with database values
     $replacements = [
@@ -34585,35 +34474,41 @@ public function printchecklistreport($id)
             ENT_QUOTES,
             'UTF-8'
         ),
+
         '{{buyer_name}}' => htmlspecialchars(
             (string) ($checklist['buyer_name'] ?? ''),
             ENT_QUOTES,
             'UTF-8'
         ),
+
         '{{invoice_no}}' => htmlspecialchars(
             (string) ($checklist['invoice_no'] ?? ''),
             ENT_QUOTES,
             'UTF-8'
         ),
+
         '{{invoice_date}}' => htmlspecialchars(
             (string) ($checklist['invoice_date'] ?? ''),
             ENT_QUOTES,
             'UTF-8'
         ),
+
         '{{mode_of_shipment}}' => htmlspecialchars(
             (string) ($checklist['mode_of_shipment'] ?? ''),
             ENT_QUOTES,
             'UTF-8'
-        )
+        ),
+
+        '{{checklist_rows}}' => $rowsHtml
     ];
 
     $html = strtr($html, $replacements);
 
     // Generate and display PDF in browser
     $mpdf->WriteHTML($html);
-    $mpdf->Output('dispatch_checklist_' . $id . '.pdf', 'I');
-}
 
+    $mpdf->Output('dispatch_checklist_' . $id . '.pdf', 'D');
+}
 
     
     
