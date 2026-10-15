@@ -34228,13 +34228,13 @@ public function printchecklistreport($id)
 
             <td>' . nl2br($e('received_qty')) . '</td>
             <td>' . $e('received_date') . '</td>
-            <td>' . $e('vendor') . '</td>
+            <td>' . $e('vendor_name') . '</td>
             <td>' . nl2br($e('sampling_by')) . '</td>
-            <td>' . nl2br($e('report_no')) . '</td>
+            <td>' . nl2br($e('report_number')) . '</td>
             <td>' . nl2br($e('inspection_report_date')) . '</td>
             <td>' . $e('team_name') . '</td>
-            <td>' . $e('issued_by') . '</td>
-            <td>' . $e('approved') . '</td>
+            <td>' . $e('verified_by') . '</td>
+            <td>' . $e('approved_by') . '</td>
         </tr>';
     }
 
