@@ -34392,7 +34392,7 @@ public function printchecklistreport($id)
         </td>
 
         <td colspan="4">
-            <b>INVOICE NO.-MG:</b> {{invoice_no}}
+            <b>INVOICE NO:</b> {{invoice_no}}
         </td>
 
         <td colspan="3">
@@ -34439,7 +34439,7 @@ public function printchecklistreport($id)
             <th>REPORT NO.</th>
             <th>INSPECTION REPORT<br>DATE</th>
             <th>TEAM NAME</th>
-            <th>ISSUED BY</th>
+            <th>VERIFIED BY</th>
             <th>APPROVED</th>
         </tr>
     </thead>
