@@ -34232,7 +34232,10 @@ public function printchecklistreport($id)
             </td>
 
             <td>' . $e('incoming_lot_date') . '</td>
-            <td>' . $e('vendor_name') . '</td>
+            <td> 
+                ' . $e('vendor_name') . '<br>
+                ' . $e('vendor_po_number') . 
+            '</td>
             <td>' . nl2br($e('sampling_by')) . '</td>
             <td>' . nl2br($e('report_number')) . '</td>
             <td>' . nl2br($e('inspection_report_date')) . '</td>
