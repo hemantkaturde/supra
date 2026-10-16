@@ -34226,8 +34226,12 @@ public function printchecklistreport($id)
                 ' . $e('dispatch_qty') . ' 
             </td>
 
-            <td>' . nl2br($e('received_qty')) . '</td>
-            <td>' . $e('received_date') . '</td>
+            <td>
+                ' . $e('lot_number') . '-
+                ' . $e('incoming_qty_lot') . '<br>
+            </td>
+
+            <td>' . $e('incoming_lot_date') . '</td>
             <td>' . $e('vendor_name') . '</td>
             <td>' . nl2br($e('sampling_by')) . '</td>
             <td>' . nl2br($e('report_number')) . '</td>
