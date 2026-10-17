@@ -34227,14 +34227,13 @@ public function printchecklistreport($id)
             </td>
 
             <td>
-                ' . $e('lot_number') . '-
-                ' . $e('incoming_qty_lot') . '<br>
+                ' . nl2br($e('lot_number')) . '
             </td>
 
-            <td>' . $e('incoming_lot_date') . '</td>
+           
             <td> 
                 ' . $e('vendor_name') . '<br>
-                ' . $e('vendor_po_number') . 
+                ' . nl2br($e('vendor_po_number')) . 
             '</td>
             <td>' . nl2br($e('sampling_by')) . '</td>
             <td>' . nl2br($e('report_number')) . '</td>
@@ -34334,7 +34333,7 @@ public function printchecklistreport($id)
 
     .dispatch td {
         border: 1px solid #000000;
-        text-align: center;
+        /* text-align: center; */
         vertical-align: middle;
         font-size: 9pt;
         color: #000000;
@@ -34421,7 +34420,7 @@ public function printchecklistreport($id)
         <col style="width:8%">
         <col style="width:16%">
         <col style="width:6%">
-        <col style="width:7%">
+        <col style="width:15%">
         <col style="width:7%">
         <col style="width:6%">
         <col style="width:6%">
@@ -34429,7 +34428,6 @@ public function printchecklistreport($id)
         <col style="width:8%">
         <col style="width:6%">
         <col style="width:7%">
-        <col style="width:10%">
     </colgroup>
 
     <thead>
@@ -34440,7 +34438,6 @@ public function printchecklistreport($id)
             <th>DESCRIPTION / PART NO.</th>
             <th>FINAL DISPATCH<br>QTY</th>
             <th>RECEIVED ON FROM<br>SUPPLIER</th>
-            <th>RECEIVED DATE</th>
             <th>VENDOR</th>
             <th>SAMPLING<br>BY</th>
             <th>REPORT NO.</th>
