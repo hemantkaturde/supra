@@ -29202,8 +29202,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
         
 
-        $this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
-        // $this->db->group_by(TBL_CHECKLIST_REPORT_PART.'.id');
+        //$this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id',$id);
+        $this->db->group_by(TBL_CHECKLIST_REPORT_PART.'.id');
           //$this->db->group_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.buyer_part_number');
         $query = $this->db->get(TBL_CHECKLIST_INCOMING_LOT_DATA);
         $fetch_result = $query->result_array();
