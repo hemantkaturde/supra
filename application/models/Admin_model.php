@@ -29294,8 +29294,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
                 
-               $vendor_info_array = [];
-
+                $vendor_info_array = [];
                 foreach ($getIncomingdatadatagrouping as $row) {
 
                     $value = $row['vendor_info'] ?? '';
@@ -29306,24 +29305,33 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                     $vendor_info_array[] = $vendor_info;
                 }
-
                 // Remove duplicate values; keep different values
                 $vendor_info_array = array_unique($vendor_info_array);
-
                 $group_concat_values_vendor_info = implode(",\n", $vendor_info_array);
 
 
-                $inspection_report_date_valu = '';
+
+
+                $inspection_report_date_array = [];
 
                 foreach ($getIncomingdatadatagrouping as $row) {
 
-                    $value = $row['inspection_report_date'];
+                    $value = $row['inspection_report_date'] ?? '';
 
-                    $parts = explode(' - ', $value);
-                    $date = date('d-m-Y', strtotime(trim($parts[0])));
+                    $parts = explode(' - ', $value, 2);
 
-                    $inspection_report_date_valu .= $date.','. "\n";
+                    $date = date('d-m-Y', strtotime(trim($parts[0] ?? '')));
+
+                    $inspection_report_date_array[] = $date;
                 }
+
+                // Remove duplicate dates
+                $inspection_report_date_array = array_unique($inspection_report_date_array);
+
+                $inspection_report_date_valu = implode(",\n", $inspection_report_date_array);
+                                
+
+
 
 
                  $data[$counter]['inspection_report_date'] =  $inspection_report_date_valu;    
