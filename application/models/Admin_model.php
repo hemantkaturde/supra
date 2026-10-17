@@ -29203,6 +29203,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         
 
         $this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
+        $this->db->group_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.buyer_part_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_report_id');
+          //$this->db->group_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.buyer_part_number');
         $query = $this->db->get(TBL_CHECKLIST_INCOMING_LOT_DATA);
         $fetch_result = $query->result_array();
 
@@ -29220,46 +29222,46 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 }
 
 
-                if($value['inspection_report_date']=='0000-00-00'){
-                   $inspection_report_date = "";
-                }else{
-                   $inspection_report_date =  date("d-m-Y", strtotime($value['inspection_report_date']));
-                }
+                // if($value['inspection_report_date']=='0000-00-00'){
+                //    $inspection_report_date = "";
+                // }else{
+                //    $inspection_report_date =  date("d-m-Y", strtotime($value['inspection_report_date']));
+                // }
 
 
-                if($value['buyer_po_date']=='0000-00-00'){
-                   $buyer_po_date = "";
-                }else{
-                   $buyer_po_date =  date("d-m-Y", strtotime($value['buyer_po_date']));
-                }
+                // if($value['buyer_po_date']=='0000-00-00'){
+                //    $buyer_po_date = "";
+                // }else{
+                //    $buyer_po_date =  date("d-m-Y", strtotime($value['buyer_po_date']));
+                // }
 
 
-                if($value['incoming_lot_date']=='0000-00-00'){
-                   $incoming_lot_date = "";
-                }else{
-                   $incoming_lot_date =  date("d-m-Y", strtotime($value['incoming_lot_date']));
-                }
+                // if($value['incoming_lot_date']=='0000-00-00'){
+                //    $incoming_lot_date = "";
+                // }else{
+                //    $incoming_lot_date =  date("d-m-Y", strtotime($value['incoming_lot_date']));
+                // }
 
 
                  $data[$counter]['sales_order_number'] =  $value['sales_order_number'];
                  $data[$counter]['buyer_po_date'] =  $buyer_po_date;
                  $data[$counter]['part_description'] =  $value['part_description'];
                  $data[$counter]['part_number'] =  $value['part_number'];
-                 $data[$counter]['vendor_name'] =  $value['vendor_name'];
+                 //$data[$counter]['vendor_name'] =  $value['vendor_name'];
                  $data[$counter]['report_number'] =  $value['report_number'];
                  $data[$counter]['team_name'] =  $value['team_name'];
                  $data[$counter]['verified_by'] =  $value['verified_by'];
                  $data[$counter]['approved_by'] =  $value['approved_by'];
-                 $data[$counter]['inspection_report_date'] =  $inspection_report_date;    
+                 //$data[$counter]['inspection_report_date'] =  $inspection_report_date;    
                  $data[$counter]['buyer_po_qty'] =  $value['buyer_po_qty'];             
                  $data[$counter]['buyer_po_number'] =  $value['buyer_po_number'];           
                  $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
-                 $data[$counter]['buyer_po_part_delivery_date'] =  $buyer_po_part_delivery_date;
+                 //$data[$counter]['buyer_po_part_delivery_date'] =  $buyer_po_part_delivery_date;
                  $data[$counter]['sampling_by'] =  $value['sampling_by'];
-                 $data[$counter]['incoming_lot_date'] =  $incoming_lot_date;
-                 $data[$counter]['lot_number'] =  $value['lot_number'];
-                 $data[$counter]['incoming_qty_lot'] =  $value['incoming_qty_lot'];
-                 $data[$counter]['vendor_po_number'] =  $value['vendor_po_number'];
+                 //$data[$counter]['incoming_lot_date'] =  $incoming_lot_date;
+                 //$data[$counter]['lot_number'] =  $value['lot_number'];
+                 //$data[$counter]['incoming_qty_lot'] =  $value['incoming_qty_lot'];
+                 //$data[$counter]['vendor_po_number'] =  $value['vendor_po_number'];
                  
 
                 $counter++; 
