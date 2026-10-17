@@ -29185,28 +29185,42 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $query = $this->db->get(TBL_CHECKLIST_REPORT);
         // $fetch_result = $query->result_array();
 
-        $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR.'.vendor_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.report_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.team_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.verified_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.approved_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.inspection_report_date,'.TBL_CHECKLIST_REPORT_PART.'.buyer_po_qty,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_CHECKLIST_REPORT_PART.'.dispatch_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.sampling_by,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date as incoming_lot_date,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.lot_number,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty as incoming_qty_lot,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+        // $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR.'.vendor_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.report_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.team_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.verified_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.approved_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.inspection_report_date,'.TBL_CHECKLIST_REPORT_PART.'.buyer_po_qty,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_CHECKLIST_REPORT_PART.'.dispatch_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.sampling_by,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_date as incoming_lot_date,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.lot_number,'.TBL_CHECKLIST_INCOMING_LOT_DATA.'.received_qty as incoming_qty_lot,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
 
-        $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
-        $this->db->join(TBL_CHECKLIST_REPORT_PART, TBL_CHECKLIST_REPORT_PART.'.id = '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id');
-        $this->db->join(TBL_CHECKLIST_REPORT, TBL_CHECKLIST_REPORT.'.id = '.TBL_CHECKLIST_REPORT_PART.'.checklist_report_id');
+        // $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
+        // $this->db->join(TBL_CHECKLIST_REPORT_PART, TBL_CHECKLIST_REPORT_PART.'.id = '.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.checklist_part_id');
+        // $this->db->join(TBL_CHECKLIST_REPORT, TBL_CHECKLIST_REPORT.'.id = '.TBL_CHECKLIST_REPORT_PART.'.checklist_report_id');
 
 
+        // $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        // $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        // $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        // $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+
+
+        // $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
+        // $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
+        
+
+        // //$this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
+        // $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id',$id);
+        // // $this->db->group_by(TBL_CHECKLIST_REPORT_PART.'.id');
+        // //$this->db->group_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.buyer_part_number');
+        // $query = $this->db->get(TBL_CHECKLIST_INCOMING_LOT_DATA);
+        // $fetch_result = $query->result_array();
+
+
+
+        $this->db->select(TBL_CHECKLIST_REPORT_PART.'.id as part_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.report_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.team_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.verified_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.approved_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.inspection_report_date,'.TBL_CHECKLIST_REPORT_PART.'.buyer_po_qty,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_CHECKLIST_REPORT_PART.'.dispatch_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.sampling_by');
+        $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_REPORT_PART.'.checklist_report_id');
         $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
         $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
         $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
 
-
-        $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
-        $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');
-        
-
-        //$this->db->where(TBL_CHECKLIST_REPORT.'.id',$id);
         $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id',$id);
-        // $this->db->group_by(TBL_CHECKLIST_REPORT_PART.'.id');
-          //$this->db->group_by(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.buyer_part_number');
-        $query = $this->db->get(TBL_CHECKLIST_INCOMING_LOT_DATA);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+
         $fetch_result = $query->result_array();
 
         $data = array();
@@ -29230,11 +29244,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 // }
 
 
-                // if($value['buyer_po_date']=='0000-00-00'){
-                //    $buyer_po_date = "";
-                // }else{
-                //    $buyer_po_date =  date("d-m-Y", strtotime($value['buyer_po_date']));
-                // }
+                if($value['buyer_po_date']=='0000-00-00'){
+                   $buyer_po_date = "";
+                }else{
+                   $buyer_po_date =  date("d-m-Y", strtotime($value['buyer_po_date']));
+                }
 
 
                 // if($value['incoming_lot_date']=='0000-00-00'){
@@ -29242,6 +29256,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 // }else{
                 //    $incoming_lot_date =  date("d-m-Y", strtotime($value['incoming_lot_date']));
                 // }
+
+                //  $get_
 
 
                  $data[$counter]['sales_order_number'] =  $value['sales_order_number'];
@@ -29271,6 +29287,22 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         return $data;
     
+    }
+
+
+    public function getGroupofchecklistfromsupplierdata(){
+
+        $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.report_number,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.team_name,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.verified_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.approved_by,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.inspection_report_date,'.TBL_CHECKLIST_REPORT_PART.'.buyer_po_qty,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_CHECKLIST_REPORT_PART.'.dispatch_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.sampling_by');
+        $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_REPORT_PART.'.checklist_report_id');
+        $this->db->join(TBL_BUYER_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_id = ' . TBL_BUYER_MASTER . '.buyer_id');
+        $this->db->join(TBL_BUYER_PO_MASTER,TBL_CHECKLIST_REPORT_PART . '.buyer_po_id = ' . TBL_BUYER_PO_MASTER . '.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM,TBL_BUYER_PO_MASTER . '.id = ' . TBL_BUYER_PO_MASTER_ITEM . '.buyer_po_id AND ' .TBL_BUYER_PO_MASTER_ITEM . '.id = ' . TBL_CHECKLIST_REPORT_PART . '.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
+        $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id',$id);
+        $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
+
     }
 
 
