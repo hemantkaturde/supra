@@ -29219,6 +29219,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_FINISHED_GOODS,TBL_FINISHED_GOODS . '.fin_id = ' . TBL_BUYER_PO_MASTER_ITEM . '.part_number_id');
 
         $this->db->where(TBL_CHECKLIST_REPORT_PART.'.checklist_report_id',$id);
+        $this->db->order_by(TBL_CHECKLIST_REPORT_PART.'.id','DESC');
         $query = $this->db->get(TBL_CHECKLIST_REPORT_PART);
 
         $fetch_result = $query->result_array();
