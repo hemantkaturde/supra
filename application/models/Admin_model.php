@@ -29271,16 +29271,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                  $data[$counter]['part_description'] =  $value['part_description'];
                  $data[$counter]['part_number'] =  $value['part_number'];
                  //$data[$counter]['vendor_name'] =  $value['vendor_name'];
-                 $data[$counter]['report_number'] =  $value['report_number'];
-                 $data[$counter]['team_name'] =  $value['team_name'];
-                 $data[$counter]['verified_by'] =  $value['verified_by'];
-                 $data[$counter]['approved_by'] =  $value['approved_by'];
+                 
                
                  $data[$counter]['buyer_po_qty'] =  $value['buyer_po_qty'];             
                  $data[$counter]['buyer_po_number'] =  $value['buyer_po_number'];           
                  $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
                  $data[$counter]['buyer_po_part_delivery_date'] =  $buyer_po_part_delivery_date;
-                 $data[$counter]['sampling_by'] =  $value['sampling_by'];
+                 //$data[$counter]['sampling_by'] =  $value['sampling_by'];
                  //$data[$counter]['incoming_lot_date'] =  $incoming_lot_date;
 
 
@@ -29336,10 +29333,112 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $inspection_report_date_array = array_unique($inspection_report_date_array);
 
                 $inspection_report_date_valu = implode(",\n", $inspection_report_date_array);
+
+
+
+                $inspection_report_number_array = [];
+
+                foreach ($getIncomingdatadatagrouping as $row) {
+
+                    $value = $row['report_number'] ?? '';
+
+                    $parts = explode(' - ', $value, 2);
+
+                  
+                    $inspection_report_number_array[] = $parts[0];
+                }
+
+                // Remove duplicate dates
+                $inspection_report_number_array = array_unique($inspection_report_number_array);
+
+                $inspection_report_number_valu = implode(",\n", $inspection_report_number_array);
+
+
+
+                $inspection_team_name_array = [];
+
+                foreach ($getIncomingdatadatagrouping as $row) {
+
+                    $value = $row['team_name'] ?? '';
+
+                    $parts = explode(' - ', $value, 2);
+
+                  
+                    $inspection_team_name_array[] = $parts[0];
+                }
+
+                // Remove duplicate dates
+                $inspection_team_name_array = array_unique($inspection_team_name_array);
+
+                $inspection_team_name_value = implode(",\n", $inspection_team_name_array);
+
+
+                
+                $inspection_sampling_array = [];
+
+                foreach ($getIncomingdatadatagrouping as $row) {
+
+                    $value = $row['sampling_by'] ?? '';
+
+                    $parts = explode(' - ', $value, 2);
+
+                  
+                    $inspection_sampling_array[] = $parts[0];
+                }
+
+                // Remove duplicate dates
+                $inspection_sampling_array = array_unique($inspection_sampling_array);
+
+                $inspection_team_sampling_value = implode(",\n", $inspection_sampling_array);
+
+
+
+
+
+                $inspection_verified_by_array = [];
+
+                foreach ($getIncomingdatadatagrouping as $row) {
+
+                    $value = $row['verified_by'] ?? '';
+
+                    $parts = explode(' - ', $value, 2);
+
+                  
+                    $inspection_verified_by_array[] = $parts[0];
+                }
+
+                // Remove duplicate dates
+                $inspection_verified_by_array = array_unique($inspection_verified_by_array);
+
+                $inspection_team_verified_by_value = implode(",\n", $inspection_verified_by_array);
+
+
+                $inspection_approved_by_array = [];
+
+                foreach ($getIncomingdatadatagrouping as $row) {
+
+                    $value = $row['approved_by'] ?? '';
+
+                    $parts = explode(' - ', $value, 2);
+
+                  
+                    $inspection_approved_by_array[] = $parts[0];
+                }
+
+                // Remove duplicate dates
+                $inspection_approved_by_array = array_unique($inspection_approved_by_array);
+
+                $inspection_approved_by_by_value = implode(",\n", $inspection_approved_by_array);
+
+                                
                                 
 
 
-
+                 $data[$counter]['report_number'] =  $inspection_report_number_valu; 
+                 $data[$counter]['team_name'] =  $inspection_team_name_value;
+                 $data[$counter]['verified_by'] =  $inspection_team_verified_by_value;
+                 $data[$counter]['approved_by'] =  $inspection_approved_by_by_value;
+                 $data[$counter]['sampling_by'] =  $inspection_team_sampling_value;
 
                  $data[$counter]['inspection_report_date'] =  $inspection_report_date_valu;    
                  $data[$counter]['lot_number'] =  $group_concat_values;
@@ -29361,7 +29460,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select("
             CONCAT(lot_number, ' - ', received_qty, ' - ', received_date) AS group_concat_value,
             CONCAT(" . TBL_VENDOR_PO_MASTER . ".po_number, ' - ', " . TBL_VENDOR . ".vendor_name) AS vendor_info,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".inspection_report_date) AS inspection_report_date
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".inspection_report_date) AS inspection_report_date,
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".sampling_by) AS sampling_by,
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".team_name) AS team_name,
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".verified_by) AS verified_by,
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".approved_by) AS approved_by,
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".report_number) AS report_number,
         ");
 
         $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
