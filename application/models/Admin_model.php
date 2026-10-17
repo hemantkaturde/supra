@@ -29294,16 +29294,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
                 
-                $group_concat_values_vendor_info = '';
+               $vendor_info_array = [];
 
                 foreach ($getIncomingdatadatagrouping as $row) {
 
-                    $value = $row['vendor_info'];
+                    $value = $row['vendor_info'] ?? '';
 
-                    $parts = explode(' - ', $value);
+                    $parts = explode(' - ', $value, 2);
 
-                    $group_concat_values_vendor_info .= trim($parts[0]) . ' - ' .trim($parts[1]) .','. "\n";
+                    $vendor_info = trim($parts[0] ?? '') . ' - ' . trim($parts[1] ?? '');
+
+                    $vendor_info_array[] = $vendor_info;
                 }
+
+                // Remove duplicate values; keep different values
+                $vendor_info_array = array_unique($vendor_info_array);
+
+                $group_concat_values_vendor_info = implode(",\n", $vendor_info_array);
 
 
                 $inspection_report_date_valu = '';
