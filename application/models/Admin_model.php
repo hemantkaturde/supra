@@ -29274,7 +29274,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                  $data[$counter]['buyer_po_qty'] =  $value['buyer_po_qty'];             
                  $data[$counter]['buyer_po_number'] =  $value['buyer_po_number'];           
                  $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
-                 //$data[$counter]['buyer_po_part_delivery_date'] =  $buyer_po_part_delivery_date;
+                 $data[$counter]['buyer_po_part_delivery_date'] =  $buyer_po_part_delivery_date;
                  $data[$counter]['sampling_by'] =  $value['sampling_by'];
                  //$data[$counter]['incoming_lot_date'] =  $incoming_lot_date;
 
