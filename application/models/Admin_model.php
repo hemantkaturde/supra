@@ -29270,7 +29270,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                  $data[$counter]['team_name'] =  $value['team_name'];
                  $data[$counter]['verified_by'] =  $value['verified_by'];
                  $data[$counter]['approved_by'] =  $value['approved_by'];
-                 //$data[$counter]['inspection_report_date'] =  $inspection_report_date;    
+               
                  $data[$counter]['buyer_po_qty'] =  $value['buyer_po_qty'];             
                  $data[$counter]['buyer_po_number'] =  $value['buyer_po_number'];           
                  $data[$counter]['dispatch_qty'] =  $value['dispatch_qty'];
@@ -29302,13 +29302,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                     $parts = explode(' - ', $value);
 
-            
-
                     $group_concat_values_vendor_info .= trim($parts[0]) . ' - ' .trim($parts[1]) .','. "\n";
                 }
 
 
+                $inspection_report_date_valu = '';
 
+                foreach ($getIncomingdatadatagrouping as $row) {
+
+                    $value = $row['inspection_report_date'];
+
+                    $parts = explode(' - ', $value);
+                    $date = date('d-m-Y', strtotime(trim($parts[0])));
+
+                    $inspection_report_date_valu .= $date.','. "\n";
+                }
+
+
+                 $data[$counter]['inspection_report_date'] =  $inspection_report_date_valu;    
                  $data[$counter]['lot_number'] =  $group_concat_values;
                  //$data[$counter]['incoming_qty_lot'] =  $value['incoming_qty_lot'];
                  $data[$counter]['vendor_po_number'] =  $group_concat_values_vendor_info;
@@ -29327,7 +29338,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select("
             CONCAT(lot_number, ' - ', received_qty, ' - ', received_date) AS group_concat_value,
-            CONCAT(" . TBL_VENDOR_PO_MASTER . ".po_number, ' - ', " . TBL_VENDOR . ".vendor_name) AS vendor_info
+            CONCAT(" . TBL_VENDOR_PO_MASTER . ".po_number, ' - ', " . TBL_VENDOR . ".vendor_name) AS vendor_info,
+            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".inspection_report_date) AS inspection_report_date
         ");
 
         $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
