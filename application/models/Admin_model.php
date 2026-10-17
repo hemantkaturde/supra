@@ -29231,6 +29231,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
 
+
+            //  print_r( $value['sampling_by']);
+            //  exit;
+
+
                 if($value['buyer_po_part_delivery_date']=='0000-00-00'){
                    $buyer_po_part_delivery_date = "";
                 }else{
@@ -29258,7 +29263,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 //    $incoming_lot_date =  date("d-m-Y", strtotime($value['incoming_lot_date']));
                 // }
 
-                $getIncomingdatadatagrouping = $this->getGroupofchecklistfromsupplierdata($value['buyer_part_id'],$value['checklist_report_id_part']);
+                
 
 
                  $data[$counter]['sales_order_number'] =  $value['sales_order_number'];
@@ -29278,6 +29283,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                  $data[$counter]['sampling_by'] =  $value['sampling_by'];
                  //$data[$counter]['incoming_lot_date'] =  $incoming_lot_date;
 
+
+                $getIncomingdatadatagrouping = $this->getGroupofchecklistfromsupplierdata($value['buyer_part_id'],$value['checklist_report_id_part']);
 
                 $group_concat_values = '';
 
