@@ -321,6 +321,7 @@
                                           <option value="Sharda">Sharda</option>
                                           <option value="Sushma">Sushma</option>
                                           <option value="Jaya">Jaya</option>
+                                           <option value="Manali">Manali</option>
                                        </select>
                                        <p class="error bill_checked_by_stock_error"></p>
                                     </div>

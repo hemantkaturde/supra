@@ -251,6 +251,8 @@
                                           <option value="Sheetal" <?php if($getPaymentdetails[0]['bill_checked_by_purchase']=='Sheetal'){ echo 'selected';} ?>>Sheetal</option>
                                           <option value="Shubhra" <?php if($getPaymentdetails[0]['bill_checked_by_purchase']=='Shubhra'){ echo 'selected';} ?>>Shubhra</option>
                                           <option value="Shruti" <?php if($getPaymentdetails[0]['bill_checked_by_purchase']=='Shruti'){ echo 'selected';} ?>>Shruti</option>
+                                          <option value="Manali" <?php if($getPaymentdetails[0]['bill_checked_by_stock']=='Manali'){ echo 'selected';} ?>>Manali</option>
+
                                        </select>
                                        <p class="error bill_checked_by_purchase_error"></p>
                                     </div>
