@@ -29458,17 +29458,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getGroupofchecklistfromsupplierdata($buyer_part_id,$checklist_report_id){
 
         $this->db->select("
-            CONCAT(lot_number, ' - ', received_qty, ' - ', received_date) AS group_concat_value,
-            CONCAT(" . TBL_VENDOR_PO_MASTER . ".po_number, ' - ', " . TBL_VENDOR . ".vendor_name) AS vendor_info,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".inspection_report_date) AS inspection_report_date,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".sampling_by) AS sampling_by,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".team_name) AS team_name,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".verified_by) AS verified_by,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".approved_by) AS approved_by,
-            CONCAT(" . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".report_number) AS report_number,
-        ");
+                        CONCAT(
+                            lot_no, ' - ',
+                            received_qty, ' - ',
+                            " . TBL_CHECKLIST_INCOMING_LOT_DATA . ".received_date
+                        ) AS group_concat_value,
+                        CONCAT(" . TBL_VENDOR_PO_MASTER . ".po_number, ' - ', " . TBL_VENDOR . ".vendor_name) AS vendor_info,
+                        " . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".inspection_report_date AS inspection_report_date,
+                        " . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".sampling_by AS sampling_by,
+                        " . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".team_name AS team_name,
+                        " . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".verified_by AS verified_by,
+                        " . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".approved_by AS approved_by,
+                        " . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . ".report_number AS report_number
+                    ");
 
         $this->db->join(TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE, TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.checklist_report_part_id');
+
+
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_CHECKLIST_INCOMING_LOT_DATA.'.lot_number');
+
       
         $this->db->join(TBL_VENDOR,TBL_VENDOR . '.ven_id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER,TBL_VENDOR_PO_MASTER . '.id = ' . TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE . '.vendor_po_id');

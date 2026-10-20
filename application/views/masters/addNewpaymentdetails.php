@@ -298,6 +298,7 @@
                                           <option value="Sheetal">Sheetal</option>
                                           <option value="Shubhra">Shubhra</option>
                                           <option value="Shruti">Shruti</option>
+                                          <option value="Manali">Manali</option>
                                        </select>
                                        <p class="error bill_checked_by_purchase_error"></p>
                                     </div>

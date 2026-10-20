@@ -273,6 +273,8 @@
                                           <option value="Sharda" <?php if($getPaymentdetails[0]['bill_checked_by_stock']=='Sharda'){ echo 'selected';} ?>>Sharda</option>
                                           <option value="Sushma" <?php if($getPaymentdetails[0]['bill_checked_by_stock']=='Sushma'){ echo 'selected';} ?>>Sushma</option>
                                           <option value="Jaya" <?php if($getPaymentdetails[0]['bill_checked_by_stock']=='Jaya'){ echo 'selected';} ?>>Jaya</option>
+                                          <option value="Manali" <?php if($getPaymentdetails[0]['bill_checked_by_stock']=='Manali'){ echo 'selected';} ?>>Manali</option>
+                                         
                                        </select>
                                        <p class="error bill_checked_by_stock_error"></p>
                                     </div>
