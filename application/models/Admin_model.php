@@ -29322,11 +29322,21 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                     $value = $row['inspection_report_date'] ?? '';
 
+                    if($value){
+
                     $parts = explode(' - ', $value, 2);
 
                     $date = date('d-m-Y', strtotime(trim($parts[0] ?? '')));
 
                     $inspection_report_date_array[] = $date;
+
+
+                    }else{
+                      $inspection_report_date_array[] = '';
+
+                    }
+
+                  
                 }
 
                 // Remove duplicate dates
