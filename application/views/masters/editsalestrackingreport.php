@@ -178,6 +178,8 @@
                                                     <option st-id="" value="">select Port Code</option>
                                                     <option st-id="" value="INNSA1" <?php if($getsalestrackingdetailsforedit['port_code']=='INNSA1'){ echo 'selected';} ?>>INNSA1</option>
                                                     <option st-id="" value="INBOM4" <?php if($getsalestrackingdetailsforedit['port_code']=='INBOM4'){ echo 'selected';} ?>>INBOM4</option>
+                                                    <option st-id="" value="INNMI4" <?php if($getsalestrackingdetailsforedit['port_code']=='INNMI4'){ echo 'selected';} ?>>INBOM4</option>
+                                                    <option st-id="" value="INDEL4" <?php if($getsalestrackingdetailsforedit['port_code']=='INDEL4'){ echo 'selected';} ?>>INBOM4</option>
                                                 </select>
                                         </div>
                                     </div>

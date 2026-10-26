@@ -179,6 +179,8 @@
                                                     <option st-id="" value="">select Port Code</option>
                                                     <option st-id="" value="INNSA1">INNSA1</option>
                                                     <option st-id="" value="INBOM4">INBOM4</option>
+                                                    <option st-id="" value="INNMI4">INNMI4</option>
+                                                    <option st-id="" value="INDEL4">INDEL4</option>
                                                 </select>
                                         </div>
                                     </div>
