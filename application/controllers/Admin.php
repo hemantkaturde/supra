@@ -17817,12 +17817,7 @@ public function downlaoddebitnotevendor($id){
                                 </tr>';
         $extra_text_label_val_for_calculation =$getDebitnotedetailsforInvoice['text_amount'];
     }else{
-        $extra_text_label_val ='<tr style="border: 1px solid black;text-align:left">
-                                    <td colspan="6" style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;></td>
-                                    <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;>'.$getDebitnotedetailsforInvoice['text_amount'].'</td>
-                                    <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;>'.$getDebitnotedetailsforInvoice['text_amount'].'</td>
-                                    <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;></td>
-                                </tr>';
+        $extra_text_label_val ="";
         $extra_text_label_val_for_calculation =0;
     }
     
