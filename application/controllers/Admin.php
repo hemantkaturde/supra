@@ -17914,9 +17914,21 @@ public function downlaoddebitnotevendor($id){
              
              
              
+             $total_debit_amount = number_format(round($subtotalpluspandrcharges_TaX_cgst,2),2) + number_format(round($subtotalpluspandrcharges_TaX_sgst,2),2)  + $sub_total_amount_1;
              //$total_debit_amount = number_format(round($subtotalpluspandrcharges_TaX_cgst,2),2) + number_format(round($subtotalpluspandrcharges_TaX_sgst,2),2)  + $sub_total_amount_1;
-             $total_debit_amount = $subtotalpluspandrcharges_TaX_cgst;
 
+
+             $total_debit_amount = number_format(
+                            round(
+                                $subtotalpluspandrcharges_TaX_cgst +
+                                $subtotalpluspandrcharges_TaX_sgst +
+                                $sub_total_amount_1,
+                                2
+                            ),
+                            2,
+                            '.',
+                            ''
+                        );
 
      }else{
 
