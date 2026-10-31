@@ -28645,6 +28645,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number',$vendor_po_id);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$buyer_part_number);
+        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.lot_no');
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->result_array();
         return $data;
