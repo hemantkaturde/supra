@@ -28628,7 +28628,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function getIncomindlotforchecklistlastreport($vendor_po_id,$buyer_part_number){
+    public function getIncomindlotforchecklistlastreport($vendor_po_id,$buyer_part_number){
 
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_TDIR_INCOMING_LOT_DATA.'.checked_by');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
@@ -29508,6 +29508,421 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function getOperationCount($params, $filtered = false)
+{
+    $this->db->from(TBL_OPERATION);
+    $this->db->where('status', 1);
+
+    if ($filtered && !empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+        $this->db->like('operation_name', $search);
+        $this->db->or_like('remark', $search);
+        $this->db->group_end();
+    }
+
+    return $this->db->count_all_results();
+}
+
+
+
+public function getOperationdata($params)
+{
+    $this->db->select('*');
+    $this->db->from(TBL_OPERATION);
+    $this->db->where('status', 1);
+
+    if (!empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+        $this->db->like('operation_name', $search);
+        $this->db->or_like('remark', $search);
+        $this->db->group_end();
+    }
+
+    $this->db->order_by('operation_id', 'DESC');
+
+    $this->db->limit(
+        $params['length'],
+        $params['start']
+    );
+
+    $query = $this->db->get();
+
+    $result = $query->result_array();
+
+    $data = array();
+
+    foreach ($result as $value) {
+
+        $row = array();
+
+        $row['operation_name'] = htmlspecialchars($value['operation_name'], ENT_QUOTES, 'UTF-8');
+
+        $row['remark'] = htmlspecialchars($value['remark'], ENT_QUOTES, 'UTF-8');
+
+        $row['action'] = '';
+
+        $row['action'] .= "<a href='".ADMIN_PATH."updateOperation/".$value['operation_id']."' style='cursor:pointer;' title='Edit'>
+            <i style='font-size:x-large;' class='fa fa-pencil-square-o'></i>
+        </a>&nbsp;&nbsp;";
+
+        $row['action'] .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['operation_id']."' class='fa fa-trash-o deleteoperation' title='Delete'></i>";
+
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+
+public function saveOperation($id, $data)
+{
+    if (empty($id)) {
+
+        return $this->db->insert(TBL_OPERATION, $data);
+
+    } else {
+
+        $this->db->where('operation_id', $id);
+        $this->db->where('status', 1);
+
+        return $this->db->update(TBL_OPERATION, $data);
+    }
+}
+
+
+public function checkOperationExists($operation_name)
+{
+    $this->db->where('operation_name', $operation_name);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_OPERATION);
+}
+
+
+public function checkOperationExistsForUpdate($id, $operation_name)
+{
+    $this->db->where('operation_name', $operation_name);
+    $this->db->where('operation_id !=', $id);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_OPERATION);
+}
+
+public function getOperationdetails($id)
+{
+    $this->db->where('operation_id', $id);
+    $this->db->where('status', 1);
+
+    $query = $this->db->get(TBL_OPERATION);
+
+    return $query->row_array();
+}
+
+// public function deleteOperation($id)
+// {
+//     $this->db->where('operation_id', $id);
+//     $this->db->where('status', 1);
+
+//     return $this->db->update(TBL_OPERATION, array(
+//         'status' => 0
+//     ));
+// }
+
+
+public function deleteOperation($id)
+{
+    $this->db->where('operation_id', $id);
+
+    return $this->db->delete(TBL_OPERATION);
+}
+
+
+public function getMachineCount($params, $filtered = false)
+{
+    $this->db->from(TBL_MACHINE);
+    $this->db->where('status', 1);
+
+    if ($filtered && !empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+        $this->db->like('machine_no', $search);
+        $this->db->or_like('remark', $search);
+        $this->db->group_end();
+    }
+
+    return $this->db->count_all_results();
+}
+
+public function getMachinedata($params)
+{
+    $this->db->select('*');
+    $this->db->from(TBL_MACHINE);
+    $this->db->where('status', 1);
+
+    if (!empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+        $this->db->like('machine_no', $search);
+        $this->db->or_like('remark', $search);
+        $this->db->group_end();
+    }
+
+    $this->db->order_by('machine_id', 'DESC');
+
+    $this->db->limit(
+        $params['length'],
+        $params['start']
+    );
+
+    $query = $this->db->get();
+
+    $fetch_result = $query->result_array();
+
+    $data = array();
+
+    if (count($fetch_result) > 0) {
+
+        foreach ($fetch_result as $value) {
+
+            $machine_id = (int)$value['machine_id'];
+
+            $machine_no = htmlspecialchars(
+                $value['machine_no'],
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+            $remark = htmlspecialchars(
+                $value['remark'],
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+            $row = array();
+
+            $row['machine_no'] = $machine_no;
+
+            $row['remark'] = $remark;
+
+            $row['action'] = '';
+
+            $row['action'] .= "<a href='".ADMIN_PATH."updateMachine/".$machine_id."' title='Edit'>
+                <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
+            </a>&nbsp;&nbsp;";
+
+            $row['action'] .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$machine_id."' class='fa fa-trash-o deletemachine' title='Delete'></i>";
+
+            $data[] = $row;
+        }
+    }
+
+    return $data;
+}
+
+
+public function saveMachine($id, $data)
+{
+    if (empty($id)) {
+
+        return $this->db->insert(TBL_MACHINE, $data);
+
+    } else {
+
+        $this->db->where('machine_id', $id);
+        $this->db->where('status', 1);
+
+        return $this->db->update(TBL_MACHINE, $data);
+    }
+}
+
+
+public function checkMachineExists($machine_no)
+{
+    $this->db->where('machine_no', $machine_no);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_MACHINE);
+}
+
+
+public function checkMachineExistsForUpdate($id, $machine_no)
+{
+    $this->db->where('machine_no', $machine_no);
+    $this->db->where('machine_id !=', $id);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_MACHINE);
+}
+
+
+public function getMachinedetails($id)
+{
+    $this->db->where('machine_id', $id);
+    $this->db->where('status', 1);
+
+    $query = $this->db->get(TBL_MACHINE);
+
+    return $query->row_array();
+}
+
+
+public function deleteMachine($id)
+{
+    $this->db->where('machine_id', $id);
+
+    return $this->db->delete(TBL_MACHINE);
+}
+
+
+public function getOperatorCount($params, $filtered = false)
+{
+    $this->db->from(TBL_OPERATOR);
+    $this->db->where('status', 1);
+
+    if ($filtered && !empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+        $this->db->like('operator_name', $search);
+        $this->db->or_like('remark', $search);
+        $this->db->group_end();
+    }
+
+    return $this->db->count_all_results();
+}
+
+
+public function getOperatordata($params)
+{
+    $this->db->select('*');
+    $this->db->from(TBL_OPERATOR);
+    $this->db->where('status', 1);
+
+    if (!empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+        $this->db->like('operator_name', $search);
+        $this->db->or_like('remark', $search);
+        $this->db->group_end();
+    }
+
+    $this->db->order_by('operator_id', 'DESC');
+
+    $this->db->limit(
+        $params['length'],
+        $params['start']
+    );
+
+    $query = $this->db->get();
+
+    $fetch_result = $query->result_array();
+
+    $data = array();
+
+    if (count($fetch_result) > 0) {
+
+        foreach ($fetch_result as $value) {
+
+            $operator_id = (int)$value['operator_id'];
+
+            $operator_name = htmlspecialchars(
+                $value['operator_name'],
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+            $remark = htmlspecialchars(
+                $value['remark'],
+                ENT_QUOTES,
+                'UTF-8'
+            );
+
+            $row = array();
+
+            $row['operator_name'] = $operator_name;
+
+            $row['remark'] = $remark;
+
+            $row['action'] = '';
+
+            $row['action'] .= "<a href='".ADMIN_PATH."updateOperator/".$operator_id."' title='Edit'>
+                <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
+            </a>&nbsp;&nbsp;";
+
+            $row['action'] .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$operator_id."' class='fa fa-trash-o deleteoperator' title='Delete'></i>";
+
+            $data[] = $row;
+        }
+    }
+
+    return $data;
+}
+
+
+public function saveOperator($id, $data)
+{
+    if (empty($id)) {
+
+        return $this->db->insert(TBL_OPERATOR, $data);
+
+    } else {
+
+        $this->db->where('operator_id', $id);
+        $this->db->where('status', 1);
+
+        return $this->db->update(TBL_OPERATOR, $data);
+    }
+}
+
+
+public function checkOperatorExists($operator_name)
+{
+    $this->db->where('operator_name', $operator_name);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_OPERATOR);
+}
+
+
+public function checkOperatorExistsForUpdate($id, $operator_name)
+{
+    $this->db->where('operator_name', $operator_name);
+    $this->db->where('operator_id !=', $id);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_OPERATOR);
+}
+
+
+public function getOperatordetails($id)
+{
+    $this->db->where('operator_id', $id);
+    $this->db->where('status', 1);
+
+    $query = $this->db->get(TBL_OPERATOR);
+
+    return $query->row_array();
+}
+
+public function deleteOperator($id)
+{
+    $this->db->where('operator_id', $id);
+
+    return $this->db->delete(TBL_OPERATOR);
+}
 
 
 }

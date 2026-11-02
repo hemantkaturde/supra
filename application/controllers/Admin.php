@@ -34530,7 +34530,743 @@ HTML;
     $mpdf->Output('dispatch_checklist_' . $id . '.pdf', 'D');
 }
 
+
+public function operationmaster()
+{
+    $process = 'Operation Master';
+    $processFunction = 'Admin/operationmaster';
+
+    $this->logrecord($process, $processFunction);
+
+    $this->global['pageTitle'] = 'Operation Master';
+
+    $this->loadViews("masters/operationmaster", $this->global, $data, NULL);
+}
     
+
+public function fetchOperation()
+{
+    $params = $_REQUEST;
+
+    $totalRecords = $this->admin_model->getOperationCount($params, false);
+    $filteredRecords = $this->admin_model->getOperationCount($params, true);
+
+    $queryRecords = $this->admin_model->getOperationdata($params);
+
+    $data = array();
+
+    foreach ($queryRecords as $key => $value) {
+        $data[$key] = array(
+            $value['operation_name'],
+            $value['remark'],
+            $value['action']
+        );
+    }
+
+    $json_data = array(
+        "draw"            => intval($params['draw']),
+        "recordsTotal"    => intval($totalRecords),
+        "recordsFiltered" => intval($filteredRecords),
+        "data"            => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+
+public function addnewOperation()
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'operation_name',
+            'Operation Name',
+            'trim|required|max_length[128]'
+        );
+
+        $this->form_validation->set_rules(
+            'remark',
+            'Remark',
+            'trim|max_length[500]'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'operation_name' => strip_tags(form_error('operation_name')),
+                'remark' => strip_tags(form_error('remark'))
+            );
+
+        } else {
+
+            $operation_name = trim($this->input->post('operation_name'));
+
+            $check = $this->admin_model->checkOperationExists($operation_name);
+
+            if ($check > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'operation_name' => 'Operation Name Already Exists'
+                );
+
+            } else {
+
+                $data = array(
+                    'operation_name' => $operation_name,
+                    'remark' => trim($this->input->post('remark')),
+                    'status' => 1,
+                    'createdBy'=>$this->vendorId
+                );
+
+                $result = $this->admin_model->saveOperation('', $data);
+
+                if ($result) {
+
+                    $response['status'] = 'success';
+                    $response['error'] = array();
+
+                } else {
+
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Add Operation Master';
+        $processFunction = 'Admin/addnewOperation';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Add Operation Master';
+
+        $this->loadViews("masters/addOperationMaster", $this->global, $data, NULL);
+    }
+}
+
+
+public function updateOperation($id)
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'operation_name',
+            'Operation Name',
+            'trim|required|max_length[128]'
+        );
+
+        $this->form_validation->set_rules(
+            'remark',
+            'Remark',
+            'trim|max_length[500]'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'operation_name' => strip_tags(form_error('operation_name')),
+                'remark' => strip_tags(form_error('remark'))
+            );
+
+        } else {
+
+            $operation_name = trim($this->input->post('operation_name'));
+
+            $operation_id = trim($this->input->post('operation_id'));
+
+            $check = $this->admin_model->checkOperationExistsForUpdate(
+                $operation_id,
+                $operation_name
+            );
+
+            if ($check > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'operation_name' => 'Operation Name Already Exists'
+                );
+
+            } else {
+
+                $data = array(
+                    'operation_name' => $operation_name,
+                    'remark' => trim($this->input->post('remark')),
+                    'updatedBy'=>$this->vendorId, 
+                    'updatedDtm'=>date('Y-m-d H:i:s')
+                );
+
+                $result = $this->admin_model->saveOperation($operation_id, $data);
+
+                if ($result) {
+
+                    $response['status'] = 'success';
+                    $response['error'] = array();
+
+                } else {
+
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Edit Operation Master';
+        $processFunction = 'Admin/updateOperation';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Edit Operation Master';
+
+        $data['getOperationdata'] = $this->admin_model->getOperationdetails($id);
+
+        if (empty($data['getOperationdata'])) {
+            show_404();
+            return;
+        }
+
+        $this->loadViews("masters/editOperationMaster", $this->global, $data, NULL);
+    }
+}
+
+public function deleteOperation()
+{
+    $id = $this->input->post('id');
+
+    if (!empty($id)) {
+
+        $result = $this->admin_model->deleteOperation($id);
+
+        if ($result) {
+
+            $process = 'Operation Master Delete';
+            $processFunction = 'Admin/deleteOperation';
+
+            $this->logrecord($process, $processFunction);
+
+            echo json_encode(array('status' => 'success'));
+
+        } else {
+
+            echo json_encode(array('status' => 'failed'));
+        }
+
+    } else {
+
+        echo json_encode(array('status' => 'failed'));
+    }
+}
+
+
+public function machinemaster()
+{
+    $process = 'Machine Master';
+    $processFunction = 'Admin/machinemaster';
+
+    $this->logrecord($process, $processFunction);
+
+    $this->global['pageTitle'] = 'Machine Master';
+
+    $this->loadViews("masters/machinemaster", $this->global, $data, NULL);
+}
+
+
+public function fetchMachine()
+{
+    $params = $_REQUEST;
+
+    $totalRecords = $this->admin_model->getMachineCount($params, false);
+
+    $filteredRecords = $this->admin_model->getMachineCount($params, true);
+
+    $queryRecords = $this->admin_model->getMachinedata($params);
+
+    $data = array();
+
+    foreach ($queryRecords as $key => $value) {
+
+        $data[$key] = array(
+            $value['machine_no'],
+            $value['remark'],
+            $value['action']
+        );
+    }
+
+    $json_data = array(
+        "draw"            => intval($params['draw']),
+        "recordsTotal"    => intval($totalRecords),
+        "recordsFiltered" => intval($filteredRecords),
+        "data"            => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+public function addnewMachine()
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'machine_no',
+            'Machine No',
+            'trim|required|max_length[128]'
+        );
+
+        $this->form_validation->set_rules(
+            'remark',
+            'Remark',
+            'trim|max_length[500]'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'machine_no' => strip_tags(form_error('machine_no')),
+                'remark' => strip_tags(form_error('remark'))
+            );
+
+        } else {
+
+            $machine_no = trim($this->input->post('machine_no'));
+
+            $check = $this->admin_model->checkMachineExists($machine_no);
+
+            if ($check > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'machine_no' => 'Machine No Already Exists'
+                );
+
+            } else {
+
+                $data = array(
+                    'machine_no' => $machine_no,
+                    'remark' => trim($this->input->post('remark')),
+                    'status' => 1,
+                    'createdBy'=>$this->vendorId
+                );
+
+                $result = $this->admin_model->saveMachine('', $data);
+
+                if ($result) {
+
+                    $response['status'] = 'success';
+
+                } else {
+
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Add Machine Master';
+        $processFunction = 'Admin/addnewMachine';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Add Machine Master';
+
+        $this->loadViews("masters/addMachineMaster", $this->global, $data, NULL);
+    }
+}
+
+
+public function updateMachine($id)
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'machine_no',
+            'Machine No',
+            'trim|required|max_length[128]'
+        );
+
+        $this->form_validation->set_rules(
+            'remark',
+            'Remark',
+            'trim|max_length[500]'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'machine_no' => strip_tags(form_error('machine_no')),
+                'remark' => strip_tags(form_error('remark')),
+                'updatedBy'=>$this->vendorId, 
+                'updatedDtm'=>date('Y-m-d H:i:s')
+            );
+
+        } else {
+
+            $machine_no = trim($this->input->post('machine_no'));
+
+            $check = $this->admin_model->checkMachineExistsForUpdate(
+                $id,
+                $machine_no
+            );
+
+            if ($check > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'machine_no' => 'Machine No Already Exists'
+                );
+
+            } else {
+
+                $data = array(
+                    'machine_no' => $machine_no,
+                    'remark' => trim($this->input->post('remark'))
+                );
+
+                $result = $this->admin_model->saveMachine($id, $data);
+
+                if ($result) {
+
+                    $response['status'] = 'success';
+
+                } else {
+
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Edit Machine Master';
+        $processFunction = 'Admin/updateMachine';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Edit Machine Master';
+
+        $data['getMachinedata'] = $this->admin_model->getMachinedetails($id);
+
+        if (empty($data['getMachinedata'])) {
+            show_404();
+            return;
+        }
+
+        $this->loadViews("masters/editMachineMaster", $this->global, $data, NULL);
+    }
+}
+
+
+public function deleteMachine()
+{
+    $id = $this->input->post('id');
+
+    if (!empty($id)) {
+
+        $result = $this->admin_model->deleteMachine($id);
+
+        if ($result) {
+
+            $process = 'Machine Master Delete';
+            $processFunction = 'Admin/deleteMachine';
+
+            $this->logrecord($process, $processFunction);
+
+            echo json_encode(array('status' => 'success'));
+
+        } else {
+
+            echo json_encode(array('status' => 'failed'));
+        }
+
+    } else {
+
+        echo json_encode(array('status' => 'failed'));
+    }
+}
+
+
+public function operatormaster()
+{
+    $process = 'Operator Master';
+    $processFunction = 'Admin/operatormaster';
+
+    $this->logrecord($process, $processFunction);
+
+    $this->global['pageTitle'] = 'Operator Master';
+
+    $this->loadViews("masters/operatormaster", $this->global, $data, NULL);
+}
+
+
+public function fetchOperator()
+{
+    $params = $_REQUEST;
+
+    $totalRecords = $this->admin_model->getOperatorCount($params, false);
+
+    $filteredRecords = $this->admin_model->getOperatorCount($params, true);
+
+    $queryRecords = $this->admin_model->getOperatordata($params);
+
+    $data = array();
+
+    foreach ($queryRecords as $key => $value) {
+
+        $data[$key] = array(
+            $value['operator_name'],
+            $value['remark'],
+            $value['action']
+        );
+    }
+
+    $json_data = array(
+        "draw"            => intval($params['draw']),
+        "recordsTotal"    => intval($totalRecords),
+        "recordsFiltered" => intval($filteredRecords),
+        "data"            => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+
+public function addnewOperator()
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'operator_name',
+            'Operator Name',
+            'trim|required|max_length[128]'
+        );
+
+        $this->form_validation->set_rules(
+            'remark',
+            'Remark',
+            'trim|max_length[500]'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'operator_name' => strip_tags(form_error('operator_name')),
+                'remark' => strip_tags(form_error('remark'))
+            );
+
+        } else {
+
+            $operator_name = trim($this->input->post('operator_name'));
+
+            $check = $this->admin_model->checkOperatorExists($operator_name);
+
+            if ($check > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'operator_name' => 'Operator Name Already Exists'
+                );
+
+            } else {
+
+                $data = array(
+                    'operator_name' => $operator_name,
+                    'remark' => trim($this->input->post('remark')),
+                    'status' => 1
+                );
+
+                $result = $this->admin_model->saveOperator('', $data);
+
+                if ($result) {
+
+                    $response['status'] = 'success';
+
+                } else {
+
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Add Operator Master';
+        $processFunction = 'Admin/addnewOperator';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Add Operator Master';
+
+        $this->loadViews("masters/addOperatorMaster", $this->global, $data, NULL);
+    }
+}
+
+
+public function updateOperator($id)
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'operator_name',
+            'Operator Name',
+            'trim|required|max_length[128]'
+        );
+
+        $this->form_validation->set_rules(
+            'remark',
+            'Remark',
+            'trim|max_length[500]'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'operator_name' => strip_tags(form_error('operator_name')),
+                'remark' => strip_tags(form_error('remark'))
+            );
+
+        } else {
+
+            $operator_name = trim($this->input->post('operator_name'));
+
+            $check = $this->admin_model->checkOperatorExistsForUpdate(
+                $id,
+                $operator_name
+            );
+
+            if ($check > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'operator_name' => 'Operator Name Already Exists'
+                );
+
+            } else {
+
+                $data = array(
+                    'operator_name' => $operator_name,
+                    'remark' => trim($this->input->post('remark'))
+                );
+
+                $result = $this->admin_model->saveOperator($id, $data);
+
+                if ($result) {
+
+                    $response['status'] = 'success';
+
+                } else {
+
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Edit Operator Master';
+        $processFunction = 'Admin/updateOperator';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Edit Operator Master';
+
+        $data['getOperatordata'] = $this->admin_model->getOperatordetails($id);
+
+        if (empty($data['getOperatordata'])) {
+            show_404();
+            return;
+        }
+
+        $this->loadViews("masters/editOperatorMaster", $this->global, $data, NULL);
+    }
+}
+
+
+
+public function deleteOperator()
+{
+    $id = $this->input->post('id');
+
+    if (!empty($id)) {
+
+        $result = $this->admin_model->deleteOperator($id);
+
+        if ($result) {
+
+            $process = 'Operator Master Delete';
+            $processFunction = 'Admin/deleteOperator';
+
+            $this->logrecord($process, $processFunction);
+
+            echo json_encode(array('status' => 'success'));
+
+        } else {
+
+            echo json_encode(array('status' => 'failed'));
+        }
+
+    } else {
+
+        echo json_encode(array('status' => 'failed'));
+    }
+}
+
+
     
 
 }

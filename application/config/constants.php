@@ -216,8 +216,9 @@ define('TBL_FORGING_SCARP_WORKING_REPORT_DATA','tbl_forging_scarp_working_report
 define('TBL_CHECKLIST_REPORT_PART_INSPECTION_DATE','tbl_checklist_report_part_inspection_date');
 define('TBL_CHECKLIST_INCOMING_LOT_DATA','tbl_checklist_incoming_lot_data');
 define('TBL_QC_INTERNAL_AUDIT','tbl_qc_internal_audit');
-
-
+define('TBL_OPERATION', 'tbl_operation');
+define('TBL_MACHINE', 'tbl_machine');
+define('TBL_OPERATOR', 'tbl_operator');
 
 define('SMTP_HOST','mail.supraexports.in');
 define('SMTP_USER','supraportal@supraexports.in');

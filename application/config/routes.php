@@ -720,6 +720,25 @@ $route['getlotdetailsforchecklistincomingdata'] = "admin/getlotdetailsforcheckli
 $route['fetechchecklistincominglotnodata/(:any)'] = "admin/fetechchecklistincominglotnodata/$1";
 $route['getlotdetailsforeditincomingdata'] = "admin/getlotdetailsforeditincomingdata";
 
+$route['operationmaster'] = 'Admin/operationmaster';
+$route['fetchOperation'] = 'Admin/fetchOperation';
+$route['addnewOperation'] = 'Admin/addnewOperation';
+$route['updateOperation/(:num)'] = 'Admin/updateOperation/$1';
+$route['deleteOperation'] = 'Admin/deleteOperation';
+
+
+$route['machinemaster'] = 'Admin/machinemaster';
+$route['fetchMachine'] = 'Admin/fetchMachine';
+$route['addnewMachine'] = 'Admin/addnewMachine';
+$route['updateMachine/(:num)'] = 'Admin/updateMachine/$1';
+$route['deleteMachine'] = 'Admin/deleteMachine';
+
+
+$route['operatormaster'] = 'Admin/operatormaster';
+$route['fetchOperator'] = 'Admin/fetchOperator';
+$route['addnewOperator'] = 'Admin/addnewOperator';
+$route['updateOperator/(:num)'] = 'Admin/updateOperator/$1';
+$route['deleteOperator'] = 'Admin/deleteOperator';
 
 
 $route['qcinternalaudit'] = 'admin/qcinternalauditlist';

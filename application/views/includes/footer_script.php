@@ -34645,4 +34645,864 @@ $('#export_excel').on('click', function() {
 	    });
 
 </script>
+
+<?php } ?>
+
+
+<?php if($pageTitle == 'Operation Master' || $pageTitle == 'Add Operation Master' || $pageTitle == 'Edit Operation Master'){ ?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    // AJAX SERVER SIDE LISTING
+    if ($('#view_Operation').length) {
+
+        var dt = $('#view_Operation').DataTable({
+
+            "columnDefs": [
+                { "width": "35%", "targets": 0 },
+                { "width": "45%", "targets": 1 },
+                { "width": "20%", "targets": 2 }
+            ],
+
+            responsive: true,
+
+            "oLanguage": {
+                "sEmptyTable": "<i>No Operation Found.</i>"
+            },
+
+            "bSort": false,
+            "bFilter": true,
+            "bLengthChange": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "<?php echo base_url(); ?>fetchOperation",
+                type: "POST"
+            }
+
+        });
+    }
+
+
+    // ADD OPERATION
+    $(document).on('click', '#saveOperation', function(e) {
+
+        e.preventDefault();
+
+        $('.operation_name_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#addOperationForm")[0]);
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>addnewOperation",
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+                        $('.' + i + '_error').html(v);
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+                        title: "Success",
+                        text: "Operation Successfully Added!",
+                        icon: "success",
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href = "<?php echo base_url().'operationmaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+                $(".loader_ajax").hide();
+                swal("Error", "Something went wrong!", "error");
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // UPDATE OPERATION
+    $(document).on('click', '#updateOperation', function(e) {
+
+        e.preventDefault();
+
+        $('.operation_name_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#editOperationForm")[0]);
+
+        var operation_id = $("#operation_id").val();
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>updateOperation/" + operation_id,
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+                        $('.' + i + '_error').html(v);
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+                        title: "Success",
+                        text: "Operation Successfully Updated!",
+                        icon: "success",
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href = "<?php echo base_url().'operationmaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+                $(".loader_ajax").hide();
+                swal("Error", "Something went wrong!", "error");
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // DELETE OPERATION
+    $(document).on('click', '.deleteoperation', function(e) {
+
+        e.preventDefault();
+
+        var elemF = $(this);
+
+        swal({
+
+            title: "Are you sure?",
+
+            text: "Delete Operation",
+
+            type: "warning",
+
+            showCancelButton: true,
+
+            closeOnClickOutside: false,
+
+            confirmButtonClass: "btn-sm btn-danger",
+
+            confirmButtonText: "Yes, delete it!",
+
+            cancelButtonText: "No, cancel plz!",
+
+            closeOnConfirm: false,
+
+            closeOnCancel: false
+
+        }, function(isConfirm) {
+
+            if (isConfirm) {
+
+                $.ajax({
+
+                    url: "<?php echo base_url(); ?>deleteOperation",
+
+                    type: "POST",
+
+                    data: {
+                        id: elemF.attr('data-id')
+                    },
+
+                    dataType: "json",
+
+                    success: function(response) {
+
+                        if (response.status == 'success') {
+
+                            swal({
+
+                                title: "Deleted!",
+
+                                text: "Operation Deleted Successfully",
+
+                                icon: "success",
+
+                                button: "Ok"
+
+                            }, function() {
+
+                                window.location.href = "<?php echo base_url().'operationmaster'; ?>";
+
+                            });
+
+                        } else {
+
+                            swal("Error", "Operation could not be deleted!", "error");
+
+                        }
+
+                    },
+
+                    error: function() {
+                        swal("Error", "Something went wrong!", "error");
+                    }
+
+                });
+
+            } else {
+
+                swal("Cancelled", "Operation deletion cancelled", "error");
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<?php } ?>
+
+
+
+<?php if($pageTitle == 'Machine Master' || $pageTitle == 'Add Machine Master' || $pageTitle == 'Edit Machine Master'){ ?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    // MACHINE AJAX LISTING
+
+    if ($('#view_Machine').length) {
+
+        var dt = $('#view_Machine').DataTable({
+
+            "columnDefs": [
+                { "width": "35%", "targets": 0 },
+                { "width": "45%", "targets": 1 },
+                { "width": "20%", "targets": 2 }
+            ],
+
+            responsive: true,
+
+            "oLanguage": {
+                "sEmptyTable": "<i>No Machine Found.</i>"
+            },
+
+            "bSort": false,
+            "bFilter": true,
+            "bLengthChange": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "<?php echo base_url(); ?>fetchMachine",
+                type: "POST"
+            }
+
+        });
+
+    }
+
+
+    // ADD MACHINE
+
+    $(document).on('click', '#saveMachine', function(e) {
+
+        e.preventDefault();
+
+        $('.machine_no_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#addMachineForm")[0]);
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>addnewMachine",
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Machine Successfully Added!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href = "<?php echo base_url().'machinemaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // UPDATE MACHINE
+
+    $(document).on('click', '#updateMachine', function(e) {
+
+        e.preventDefault();
+
+        $('.machine_no_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#editMachineForm")[0]);
+
+        var machine_id = $("#machine_id").val();
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>updateMachine/" + machine_id,
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Machine Successfully Updated!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href = "<?php echo base_url().'machinemaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // DELETE MACHINE - PERMANENT
+
+    $(document).on('click', '.deletemachine', function(e) {
+
+        e.preventDefault();
+
+        var elemF = $(this);
+
+        swal({
+
+            title: "Are you sure?",
+
+            text: "Machine will be permanently deleted!",
+
+            type: "warning",
+
+            showCancelButton: true,
+
+            closeOnClickOutside: false,
+
+            confirmButtonClass: "btn-sm btn-danger",
+
+            confirmButtonText: "Yes, delete it!",
+
+            cancelButtonText: "No, cancel plz!",
+
+            closeOnConfirm: false,
+
+            closeOnCancel: false
+
+        }, function(isConfirm) {
+
+            if (isConfirm) {
+
+                $.ajax({
+
+                    url: "<?php echo base_url(); ?>deleteMachine",
+
+                    type: "POST",
+
+                    data: {
+                        id: elemF.attr('data-id')
+                    },
+
+                    dataType: "json",
+
+                    success: function(response) {
+
+                        if (response.status == 'success') {
+
+                            swal({
+
+                                title: "Deleted!",
+
+                                text: "Machine Deleted Permanently",
+
+                                icon: "success",
+
+                                button: "Ok"
+
+                            }, function() {
+
+                                window.location.href = "<?php echo base_url().'machinemaster'; ?>";
+
+                            });
+
+                        } else {
+
+                            swal("Error", "Machine could not be deleted!", "error");
+
+                        }
+
+                    },
+
+                    error: function() {
+
+                        swal("Error", "Something went wrong!", "error");
+
+                    }
+
+                });
+
+            } else {
+
+                swal("Cancelled", "Machine deletion cancelled", "error");
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<?php } ?>
+
+
+
+<?php if($pageTitle == 'Operator Master' || $pageTitle == 'Add Operator Master' || $pageTitle == 'Edit Operator Master'){ ?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    // OPERATOR AJAX LISTING
+
+    if ($('#view_Operator').length) {
+
+        var dt = $('#view_Operator').DataTable({
+
+            "columnDefs": [
+                { "width": "35%", "targets": 0 },
+                { "width": "45%", "targets": 1 },
+                { "width": "20%", "targets": 2 }
+            ],
+
+            responsive: true,
+
+            "oLanguage": {
+                "sEmptyTable": "<i>No Operator Found.</i>"
+            },
+
+            "bSort": false,
+            "bFilter": true,
+            "bLengthChange": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "<?php echo base_url(); ?>fetchOperator",
+                type: "POST"
+            }
+
+        });
+
+    }
+
+
+    // ADD OPERATOR
+
+    $(document).on('click', '#saveOperator', function(e) {
+
+        e.preventDefault();
+
+        $('.operator_name_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#addOperatorForm")[0]);
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>addnewOperator",
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Operator Successfully Added!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href = "<?php echo base_url().'operatormaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // UPDATE OPERATOR
+
+    $(document).on('click', '#updateOperator', function(e) {
+
+        e.preventDefault();
+
+        $('.operator_name_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#editOperatorForm")[0]);
+
+        var operator_id = $("#operator_id").val();
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>updateOperator/" + operator_id,
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Operator Successfully Updated!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href = "<?php echo base_url().'operatormaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // DELETE OPERATOR - PERMANENT DELETE
+
+    $(document).on('click', '.deleteoperator', function(e) {
+
+        e.preventDefault();
+
+        var elemF = $(this);
+
+        swal({
+
+            title: "Are you sure?",
+
+            text: "Operator will be permanently deleted!",
+
+            type: "warning",
+
+            showCancelButton: true,
+
+            closeOnClickOutside: false,
+
+            confirmButtonClass: "btn-sm btn-danger",
+
+            confirmButtonText: "Yes, delete it!",
+
+            cancelButtonText: "No, cancel plz!",
+
+            closeOnConfirm: false,
+
+            closeOnCancel: false
+
+        }, function(isConfirm) {
+
+            if (isConfirm) {
+
+                $.ajax({
+
+                    url: "<?php echo base_url(); ?>deleteOperator",
+
+                    type: "POST",
+
+                    data: {
+                        id: elemF.attr('data-id')
+                    },
+
+                    dataType: "json",
+
+                    success: function(response) {
+
+                        if (response.status == 'success') {
+
+                            swal({
+
+                                title: "Deleted!",
+
+                                text: "Operator Deleted Permanently",
+
+                                icon: "success",
+
+                                button: "Ok"
+
+                            }, function() {
+
+                                window.location.href = "<?php echo base_url().'operatormaster'; ?>";
+
+                            });
+
+                        } else {
+
+                            swal("Error", "Operator could not be deleted!", "error");
+
+                        }
+
+                    },
+
+                    error: function() {
+
+                        swal("Error", "Something went wrong!", "error");
+
+                    }
+
+                });
+
+            } else {
+
+                swal("Cancelled", "Operator deletion cancelled", "error");
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
 <?php } ?>
