@@ -749,6 +749,15 @@ $route['deleteParameter'] = 'Admin/deleteParameter';
 
 
 
+$route['countmaster'] = 'Admin/countmaster';
+$route['fetchCount'] = 'Admin/fetchCount';
+$route['addnewCount'] = 'Admin/addnewCount';
+$route['updateCount/(:num)'] = 'Admin/updateCount/$1';
+$route['deleteCount'] = 'Admin/deleteCount';
+
+
+
+
 $route['qcinternalaudit'] = 'admin/qcinternalauditlist';
 $route['qcinternalauditadd'] = 'admin/qcinternalauditadd';
 // $route['qcinternalauditsave'] = 'admin/qcinternalauditsave';

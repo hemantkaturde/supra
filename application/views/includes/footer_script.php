@@ -35826,3 +35826,324 @@ $(document).ready(function() {
 </script>
 
 <?php } ?>
+
+
+
+
+<?php if(
+    $pageTitle == 'Count Master' ||
+    $pageTitle == 'Add Count Master' ||
+    $pageTitle == 'Edit Count Master'
+) { ?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+
+    // =====================================
+    // COUNT MASTER LISTING
+    // =====================================
+
+    if ($('#view_Count').length) {
+
+        $('#view_Count').DataTable({
+
+            "columnDefs": [
+                { "width": "30%", "targets": 0 },
+                { "width": "12%", "targets": [1, 2, 3, 4] },
+                { "width": "10%", "targets": 5 }
+            ],
+
+            responsive: true,
+
+            "oLanguage": {
+                "sEmptyTable": "<i>No Count Master Found.</i>"
+            },
+
+            "bSort": false,
+            "bFilter": true,
+            "bLengthChange": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "<?php echo base_url(); ?>fetchCount",
+                type: "POST"
+            }
+
+        });
+
+    }
+
+
+    // =====================================
+    // ADD COUNT MASTER
+    // =====================================
+
+    $(document).on('click', '#saveCount', function(e) {
+
+        e.preventDefault();
+
+        $('.fin_id_error, .setup_1_error, .setup_2_error, .setup_3_error, .setup_4_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#addCountForm")[0]);
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>addnewCount",
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Count Master Successfully Added!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href =
+                            "<?php echo base_url().'countmaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // =====================================
+    // UPDATE COUNT MASTER
+    // =====================================
+
+    $(document).on('click', '#updateCount', function(e) {
+
+        e.preventDefault();
+
+        $('.fin_id_error, .setup_1_error, .setup_2_error, .setup_3_error, .setup_4_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#editCountForm")[0]);
+
+        var count_id = $("#count_id").val();
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>updateCount/" + count_id,
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Count Master Successfully Updated!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href =
+                            "<?php echo base_url().'countmaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // =====================================
+    // DELETE COUNT MASTER - PERMANENT
+    // =====================================
+
+    $(document).on('click', '.deletecount', function(e) {
+
+        e.preventDefault();
+
+        var elemF = $(this);
+
+        swal({
+
+            title: "Are you sure?",
+
+            text: "Count Master will be permanently deleted!",
+
+            type: "warning",
+
+            showCancelButton: true,
+
+            closeOnClickOutside: false,
+
+            confirmButtonClass: "btn-sm btn-danger",
+
+            confirmButtonText: "Yes, delete it!",
+
+            cancelButtonText: "No, cancel plz!",
+
+            closeOnConfirm: false,
+
+            closeOnCancel: false
+
+        }, function(isConfirm) {
+
+            if (isConfirm) {
+
+                $.ajax({
+
+                    url: "<?php echo base_url(); ?>deleteCount",
+
+                    type: "POST",
+
+                    data: {
+                        id: elemF.attr('data-id')
+                    },
+
+                    dataType: "json",
+
+                    success: function(response) {
+
+                        if (response.status == 'success') {
+
+                            swal({
+
+                                title: "Deleted!",
+
+                                text: "Count Master Deleted Permanently!",
+
+                                icon: "success",
+
+                                button: "Ok"
+
+                            }, function() {
+
+                                $('#view_Count')
+                                    .DataTable()
+                                    .ajax.reload(null, false);
+
+                            });
+
+                        } else {
+
+                            swal(
+                                "Error",
+                                "Count Master could not be deleted!",
+                                "error"
+                            );
+
+                        }
+
+                    },
+
+                    error: function() {
+
+                        swal(
+                            "Error",
+                            "Something went wrong!",
+                            "error"
+                        );
+
+                    }
+
+                });
+
+            } else {
+
+                swal.close();
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<?php } ?>

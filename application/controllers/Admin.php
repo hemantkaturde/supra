@@ -35581,6 +35581,328 @@ public function deleteParameter()
 
 
 
+public function countmaster()
+{
+    $process = 'Count Master';
+    $processFunction = 'Admin/countmaster';
+
+    $this->logrecord($process, $processFunction);
+
+    $this->global['pageTitle'] = 'Count Master';
+
+    $data['fgList'] = $this->admin_model->getFinishedGoods();
+
+    $this->loadViews(
+        "masters/countMaster",
+        $this->global,
+        $data,
+        NULL
+    );
+}
+
+
+
+public function fetchCount()
+{
+    $params = $_REQUEST;
+
+    $totalRecords = $this->admin_model->getCountMasterCount(
+        $params,
+        false
+    );
+
+    $filteredRecords = $this->admin_model->getCountMasterCount(
+        $params,
+        true
+    );
+
+    $queryRecords = $this->admin_model->getCountMasterData($params);
+
+    $data = array();
+
+    foreach ($queryRecords as $value) {
+
+        $data[] = array(
+            $value['name'],
+            $value['setup_1'],
+            $value['setup_2'],
+            $value['setup_3'],
+            $value['setup_4'],
+            $value['action']
+        );
+    }
+
+    $json_data = array(
+        "draw" => intval($params['draw']),
+        "recordsTotal" => intval($totalRecords),
+        "recordsFiltered" => intval($filteredRecords),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+
+
+public function addnewCount()
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'fin_id',
+            'Finished Goods',
+            'trim|required|integer'
+        );
+
+        for ($i = 1; $i <= 4; $i++) {
+
+            $this->form_validation->set_rules(
+                'setup_'.$i,
+                'Setup '.$i,
+                'trim|integer'
+            );
+        }
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'fin_id' => strip_tags(form_error('fin_id'))
+            );
+
+            for ($i = 1; $i <= 4; $i++) {
+
+                $error = strip_tags(form_error('setup_'.$i));
+
+                if ($error != '') {
+                    $response['error']['setup_'.$i] = $error;
+                }
+            }
+
+        } else {
+
+            $fin_id = (int)$this->input->post('fin_id');
+
+            if (!$this->admin_model->isValidFinishedGoods($fin_id)) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fin_id' => 'Invalid Finished Goods.'
+                );
+
+            } elseif ($this->admin_model->checkCountExists($fin_id) > 0) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fin_id' => 'Count Master Already Exists for this Finished Goods.'
+                );
+
+            } else {
+
+                $data = array(
+                    'fin_id' => $fin_id,
+                    'status' => 1
+                );
+
+                for ($i = 1; $i <= 4; $i++) {
+
+                    $value = $this->input->post('setup_'.$i);
+
+                    $data['setup_'.$i] =
+                        ($value === '' || $value === NULL)
+                        ? NULL
+                        : (int)$value;
+                }
+
+                $result = $this->admin_model->saveCountMaster('', $data);
+
+                if ($result) {
+                    $response['status'] = 'success';
+                } else {
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Add Count Master';
+        $processFunction = 'Admin/addnewCount';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Add Count Master';
+
+        $data['fgList'] = $this->admin_model->getFinishedGoods();
+
+        $this->loadViews(
+            "masters/addCountMaster",
+            $this->global,
+            $data,
+            NULL
+        );
+    }
+}
+
+
+public function updateCount($id)
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'fin_id',
+            'Finished Goods',
+            'trim|required|integer'
+        );
+
+        for ($i = 1; $i <= 4; $i++) {
+
+            $this->form_validation->set_rules(
+                'setup_'.$i,
+                'Setup '.$i,
+                'trim|integer'
+            );
+        }
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'fin_id' => strip_tags(form_error('fin_id'))
+            );
+
+            for ($i = 1; $i <= 4; $i++) {
+
+                $error = strip_tags(form_error('setup_'.$i));
+
+                if ($error != '') {
+                    $response['error']['setup_'.$i] = $error;
+                }
+            }
+
+        } else {
+
+            $fin_id = (int)$this->input->post('fin_id');
+
+            if (!$this->admin_model->isValidFinishedGoods($fin_id)) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fin_id' => 'Invalid Finished Goods.'
+                );
+
+            } elseif (
+                $this->admin_model->checkCountExists($fin_id, $id) > 0
+            ) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fin_id' => 'Count Master Already Exists for this Finished Goods.'
+                );
+
+            } else {
+
+                $data = array(
+                    'fin_id' => $fin_id
+                );
+
+                for ($i = 1; $i <= 4; $i++) {
+
+                    $value = $this->input->post('setup_'.$i);
+
+                    $data['setup_'.$i] =
+                        ($value === '' || $value === NULL)
+                        ? NULL
+                        : (int)$value;
+                }
+
+                $result = $this->admin_model->saveCountMaster($id, $data);
+
+                if ($result) {
+                    $response['status'] = 'success';
+                } else {
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Edit Count Master';
+        $processFunction = 'Admin/updateCount';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Edit Count Master';
+
+        $data['fgList'] = $this->admin_model->getFinishedGoods();
+
+        $data['countData'] =
+            $this->admin_model->getCountMasterDetails($id);
+
+        if (empty($data['countData'])) {
+            show_404();
+            return;
+        }
+
+        $this->loadViews(
+            "masters/editCountMaster",
+            $this->global,
+            $data,
+            NULL
+        );
+    }
+}
+
+
+public function deleteCount()
+{
+    $id = (int)$this->input->post('id');
+
+    if ($id > 0) {
+
+        $result = $this->admin_model->deleteCountMaster($id);
+
+        if ($result) {
+
+            $process = 'Count Master Delete';
+            $processFunction = 'Admin/deleteCount';
+
+            $this->logrecord($process, $processFunction);
+
+            echo json_encode(array('status' => 'success'));
+
+        } else {
+
+            echo json_encode(array('status' => 'failed'));
+        }
+
+    } else {
+
+        echo json_encode(array('status' => 'failed'));
+    }
+}
+
+
+
 
     
 

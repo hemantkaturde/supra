@@ -30133,6 +30133,196 @@ public function deleteParameter($id)
 
 
 
+public function getFinishedGoods()
+{
+    $this->db->select('fin_id, name');
+    $this->db->from('tbl_finished_goods');
+    $this->db->order_by('name', 'ASC');
+
+    return $this->db->get()->result_array();
+}
+
+
+
+public function isValidFinishedGoods($fin_id)
+{
+    $this->db->where('fin_id', $fin_id);
+
+    return $this->db->count_all_results('tbl_finished_goods') > 0;
+}
+
+
+
+public function checkCountExists($fin_id, $id = '')
+{
+    $this->db->where('fin_id', $fin_id);
+
+    if (!empty($id)) {
+        $this->db->where('count_id !=', $id);
+    }
+
+    return $this->db->count_all_results('tbl_count_master');
+}
+
+
+
+public function saveCountMaster($id, $data)
+{
+    if (empty($id)) {
+
+        return $this->db->insert('tbl_count_master', $data);
+
+    } else {
+
+        $this->db->where('count_id', $id);
+
+        return $this->db->update('tbl_count_master', $data);
+    }
+}
+
+
+
+public function getCountMasterDetails($id)
+{
+    $this->db->where('count_id', $id);
+
+    $query = $this->db->get('tbl_count_master');
+
+    return $query->row_array();
+}
+
+
+
+public function getCountMasterCount($params, $filtered = false)
+{
+    $this->db->from('tbl_count_master cm');
+
+    $this->db->join(
+        'tbl_finished_goods fg',
+        'fg.fin_id = cm.fin_id',
+        'left'
+    );
+
+    $this->db->where('cm.status', 1);
+
+    if ($filtered && !empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+
+        $this->db->like('fg.name', $search);
+
+        for ($i = 1; $i <= 4; $i++) {
+            $this->db->or_like('cm.setup_'.$i, $search);
+        }
+
+        $this->db->group_end();
+    }
+
+    return $this->db->count_all_results();
+}
+
+
+
+public function getCountMasterData($params)
+{
+    $this->db->select('
+        cm.*,
+        fg.name
+    ');
+
+    $this->db->from('tbl_count_master cm');
+
+    $this->db->join(
+        'tbl_finished_goods fg',
+        'fg.fin_id = cm.fin_id',
+        'left'
+    );
+
+    $this->db->where('cm.status', 1);
+
+    if (!empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+
+        $this->db->like('fg.name', $search);
+
+        for ($i = 1; $i <= 4; $i++) {
+            $this->db->or_like('cm.setup_'.$i, $search);
+        }
+
+        $this->db->group_end();
+    }
+
+    $this->db->order_by('cm.count_id', 'DESC');
+
+    $length = isset($params['length']) ? (int)$params['length'] : 10;
+    $start = isset($params['start']) ? (int)$params['start'] : 0;
+
+    $this->db->limit($length, $start);
+
+    $result = $this->db->get()->result_array();
+
+    $data = array();
+
+    foreach ($result as $value) {
+
+        $row = array();
+
+        $row['name'] = htmlspecialchars(
+            $value['name'] ?? '',
+            ENT_QUOTES,
+            'UTF-8'
+        );
+
+        for ($i = 1; $i <= 4; $i++) {
+
+            $row['setup_'.$i] = htmlspecialchars(
+                (string)($value['setup_'.$i] ?? ''),
+                ENT_QUOTES,
+                'UTF-8'
+            );
+        }
+
+        $count_id = (int)$value['count_id'];
+
+        $row['action'] = '';
+
+        $row['action'] .= "
+            <a href='".ADMIN_PATH."updateCount/".$count_id."' title='Edit'>
+                <i style='font-size:x-large;cursor:pointer;'
+                   class='fa fa-pencil-square-o'></i>
+            </a>&nbsp;&nbsp;
+        ";
+
+        $row['action'] .= "
+            <i style='font-size:x-large;cursor:pointer;'
+               data-id='".$count_id."'
+               class='fa fa-trash-o deletecount'
+               title='Delete'></i>
+        ";
+
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+
+
+public function deleteCountMaster($id)
+{
+    $this->db->where('count_id', $id);
+
+    return $this->db->delete('tbl_count_master');
+}
+
+
+
+
 
 }
 
