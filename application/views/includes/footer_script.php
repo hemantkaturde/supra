@@ -35506,3 +35506,323 @@ $(document).ready(function() {
 </script>
 
 <?php } ?>
+
+
+
+
+<?php if(
+    $pageTitle == 'Parameter Master' ||
+    $pageTitle == 'Add Parameter Master' ||
+    $pageTitle == 'Edit Parameter Master'
+) { ?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    // =====================================
+    // PARAMETER MASTER LISTING
+    // =====================================
+
+    if ($('#view_Parameter').length) {
+
+        $('#view_Parameter').DataTable({
+
+            scrollX: true,
+            responsive: false,
+
+            "columnDefs": [
+                { "width": "150px", "targets": 0 },
+                { "width": "120px", "targets": "_all" }
+            ],
+
+            "oLanguage": {
+                "sEmptyTable": "<i>No Parameter Found.</i>"
+            },
+
+            "bSort": false,
+            "bFilter": true,
+            "bLengthChange": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "<?php echo base_url(); ?>fetchParameter",
+                type: "POST"
+            }
+
+        });
+
+    }
+
+
+    // =====================================
+    // ADD PARAMETER
+    // =====================================
+
+    $(document).on('click', '#saveParameter', function(e) {
+
+        e.preventDefault();
+
+        $('.fc_id_error, .parameters_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#addParameterForm")[0]);
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>addnewParameter",
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if(response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if(response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Parameter Successfully Added!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href =
+                            "<?php echo base_url().'parametermaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // =====================================
+    // UPDATE PARAMETER
+    // =====================================
+
+    $(document).on('click', '#updateParameter', function(e) {
+
+        e.preventDefault();
+
+        $('.fc_id_error, .parameters_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#editParameterForm")[0]);
+
+        var parameter_id = $("#parameter_id").val();
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>updateParameter/" + parameter_id,
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if(response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if(response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "Parameter Successfully Updated!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href =
+                            "<?php echo base_url().'parametermaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function() {
+
+                $(".loader_ajax").hide();
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // =====================================
+    // DELETE PARAMETER
+    // =====================================
+
+    $(document).on('click', '.deleteparameter', function(e) {
+
+        e.preventDefault();
+
+        var elemF = $(this);
+
+        swal({
+
+            title: "Are you sure?",
+
+            text: "Parameter details will be deleted!",
+
+            type: "warning",
+
+            showCancelButton: true,
+
+            closeOnClickOutside: false,
+
+            confirmButtonClass: "btn-sm btn-danger",
+
+            confirmButtonText: "Yes, delete it!",
+
+            cancelButtonText: "No, cancel plz!",
+
+            closeOnConfirm: false,
+
+            closeOnCancel: false
+
+        }, function(isConfirm) {
+
+            if(isConfirm) {
+
+                $.ajax({
+
+                    url: "<?php echo base_url(); ?>deleteParameter",
+
+                    type: "POST",
+
+                    data: {
+                        id: elemF.attr('data-id')
+                    },
+
+                    dataType: "json",
+
+                    success: function(response) {
+
+                        if(response.status == 'success') {
+
+                            swal({
+
+                                title: "Deleted!",
+
+                                text: "Parameter Deleted Successfully!",
+
+                                icon: "success",
+
+                                button: "Ok"
+
+                            }, function() {
+
+                                $('#view_Parameter')
+                                    .DataTable()
+                                    .ajax.reload(null, false);
+
+                            });
+
+                        } else {
+
+                            swal(
+                                "Error",
+                                "Parameter could not be deleted!",
+                                "error"
+                            );
+
+                        }
+
+                    },
+
+                    error: function() {
+
+                        swal(
+                            "Error",
+                            "Something went wrong!",
+                            "error"
+                        );
+
+                    }
+
+                });
+
+            } else {
+
+                swal.close();
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<?php } ?>

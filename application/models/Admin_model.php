@@ -29925,6 +29925,206 @@ public function deleteOperator($id)
 }
 
 
+
+public function getFCList()
+{
+    $this->db->where('status', 1);
+
+    $this->db->order_by('name', 'ASC');
+
+    return $this->db
+        ->get(TBL_FINISHED_GOODS)
+        ->result_array();
+}
+
+
+
+public function isValidFC($fc_id)
+{
+    $this->db->where('fin_id', $fc_id);
+    $this->db->where('status', 1);
+
+    return $this->db->count_all_results(TBL_FINISHED_GOODS) > 0;
+}
+
+
+
+public function checkFCExists($fc_id, $id = '')
+{
+    $this->db->where('fc_id', $fc_id);
+    $this->db->where('status', 1);
+
+    if (!empty($id)) {
+        $this->db->where('parameter_id !=', $id);
+    }
+
+    return $this->db->count_all_results('tbl_parameter');
+}
+
+
+
+
+public function saveParameter($id, $data)
+{
+    if (empty($id)) {
+
+        return $this->db->insert('tbl_parameter', $data);
+
+    } else {
+
+        $this->db->where('parameter_id', $id);
+        $this->db->where('status', 1);
+
+        return $this->db->update('tbl_parameter', $data);
+    }
+}
+
+
+
+public function getParameterDetails($id)
+{
+    $this->db->where('parameter_id', $id);
+    $this->db->where('status', 1);
+
+    $query = $this->db->get('tbl_parameter');
+
+    return $query->row_array();
+}
+
+
+
+
+public function getParameterCount($params, $filtered = false)
+{
+    $this->db->from('tbl_parameter p');
+
+    $this->db->join(
+        TBL_FINISHED_GOODS.' fc',
+        'fc.fin_id = p.fc_id',
+        'left'
+    );
+
+    $this->db->where('p.status', 1);
+
+    if ($filtered && !empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+
+        $this->db->like('fc.name', $search);
+
+        for ($i = 1; $i <= 12; $i++) {
+            $this->db->or_like('p.parameter_'.$i, $search);
+        }
+
+        $this->db->group_end();
+    }
+
+    return $this->db->count_all_results();
+}
+
+
+
+
+public function getParameterData($params)
+{
+    $this->db->select('p.*, fc.name as finish_good_name');
+
+    $this->db->from('tbl_parameter p');
+
+    $this->db->join(
+        TBL_FINISHED_GOODS.' fc',
+        'fc.fin_id = p.fc_id',
+        'left'
+    );
+
+    $this->db->where('p.status', 1);
+
+    if (!empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+
+        $this->db->like('fc.name', $search);
+
+        for ($i = 1; $i <= 12; $i++) {
+            $this->db->or_like('p.parameter_'.$i, $search);
+        }
+
+        $this->db->group_end();
+    }
+
+    $this->db->order_by('p.parameter_id', 'DESC');
+
+    $this->db->limit(
+        (int)$params['length'],
+        (int)$params['start']
+    );
+
+    $result = $this->db->get()->result_array();
+
+    $data = array();
+
+    foreach ($result as $value) {
+
+        $row = array();
+
+        $row['name'] = htmlspecialchars(
+            $value['finish_good_name'],
+            ENT_QUOTES,
+            'UTF-8'
+        );
+
+        for ($i = 1; $i <= 12; $i++) {
+
+            $row['parameter_'.$i] = htmlspecialchars(
+                $value['parameter_'.$i] ?? '',
+                ENT_QUOTES,
+                'UTF-8'
+            );
+        }
+
+        $parameter_id = (int)$value['parameter_id'];
+
+        $row['action'] = '';
+
+        $row['action'] .= "
+            <a href='".ADMIN_PATH."updateParameter/".$parameter_id."' title='Edit'>
+                <i style='font-size:x-large;cursor:pointer;'
+                   class='fa fa-pencil-square-o'></i>
+            </a>&nbsp;&nbsp;
+        ";
+
+        $row['action'] .= "
+            <i style='font-size:x-large;cursor:pointer;'
+               data-id='".$parameter_id."'
+               class='fa fa-trash-o deleteparameter'
+               title='Delete'></i>
+        ";
+
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+
+
+public function deleteParameter($id)
+{
+    $this->db->where('parameter_id', $id);
+    $this->db->where('status', 1);
+
+    return $this->db->update(
+        'tbl_parameter',
+        array('status' => 0)
+    );
+}
+
+
+
 }
 
 ?>

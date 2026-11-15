@@ -741,6 +741,14 @@ $route['updateOperator/(:num)'] = 'Admin/updateOperator/$1';
 $route['deleteOperator'] = 'Admin/deleteOperator';
 
 
+$route['parametermaster'] = 'Admin/parametermaster';
+$route['fetchParameter'] = 'Admin/fetchParameter';
+$route['addnewParameter'] = 'Admin/addnewParameter';
+$route['updateParameter/(:num)'] = 'Admin/updateParameter/$1';
+$route['deleteParameter'] = 'Admin/deleteParameter';
+
+
+
 $route['qcinternalaudit'] = 'admin/qcinternalauditlist';
 $route['qcinternalauditadd'] = 'admin/qcinternalauditadd';
 // $route['qcinternalauditsave'] = 'admin/qcinternalauditsave';

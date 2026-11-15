@@ -35267,6 +35267,321 @@ public function deleteOperator()
 }
 
 
+
+public function parametermaster()
+{
+    $process = 'Parameter Master';
+    $processFunction = 'Admin/parametermaster';
+    $this->logrecord($process, $processFunction);
+    $this->global['pageTitle'] = 'Parameter Master';
+    $data['fcList'] = $this->admin_model->getFCList();
+    $this->loadViews("masters/parameterMaster",$this->global,$data,NULL);
+}
+
+
+public function fetchParameter()
+{
+    $params = $_REQUEST;
+
+    $totalRecords = $this->admin_model->getParameterCount(
+        $params,
+        false
+    );
+
+    $filteredRecords = $this->admin_model->getParameterCount(
+        $params,
+        true
+    );
+
+    $queryRecords = $this->admin_model->getParameterData($params);
+
+    $data = array();
+
+    foreach ($queryRecords as $value) {
+
+        $row = array();
+
+        $row[] = $value['name'];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $row[] = $value['parameter_'.$i];
+        }
+
+        $row[] = $value['action'];
+
+        $data[] = $row;
+    }
+
+    $json_data = array(
+        "draw" => intval($params['draw']),
+        "recordsTotal" => intval($totalRecords),
+        "recordsFiltered" => intval($filteredRecords),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+
+
+public function addnewParameter()
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'fc_id',
+            'Function Category',
+            'trim|required|integer'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'fc_id' => strip_tags(form_error('fc_id'))
+            );
+
+        } else {
+
+            $fc_id = (int)$this->input->post('fc_id');
+
+            $data = array(
+                'fc_id' => $fc_id
+            );
+
+            $hasParameter = false;
+
+            for ($i = 1; $i <= 12; $i++) {
+
+                $parameter = trim(
+                    (string)$this->input->post('parameter_'.$i)
+                );
+
+                $data['parameter_'.$i] = $parameter;
+
+                if ($parameter != '') {
+                    $hasParameter = true;
+                }
+            }
+
+            if (!$hasParameter) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'parameters' => 'Please enter at least one parameter.'
+                );
+
+            } elseif (!$this->admin_model->isValidFC($fc_id)) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fc_id' => 'Invalid Function Category.'
+                );
+
+            } elseif (
+                $this->admin_model->checkFCExists($fc_id) > 0
+            ) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fc_id' => 'Parameters already exist for this FC.'
+                );
+
+            } else {
+
+                $data['status'] = 1;
+
+                $result = $this->admin_model->saveParameter('', $data);
+
+                if ($result) {
+                    $response['status'] = 'success';
+                } else {
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Add Parameter Master';
+        $processFunction = 'Admin/addnewParameter';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Add Parameter Master';
+
+        $data['fcList'] = $this->admin_model->getFCList();
+
+        $this->loadViews(
+            "masters/addParameterMaster",
+            $this->global,
+            $data,
+            NULL
+        );
+    }
+}
+
+
+
+public function updateParameter($id)
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'fc_id',
+            'Function Category',
+            'trim|required|integer'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+
+            $response['error'] = array(
+                'fc_id' => strip_tags(form_error('fc_id'))
+            );
+
+        } else {
+
+            $fc_id = (int)$this->input->post('fc_id');
+
+            $data = array(
+                'fc_id' => $fc_id
+            );
+
+            $hasParameter = false;
+
+            for ($i = 1; $i <= 12; $i++) {
+
+                $parameter = trim(
+                    (string)$this->input->post('parameter_'.$i)
+                );
+
+                $data['parameter_'.$i] = $parameter;
+
+                if ($parameter != '') {
+                    $hasParameter = true;
+                }
+            }
+
+            if (!$hasParameter) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'parameters' => 'Please enter at least one parameter.'
+                );
+
+            } elseif (
+                !$this->admin_model->isValidFC($fc_id)
+            ) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fc_id' => 'Invalid Function Category.'
+                );
+
+            } elseif (
+                $this->admin_model->checkFCExists($fc_id, $id) > 0
+            ) {
+
+                $response['status'] = 'failure';
+
+                $response['error'] = array(
+                    'fc_id' => 'Parameters already exist for this FC.'
+                );
+
+            } else {
+
+                $result = $this->admin_model->saveParameter($id, $data);
+
+                if ($result) {
+                    $response['status'] = 'success';
+                } else {
+                    $response['status'] = 'failure';
+                }
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Edit Parameter Master';
+        $processFunction = 'Admin/updateParameter';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Edit Parameter Master';
+
+        $data['fcList'] = $this->admin_model->getFCList();
+
+        $data['parameterData'] =
+            $this->admin_model->getParameterDetails($id);
+
+        if (empty($data['parameterData'])) {
+            show_404();
+            return;
+        }
+
+        $this->loadViews(
+            "masters/editParameterMaster",
+            $this->global,
+            $data,
+            NULL
+        );
+    }
+}
+
+
+
+
+public function deleteParameter()
+{
+    $id = (int)$this->input->post('id');
+
+    if ($id > 0) {
+
+        $result = $this->admin_model->deleteParameter($id);
+
+        if ($result) {
+
+            $process = 'Parameter Master Delete';
+            $processFunction = 'Admin/deleteParameter';
+
+            $this->logrecord($process, $processFunction);
+
+            echo json_encode(array('status' => 'success'));
+
+        } else {
+
+            echo json_encode(array('status' => 'failed'));
+        }
+
+    } else {
+
+        echo json_encode(array('status' => 'failed'));
+    }
+}
+
+
+
+
     
 
 }
