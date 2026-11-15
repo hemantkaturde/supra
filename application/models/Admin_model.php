@@ -30112,16 +30112,25 @@ public function getParameterData($params)
 
 
 
+// public function deleteParameter($id)
+// {
+//     $this->db->where('parameter_id', $id);
+//     $this->db->where('status', 1);
+
+//     return $this->db->update(
+//         'tbl_parameter',
+//         array('status' => 0)
+//     );
+// }
+
+
 public function deleteParameter($id)
 {
     $this->db->where('parameter_id', $id);
-    $this->db->where('status', 1);
 
-    return $this->db->update(
-        'tbl_parameter',
-        array('status' => 0)
-    );
+    return $this->db->delete('tbl_parameter');
 }
+
 
 
 
