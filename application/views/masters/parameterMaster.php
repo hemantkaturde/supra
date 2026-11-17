@@ -63,7 +63,7 @@
 
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
 
-                                        <th>Function Category</th>
+                                        <th>Part Number</th>
 
                                         <?php for($i=1; $i<=12; $i++) { ?>
                                             <th>Parameter <?php echo $i; ?></th>

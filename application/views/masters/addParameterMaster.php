@@ -31,7 +31,7 @@
                                     <div class="form-group">
 
                                         <label>
-                                            Function Category (FC)
+                                           Part Number
                                             <span style="color:red">*</span>
                                         </label>
 
@@ -39,13 +39,13 @@
                                             id="fc_id"
                                             class="form-control">
 
-                                            <option value="">Select Function Category</option>
+                                            <option value="">Select Part Number</option>
 
                                             <?php foreach($fcList as $fc) { ?>
 
                                                 <option value="<?php echo $fc['fin_id']; ?>">
 
-                                                    <?php echo htmlspecialchars($fc['name'], ENT_QUOTES, 'UTF-8'); ?>
+                                                    <?php echo htmlspecialchars($fc['part_number'], ENT_QUOTES, 'UTF-8'); ?>
 
                                                 </option>
 

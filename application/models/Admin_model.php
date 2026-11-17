@@ -30029,7 +30029,7 @@ public function getParameterCount($params, $filtered = false)
 
 public function getParameterData($params)
 {
-    $this->db->select('p.*, fc.name as finish_good_name');
+    $this->db->select('p.*, fc.part_number as finish_good_name');
 
     $this->db->from('tbl_parameter p');
 
@@ -30047,7 +30047,7 @@ public function getParameterData($params)
 
         $this->db->group_start();
 
-        $this->db->like('fc.name', $search);
+        $this->db->like('fc.part_number', $search);
 
         for ($i = 1; $i <= 12; $i++) {
             $this->db->or_like('p.parameter_'.$i, $search);
