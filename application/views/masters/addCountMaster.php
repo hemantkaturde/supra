@@ -31,7 +31,7 @@
                                     <div class="form-group">
 
                                         <label>
-                                            Finished Goods (FG)
+                                            Part Number
                                             <span style="color:red">*</span>
                                         </label>
 
@@ -39,13 +39,13 @@
                                             id="fin_id"
                                             class="form-control">
 
-                                            <option value="">Select Finished Goods</option>
+                                            <option value="">Select Part Number</option>
 
                                             <?php foreach($fgList as $fg) { ?>
 
                                                 <option value="<?php echo $fg['fin_id']; ?>">
 
-                                                    <?php echo htmlspecialchars($fg['name'], ENT_QUOTES, 'UTF-8'); ?>
+                                                    <?php echo htmlspecialchars($fg['part_number'], ENT_QUOTES, 'UTF-8'); ?>
 
                                                 </option>
 

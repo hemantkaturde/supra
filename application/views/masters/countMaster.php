@@ -63,7 +63,7 @@
 
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
 
-                                        <th>Finished Goods</th>
+                                        <th>Part Number</th>
 
                                         <th>Setup 1 (Min)</th>
 

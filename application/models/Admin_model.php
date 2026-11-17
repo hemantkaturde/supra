@@ -30135,7 +30135,7 @@ public function deleteParameter($id)
 
 public function getFinishedGoods()
 {
-    $this->db->select('fin_id, name');
+    $this->db->select('fin_id, name,part_number');
     $this->db->from('tbl_finished_goods');
     $this->db->order_by('name', 'ASC');
 
@@ -30211,7 +30211,7 @@ public function getCountMasterCount($params, $filtered = false)
 
         $this->db->group_start();
 
-        $this->db->like('fg.name', $search);
+        $this->db->like('fg.part_number', $search);
 
         for ($i = 1; $i <= 4; $i++) {
             $this->db->or_like('cm.setup_'.$i, $search);
@@ -30229,7 +30229,7 @@ public function getCountMasterData($params)
 {
     $this->db->select('
         cm.*,
-        fg.name
+        fg.part_number
     ');
 
     $this->db->from('tbl_count_master cm');
@@ -30248,7 +30248,7 @@ public function getCountMasterData($params)
 
         $this->db->group_start();
 
-        $this->db->like('fg.name', $search);
+        $this->db->like('fg.part_number', $search);
 
         for ($i = 1; $i <= 4; $i++) {
             $this->db->or_like('cm.setup_'.$i, $search);
@@ -30273,7 +30273,7 @@ public function getCountMasterData($params)
         $row = array();
 
         $row['name'] = htmlspecialchars(
-            $value['name'] ?? '',
+            $value['part_number'] ?? '',
             ENT_QUOTES,
             'UTF-8'
         );
