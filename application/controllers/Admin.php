@@ -36171,9 +36171,10 @@ public function updateCNC($id)
 
         $this->logrecord($process, $processFunction);
 
-        $this->global['pageTitle'] = 'Edit CNC';
+        $this->global['pageTitle'] = 'Edit CNC Master';
 
         $data['vendorList'] = $this->admin_model->getVendorList();
+
         $data['cncData'] = $this->admin_model->getCNCDetails($id);
 
         if (empty($data['cncData'])) {
@@ -36181,11 +36182,13 @@ public function updateCNC($id)
             return;
         }
 
-        $data['poList'] = $this->admin_model->getVendorPOList(
+        // Load selected Vendor PO
+        $data['vendorPOList'] = $this->admin_model->getVendorPOList(
             $data['cncData']['vendor_id']
         );
 
-        $data['partList'] = $this->admin_model->getVendorPartList(
+        // Load selected PO Parts
+        $data['vendorPartList'] = $this->admin_model->getVendorPartList(
             $data['cncData']['vendor_po_id']
         );
 

@@ -30392,7 +30392,7 @@ public function validateCNCSelection($vendor_id, $po_id, $part_id)
 
     $po = $this->db
         ->where('id', $po_id)
-        ->where('vendor_name', $vendor['vendor_name'])
+        ->where('vendor_name',$vendor_id)
         ->get('tbl_vendor_po')
         ->row_array();
 
