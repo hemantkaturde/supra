@@ -776,6 +776,23 @@ $route['printchecklistreport/(:num)'] = 'admin/printchecklistreport/$1';
 
 
 
+// =====================================
+// CNC MASTER ROUTES
+// =====================================
+
+$route['cncmaster'] = 'Admin/cncmaster';
+$route['fetchCNC'] = 'Admin/fetchCNC';
+$route['addnewCNC'] = 'Admin/addnewCNC';
+$route['updateCNC/(:num)'] = 'Admin/updateCNC/$1';
+$route['deleteCNC'] = 'Admin/deleteCNC';
+
+// AJAX DROPDOWNS
+
+$route['getVendorPO'] = 'Admin/getVendorPO';
+$route['getVendorPart'] = 'Admin/getVendorPart';
+
+
+
 
 
 

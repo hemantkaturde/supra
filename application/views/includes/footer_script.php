@@ -36147,3 +36147,471 @@ $(document).ready(function() {
 </script>
 
 <?php } ?>
+
+
+<?php if(
+    $pageTitle == 'CNC Master' ||
+    $pageTitle == 'Add CNC Master' ||
+    $pageTitle == 'Edit CNC Master'
+) { ?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    // =====================================
+    // CNC MASTER LISTING
+    // =====================================
+
+    if ($('#view_CNC').length) {
+
+        $('#view_CNC').DataTable({
+
+            "columnDefs": [
+                { "width": "10%", "targets": 0 },
+                { "width": "8%", "targets": 1 },
+                { "width": "12%", "targets": [2, 3, 4] },
+                { "width": "15%", "targets": [5, 6] },
+                { "width": "8%", "targets": 7 },
+                { "width": "12%", "targets": 8 },
+                { "width": "7%", "targets": 9 }
+            ],
+
+            responsive: true,
+
+            "oLanguage": {
+                "sEmptyTable": "<i>No CNC Master Found.</i>"
+            },
+
+            "bSort": false,
+            "bFilter": true,
+            "bLengthChange": true,
+            "iDisplayLength": 10,
+            "bProcessing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "<?php echo base_url(); ?>fetchCNC",
+                type: "POST"
+            }
+
+        });
+
+    }
+
+
+    // =====================================
+    // LOAD VENDOR PO
+    // =====================================
+
+    $(document).on('change', '#vendor_id', function() {
+
+        var vendor_id = $(this).val();
+
+
+        $('#vendor_po_id')
+            .html('<option value="">Select Vendor PO</option>')
+            .prop('disabled', true);
+
+        $('#part_number_id')
+            .html('<option value="">Select Part Number</option>')
+            .prop('disabled', true);
+
+        if (vendor_id != '') {
+
+            $.ajax({
+
+                url: "<?php echo base_url(); ?>getVendorPO",
+
+                type: "POST",
+
+                data: { vendor_id: vendor_id },
+
+                dataType: "json",
+
+                success: function(response) {
+
+									
+						console.log("Vendor PO Response:", response);
+
+						$('#vendor_po_id').html(
+							'<option value="">Select Vendor PO</option>'
+						);
+
+						if (response && response.length > 0) {
+
+							$.each(response, function(i, v) {
+
+								$('#vendor_po_id').append(
+									$('<option>', {
+										value: v.id,
+										text: v.po_number
+									})
+								);
+
+							});
+
+							$('#vendor_po_id').prop('disabled', false);
+
+						} else {
+
+							$('#vendor_po_id').html(
+								'<option value="">No Vendor PO Found</option>'
+							);
+
+						}
+
+                },
+
+                error: function() {
+
+                    swal("Error", "Unable to load Vendor PO!", "error");
+
+                }
+
+            });
+
+        }
+
+    });
+
+
+    // =====================================
+    // LOAD PART NUMBER
+    // =====================================
+
+    $(document).on('change', '#vendor_po_id', function() {
+
+        var vendor_po_id = $(this).val();
+
+        $('#part_number_id')
+            .html('<option value="">Select Part Number</option>')
+            .prop('disabled', true);
+
+        if (vendor_po_id != '') {
+
+            $.ajax({
+
+                url: "<?php echo base_url(); ?>getVendorPart",
+
+                type: "POST",
+
+                data: { vendor_po_id: vendor_po_id },
+
+                dataType: "json",
+
+                success: function(response) {
+
+                  console.log("Vendor Part Response:", response);
+
+						$('#part_number_id').html(
+							'<option value="">Select Part Number</option>'
+						);
+
+						if (response && response.length > 0) {
+
+							$.each(response, function(i, v) {
+
+								$('#part_number_id').append(
+									$('<option>', {
+										value: v.part_number_id,
+										text: v.part_number
+									})
+								);
+
+							});
+
+							$('#part_number_id').prop('disabled', false);
+
+						} else {
+
+							$('#part_number_id').html(
+								'<option value="">No Part Found</option>'
+							);
+
+						}
+
+                },
+
+                error: function() {
+
+                    swal("Error", "Unable to load Part Number!", "error");
+
+                }
+
+            });
+
+        }
+
+    });
+
+
+    // =====================================
+    // ADD CNC MASTER
+    // =====================================
+
+    $(document).on('click', '#saveCNC', function(e) {
+
+        e.preventDefault();
+
+        $('.job_date_error, .vendor_id_error, .vendor_po_id_error, .part_number_id_error, .part_description_error, .material_grade_error, .vendor_po_qty_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#addCNCForm")[0]);
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>addnewCNC",
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "CNC Master Successfully Added!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href =
+                            "<?php echo base_url().'cncmaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function(xhr) {
+
+                $(".loader_ajax").hide();
+
+                console.log(xhr.responseText);
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // =====================================
+    // UPDATE CNC MASTER
+    // =====================================
+
+    $(document).on('click', '#updateCNC', function(e) {
+
+        e.preventDefault();
+
+        $('.job_date_error, .vendor_id_error, .vendor_po_id_error, .part_number_id_error, .part_description_error, .material_grade_error, .vendor_po_qty_error, .remark_error').html('');
+
+        $(".loader_ajax").show();
+
+        var formData = new FormData($("#editCNCForm")[0]);
+
+        var cnc_id = $("#cnc_id").val();
+
+        $.ajax({
+
+            url: "<?php echo base_url(); ?>updateCNC/" + cnc_id,
+
+            type: "POST",
+
+            data: formData,
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            dataType: "json",
+
+            success: function(response) {
+
+                $(".loader_ajax").hide();
+
+                if (response.status == "failure") {
+
+                    $.each(response.error, function(i, v) {
+
+                        $('.' + i + '_error').html(v);
+
+                    });
+
+                }
+                else if (response.status == "success") {
+
+                    swal({
+
+                        title: "Success",
+
+                        text: "CNC Master Successfully Updated!",
+
+                        icon: "success",
+
+                        button: "Ok"
+
+                    }, function() {
+
+                        window.location.href =
+                            "<?php echo base_url().'cncmaster'; ?>";
+
+                    });
+
+                }
+
+            },
+
+            error: function(xhr) {
+
+                $(".loader_ajax").hide();
+
+                console.log(xhr.responseText);
+
+                swal("Error", "Something went wrong!", "error");
+
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+    // =====================================
+    // DELETE CNC MASTER
+    // =====================================
+
+    $(document).on('click', '.deleteCNC', function(e) {
+
+        e.preventDefault();
+
+        var elemF = $(this);
+
+        swal({
+
+            title: "Are you sure?",
+
+            text: "CNC Master will be permanently deleted!",
+
+            type: "warning",
+
+            showCancelButton: true,
+
+            closeOnClickOutside: false,
+
+            confirmButtonClass: "btn-sm btn-danger",
+
+            confirmButtonText: "Yes, delete it!",
+
+            cancelButtonText: "No, cancel plz!",
+
+            closeOnConfirm: false,
+
+            closeOnCancel: false
+
+        }, function(isConfirm) {
+
+            if (isConfirm) {
+
+                $.ajax({
+
+                    url: "<?php echo base_url(); ?>deleteCNC",
+
+                    type: "POST",
+
+                    data: {
+                        id: elemF.attr('data-id')
+                    },
+
+                    dataType: "json",
+
+                    success: function(response) {
+
+                        if (response.status == 'success') {
+
+                            swal({
+
+                                title: "Deleted!",
+
+                                text: "CNC Master Deleted Permanently!",
+
+                                icon: "success",
+
+                                button: "Ok"
+
+                            }, function() {
+
+                                $('#view_CNC')
+                                    .DataTable()
+                                    .ajax.reload(null, false);
+
+                            });
+
+                        } else {
+
+                            swal(
+                                "Error",
+                                "CNC Master could not be deleted!",
+                                "error"
+                            );
+
+                        }
+
+                    },
+
+                    error: function() {
+
+                        swal("Error", "Something went wrong!", "error");
+
+                    }
+
+                });
+
+            } else {
+
+                swal.close();
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<?php } ?>

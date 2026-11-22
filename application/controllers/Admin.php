@@ -35904,6 +35904,356 @@ public function deleteCount()
 
 
 
+public function cncmaster()
+{
+    $process = 'CNC Master';
+    $processFunction = 'Admin/cncmaster';
+
+    $this->logrecord($process, $processFunction);
+
+    $this->global['pageTitle'] = 'CNC Master';
+
+    $this->loadViews(
+        "masters/cncMaster",
+        $this->global,
+        array(),
+        NULL
+    );
+}
+
+
+
+public function fetchCNC()
+{
+    $params = $_REQUEST;
+
+    $totalRecords = $this->admin_model->getCNCCount($params, false);
+
+    $filteredRecords = $this->admin_model->getCNCCount($params, true);
+
+    $queryRecords = $this->admin_model->getCNCData($params);
+
+    $data = array();
+
+    foreach ($queryRecords as $value) {
+
+        $data[] = array(
+            $value['job_no'],
+            $value['job_date'],
+            $value['vendor_name'],
+            $value['po_number'],
+            $value['part_number'],
+            $value['part_description'],
+            $value['material_grade'],
+            $value['vendor_po_qty'],
+            $value['remark'],
+            $value['action']
+        );
+    }
+
+    echo json_encode(array(
+        "draw" => intval($params['draw']),
+        "recordsTotal" => intval($totalRecords),
+        "recordsFiltered" => intval($filteredRecords),
+        "data" => $data
+    ));
+}
+
+
+
+public function addnewCNC()
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules(
+            'job_date', 'Date', 'trim|required'
+        );
+
+        $this->form_validation->set_rules(
+            'vendor_id', 'Vendor Name', 'trim|required|integer'
+        );
+
+        $this->form_validation->set_rules(
+            'vendor_po_id', 'Vendor PO', 'trim|required|integer'
+        );
+
+        $this->form_validation->set_rules(
+            'part_number_id', 'Part', 'trim|required|integer'
+        );
+
+        $this->form_validation->set_rules(
+            'part_description', 'Part Description', 'trim'
+        );
+
+        $this->form_validation->set_rules(
+            'material_grade', 'Material Grade', 'trim'
+        );
+
+        $this->form_validation->set_rules(
+            'vendor_po_qty', 'Vendor PO Qty', 'trim|numeric'
+        );
+
+        $this->form_validation->set_rules(
+            'remark', 'Remark', 'trim'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+            $response['error'] = array();
+
+            $fields = array(
+                'job_date',
+                'vendor_id',
+                'vendor_po_id',
+                'part_number_id',
+                'part_description',
+                'material_grade',
+                'vendor_po_qty',
+                'remark'
+            );
+
+            foreach ($fields as $field) {
+                $error = strip_tags(form_error($field));
+
+                if ($error != '') {
+                    $response['error'][$field] = $error;
+                }
+            }
+
+        } else {
+
+            $vendor_id = (int)$this->input->post('vendor_id');
+            $vendor_po_id = (int)$this->input->post('vendor_po_id');
+            $part_number_id = (int)$this->input->post('part_number_id');
+
+            if (!$this->admin_model->validateCNCSelection(
+                $vendor_id,
+                $vendor_po_id,
+                $part_number_id
+            )) {
+
+                $response['status'] = 'failure';
+                $response['error'] = array(
+                    'vendor_po_id' => 'Invalid Vendor, PO or Part selection.'
+                );
+
+            } else {
+
+                $data = array(
+                    'job_no' => $this->admin_model->generateCNCJobNo(),
+                    'job_date' => $this->input->post('job_date'),
+                    'vendor_id' => $vendor_id,
+                    'vendor_po_id' => $vendor_po_id,
+                    'part_number_id' => $part_number_id,
+                    'part_description' => $this->input->post('part_description'),
+                    'material_grade' => $this->input->post('material_grade'),
+                    'vendor_po_qty' => $this->input->post('vendor_po_qty') ?: NULL,
+                    'remark' => $this->input->post('remark'),
+                    'status' => 1,
+                    'createdBy' => $this->session->userdata('userId')
+                );
+
+                $result = $this->admin_model->saveCNC('', $data);
+
+                $response['status'] = $result ? 'success' : 'failure';
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Add CNC Master';
+        $processFunction = 'Admin/addnewCNC';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Add CNC Master';
+
+        $data['vendorList'] = $this->admin_model->getVendorList();
+
+        $this->loadViews(
+            "masters/addCNC",
+            $this->global,
+            $data,
+            NULL
+        );
+    }
+}
+
+
+
+public function updateCNC($id)
+{
+    $post_submit = $this->input->post();
+
+    if ($post_submit) {
+
+        $response = array();
+
+        $this->form_validation->set_rules('job_date', 'Date', 'trim|required');
+        $this->form_validation->set_rules('vendor_id', 'Vendor Name', 'trim|required|integer');
+        $this->form_validation->set_rules('vendor_po_id', 'Vendor PO', 'trim|required|integer');
+        $this->form_validation->set_rules('part_number_id', 'Part', 'trim|required|integer');
+        $this->form_validation->set_rules('part_description', 'Part Description', 'trim');
+        $this->form_validation->set_rules('material_grade', 'Material Grade', 'trim');
+        $this->form_validation->set_rules('vendor_po_qty', 'Vendor PO Qty', 'trim|numeric');
+        $this->form_validation->set_rules('remark', 'Remark', 'trim');
+
+        if ($this->form_validation->run() == FALSE) {
+
+            $response['status'] = 'failure';
+            $response['error'] = array();
+
+            $fields = array(
+                'job_date', 'vendor_id', 'vendor_po_id',
+                'part_number_id', 'part_description',
+                'material_grade', 'vendor_po_qty', 'remark'
+            );
+
+            foreach ($fields as $field) {
+                $error = strip_tags(form_error($field));
+
+                if ($error != '') {
+                    $response['error'][$field] = $error;
+                }
+            }
+
+        } else {
+
+            $vendor_id = (int)$this->input->post('vendor_id');
+            $vendor_po_id = (int)$this->input->post('vendor_po_id');
+            $part_number_id = (int)$this->input->post('part_number_id');
+
+            if (!$this->admin_model->validateCNCSelection(
+                $vendor_id,
+                $vendor_po_id,
+                $part_number_id
+            )) {
+
+                $response['status'] = 'failure';
+                $response['error'] = array(
+                    'vendor_po_id' => 'Invalid Vendor, PO or Part selection.'
+                );
+
+            } else {
+
+                $data = array(
+                    'job_date' => $this->input->post('job_date'),
+                    'vendor_id' => $vendor_id,
+                    'vendor_po_id' => $vendor_po_id,
+                    'part_number_id' => $part_number_id,
+                    'part_description' => $this->input->post('part_description'),
+                    'material_grade' => $this->input->post('material_grade'),
+                    'vendor_po_qty' => $this->input->post('vendor_po_qty') ?: NULL,
+                    'remark' => $this->input->post('remark'),
+                    'updatedBy' => $this->session->userdata('userId'),
+                    'updatedDtm' => date('Y-m-d H:i:s')
+                );
+
+                $result = $this->admin_model->saveCNC($id, $data);
+
+                $response['status'] = $result ? 'success' : 'failure';
+            }
+        }
+
+        echo json_encode($response);
+
+    } else {
+
+        $process = 'Edit CNC';
+        $processFunction = 'Admin/updateCNC';
+
+        $this->logrecord($process, $processFunction);
+
+        $this->global['pageTitle'] = 'Edit CNC';
+
+        $data['vendorList'] = $this->admin_model->getVendorList();
+        $data['cncData'] = $this->admin_model->getCNCDetails($id);
+
+        if (empty($data['cncData'])) {
+            show_404();
+            return;
+        }
+
+        $data['poList'] = $this->admin_model->getVendorPOList(
+            $data['cncData']['vendor_id']
+        );
+
+        $data['partList'] = $this->admin_model->getVendorPartList(
+            $data['cncData']['vendor_po_id']
+        );
+
+        $this->loadViews(
+            "masters/editCNC",
+            $this->global,
+            $data,
+            NULL
+        );
+    }
+}
+
+
+
+public function deleteCNC()
+{
+    $id = (int)$this->input->post('id');
+
+    if ($id > 0) {
+
+        $result = $this->admin_model->deleteCNC($id);
+
+        if ($result) {
+
+            $process = 'CNC Master Delete';
+            $processFunction = 'Admin/deleteCNC';
+
+            $this->logrecord($process, $processFunction);
+
+            echo json_encode(array('status' => 'success'));
+
+        } else {
+            echo json_encode(array('status' => 'failed'));
+        }
+
+    } else {
+        echo json_encode(array('status' => 'failed'));
+    }
+}
+
+
+
+public function getVendorPO()
+{
+    $vendor_id = (int)$this->input->post('vendor_id');
+
+    $result = $this->admin_model->getVendorPOList($vendor_id);
+
+    echo json_encode($result);
+}
+
+
+
+public function getVendorPart()
+{
+    $vendor_po_id = (int)$this->input->post('vendor_po_id');
+
+    $result = $this->admin_model->getVendorPartList($vendor_po_id);
+
+    echo json_encode($result);
+}
+
+
+
+
+
+
+
     
 
 }

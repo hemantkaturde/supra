@@ -30322,6 +30322,270 @@ public function deleteCountMaster($id)
 
 
 
+public function getVendorList()
+{
+    $this->db->select('ven_id, vendor_name');
+    $this->db->from('tbl_vendor');
+    $this->db->order_by('vendor_name', 'ASC');
+
+    return $this->db->get()->result_array();
+}
+
+
+
+public function getVendorPOList($vendor_id)
+{
+    // $vendor = $this->db
+    //     ->select('vendor_name')
+    //     ->where('ven_id', $vendor_id)
+    //     ->get('tbl_vendor')
+    //     ->row_array();
+
+    // if (empty($vendor)) {
+    //     return array();
+    // }
+
+    $this->db->select('id, po_number');
+    $this->db->from('tbl_vendor_po');
+    $this->db->where('vendor_name', $vendor_id);
+    $this->db->order_by('id', 'DESC');
+
+    return $this->db->get()->result_array();
+}
+
+
+
+public function getVendorPartList($vendor_po_id)
+{
+    $this->db->select('
+        vi.id,
+        vi.part_number_id,
+        fg.part_number
+    ');
+
+    $this->db->from('tbl_vendorpo_item vi');
+
+    $this->db->join(
+        'tbl_finished_goods fg',
+        'fg.fin_id = vi.part_number_id',
+        'left'
+    );
+
+    $this->db->where('vi.vendor_po_id', $vendor_po_id);
+
+    return $this->db->get()->result_array();
+}
+
+
+
+public function validateCNCSelection($vendor_id, $po_id, $part_id)
+{
+    $vendor = $this->db
+        ->select('vendor_name')
+        ->where('ven_id', $vendor_id)
+        ->get('tbl_vendor')
+        ->row_array();
+
+    if (empty($vendor)) {
+        return false;
+    }
+
+    $po = $this->db
+        ->where('id', $po_id)
+        ->where('vendor_name', $vendor['vendor_name'])
+        ->get('tbl_vendor_po')
+        ->row_array();
+
+    if (empty($po)) {
+        return false;
+    }
+
+    return $this->db
+        ->where('vendor_po_id', $po_id)
+        ->where('part_number_id', $part_id)
+        ->count_all_results('tbl_vendorpo_item') > 0;
+}
+
+
+public function generateCNCJobNo()
+{
+    return 'CNC-' . date('YmdHis') . rand(10, 99);
+}
+
+
+public function saveCNC($id, $data)
+{
+    if (empty($id)) {
+        return $this->db->insert('tbl_cnc_master', $data);
+    } else {
+        $this->db->where('cnc_id', $id);
+        return $this->db->update('tbl_cnc_master', $data);
+    }
+}
+
+
+public function getCNCDetails($id)
+{
+    $this->db->where('cnc_id', $id);
+    $this->db->where('status', 1);
+
+    return $this->db->get('tbl_cnc_master')->row_array();
+}
+
+
+
+public function getCNCCount($params, $filtered = false)
+{
+    $this->db->from('tbl_cnc_master cm');
+
+    $this->db->join(
+        'tbl_vendor v',
+        'v.ven_id = cm.vendor_id',
+        'left'
+    );
+
+    $this->db->join(
+        'tbl_vendor_po vp',
+        'vp.id = cm.vendor_po_id',
+        'left'
+    );
+
+    $this->db->join(
+        'tbl_finished_goods fg',
+        'fg.fin_id = cm.part_number_id',
+        'left'
+    );
+
+    $this->db->where('cm.status', 1);
+
+    if ($filtered && !empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+
+        $this->db->like('cm.job_no', $search);
+        $this->db->or_like('v.vendor_name', $search);
+        $this->db->or_like('vp.po_number', $search);
+        $this->db->or_like('fg.part_number', $search);
+        $this->db->or_like('cm.part_description', $search);
+        $this->db->or_like('cm.material_grade', $search);
+
+        $this->db->group_end();
+    }
+
+    return $this->db->count_all_results();
+}
+
+
+
+public function getCNCData($params)
+{
+    $this->db->select('
+        cm.*,
+        v.vendor_name,
+        vp.po_number,
+        fg.part_number
+    ');
+
+    $this->db->from('tbl_cnc_master cm');
+
+    $this->db->join(
+        'tbl_vendor v',
+        'v.ven_id = cm.vendor_id',
+        'left'
+    );
+
+    $this->db->join(
+        'tbl_vendor_po vp',
+        'vp.id = cm.vendor_po_id',
+        'left'
+    );
+
+    $this->db->join(
+        'tbl_finished_goods fg',
+        'fg.fin_id = cm.part_number_id',
+        'left'
+    );
+
+    $this->db->where('cm.status', 1);
+
+    if (!empty($params['search']['value'])) {
+
+        $search = $params['search']['value'];
+
+        $this->db->group_start();
+
+        $this->db->like('cm.job_no', $search);
+        $this->db->or_like('v.vendor_name', $search);
+        $this->db->or_like('vp.po_number', $search);
+        $this->db->or_like('fg.part_number', $search);
+        $this->db->or_like('cm.part_description', $search);
+        $this->db->or_like('cm.material_grade', $search);
+
+        $this->db->group_end();
+    }
+
+    $this->db->order_by('cm.cnc_id', 'DESC');
+
+    $length = isset($params['length']) ? (int)$params['length'] : 10;
+    $start = isset($params['start']) ? (int)$params['start'] : 0;
+
+    $this->db->limit($length, $start);
+
+    $result = $this->db->get()->result_array();
+
+    $data = array();
+
+    foreach ($result as $value) {
+
+        $row = array();
+
+        $row['job_no'] = htmlspecialchars($value['job_no'], ENT_QUOTES, 'UTF-8');
+        $row['job_date'] = htmlspecialchars($value['job_date'], ENT_QUOTES, 'UTF-8');
+        $row['vendor_name'] = htmlspecialchars($value['vendor_name'] ?? '', ENT_QUOTES, 'UTF-8');
+        $row['po_number'] = htmlspecialchars($value['po_number'] ?? '', ENT_QUOTES, 'UTF-8');
+        $row['part_number'] = htmlspecialchars($value['part_number'] ?? '', ENT_QUOTES, 'UTF-8');
+        $row['part_description'] = htmlspecialchars($value['part_description'] ?? '', ENT_QUOTES, 'UTF-8');
+        $row['material_grade'] = htmlspecialchars($value['material_grade'] ?? '', ENT_QUOTES, 'UTF-8');
+        $row['vendor_po_qty'] = htmlspecialchars((string)($value['vendor_po_qty'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $row['remark'] = htmlspecialchars($value['remark'] ?? '', ENT_QUOTES, 'UTF-8');
+
+        $cnc_id = (int)$value['cnc_id'];
+
+        $row['action'] = '';
+
+        $row['action'] .= "
+            <a href='".ADMIN_PATH."updateCNC/".$cnc_id."' title='Edit'>
+                <i style='font-size:x-large;cursor:pointer;'
+                   class='fa fa-pencil-square-o'></i>
+            </a>&nbsp;&nbsp;
+        ";
+
+        $row['action'] .= "
+            <i style='font-size:x-large;cursor:pointer;'
+               data-id='".$cnc_id."'
+               class='fa fa-trash-o deleteCNC'
+               title='Delete'></i>
+        ";
+
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+
+
+public function deleteCNC($id)
+{
+    $this->db->where('cnc_id', $id);
+
+    return $this->db->delete('tbl_cnc_master');
+}
+
+
+
 
 
 }

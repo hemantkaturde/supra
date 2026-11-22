@@ -458,6 +458,22 @@
                         </li> 
 
 
+                        <li class="treeview <?php
+    if (
+        $pageUrl == "cncmaster" ||
+        $pageUrl == "addnewCNC" ||
+        $pageUrl == "updateCNC"
+    ) {
+        echo 'active';
+    }
+?>">
+    <a href="<?php echo base_url(); ?>cncmaster">
+        <i class="fa fa-cogs"></i>
+        <span class="menu_label">CNC Master</span>
+    </a>
+</li>
+
+
                       <?php  if( $this->session->userdata('roleText')=='Superadmin'){ ?>
                           <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
                               <a href="#">
