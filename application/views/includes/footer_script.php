@@ -36152,7 +36152,7 @@ $(document).ready(function() {
 <?php if(
     $pageTitle == 'CNC Master' ||
     $pageTitle == 'Add CNC Master' ||
-    $pageTitle == 'Edit CNC Master'
+    $pageTitle == 'Edit CNC Master' || $pageTitle == 'Job Number Wise Insert Details'	
 ) { ?>
 
 <script type="text/javascript">
@@ -36168,13 +36168,13 @@ $(document).ready(function() {
         $('#view_CNC').DataTable({
 
             "columnDefs": [
-                { "width": "10%", "targets": 0 },
+                { "width": "5%", "targets": 0 },
                 { "width": "8%", "targets": 1 },
                 { "width": "12%", "targets": [2, 3, 4] },
                 { "width": "15%", "targets": [5, 6] },
                 { "width": "8%", "targets": 7 },
                 { "width": "12%", "targets": 8 },
-                { "width": "7%", "targets": 9 }
+                { "width": "10%", "targets": 9 }
             ],
 
             responsive: true,
@@ -36609,6 +36609,71 @@ $(document).ready(function() {
         });
 
     });
+
+
+
+	// =====================================
+// SAVE JOB NUMBER WISE INSERT DETAILS
+// =====================================
+
+$('#saveInsertDetails').click(function(e) {
+
+    e.preventDefault();
+
+    var formData = new FormData($('#insertDetailsForm')[0]);
+
+    $(".loader_ajax").show();
+
+    $.ajax({
+
+        url: "<?php echo base_url(); ?>saveJobNumberWiseInsertDetails",
+
+        type: "POST",
+
+        data: formData,
+
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        dataType: "json",
+
+        success: function(response) {
+
+            $(".loader_ajax").hide();
+
+            if (response.status == 'success') {
+
+                swal({
+                    title: "Success",
+                    text: response.message,
+                    icon: "success",
+                    button: "Ok"
+                }, function() {
+                    location.reload();
+                });
+
+            } else {
+
+                swal("Error", response.message, "error");
+
+            }
+
+        },
+
+        error: function(xhr) {
+
+            $(".loader_ajax").hide();
+
+            console.log(xhr.responseText);
+
+            swal("Error", "Something went wrong!", "error");
+
+        }
+
+    });
+
+});
 
 });
 

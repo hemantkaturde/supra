@@ -30407,10 +30407,10 @@ public function validateCNCSelection($vendor_id, $po_id, $part_id)
 }
 
 
-public function generateCNCJobNo()
-{
-    return 'CNC-' . date('YmdHis') . rand(10, 99);
-}
+// public function generateCNCJobNo()
+// {
+//     return 'CNC-' . date('YmdHis') . rand(10, 99);
+// }
 
 
 public function saveCNC($id, $data)
@@ -30569,6 +30569,14 @@ public function getCNCData($params)
                title='Delete'></i>
         ";
 
+        $row['action'] .= '
+            <a href="'.ADMIN_PATH.'jobNumberWiseInsertDetails/'.$cnc_id.'"
+                class="btn btn-sm btn-success"
+                title="Job Number Wise Insert Details">
+                <i class="fa fa-plus"></i>
+                </a>
+        ';
+
         $data[] = $row;
     }
 
@@ -30611,6 +30619,67 @@ public function getNextCNCJobNo()
     return 1;
 }
 
+
+public function getJobNumberWiseInsertDetails($cnc_id)
+{
+    $this->db->select('*');
+    $this->db->from('tbl_job_number_wise_insert_details');
+    $this->db->where('cnc_id', $cnc_id);
+    $this->db->where('status', 1);
+    $this->db->order_by('id', 'ASC');
+
+    return $this->db->get()->result_array();
+}
+
+
+public function saveJobNumberWiseInsertDetails($cnc_id, $rows, $issued_by)
+{
+    $this->db->trans_begin();
+
+    // Remove previous rows for this CNC job.
+    // New submitted rows will replace the existing set.
+    $this->db->where('cnc_id', $cnc_id);
+    $this->db->delete('tbl_job_number_wise_insert_details');
+
+    $user_id = $this->session->userdata('userId');
+
+    foreach ($rows as $row) {
+
+        $data = array(
+            'cnc_id' => $cnc_id,
+
+            'date_1' => !empty($row['date_1']) ? $row['date_1'] : NULL,
+            'tnmg_r12_qty' => ($row['tnmg_r12_qty'] !== '') ? $row['tnmg_r12_qty'] : NULL,
+
+            'date_2' => !empty($row['date_2']) ? $row['date_2'] : NULL,
+            'tnmg_r08_qty' => ($row['tnmg_r08_qty'] !== '') ? $row['tnmg_r08_qty'] : NULL,
+
+            'date_3' => !empty($row['date_3']) ? $row['date_3'] : NULL,
+            'vnmg_r04_qty' => ($row['vnmg_r04_qty'] !== '') ? $row['vnmg_r04_qty'] : NULL,
+            'tnmg_r04_qty' => ($row['tnmg_r04_qty'] !== '') ? $row['tnmg_r04_qty'] : NULL,
+
+            'date_4' => !empty($row['date_4']) ? $row['date_4'] : NULL,
+            'thread_11_tpi_qty' => ($row['thread_11_tpi_qty'] !== '') ? $row['thread_11_tpi_qty'] : NULL,
+
+            'rec_by' => $row['rec_by'] ?? NULL,
+            'issued_by' => $issued_by,
+
+            'status' => 1,
+            'createdBy' => $user_id
+        );
+
+        $this->db->insert('tbl_job_number_wise_insert_details', $data);
+    }
+
+    if ($this->db->trans_status() === FALSE) {
+        $this->db->trans_rollback();
+        return false;
+    }
+
+    $this->db->trans_commit();
+
+    return true;
+}
 
 
 

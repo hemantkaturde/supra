@@ -33,6 +33,7 @@
                                         <label>Job No.</label>
                                         <input type="text"
                                             class="form-control"
+                                            name="job_no"
                                             value="<?php echo $nextJobNo; ?>"
                                             readonly>
                                         <small class="text-muted">

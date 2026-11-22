@@ -36045,7 +36045,7 @@ public function addnewCNC()
             } else {
 
                 $data = array(
-                    'job_no' => $this->admin_model->generateCNCJobNo(),
+                    'job_no' =>$this->input->post('job_no'),
                     'job_date' => $this->input->post('job_date'),
                     'vendor_id' => $vendor_id,
                     'vendor_po_id' => $vendor_po_id,
@@ -36074,7 +36074,7 @@ public function addnewCNC()
         $this->logrecord($process, $processFunction);
 
         $this->global['pageTitle'] = 'Add CNC Master';
-$data['nextJobNo'] = $this->admin_model->getNextCNCJobNo();
+        $data['nextJobNo'] = $this->admin_model->getNextCNCJobNo();
 
         $data['vendorList'] = $this->admin_model->getVendorList();
 
@@ -36253,6 +36253,111 @@ public function getVendorPart()
 }
 
 
+public function jobNumberWiseInsertDetails($cnc_id)
+{
+    $process = 'Job Number Wise Insert Details';
+    $processFunction = 'Admin/jobNumberWiseInsertDetails';
+
+    $this->logrecord($process, $processFunction);
+
+    // Get CNC Master Details
+    $data['cncData'] = $this->admin_model->getCNCDetails($cnc_id);
+
+    if (empty($data['cncData'])) {
+        show_404();
+        return;
+    }
+
+    // Get previously saved Insert Details
+    $data['insertDetails'] =
+        $this->admin_model->getJobNumberWiseInsertDetails($cnc_id);
+
+    $this->global['pageTitle'] = 'Job Number Wise Insert Details';
+
+    $this->loadViews(
+        "masters/jobNumberWiseInsertDetails",
+        $this->global,
+        $data,
+        NULL
+    );
+}
+
+
+
+public function saveJobNumberWiseInsertDetails()
+{
+    $cnc_id = (int)$this->input->post('cnc_id');
+    $rows = $this->input->post('rows');
+    $issued_by = trim($this->input->post('issued_by'));
+
+    $response = array();
+
+    if ($cnc_id <= 0 || empty($rows) || !is_array($rows)) {
+
+        $response = array(
+            'status' => 'failure',
+            'message' => 'Please add at least one row.'
+        );
+
+        echo json_encode($response);
+        return;
+    }
+
+    // Verify CNC Master exists
+    $cncData = $this->admin_model->getCNCDetails($cnc_id);
+
+    if (empty($cncData)) {
+
+        echo json_encode(array(
+            'status' => 'failure',
+            'message' => 'Invalid CNC Job.'
+        ));
+
+        return;
+    }
+
+    // Remove completely blank rows
+    $validRows = array();
+
+    foreach ($rows as $row) {
+
+        $hasData = false;
+
+        foreach ($row as $value) {
+            if (trim((string)$value) !== '') {
+                $hasData = true;
+                break;
+            }
+        }
+
+        if ($hasData) {
+            $validRows[] = $row;
+        }
+    }
+
+    if (empty($validRows)) {
+
+        echo json_encode(array(
+            'status' => 'failure',
+            'message' => 'Please enter at least one Insert Detail.'
+        ));
+
+        return;
+    }
+
+    $result = $this->admin_model->saveJobNumberWiseInsertDetails(
+        $cnc_id,
+        $validRows,
+        $issued_by
+    );
+
+    echo json_encode(array(
+        'status' => $result ? 'success' : 'failure',
+        'message' => $result
+            ? 'Insert Details Successfully Saved!'
+            : 'Unable to save Insert Details.'
+    ));
+}
 
 
 

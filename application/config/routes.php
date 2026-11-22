@@ -785,7 +785,8 @@ $route['fetchCNC'] = 'Admin/fetchCNC';
 $route['addnewCNC'] = 'Admin/addnewCNC';
 $route['updateCNC/(:num)'] = 'Admin/updateCNC/$1';
 $route['deleteCNC'] = 'Admin/deleteCNC';
-
+$route['jobNumberWiseInsertDetails/(:num)'] ='Admin/jobNumberWiseInsertDetails/$1';
+$route['saveJobNumberWiseInsertDetails'] ='Admin/saveJobNumberWiseInsertDetails';
 // AJAX DROPDOWNS
 
 $route['getVendorPO'] = 'Admin/getVendorPO';
