@@ -33,7 +33,7 @@
                                         <label>Job No.</label>
                                         <input type="text"
                                             class="form-control"
-                                            value="Auto Generated"
+                                            value="<?php echo $nextJobNo; ?>"
                                             readonly>
                                         <small class="text-muted">
                                             Job number will be generated automatically after saving.
@@ -50,8 +50,8 @@
                                         <input type="date"
                                             name="job_date"
                                             id="job_date"
-                                            class="form-control">
-
+                                            class="form-control"
+                                            value="<?php echo date('Y-m-d'); ?>">
                                         <span class="job_date_error text-danger"></span>
                                     </div>
                                 </div>

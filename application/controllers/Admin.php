@@ -36074,6 +36074,7 @@ public function addnewCNC()
         $this->logrecord($process, $processFunction);
 
         $this->global['pageTitle'] = 'Add CNC Master';
+$data['nextJobNo'] = $this->admin_model->getNextCNCJobNo();
 
         $data['vendorList'] = $this->admin_model->getVendorList();
 

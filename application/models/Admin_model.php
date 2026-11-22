@@ -30585,6 +30585,33 @@ public function deleteCNC($id)
 }
 
 
+public function getNextCNCJobNo()
+{
+    // $query = $this->db->query("
+    //     SELECT AUTO_INCREMENT
+    //     FROM information_schema.TABLES
+    //     WHERE TABLE_SCHEMA = DATABASE()
+    //     AND TABLE_NAME = 'tbl_cnc_master'
+    // ");
+
+    // $row = $query->row_array();
+
+    // return !empty($row['AUTO_INCREMENT']) ? $row['AUTO_INCREMENT'] : 1;
+    $this->db->select('job_no');
+    $this->db->from('tbl_cnc_master');
+    $this->db->order_by('cnc_id', 'DESC');
+    $this->db->limit(1);
+
+    $result = $this->db->get()->row_array();
+
+    if (!empty($result)) {
+        return ((int)$result['job_no']) + 1;
+    }
+
+    return 1;
+}
+
+
 
 
 
