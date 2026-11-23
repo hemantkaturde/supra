@@ -30426,10 +30426,30 @@ public function saveCNC($id, $data)
 
 public function getCNCDetails($id)
 {
-    $this->db->where('cnc_id', $id);
-    $this->db->where('status', 1);
+    // $this->db->where('cnc_id', $id);
+    // $this->db->where('status', 1);
 
-    return $this->db->get('tbl_cnc_master')->row_array();
+    // return $this->db->get('tbl_cnc_master')->row_array();
+
+
+     $this->db->select('
+        cnc.*,
+        fg.part_number
+    ');
+
+    $this->db->from('tbl_cnc_master as cnc');
+
+    $this->db->join(
+        'tbl_finished_goods as fg',
+        'fg.fin_id = cnc.part_number_id',
+        'left'
+    );
+
+    $this->db->where('cnc.cnc_id', $id);
+    $this->db->where('cnc.status', 1);
+
+    return $this->db->get()->row_array();
+
 }
 
 
