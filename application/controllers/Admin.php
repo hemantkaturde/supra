@@ -12597,7 +12597,11 @@ public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to
 
     
     // create file name
-    $fileName = 'Buyer Order & Exports Report -'.date('d-m-Y').'.xlsx';  
+    $buyer_name = !empty($buyer_name) ? $buyer_name . '-' : '';
+
+    $fileName = 'Buyer Order & Exports Report - ' . $buyer_name . date('d-m-Y') . '.xlsx'; 
+
+    
     // load excel library
     $empInfo = $this->admin_model->exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status);
 
