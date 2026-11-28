@@ -186,6 +186,9 @@
                                     </ul>
                                   </div>
                                 </div>
+                             <button type="button" onclick="printQCAudit()" class="btn btn-success qc-actions">
+                                  <i class="fa fa-print"></i> Print PDF
+                              </button>
                                 <!-- Main Box -->
                                 <div class="row">
                                   <div class="col-xs-12">
@@ -484,3 +487,143 @@
                             </div>
                             <script type="text/javascript" src="assets/js/common.js" charset="utf-8">
                             </script>
+
+                            <style>
+
+                              @media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 8mm;
+    }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+    }
+
+    .content-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .content {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .box,
+    .box-body,
+    .panel-body {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .qc-actions,
+    .qc-save-area,
+    .content-header,
+    .breadcrumb,
+    .text-right {
+        display: none !important;
+    }
+
+    .qc-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        table-layout: fixed !important;
+        font-size: 10px !important;
+        page-break-inside: auto;
+    }
+
+    .qc-table tr {
+        page-break-inside: avoid;
+    }
+
+    .qc-table th,
+    .qc-table td {
+        border: 1px solid #000 !important;
+        color: #000 !important;
+        padding: 3px 4px !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .qc-table input,
+    .qc-table select,
+    .qc-table textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        color: #000 !important;
+        font-size: 10px !important;
+        padding: 1px !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+    }
+
+    .qc-table input,
+    .qc-table select {
+        height: auto !important;
+    }
+
+    .qc-table textarea {
+        resize: none !important;
+        overflow: visible !important;
+    }
+
+    .footer-input {
+        border: none !important;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none !important;
+    }
+
+     .main-footer,
+    footer,
+    .content-wrapper .main-footer,
+    body > .main-footer {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+    }
+}
+                            </style>
+
+                            <!-- <script>
+function printQCAudit() {
+
+    // Select and textarea values ko print ke liye preserve karein
+    document.querySelectorAll('.qc-table select').forEach(function(el) {
+        el.setAttribute('data-print-value', el.options[el.selectedIndex]?.text || '');
+    });
+
+    window.print();
+}
+</script> -->
+
+
+<script>
+function printQCAudit() {
+
+    var auditNo = document.getElementById('qc_internal_audit_no').value;
+
+    var oldTitle = document.title;
+
+    document.title = 'QC Internal Audit - ' + auditNo;
+
+    window.print();
+
+    setTimeout(function() {
+        document.title = oldTitle;
+    }, 1000);
+}
+</script>
