@@ -194,6 +194,9 @@
                                   <div class="col-xs-12">
                                     <div class="box">
                                       <div class="box-body">
+                                        <div class="qc-print-heading" style="display:none;">
+    QC INTERNAL AUDIT
+</div>
                                         <div class="panel-body">
                                          <form role="form" id="qcinternalauditaddform" action="<?php echo base_url() ?>qcinternalauditaddform" method="post" role="form">
                                             <div class="row">
@@ -596,6 +599,93 @@
         height: 0 !important;
     }
 }
+
+
+@media print {
+
+    /* Dropdown arrow and border remove */
+    .qc-table select {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        background: transparent !important;
+        background-image: none !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0 2px !important;
+    }
+
+    .qc-table select::-ms-expand {
+        display: none !important;
+    }
+
+    /* Calendar icon hide */
+    .qc-table input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none !important;
+    }
+
+    /* Table borders maintain */
+    .qc-table {
+        border-collapse: collapse !important;
+        border: 1px solid #000 !important;
+    }
+
+    .qc-table th,
+    .qc-table td {
+        border: 1px solid #000 !important;
+    }
+
+    /* Input borders remove */
+    .qc-table input,
+    .qc-table textarea {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    /* Print heading */
+    .qc-print-heading {
+        display: block !important;
+        text-align: center !important;
+        font-size: 14px !important;
+        font-weight: bold !important;
+        padding: 5px !important;
+        margin-bottom: 5px !important;
+        border: 1px solid #000 !important;
+    }
+
+    
+}
+
+
+@media print {
+
+    .qc-print-select {
+        display: none !important;
+    }
+
+    .qc-print-select-text {
+        display: inline-block !important;
+        width: 100% !important;
+        border: none !important;
+        background: transparent !important;
+        color: #000 !important;
+        font-size: 7.5px !important;
+        padding: 0 !important;
+    }
+
+    .qc-table input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none !important;
+        opacity: 0 !important;
+        width: 0 !important;
+    }
+}
+
+.qc-print-select-text {
+    display: none;
+}
+
                             </style>
 
                             <!-- <script>
@@ -611,7 +701,7 @@ function printQCAudit() {
 </script> -->
 
 
-<script>
+<!-- <script>
 function printQCAudit() {
 
     var auditNo = document.getElementById('qc_internal_audit_no').value;
@@ -624,6 +714,48 @@ function printQCAudit() {
 
     setTimeout(function() {
         document.title = oldTitle;
+    }, 1000);
+}
+</script> -->
+
+
+<script>
+function printQCAudit() {
+
+    var auditNo = document.getElementById('qc_internal_audit_no').value;
+    var oldTitle = document.title;
+
+    document.title = 'QC Internal Audit - ' + auditNo;
+
+    var selects = document.querySelectorAll('.qc-table select');
+
+    selects.forEach(function(select) {
+
+        var span = document.createElement('span');
+
+        span.className = 'qc-print-select-text';
+        span.textContent = select.options[select.selectedIndex]?.text || '';
+
+        select.classList.add('qc-print-select');
+
+        select.parentNode.insertBefore(span, select.nextSibling);
+
+    });
+
+    window.print();
+
+    setTimeout(function() {
+
+        document.querySelectorAll('.qc-print-select-text').forEach(function(span) {
+            span.remove();
+        });
+
+        document.querySelectorAll('.qc-print-select').forEach(function(select) {
+            select.classList.remove('qc-print-select');
+        });
+
+        document.title = oldTitle;
+
     }, 1000);
 }
 </script>
